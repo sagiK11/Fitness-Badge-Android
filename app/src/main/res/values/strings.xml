@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Fitracker</string>
+    <string name="update_student">Update Student</string>
+    <string name="aerobic">aerobic</string>
+    <string name="hands">hands</string>
+    <string name="abs">abs</string>
+    <string name="cubes">cubes</string>
+    <string name="student_name">name</string>
+    <string name="jump">jump</string>
+    <string name="student_class">class</string>
+    <string name="name">Name</string>
+    <string name="Class">Class</string>
+    <string name="score">Score</string>
+    <string name="grade">Grade</string>
+    <string name="enter">ADD</string>
+    <string name="total_score">Total Score</string>
+    <string name="score_without_aerobic">no aerobic</string>
+    <string name="total_score_small_letter">total score</string>
+    <string name="search">search</string>
+    <string name="aero_values">7.00 \- 30.00</string>
+    <string name="abs_values">120 \- 0</string>
+    <string name="cubes_values">6.0 \- 30.0</string>
+    <string name="hands_values">3.0 \- 0.0</string>
+    <string name="jump_values">300 \- 50</string>
+    <string name="update_button">UPDATE</string>
+    <string name="student_name_to_update" translatable="false">student to update</string>
+    <string name="did_you_enter_class">Have you entered student class?</string>
+    <string name="enter_update_data">add student</string>
+    <string name="view_student_results">results</string>
+    <string name="progress_text">Progress: </string>
+    <string name="number_of_student">Total number of students:</string>
+    <string name="number_of_student_in_db">Students Finished:</string>
+    <string name="open_memory">Open File</string>
+    <string name="back_memory">Back</string>
+    <string name="import_excel_file">open file</string>
+    <string name="search_hint">enter name</string>
+    <string name="setting">Setting</string>
+    <string name="send_sms">Send Grade With SMS</string>
+    <string name="sms">phone </string>
+    <string name="phone_number">Phone</string>
+    <string name="hint_phone_number">050123456</string>
+    <string name="export_to_excel">mail results</string>
+    <string name="total_students">Total Students</string>
+    <string name="home">Home</string>
+    <string name="delete_data">Delete all students</string>
+    <string name="no_phone">no phone</string>
+
+
+</resources>

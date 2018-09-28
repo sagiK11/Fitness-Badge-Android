@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fitracker_bright"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="65dp">
+
+
+        <ProgressBar
+            android:id="@+id/pBar_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:indeterminate="false"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.676" />
+
+        <ProgressBar
+            android:id="@+id/main_activity_prog_bar_id"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="152dp"
+            android:layout_height="137dp"
+            android:progress="100"
+            android:progressDrawable="@drawable/main_activity_prog_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.296" />
+
+        <ProgressBar
+            android:id="@+id/main_activity_fixed_prog_bar_id"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="240dp"
+            android:layout_height="235dp"
+            android:fadingEdge="horizontal"
+            android:orientation="vertical"
+            android:progress="100"
+            android:progressDrawable="@drawable/main_activity_fix_prog_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.229" />
+
+        <TextView
+            android:id="@+id/totnumber_of_students_to_display_id"
+            style="@style/main_activity_style"
+            android:layout_width="59dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/number_of_students_to_display_id"
+            style="@style/main_activity_style"
+            android:layout_width="59dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="168dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.019"
+            app:layout_constraintStart_toEndOf="@+id/totnumber_of_students_to_display_id"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/prog_bar_precentage"
+            style="@style/main_activity_style"
+            android:layout_width="37dp"
+            android:layout_height="24dp"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.343" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/main_activity_style"
+            android:layout_width="139dp"
+            android:layout_height="41dp"
+            android:text="@string/total_students"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.052"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/main_activity_style"
+            android:layout_width="133dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/number_of_student_in_db"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.924"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_activity_fixed_prog_bar_id"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/button_nav_id"
+            android:layout_width="345dp"
+            android:layout_height="56dp"
+            android:background="@color/button_nav_bar"
+            app:itemIconTint="@drawable/nav_item_color_state"
+            app:itemTextColor="@drawable/nav_item_color_state"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.966"
+            app:menu="@menu/bottom_navigation_bar" />
+
+        <ImageButton
+            android:id="@+id/setting_id"
+            android:layout_width="66dp"
+            android:layout_height="55dp"
+            android:background="@color/transparent"
+            android:onClick="setting"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.033"
+            app:srcCompat="@drawable/ic_action_setting" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentEnd="true"
+    android:background="@drawable/fitracker_bright"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="81dp">
+
+    <EditText
+        android:id="@+id/update_student_aerobic_id"
+        style="@style/enter_style_for_values"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/aero_values"
+        android:inputType="numberDecimal"
+        android:nextFocusDown="@id/student_abs_id"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <EditText
+        android:id="@+id/update_student_hands_id"
+        style="@style/enter_style_for_values"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/hands_values"
+        android:inputType="numberDecimal"
+        android:nextFocusDown="@id/student_jump_id"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/update_student_jump_id"
+        style="@style/enter_style_for_values"
+        android:layout_width="82dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/jump_values"
+        android:inputType="numberDecimal"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/update_student_cubes_id"
+        style="@style/enter_style_for_values"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cubes_values"
+        android:inputType="numberDecimal"
+        android:nextFocusDown="@id/student_hands_id"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toEndOf="@+id/textView7"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/update_student_abs_id"
+        style="@style/enter_style_for_values"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:focusable="auto"
+        android:hint="@string/abs_values"
+        android:inputType="numberDecimal"
+        android:nextFocusDown="@id/student_cubes_id"
+        android:textAlignment="gravity"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/update_student_total_score"
+        style="@style/enter_style"
+        android:layout_width="78dp"
+        android:layout_height="48dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/update_student_hands_text"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/update_student_hands_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/update_student_hands_id" />
+
+    <TextView
+        android:id="@+id/update_student_jump_text"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/update_student_jump_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/update_student_jump_id" />
+
+    <TextView
+        android:id="@+id/update_student_cubes_text"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/update_student_cubes_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/update_student_cubes_id" />
+
+    <TextView
+        android:id="@+id/update_student_aerobic_text"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/update_student_aerobic_id"
+        app:layout_constraintEnd_toStartOf="@+id/view5"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/update_student_aerobic_id" />
+
+    <TextView
+        android:id="@+id/update_student_abs_text"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/grade"
+        android:textAlignment="gravity"
+        app:layout_constraintBaseline_toBaselineOf="@+id/update_student_abs_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/update_student_abs_id" />
+
+    <TextView
+        android:id="@+id/textView10"
+        style="@style/enter_style"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/total_score"
+        android:textAlignment="gravity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.942" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/enter_style"
+        android:layout_width="86dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/aerobic"
+        android:textAlignment="gravity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.378" />
+
+
+    <TextView
+        android:id="@+id/textView9"
+        style="@style/enter_style"
+        android:layout_width="84dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/hands"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView8"
+        style="@style/enter_style"
+        android:layout_width="79dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/jump"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/enter_style"
+        android:layout_width="81dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/cubes"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView6"
+        style="@style/enter_style"
+        android:layout_width="85dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/abs"
+        android:textAlignment="gravity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+
+    <Button
+        android:id="@+id/button"
+        style="@style/buttons_style"
+        android:layout_width="83dp"
+        android:layout_height="39dp"
+        android:background="@drawable/small_buttons"
+        android:onClick="enterButtonClicked"
+        android:text="@string/enter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.967"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/student_name"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <TextView
+        android:id="@+id/textView12"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/student_class"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.152" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="7dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number_to_enter_id" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update_student_jump_text" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/enter_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:textSize="21sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <TextView
+        android:id="@+id/enter_data_vs_student_to_display_id"
+        style="@style/enter_style"
+        android:layout_width="161dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/enter_data_v2_student_class_to_disply_id"
+        style="@style/enter_style"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/phone_number_to_enter_id"
+        android:layout_width="169dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:hint="@string/hint_phone_number"
+        android:inputType="phone"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.581"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
