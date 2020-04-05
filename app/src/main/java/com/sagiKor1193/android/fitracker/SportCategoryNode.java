@@ -3,117 +3,74 @@ package com.sagiKor1193.android.fitracker;
 
 public class SportCategoryNode {
     //Scores
-    private double _cubesData;
-    private double _aeroData;
-    private int _absData;
-    private int _jumpData;
-    private double _handsData;
+    private double cubesScore;
+    private double aerobicScore;
+    private int absScore;
+    private int jumpScore;
+    private double handsScore;
     //Result;
-    private int _cubesRes;
-    private int _absRes;
-    private int _aeroRes;
-    private int _handsRes;
-    private int _jumpRes;
-    //Next
-    SportCategoryNode _next;
+    private int cubesResult;
+    private int absResult;
+    private int aerobicResult;
+    private int handsResult;
+    private int jumpResult;
 
-
-    public SportCategoryNode(double cubes, int cubesRes, double aero, int aeroRes, int abs, int absRes,
+    public SportCategoryNode(double cubes, int cubesRes, double aerobic, int aerobicRes, int abs, int absRes,
                              int jump, int jumpRes , double hands, int handsRes){
-        _cubesData = cubes;
-        _cubesRes = cubesRes;
+        cubesScore = cubes;
+        cubesResult = cubesRes;
 
-        _aeroData = aero;
-        _aeroRes = aeroRes;
+        aerobicScore = aerobic;
+        aerobicResult = aerobicRes;
 
-        _absData = abs;
-        _absRes = absRes;
+        absScore = abs;
+        absResult = absRes;
 
-        _jumpData = jump;
-        _jumpRes = jumpRes;
+        jumpScore = jump;
+        jumpResult = jumpRes;
 
-
-        _handsData = hands;
-        _handsRes = handsRes;
-
-   }
-    public double get_cubesData() {
-        return _cubesData;
+        handsScore = hands;
+        handsResult = handsRes;
     }
 
-    public void set_cubesData(double _cubesData) {
-        this._cubesData = _cubesData;
+    public double getCubesScore() {
+        return cubesScore;
     }
 
-    public double get_aeroData() {
-        return _aeroData;
+
+    public double getAerobicScore() {
+        return aerobicScore;
     }
 
-    public void set_aeroData(double _aeroData) {
-        this._aeroData = _aeroData;
+    public int getAbsScore() {
+        return absScore;
     }
 
-    public int get_absData() {
-        return _absData;
+    public int getJumpScore() {
+        return jumpScore;
     }
 
-    public void set_absData(short _absData) {
-        this._absData = _absData;
+    public double getHandsScore() {
+        return handsScore;
     }
 
-    public int get_jumpData() {
-        return _jumpData;
+    public int getCubesResult() {
+        return cubesResult;
     }
 
-    public void set_jumpData(short _jumpData) {
-        this._jumpData = _jumpData;
+    public int getAbsResult() {
+        return absResult;
     }
 
-    public double get_handsData() {
-        return _handsData;
+    public int getAerobicResult() {
+        return aerobicResult;
     }
 
-    public void set_handsData(double _handsData) {
-        this._handsData = _handsData;
+    public int getHandsResult() {
+        return handsResult;
     }
 
-    public int get_cubesRes() {
-        return _cubesRes;
-    }
-
-    public void set_cubesRes(short _cubesRes) {
-        this._cubesRes = _cubesRes;
-    }
-
-    public int get_absRes() {
-        return _absRes;
-    }
-
-    public void set_absRes(short _absRes) {
-        this._absRes = _absRes;
-    }
-
-    public int get_aeroRes() {
-        return _aeroRes;
-    }
-
-    public void set_aeroRes(short _aeroRes) {
-        this._aeroRes = _aeroRes;
-    }
-
-    public int get_handsRes() {
-        return _handsRes;
-    }
-
-    public void set_handsRes(short _handsRes) {
-        this._handsRes = _handsRes;
-    }
-
-    public int get_jumpRes() {
-        return _jumpRes;
-    }
-
-    public void set_jumpRes(short _jumpRes) {
-        this._jumpRes = _jumpRes;
+    public int getJumpResult() {
+        return jumpResult;
     }
 }

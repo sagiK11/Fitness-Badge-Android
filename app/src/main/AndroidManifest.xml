@@ -31,16 +31,13 @@
             android:value=".SearchableActivity" />
 
 
-        <activity android:name=".ViewDataActivity"
+        <activity android:name=".ViewStudentsActivity"
             android:label="Students Results" />
 
-        <activity android:name=".UploadExcelFileActivity"
-            android:label="Import Excel File"/>
-
-        <activity android:name=".AddStudentFromResultsActivity"
+        <activity android:name=".UpdateStudentActivity"
             android:label="Update Student"/>
 
-        <activity android:name=".Setting"
+        <activity android:name=".SettingActivity"
             android:label="Setting"/>
 
 

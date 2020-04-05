@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Fitracker</string>
+    <string name="aerobic">אירובי</string>
+    <string name="hands">ידיים</string>
+    <string name="abs">בטן</string>
+    <string name="cubes">קוביות</string>
+    <string name="student_name">שם</string>
+    <string name="jump">קפיצה לרוחק</string>
+    <string name="student_class">כתה</string>
+    <string name="name">שם</string>
+    <string name="Class">כתה</string>
+    <string name="small_class">כתה</string>
+    <string name="score">תוצאה</string>
+    <string name="grade">ציון</string>
+    <string name="enter">הכנס</string>
+    <string name="total_score">ציון סופי</string>
+    <string name="score_without_aerobic">ציון סופי ללא אירובי</string>
+    <string name="total_score_small_letter">ציון סופי</string>
+    <string name="search">חפש תלמיד</string>
+    <string name="date">תאריך</string>
+    <string name="gender">מגדר</string>
+    <string name="save">שמור</string>
+    <string name="done">סיימו</string>
+    <string name="undone">לא-סיימו</string>
+    <string name="finished">סיימו</string>
+    <string name="delete_data">מחק את כל הסטודנטים</string>
+    <string name="import_excel_file">שלח למייל</string>
+    <string name="setting">הגדרות</string>
+    <string name="send_sms">שלח אסמס</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="export_to_excel">שלח למייל</string>
+    <string name="havnt_finished">לא סיימו</string>
+    <string name="show">הראה</string>
+    <string name="all">כולם</string>
+    <string name="sms">אסמס</string>
+    <string name="enter_update_data">הוסף תלמיד</string>
+    <string name="view_student_results">תוצאות</string>
+    <string name="number_of_student_in_db">תלמידים שסיימו</string>
+    <string name="update_button">עדכן תלמיד</string>
+    <string name="student_name_to_update">תלמיד לעדכון</string>
+    <string name="Update_student">עדכן תלמיד</string>
+</resources>

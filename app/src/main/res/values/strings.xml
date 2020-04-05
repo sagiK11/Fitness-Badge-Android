@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Fitracker</string>
-    <string name="update_student">Update Student</string>
+    <string name="Update_student">Update Student</string>
     <string name="aerobic">aerobic</string>
     <string name="hands">hands</string>
     <string name="abs">abs</string>
@@ -10,40 +10,52 @@
     <string name="student_class">class</string>
     <string name="name">Name</string>
     <string name="Class">Class</string>
-    <string name="score">Score</string>
-    <string name="grade">Grade</string>
+    <string name="small_class">class</string>
+    <string name="score">score</string>
+    <string name="grade">grade</string>
     <string name="enter">ADD</string>
     <string name="total_score">Total Score</string>
     <string name="score_without_aerobic">no aerobic</string>
     <string name="total_score_small_letter">total score</string>
-    <string name="search">search</string>
-    <string name="aero_values">7.00 \- 30.00</string>
-    <string name="abs_values">120 \- 0</string>
-    <string name="cubes_values">6.0 \- 30.0</string>
-    <string name="hands_values">3.0 \- 0.0</string>
-    <string name="jump_values">300 \- 50</string>
+    <string name="search">Search Student</string>
+    <string name="aero_values" translatable="false">7.00 \- 30.00</string>
+    <string name="abs_values" translatable="false">120 \- 0</string>
+    <string name="cubes_values" translatable="false">6.0 \- 30.0</string>
+    <string name="hands_values" translatable="false">3.0 \- 0.0</string>
+    <string name="jump_values" translatable="false">300 \- 50</string>
     <string name="update_button">UPDATE</string>
-    <string name="student_name_to_update" translatable="false">student to update</string>
-    <string name="did_you_enter_class">Have you entered student class?</string>
-    <string name="enter_update_data">add student</string>
+    <string name="student_name_to_update">student to update</string>
+    <string name="did_you_enter_class" translatable="false">Have you entered student class?</string>
+    <string name="enter_update_data">Add Student</string>
     <string name="view_student_results">results</string>
-    <string name="progress_text">Progress: </string>
-    <string name="number_of_student">Total number of students:</string>
+    <string name="progress_text" translatable="false">Progress: </string>
+    <string name="number_of_student" translatable="false">Total number of students:</string>
     <string name="number_of_student_in_db">Students Finished:</string>
-    <string name="open_memory">Open File</string>
-    <string name="back_memory">Back</string>
+    <string name="open_memory" translatable="false">Open File</string>
+    <string name="back_memory" translatable="false">Back</string>
     <string name="import_excel_file">open file</string>
-    <string name="search_hint">enter name</string>
+    <string name="search_hint" translatable="false">enter name</string>
     <string name="setting">Setting</string>
     <string name="send_sms">Send Grade With SMS</string>
     <string name="sms">phone </string>
-    <string name="phone_number">Phone</string>
-    <string name="hint_phone_number">050123456</string>
-    <string name="export_to_excel">mail results</string>
-    <string name="total_students">Total Students</string>
-    <string name="home">Home</string>
+    <string name="phone_number">phone</string>
+    <string name="hint_phone_number" translatable="false">050123456</string>
+    <string name="export_to_excel">Mail Results</string>
+    <string name="total_students" translatable="false">Total Students</string>
+    <string name="home" translatable="false">Home</string>
     <string name="delete_data">Delete all students</string>
-    <string name="no_phone">no phone</string>
+    <string name="no_phone" translatable="false">no phone</string>
+    <string name="finished">finished</string>
+    <string name="havnt_finished">did not finish</string>
+    <string name="show">show</string>
+    <string name="all">all</string>
+    <string name="done">done</string>
+    <string name="undone">undone</string>
+    <string name="profession" translatable="false">sport type</string>
+    <string name="see_statistics" translatable="false">statistics</string>
+    <string name="date">date</string>
+    <string name="gender">Gender</string>
+    <string name="save">Save</string>
 
 
 </resources>
