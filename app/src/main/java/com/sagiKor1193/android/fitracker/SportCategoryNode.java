@@ -2,21 +2,12 @@ package com.sagiKor1193.android.fitracker;
 
 
 public class SportCategoryNode {
-    //Scores
-    private double cubesScore;
-    private double aerobicScore;
-    private int absScore;
-    private int jumpScore;
-    private double handsScore;
-    //Result;
-    private int cubesResult;
-    private int absResult;
-    private int aerobicResult;
-    private int handsResult;
-    private int jumpResult;
+    private double cubesScore, aerobicScore, handsScore;
+    private int absScore, jumpScore, cubesResult, absResult, aerobicResult, handsResult, jumpResult;
 
-    public SportCategoryNode(double cubes, int cubesRes, double aerobic, int aerobicRes, int abs, int absRes,
-                             int jump, int jumpRes , double hands, int handsRes){
+
+    public SportCategoryNode( double cubes, int cubesRes, double aerobic, int aerobicRes, int abs, int absRes,
+                              int jump, int jumpRes, double hands, int handsRes ) {
         cubesScore = cubes;
         cubesResult = cubesRes;
 
@@ -36,7 +27,6 @@ public class SportCategoryNode {
     public double getCubesScore() {
         return cubesScore;
     }
-
 
     public double getAerobicScore() {
         return aerobicScore;
@@ -73,4 +63,5 @@ public class SportCategoryNode {
     public int getJumpResult() {
         return jumpResult;
     }
+
 }

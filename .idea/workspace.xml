@@ -25,7 +25,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_6_API_R" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="ce0117112d1ae4e40c" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -46,10 +46,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
-        <option value="Class" />
         <option value="valueResourceFile" />
         <option value="resourceFile" />
+        <option value="Interface" />
+        <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,11 +72,11 @@
     <option name="MODULE_TAB" value="Properties" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable-xxhdpi-v24" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable-xxhdpi-v24" />
     </key>
   </component>
   <component name="RunDashboard">

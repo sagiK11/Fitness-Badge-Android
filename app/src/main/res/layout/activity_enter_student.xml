@@ -26,9 +26,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:gravity="end"
+            android:gravity="start"
             android:inputType="textPersonName"
-            android:textAlignment="textStart" />
+            android:textAlignment="viewEnd" />
 
         <TextView
             android:id="@+id/textView2"
@@ -82,23 +82,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/button3"
             style="@style/buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:text="@string/gender" />
+            android:text="@string/gender"
+            app:rd_enable="true"
+            app:rd_delayClick ="untilRelease"
+            app:rd_rippleType="touch"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"/>
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/student_class_id"
             style="@style/buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:text="@string/Class" />
+            android:text="@string/Class"
+            app:rd_enable="true"
+            app:rd_delayClick ="untilRelease"
+            app:rd_rippleType="touch"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"/>
 
     </LinearLayout>
 
@@ -126,8 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textStart" />
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView15"
@@ -162,8 +173,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textStart" />
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView16"
@@ -198,8 +210,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textStart" />
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView17"
@@ -234,8 +247,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textStart" />
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView18"
@@ -270,8 +284,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textStart" />
+            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView20"
@@ -322,7 +337,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/button_add_student_enter_data"
             style="@style/buttons_style"
             android:layout_width="100dp"
@@ -330,7 +345,11 @@
             android:layout_margin="12dp"
             android:layout_marginBottom="3dp"
             android:text="@string/save"
-             />
+            app:rd_enable="true"
+            app:rd_delayClick ="untilRelease"
+            app:rd_rippleType="touch"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"/>
 
     </LinearLayout>
 

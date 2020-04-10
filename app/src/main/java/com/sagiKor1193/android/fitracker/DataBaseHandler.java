@@ -37,8 +37,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String COLUMN_SDATE = "_sdate";
 
 
-    //We need to pass database information along to superclass
-    public DataBaseHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version ) {
+    DataBaseHandler( Context context, String name, SQLiteDatabase.CursorFactory factory, int version ) {
         super( context, DATABASE_NAME, factory, DATABASE_VERSION );
     }
 
@@ -65,8 +64,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate( db );
     }
 
-    //Add a new row to the database
-    public boolean addStudentData( Student data ) {
+    boolean addStudentData( Student data ) {
         ContentValues values = new ContentValues();
 
         values.put( COLUMN_SNAME, data.getName() );
@@ -100,7 +98,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    //Delete a student from the database.
     void deleteStudentData( String sName, String sClass ) {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL( "DELETE FROM " + TABLE_DATA +
@@ -109,92 +106,12 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         );
     }
 
-    //Clears data base.
     void clearDataBase() {
         Log.d( TAG, "clearing table" );
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL( "DELETE FROM " + TABLE_DATA );
     }
 
-    //DEBUGGING FUNC
-    String databaseToString() {
-        String dbString = "";
-        SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_DATA;
-
-        //Cursor points to a location in your results
-        Cursor recordSet = db.rawQuery( query, null );
-        //Move to the first row in your results
-        recordSet.moveToFirst();
-
-        //Position after the last row means the end of the results
-        System.out.println( "Name\t|Class\t\t|aerobicScore\t|aerobicRes\t" +
-                "|cubesScore\t|cubesRes\t|absScore\t|absRes\t|handsScore\t|handsRes\t" +
-                "|jumpScore\t|jumpRes\t|totalScore\t|PhoneNumber\t|" );
-        while ( ! recordSet.isAfterLast() ) {
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SNAME ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SNAME ) );
-                dbString += " ";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SCLASS ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SCLASS ) );
-                dbString += "\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SAEROBIC_RES ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SAEROBIC_RES ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SCUBES_RES ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SCUBES_RES ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SCUBES_SCORE ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SCUBES_SCORE ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SABS_RES ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SABS_RES ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SABS_SCORE ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_SABS_SCORE ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_HANDS_RES ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_HANDS_RES ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_HANDS_SCORE ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_HANDS_SCORE ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_JUMP_RES ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_JUMP_RES ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_JUMP_SCORE ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_JUMP_SCORE ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_TOTAL_SCORE ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_TOTAL_SCORE ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_TOTAL_SCORE_WITHOUT_AEROBIC ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_TOTAL_SCORE_WITHOUT_AEROBIC ) );
-                dbString += "\t\t\t";
-            }
-            if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_PHONE_NUMBER ) ) != null ) {
-                dbString += recordSet.getString( recordSet.getColumnIndex( COLUMN_PHONE_NUMBER ) );
-            }
-            dbString += "\n";
-
-            recordSet.moveToNext();
-        }
-        recordSet.close();
-        db.close();
-        return dbString;
-    }
 
     int getRowsNum() {
         SQLiteDatabase db = getReadableDatabase();
@@ -206,15 +123,40 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     }
 
+    void updateStudent( Student student ) {
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues content = new ContentValues();
+        content.put( COLUMN_SAEROBIC_SCORE, student.getAerobicScore() );
+        content.put( COLUMN_SAEROBIC_RES, student.getAerobicResult() );
+        content.put( COLUMN_HANDS_SCORE, student.getHandsScore() );
+        content.put( COLUMN_HANDS_RES, student.getHandsResult() );
+        content.put( COLUMN_JUMP_SCORE, student.getJumpScore() );
+        content.put( COLUMN_JUMP_RES, student.getJumpResult() );
+        content.put( COLUMN_SABS_SCORE, student.getAbsScore() );
+        content.put( COLUMN_SABS_RES, student.getAbsResult() );
+        content.put( COLUMN_SCUBES_SCORE, student.getCubesScore() );
+        content.put( COLUMN_SCUBES_RES, student.getCubesResult() );
+        content.put( COLUMN_TOTAL_SCORE, student.getTotalScore() );
+        content.put( COLUMN_TOTAL_SCORE_WITHOUT_AEROBIC, student.getTotScoreWithoutAerobic() );
+        content.put( COLUMN_PHONE_NUMBER, student.getPhoneNumber() );
+        content.put( COLUMN_SDATE, student.getUpdatedDate() ); //Date
+
+        String where = COLUMN_SNAME + " = " + "\'" + student.getName() + "\'" + " and " +
+                COLUMN_SCLASS + " = " + "\'" + student.getStudentClass() + "\'";
+
+        db.update( TABLE_DATA, content, where, null );
+        db.close();
+    }
+
     Student getCurrentRow( int position ) {
 
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_DATA;
         Student newStudent = new Student();
 
-        //Cursor points to a location in your results
         Cursor recordSet = db.rawQuery( query, null );
-
         recordSet.moveToPosition( position );
 
         if ( recordSet.getString( recordSet.getColumnIndex( COLUMN_SNAME ) ) != null ) {
@@ -267,58 +209,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         }//16
         recordSet.close();
         db.close();
-        //Log.d(TAG, "returning newStudent: " + newStudent);
         return newStudent;
-
-    }
-
-    public void updateStudent( Student student ) {
-
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues content = new ContentValues();
-        content.put( COLUMN_SAEROBIC_SCORE, student.getAerobicScore() );
-        content.put( COLUMN_SAEROBIC_RES, student.getAerobicResult() );
-
-        content.put( COLUMN_HANDS_SCORE, student.getHandsScore() );
-        content.put( COLUMN_HANDS_RES, student.getHandsResult() );
-
-        content.put( COLUMN_JUMP_SCORE, student.getJumpScore() );
-        content.put( COLUMN_JUMP_RES, student.getJumpResult() );
-
-        content.put( COLUMN_SABS_SCORE, student.getAbsScore() );
-        content.put( COLUMN_SABS_RES, student.getAbsResult() );
-
-        content.put( COLUMN_SCUBES_SCORE, student.getCubesScore() );
-        content.put( COLUMN_SCUBES_RES, student.getCubesResult() );
-
-        content.put( COLUMN_TOTAL_SCORE, student.getTotalScore() );
-        content.put( COLUMN_TOTAL_SCORE_WITHOUT_AEROBIC, student.getTotScoreWithoutAerobic() );
-
-        content.put( COLUMN_PHONE_NUMBER, student.getPhoneNumber() );
-        content.put( COLUMN_SDATE, student.getUpdatedDate() ); //Date
-
-        String where = COLUMN_SNAME + " = " + "\'" + student.getName() + "\'" + " and " +
-                COLUMN_SCLASS + " = " + "\'" + student.getStudentClass() + "\'";
-
-
-        db.update( TABLE_DATA, content, where, null );
-        db.close();
-
-
-    }
-
-    public int studentsCompleted() {
-        SQLiteDatabase db = getReadableDatabase();
-
-        String query =
-                "SELECT T._sname , T._sclass FROM " + TABLE_DATA + " AS T " +
-                        " WHERE  T._saeroscore <> -1 AND T._scubesscore <> -1 " +
-                        " AND T._shandsscore <> -1 AND T._sjumpscore <> -1  AND T._sabsresult <> -1";
-
-        Cursor recordSet = db.rawQuery( query, null );
-        Log.v( TAG, "rows: " + recordSet.getCount() );
-        return recordSet.getCount();
 
     }
 }

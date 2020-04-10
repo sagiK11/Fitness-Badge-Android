@@ -66,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity( new Intent( this, AddStudentActivity.class ) );
     }
 
-    public static void printDatabase() {
-        String dbString = dbHandler.databaseToString();
-        System.out.println( "\n" + dbString + "\n" );
-    }
 
     public void searchStudents() {
         startActivity( new Intent( this, ViewStudentsActivity.class ) );
@@ -215,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity( sendToMail );
                 return null;
             } catch ( IOException e ) {
-                Log.e( "MainActivity", e.getMessage(), e );
+                Log.e( TAG, e.getMessage(), e );
                 return null;
             }
 

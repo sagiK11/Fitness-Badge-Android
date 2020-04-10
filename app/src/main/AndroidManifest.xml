@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_fitracker_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        tools:replace="android:icon"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".MainActivity">
@@ -26,19 +27,20 @@
         </activity>
 
         <activity android:name=".AddStudentActivity"
-            android:label="Add Student"/>
+            android:label="@string/enter_update_data"/>
             <meta-data android:name="android.app.default_searchable"
             android:value=".SearchableActivity" />
 
+        <activity android:name=".StudentActivity" />
 
         <activity android:name=".ViewStudentsActivity"
-            android:label="Students Results" />
+            android:label="@string/view_student_results" />
 
         <activity android:name=".UpdateStudentActivity"
-            android:label="Update Student"/>
+            android:label="@string/Update_student"/>
 
         <activity android:name=".SettingActivity"
-            android:label="Setting"/>
+            android:label="@string/setting"/>
 
 
     </application>

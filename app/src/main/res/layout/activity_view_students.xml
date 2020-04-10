@@ -14,10 +14,12 @@
         android:id="@+id/search_input"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName|text"
+        android:autofillHints="@string/search"
+        android:gravity="start"
+        android:inputType="textPersonName"
+        android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:textColorHint="@color/black"
-        android:autofillHints="@string/search" />
+        android:textColorHint="@color/black" />
 
     <ListView
         android:id="@+id/list_view"

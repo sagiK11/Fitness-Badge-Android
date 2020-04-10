@@ -16,6 +16,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class ViewStudentsActivity extends AppCompatActivity {
     private final String TAG = "ViewDataActivity";
     StudentAdapter adapter;
@@ -23,13 +25,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private EditText inputSearch;
     private Context thisContext;
     private ArrayList<Student> studentsList;
-    private String studentClass;
-
-    private String[] studentsClass = { "ט 1", "ט 2", "ט 3", "ט 4", "ט 5", "ט 6", "ט 7", "ט 8", "ט 9",
-            "י 1", "י 2", "י 3", "י-4", "י 5", "י 6", "י 7", "י 8", "י 9",
-            "י\"א 1", "י\"א 2", "י\"א 3", "י\"א 4", "י\"א 5", "י\"א 6",
-            "י\"א 7", "י\"א 8", "י\"א 9", "י\"ב 1", "י\"ב 2", "י\"ב 3", "י\"ב 4"
-            , "י\"ב 5", "י\"ב 6", "י\"ב 7", "י\"ב 8", "י\"ב 9", "כולם" };
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -52,16 +47,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
     }
 
 
-
-
-    private boolean studentFinished( Student curr ) {
-
-        final int MISSING = - 1;
-        return curr.getAbsScore() != MISSING && curr.getAerobicScore() != MISSING
-                && curr.getCubesScore() != MISSING && curr.getJumpScore() != MISSING
-                && curr.getHandsScore() != MISSING;
-    }
-
     private void linkObjects() {
         thisContext = this;
         listView = findViewById( R.id.list_view );
@@ -78,19 +63,15 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener( ( parent, view, position, id ) -> {
             final Student currentStudent = (Student) parent.getItemAtPosition( position );
-            final int DELETE_STUDENT = 1;
-
-            final AlertDialog.Builder builder = new AlertDialog.Builder( thisContext );
-            builder.setTitle( "מחק סטודנט?" );
-            String[] answers = { "No", "Yes" };
-
-            builder.setItems( answers, ( dialog, which ) -> {
-                if ( which == DELETE_STUDENT ) {
-                    deleteStudent( currentStudent );
-                }
-            } );
-            builder.show();
-
+            new SweetAlertDialog( this, SweetAlertDialog.WARNING_TYPE )
+                    .setTitleText( "למחוק תלמיד?" )
+                    .setConfirmText( "כן" )
+                    .setConfirmClickListener( sDialog -> {
+                        sDialog.dismissWithAnimation();
+                        deleteStudent( currentStudent );
+                    } )
+                    .setCancelButton( "לא", SweetAlertDialog::dismissWithAnimation )
+                    .show();
             return false;
 
         } );
@@ -108,14 +89,10 @@ public class ViewStudentsActivity extends AppCompatActivity {
         int length = MainActivity.dbHandler.getRowsNum();
         studentsList.clear();
         Student currentStudent;
+
         for ( int i = 0 ; i < length ; i++ ) {
             currentStudent = MainActivity.dbHandler.getCurrentRow( i );
-
-            if ( studentClass == null )
-                studentsList.add( currentStudent );
-            else if ( currentStudent.getStudentClass().trim().equals( studentClass ) )
-                studentsList.add( currentStudent );
-
+            studentsList.add( currentStudent );
         }
 
     }
@@ -173,5 +150,4 @@ public class ViewStudentsActivity extends AppCompatActivity {
         refreshList();
         adapter.notifyDataSetChanged();
     }
-
 }

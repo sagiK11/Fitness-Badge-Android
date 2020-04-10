@@ -6,16 +6,120 @@ import android.os.Parcelable;
 import android.util.Log;
 
 public class Student implements Parcelable {
-
     private String name, studentClass, phoneNumber, updatedDate;
     private double aerobicScore, aerobicResult, cubesScore, cubesResult, absScore, absResult;
     private double jumpScore, jumpResult, handsScore, handsResult, totalScore, totalScoreWithoutAerobic;
 
+    public static class Builder {
+        private String name, studentClass, phoneNumber, updatedDate;
+        private double aerobicScore, aerobicResult, cubesScore, cubesResult, absScore, absResult;
+        private double jumpScore, jumpResult, handsScore, handsResult, totalScore, totalScoreWithoutAerobic;
+
+        Builder( String name ) {
+            this.name = name;
+        }
+
+        Builder studentClass( String studentClass ) {
+            this.studentClass = studentClass;
+            return this;
+        }
+
+        Builder phoneNumber( String phoneNumber ) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        Builder updatedDate( String updatedDate ) {
+            this.updatedDate = updatedDate;
+            return this;
+        }
+
+        Builder aerobicScore( double aerobicScore ) {
+            this.aerobicScore = aerobicScore;
+            return this;
+        }
+
+        public Builder aerobicResult( double aerobicResult ) {
+            this.aerobicResult = aerobicResult;
+            return this;
+        }
+
+        public Builder cubesScore( double cubesScore ) {
+            this.cubesScore = cubesScore;
+            return this;
+        }
+
+        Builder cubesResult( double cubesResult ) {
+            this.cubesResult = cubesResult;
+            return this;
+        }
+
+        Builder absScore( double absScore ) {
+            this.absScore = absScore;
+            return this;
+        }
+
+        Builder absResult( double absResult ) {
+            this.absResult = absResult;
+            return this;
+        }
+
+        Builder jumpScore( double jumpScore ) {
+            this.jumpScore = jumpScore;
+            return this;
+        }
+
+        Builder jumpResult( double jumpResult ) {
+            this.jumpResult = jumpResult;
+            return this;
+        }
+
+        Builder handsScore( double handsScore ) {
+            this.handsScore = handsScore;
+            return this;
+        }
+
+        Builder handsResult( double handsResult ) {
+            this.handsResult = handsResult;
+            return this;
+        }
+
+        Builder totalScore( double totalScore ) {
+            this.totalScore = totalScore;
+            return this;
+        }
+
+        Builder totalScoreWithoutAerobic( double totalScoreWithoutAerobic ) {
+            this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
+            return this;
+        }
+
+        Student build() {
+            Student student = new Student();
+            student.setName( this.name );
+            student.setStudentClass( this.studentClass );
+            student.setPhoneNumber( this.phoneNumber );
+            student.setAerobicScore( this.aerobicScore );
+            student.setCubesScore( this.cubesScore );
+            student.setAbsScore( this.absScore );
+            student.setJumpScore( this.jumpScore );
+            student.setHandsScore( this.handsScore );
+            student.setAbsResult( this.absResult );
+            student.setAerobicResult( this.aerobicResult );
+            student.setJumpResult( this.jumpResult );
+            student.setHandsResult( this.handsResult );
+            student.setCubesResult( this.cubesResult );
+            student.setTotalScore( this.totalScore );
+            student.setTotScoreWithoutAerobic( this.totalScoreWithoutAerobic );
+            student.setUpdateDate( Utility.getTodayDate() );
+            return student;
+        }
+
+    }
 
     Student() {
 
     }
-
 
     String getName() {
         return name;
@@ -25,124 +129,124 @@ public class Student implements Parcelable {
         this.name = name;
     }
 
-    public String getStudentClass() {
+    String getStudentClass() {
         return studentClass;
     }
 
-    public String getUpdatedDate() {
+    String getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdateDate( String date ) {
+    void setUpdateDate( String date ) {
         this.updatedDate = date;
     }
 
-    public void setAerobicResult( double aerobicResult ) {
+    void setAerobicResult( double aerobicResult ) {
         this.aerobicResult = aerobicResult;
     }
 
-    public void setCubesResult( double cubesResult ) {
+    void setCubesResult( double cubesResult ) {
         this.cubesResult = cubesResult;
     }
 
-    public void setAbsResult( double absResult ) {
+    void setAbsResult( double absResult ) {
         this.absResult = absResult;
     }
 
-    public void setJumpResult( double jumpResult ) {
+    void setJumpResult( double jumpResult ) {
         this.jumpResult = jumpResult;
     }
 
-    public void setHandsResult( double handsResult ) {
+    void setHandsResult( double handsResult ) {
         this.handsResult = handsResult;
     }
 
-    public void setStudentClass( String studentClass ) {
+    void setStudentClass( String studentClass ) {
         this.studentClass = studentClass;
     }
 
-    public double getAerobicScore() {
+    double getAerobicScore() {
         return aerobicScore;
     }
 
-    public void setAerobicScore( double aerobicScore ) {
+    void setAerobicScore( double aerobicScore ) {
         this.aerobicScore = aerobicScore;
     }
 
-    public double getCubesScore() {
+    double getCubesScore() {
         return cubesScore;
     }
 
-    public void setCubesScore( double cubesScore ) {
+    void setCubesScore( double cubesScore ) {
         this.cubesScore = cubesScore;
     }
 
-    public double getAbsScore() {
+    double getAbsScore() {
         return absScore;
     }
 
-    public void setAbsScore( double absScore ) {
+    void setAbsScore( double absScore ) {
         this.absScore = absScore;
     }
 
-    public double getJumpScore() {
+    double getJumpScore() {
         return jumpScore;
     }
 
-    public void setJumpScore( double jumpScore ) {
+    void setJumpScore( double jumpScore ) {
         this.jumpScore = jumpScore;
     }
 
-    public double getHandsScore() {
+    double getHandsScore() {
         return handsScore;
     }
 
-    public void setHandsScore( double handsScore ) {
+    void setHandsScore( double handsScore ) {
         this.handsScore = handsScore;
     }
 
-    public double getAerobicResult() {
+    double getAerobicResult() {
         return aerobicResult;
     }
 
-    public double getCubesResult() {
+    double getCubesResult() {
         return cubesResult;
     }
 
-    public double getAbsResult() {
+    double getAbsResult() {
         return absResult;
     }
 
-    public double getJumpResult() {
+    double getJumpResult() {
         return jumpResult;
     }
 
-    public double getHandsResult() {
+    double getHandsResult() {
         return handsResult;
     }
 
-    public double getTotalScore() {
+    double getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalScore( double totalScore ) {
+    void setTotalScore( double totalScore ) {
         this.totalScore = totalScore;
     }
 
-    public double getTotScoreWithoutAerobic() {
+    double getTotScoreWithoutAerobic() {
         return totalScoreWithoutAerobic;
     }
 
-    public void setTotScoreWithoutAerobic( double totalScoreWithoutAerobic ) {
+    void setTotScoreWithoutAerobic( double totalScoreWithoutAerobic ) {
         this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
     }
 
 
-    public String getPhoneNumber() {
+    String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber( String phoneNumber ) {
+    void setPhoneNumber( String phoneNumber ) {
         this.phoneNumber = phoneNumber;
     }
 

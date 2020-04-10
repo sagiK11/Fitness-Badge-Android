@@ -47,4 +47,7 @@ dependencies {
     }
     implementation 'com.android.support:support-fragment:27.1.1'
     implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+    implementation 'com.github.rey5137:material:1.2.5'
+
 }

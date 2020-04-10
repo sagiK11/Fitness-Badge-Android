@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimary">#5B377A</color>
     <color name="colorPrimaryDark">#26C6DA</color>
     <color name="colorAccent">#4144f0</color>
     <color name="fixedProgressBar">#a00538</color>
