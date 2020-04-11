@@ -11,6 +11,9 @@ The app provides the following features:
 - Exports the students scores & grades to an excel file to be sent via an email to the teacher.
 - Option to send the student scores & grades via an SMS/Whatsapp.
 
+#### Demo
+![Farmers Market Finder Demo](http://g.recordit.co/nG4VDNsJAN.gif)
+
 
 #### Screenshots
 ###### app home screen
