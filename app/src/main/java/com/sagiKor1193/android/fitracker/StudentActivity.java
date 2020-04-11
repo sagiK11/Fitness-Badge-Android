@@ -4,7 +4,9 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,14 +16,14 @@ import android.widget.Toast;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class StudentActivity extends AppCompatActivity {
-    String sClassString, TAG = "StudentActivity";
+    String sClassString, sGenderString, TAG = "StudentActivity";
     final int INVALID_INPUT = - 2, MISSING_INPUT = - 1;
     Student currentStudent;
     SportResultsArrayList sportResultsArrayList = new SportResultsArrayList();
     EditText sName, sPhoneNumber, sAerobicScore, sCubesScore, sHandsScore, sAbsScore, sJumpScore;
     TextView sAerobicScoreText, sCubesScoreText, sHandsScoreText, sAbsScoreText, sJumpScoreText;
     TextView sTotalScoreText;
-    Button chooseClassButton, saveStudentButton, sClassButton;
+    Button chooseClassButton, genderButton, saveStudentButton, sClassButton;
     double aerobicScore, cubesScore, handsScore, absScore, jumpScore, avg, avgWithOutAerobic;
     int aerobicGrade, cubesGrade, handsGrade, absGrade, jumpGrade;
 

@@ -1,23 +1,28 @@
 package com.sagiKor1193.android.fitracker;
 
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+
+
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class AddStudentActivity extends StudentActivity {
 
     private final String TAG = "AddStudentActivity";
-    //Alert dialog
-    private String[] studentsClass = { "ט 1", "ט 2", "ט 3", "ט 4", "ט 5", "ט 6", "ט 7", "ט 8", "ט 9",
-            "י 1", "י 2", "י 3", "י-4", "י 5", "י 6", "י 7", "י 8", "י 9",
-            "י\"א 1", "י\"א 2", "י\"א 3", "י\"א 4", "י\"א 5", "י\"א 6",
-            "י\"א 7", "י\"א 8", "י\"א 9", "י\"ב 1", "י\"ב 2", "י\"ב 3", "י\"ב 4"
-            , "י\"ב 5", "י\"ב 6", "י\"ב 7", "י\"ב 8", "י\"ב 9" };
 
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
@@ -34,6 +39,7 @@ public class AddStudentActivity extends StudentActivity {
         sName = findViewById( R.id.enter_data_v2_student_to_display_id );
         sPhoneNumber = findViewById( R.id.phone_number_to_enter_id );
         chooseClassButton = findViewById( R.id.student_class_id );
+        genderButton = findViewById( R.id.gender_button );
         saveStudentButton = findViewById( R.id.button_add_student_enter_data );
         sAerobicScore = findViewById( R.id.update_student_aerobic_id );
         sCubesScore = findViewById( R.id.update_student_cubes_id );
@@ -41,9 +47,9 @@ public class AddStudentActivity extends StudentActivity {
         sJumpScore = findViewById( R.id.update_student_jump_id );
         sAbsScore = findViewById( R.id.update_student_abs_id );
         chooseClassButton.setOnClickListener( e -> selectStudentClass() );
+        genderButton.setOnClickListener( e -> selectStudentGender() );
         saveStudentButton.setOnClickListener( e -> addStudentClicked() );
     }
-
 
     private void linkTextToDisplayObjects() {
         sAerobicScoreText = findViewById( R.id.update_student_aerobic_text );
@@ -67,27 +73,54 @@ public class AddStudentActivity extends StudentActivity {
 
     private void addStudent() {
         Student newStudent = createNewStudent();
-        addStudentToDataBase( newStudent );
+        addStudentToFireBase( newStudent );
     }
 
-    private void addStudentToDataBase( Student newStudent ) {
-        if ( ! studentAlreadyExists( newStudent ) ) {
-            popFailWindow();
-        } else {
-            askForSendingSMS();
-        }
+
+    private void addStudentToFireBase( Student newStudent ) {
+
+        DatabaseReference dbRef = MainActivity.dbRef;
+        dbRef.addListenerForSingleValueEvent( new ValueEventListener() {
+            @Override
+            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
+                boolean exists = false;
+                for ( DataSnapshot obj : dataSnapshot.getChildren() ) {
+                    Student student = obj.getValue( Student.class );
+                    if ( studentExists( student, newStudent ) ) {
+                        popFailWindow();
+                        exists = true;
+                    }
+                }
+                if ( ! exists ) {
+                    dbRef.child( newStudent.getKey() ).setValue( newStudent );
+                    askForSendingSMS();
+                }
+            }
+
+            @Override
+            public void onCancelled( @NonNull DatabaseError databaseError ) {
+
+            }
+        } );
     }
 
-    private boolean studentAlreadyExists( Student newStudent ) {
-        return MainActivity.getDbHandler().addStudentData( newStudent );
+    private boolean studentExists( Student student, Student newStudent ) {
+        return student != null && student.getKey() != null && student.getKey().equals( newStudent.getKey() );
     }
+
+    private String generateStudentKey( String sName, String sClass ) {
+        return sName + " " + sClass;
+    }
+
 
     private Student createNewStudent() {
         getUserInput();
-
-        return new Student.Builder( sName.getText().toString().trim() )
+        String studentKey = generateStudentKey( getStudentName(), sClassString );
+        return new Student.Builder( getStudentName() )
                 .studentClass( sClassString )
                 .phoneNumber( sPhoneNumber.getText().toString() )
+                .key( studentKey )
+                .studentGender( sGenderString )
                 .aerobicScore( aerobicScore )
                 .cubesScore( cubesScore )
                 .absScore( absScore )
@@ -103,6 +136,10 @@ public class AddStudentActivity extends StudentActivity {
                 .updatedDate( Utility.getTodayDate() )
                 .build();
 
+    }
+
+    private String getStudentName() {
+        return sName.getText().toString().trim();
     }
 
     private void getUserInput() {
@@ -152,12 +189,30 @@ public class AddStudentActivity extends StudentActivity {
         return super.testInput( text, place, getApplicationContext() );
     }
 
+    private void selectStudentGender() {
+        new SweetAlertDialog( this, SweetAlertDialog.WARNING_TYPE )
+                .setTitleText( "בחר מגדר" )
+                .setConfirmText( "בת" )
+                .setConfirmClickListener( sDialog -> {
+                    sDialog.dismissWithAnimation();
+                    sGenderString = "בת";
+                    genderButton.setText( sGenderString );
+
+                } )
+                .setCancelButton( "בן", sDialog -> {
+                    sDialog.dismissWithAnimation();
+                    sGenderString = "בן";
+                    genderButton.setText( sGenderString );
+                } )
+                .show();
+    }
+
     public void selectStudentClass() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder( this );
         View row = getLayoutInflater().inflate( R.layout.class_list_item, null );
 
         ListView listView = row.findViewById( R.id.class_list_view );
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( this, android.R.layout.simple_list_item_1, studentsClass );
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>( this, android.R.layout.simple_list_item_1, getStudentsClasses() );
 
         listView.setAdapter( arrayAdapter );
         arrayAdapter.notifyDataSetChanged();
@@ -174,6 +229,14 @@ public class AddStudentActivity extends StudentActivity {
     private void setClass( String sClass ) {
         this.sClassString = sClass;
         chooseClassButton.setText( sClass );
+    }
+
+    private String[] getStudentsClasses() {
+        return new String[]{ "ט 1", "ט 2", "ט 3", "ט 4", "ט 5", "ט 6", "ט 7", "ט 8", "ט 9",
+                "י 1", "י 2", "י 3", "י-4", "י 5", "י 6", "י 7", "י 8", "י 9",
+                "י\"א 1", "י\"א 2", "י\"א 3", "י\"א 4", "י\"א 5", "י\"א 6",
+                "י\"א 7", "י\"א 8", "י\"א 9", "י\"ב 1", "י\"ב 2", "י\"ב 3", "י\"ב 4"
+                , "י\"ב 5", "י\"ב 6", "י\"ב 7", "י\"ב 8", "י\"ב 9" };
     }
 }
 

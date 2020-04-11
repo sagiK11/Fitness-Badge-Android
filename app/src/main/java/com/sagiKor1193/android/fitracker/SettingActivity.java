@@ -1,9 +1,11 @@
 package com.sagiKor1193.android.fitracker;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -12,8 +14,7 @@ import android.widget.Toast;
 public class SettingActivity extends AppCompatActivity {
     private final String TAG = "Setting";
     private final String[] answers = { "No", "Yes" };
-    private final int NO = 0;
-    private final int YES = 1;
+    private final int NO = 0, YES = 1;
 
 
     @Override
@@ -34,13 +35,17 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 case YES: {
                     Log.w( TAG, "user deleted all students" );
-                    MainActivity.getDbHandler().clearDataBase();
+                    clearDataBase();
                     popToast( "Students deleted successfully" );
                     break;
                 }
             }
         } );
         builder.show();
+    }
+
+    private void clearDataBase() {
+        MainActivity.dbRef.child( "students" ).removeValue();
     }
 
 

@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class StudentAdapter extends ArrayAdapter<Student> {
     private String TAG = "StudentAdapter";
 
 
-    StudentAdapter( Activity context, ArrayList<Student> studentsList ) {
+    StudentAdapter( Activity context, List<Student> studentsList ) {
         super( context, 0, studentsList );
     }
 

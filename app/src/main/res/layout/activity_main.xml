@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -43,11 +43,11 @@
                 android:paddingTop="20dp"
                 android:text="@string/search"
                 android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
                 app:rd_enable="true"
-                app:rd_delayClick ="untilRelease"
-                app:rd_rippleType="touch"
                 app:rd_maxRippleRadius="match_view"
-                app:rd_rippleColor="@color/colorPrimary"/>
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
 
             <com.rey.material.widget.Button
                 android:id="@+id/button_add_student"
@@ -56,17 +56,16 @@
                 android:layout_height="130dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="11dp"
-                android:paddingTop="20dp"
                 android:background="@drawable/buttons"
                 android:drawableTop="@drawable/add_person_icon"
+                android:paddingTop="20dp"
                 android:text="@string/enter_update_data"
                 android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
                 app:rd_enable="true"
-                app:rd_delayClick ="untilRelease"
-                app:rd_rippleType="touch"
                 app:rd_maxRippleRadius="match_view"
                 app:rd_rippleColor="@color/colorPrimary"
-                 />
+                app:rd_rippleType="touch" />
 
         </LinearLayout>
 
@@ -82,17 +81,17 @@
                 android:layout_width="165dp"
                 android:layout_height="130dp"
                 android:layout_marginEnd="1dp"
-                android:paddingTop="20dp"
                 android:background="@drawable/buttons"
                 android:drawableTop="@drawable/mail_icon"
                 android:padding="16dp"
+                android:paddingTop="20dp"
                 android:text="@string/export_to_excel"
                 android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
                 app:rd_enable="true"
-                app:rd_delayClick ="untilRelease"
-                app:rd_rippleType="touch"
                 app:rd_maxRippleRadius="match_view"
-                app:rd_rippleColor="@color/colorPrimary"/>
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
 
             <com.rey.material.widget.Button
                 android:id="@+id/button_update_student"
@@ -100,17 +99,17 @@
                 android:layout_width="165dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="1dp"
-                android:paddingTop="20dp"
                 android:background="@drawable/buttons"
                 android:drawableTop="@drawable/update_icon"
                 android:padding="16dp"
+                android:paddingTop="20dp"
                 android:text="@string/Update_student"
                 android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
                 app:rd_enable="true"
-                app:rd_delayClick ="untilRelease"
-                app:rd_rippleType="touch"
                 app:rd_maxRippleRadius="match_view"
-                app:rd_rippleColor="@color/colorPrimary"/>
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
 
 
         </LinearLayout>
@@ -118,4 +117,4 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,17 +6,30 @@ import android.os.Parcelable;
 import android.util.Log;
 
 public class Student implements Parcelable {
-    private String name, studentClass, phoneNumber, updatedDate;
+    private String name;
+    private String gender;
+    private String studentClass;
+    private String phoneNumber;
+    private String updatedDate;
+
+
+
+    private String key;
     private double aerobicScore, aerobicResult, cubesScore, cubesResult, absScore, absResult;
     private double jumpScore, jumpResult, handsScore, handsResult, totalScore, totalScoreWithoutAerobic;
 
     public static class Builder {
-        private String name, studentClass, phoneNumber, updatedDate;
+        private String name, gender, studentClass, phoneNumber, updatedDate, key;
         private double aerobicScore, aerobicResult, cubesScore, cubesResult, absScore, absResult;
         private double jumpScore, jumpResult, handsScore, handsResult, totalScore, totalScoreWithoutAerobic;
 
         Builder( String name ) {
             this.name = name;
+        }
+
+        Builder studentGender( String gender ) {
+            this.gender = gender;
+            return this;
         }
 
         Builder studentClass( String studentClass ) {
@@ -26,6 +39,10 @@ public class Student implements Parcelable {
 
         Builder phoneNumber( String phoneNumber ) {
             this.phoneNumber = phoneNumber;
+            return this;
+        }
+        Builder key( String key ) {
+            this.key = key;
             return this;
         }
 
@@ -98,6 +115,8 @@ public class Student implements Parcelable {
             Student student = new Student();
             student.setName( this.name );
             student.setStudentClass( this.studentClass );
+            student.setGender( this.gender );
+            student.setKey(this.key);
             student.setPhoneNumber( this.phoneNumber );
             student.setAerobicScore( this.aerobicScore );
             student.setCubesScore( this.cubesScore );
@@ -121,7 +140,7 @@ public class Student implements Parcelable {
 
     }
 
-    String getName() {
+    public String getName() {
         return name;
     }
 
@@ -129,12 +148,28 @@ public class Student implements Parcelable {
         this.name = name;
     }
 
-    String getStudentClass() {
+    public String getStudentClass() {
         return studentClass;
     }
 
-    String getUpdatedDate() {
+    public String getGender() {
+        return gender;
+    }
+
+    void setGender( String gender ) {
+        this.gender = gender;
+    }
+
+    public String getUpdatedDate() {
         return updatedDate;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey( String key ) {
+        this.key = key;
     }
 
     void setUpdateDate( String date ) {
@@ -165,7 +200,7 @@ public class Student implements Parcelable {
         this.studentClass = studentClass;
     }
 
-    double getAerobicScore() {
+    public double getAerobicScore() {
         return aerobicScore;
     }
 
@@ -173,7 +208,7 @@ public class Student implements Parcelable {
         this.aerobicScore = aerobicScore;
     }
 
-    double getCubesScore() {
+    public double getCubesScore() {
         return cubesScore;
     }
 
@@ -181,7 +216,7 @@ public class Student implements Parcelable {
         this.cubesScore = cubesScore;
     }
 
-    double getAbsScore() {
+    public double getAbsScore() {
         return absScore;
     }
 
@@ -189,7 +224,7 @@ public class Student implements Parcelable {
         this.absScore = absScore;
     }
 
-    double getJumpScore() {
+    public double getJumpScore() {
         return jumpScore;
     }
 
@@ -197,7 +232,7 @@ public class Student implements Parcelable {
         this.jumpScore = jumpScore;
     }
 
-    double getHandsScore() {
+    public double getHandsScore() {
         return handsScore;
     }
 
@@ -205,27 +240,27 @@ public class Student implements Parcelable {
         this.handsScore = handsScore;
     }
 
-    double getAerobicResult() {
+    public double getAerobicResult() {
         return aerobicResult;
     }
 
-    double getCubesResult() {
+    public double getCubesResult() {
         return cubesResult;
     }
 
-    double getAbsResult() {
+    public double getAbsResult() {
         return absResult;
     }
 
-    double getJumpResult() {
+    public double getJumpResult() {
         return jumpResult;
     }
 
-    double getHandsResult() {
+    public double getHandsResult() {
         return handsResult;
     }
 
-    double getTotalScore() {
+    public double getTotalScore() {
         return totalScore;
     }
 
@@ -233,7 +268,7 @@ public class Student implements Parcelable {
         this.totalScore = totalScore;
     }
 
-    double getTotScoreWithoutAerobic() {
+    public double getTotScoreWithoutAerobic() {
         return totalScoreWithoutAerobic;
     }
 
@@ -242,7 +277,7 @@ public class Student implements Parcelable {
     }
 
 
-    String getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -277,6 +312,8 @@ public class Student implements Parcelable {
         handsResult = in.readDouble();
         totalScore = in.readDouble();
         phoneNumber = in.readString();
+        gender = in.readString();
+        key = in.readString();
     }
 
     @Override
@@ -295,6 +332,8 @@ public class Student implements Parcelable {
         dest.writeDouble( handsResult );
         dest.writeDouble( totalScore );
         dest.writeString( phoneNumber );
+        dest.writeString( gender );
+        dest.writeString( key );
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {

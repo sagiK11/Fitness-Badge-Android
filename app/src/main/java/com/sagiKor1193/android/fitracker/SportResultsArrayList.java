@@ -3,10 +3,11 @@ package com.sagiKor1193.android.fitracker;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class SportResultsArrayList {
 
 
-    ArrayList<SportCategoryNode> gradesArrayList;
+    List<SportCategoryNode> gradesArrayList;
     private final int WORST_RESULT = 30;
 
 
@@ -223,10 +224,11 @@ public class SportResultsArrayList {
 
     public int getCubesResult( double score ) {
         SportCategoryNode ptr;
+        boolean emptyField = score == 0;
         for ( int i = 0 ; i < gradesArrayList.size() ; i++ ) {
             ptr = gradesArrayList.get( i );
             if ( ptr.getCubesScore() >= score ) {
-                return ptr.getCubesResult();
+                return emptyField ? WORST_RESULT : ptr.getCubesResult();
             }
         }
         return WORST_RESULT;
@@ -235,10 +237,11 @@ public class SportResultsArrayList {
 
     public int getAerobicResult( double score ) {
         SportCategoryNode ptr;
+        boolean emptyField = score == 0;
         for ( int i = 0 ; i < gradesArrayList.size() ; i++ ) {
             ptr = gradesArrayList.get( i );
             if ( ptr.getAerobicScore() >= score ) {
-                return ptr.getAerobicResult();
+                return emptyField ? WORST_RESULT : ptr.getAerobicResult();
             }
         }
         return WORST_RESULT;

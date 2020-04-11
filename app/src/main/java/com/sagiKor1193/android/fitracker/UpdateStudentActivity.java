@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
 
 public class UpdateStudentActivity extends StudentActivity {
 
@@ -35,6 +37,7 @@ public class UpdateStudentActivity extends StudentActivity {
     private void updateStudentDetailsTextFields() {
         sName.setText( currentStudent.getName() );
         sClassButton.setText( currentStudent.getStudentClass() );
+        genderButton.setText( currentStudent.getGender() );
     }
 
     private void updateScoreTextFields() {
@@ -76,6 +79,7 @@ public class UpdateStudentActivity extends StudentActivity {
     private void linkUserInputObjects() {
         sName = findViewById( R.id.enter_data_v2_student_to_display_id );
         sClassButton = findViewById( R.id.enter_data_v2_student_class_to_display_id );
+        genderButton = findViewById( R.id.gender_button_update );
         sPhoneNumber = findViewById( R.id.phone_number_to_enter_id );
         sAerobicScore = findViewById( R.id.update_student_aerobic_id );
         sCubesScore = findViewById( R.id.update_student_cubes_id );
@@ -101,16 +105,18 @@ public class UpdateStudentActivity extends StudentActivity {
         if ( inputErrors() )
             return;
         updateGradeTextFields();
-        updateStudentInDataBase();
+        updateStudentInFireBase();
         askForSendingSMS();
     }
 
 
-    private void updateStudentInDataBase() {
-        MainActivity.getDbHandler().updateStudent(
+    private void updateStudentInFireBase() {
+        DatabaseReference dbRef = MainActivity.dbRef;
+        dbRef.child( sName.getText().toString() + " " + sClassButton.getText().toString() ).setValue(
                 new Student.Builder( sName.getText().toString().trim() )
                         .studentClass( sClassButton.getText().toString() )
                         .phoneNumber( getStudentPhoneNumber() )
+                        .studentGender( sGenderString )
                         .aerobicScore( aerobicScore )
                         .cubesScore( cubesScore )
                         .absScore( absScore )

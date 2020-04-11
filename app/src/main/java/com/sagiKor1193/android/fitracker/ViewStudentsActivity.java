@@ -5,16 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -24,7 +31,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private ListView listView;
     private EditText inputSearch;
     private Context thisContext;
-    private ArrayList<Student> studentsList;
+    private List<Student> studentsList;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -79,21 +86,27 @@ public class ViewStudentsActivity extends AppCompatActivity {
     }
 
     private void deleteStudent( Student currentStudent ) {
-        String studentName = currentStudent.getName();
-        String studentClass = currentStudent.getStudentClass();
-        MainActivity.dbHandler.deleteStudentData( studentName, studentClass );
+        MainActivity.dbRef.child( currentStudent.getName() + " " + currentStudent.getStudentClass() ).removeValue();
         onRestart();
     }
 
     public void refreshList() {
-        int length = MainActivity.dbHandler.getRowsNum();
-        studentsList.clear();
-        Student currentStudent;
+        MainActivity.dbRef.addValueEventListener( new ValueEventListener() {
+            @Override
+            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
+                studentsList.clear();
+                for ( DataSnapshot obj : dataSnapshot.getChildren() ) {
+                    Student student = obj.getValue( Student.class );
+                    studentsList.add( student );
+                }
+                adapter.notifyDataSetChanged();
+            }
 
-        for ( int i = 0 ; i < length ; i++ ) {
-            currentStudent = MainActivity.dbHandler.getCurrentRow( i );
-            studentsList.add( currentStudent );
-        }
+            @Override
+            public void onCancelled( @NonNull DatabaseError databaseError ) {
+                Log.d( TAG, databaseError.getDetails() );
+            }
+        } );
 
     }
 
@@ -148,6 +161,5 @@ public class ViewStudentsActivity extends AppCompatActivity {
         Log.d( TAG, "restarted" );
 
         refreshList();
-        adapter.notifyDataSetChanged();
     }
 }

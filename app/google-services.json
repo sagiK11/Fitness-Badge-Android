@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "106279244813",
+    "firebase_url": "https://fitracker-e553e.firebaseio.com",
+    "project_id": "fitracker-e553e",
+    "storage_bucket": "fitracker-e553e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106279244813:android:e91f2746d37b80a4477144",
+        "android_client_info": {
+          "package_name": "com.sagiKor1193.android.fitracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106279244813-7n1870ho1ae6kf5ob8bcrvva9bc3l2q2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sagiKor1193.android.fitracker",
+            "certificate_hash": "343bd8a9c586bd7e8c1d95c0c05979ae4ba3b268"
+          }
+        },
+        {
+          "client_id": "106279244813-q1r6g62unqmml1hj3ma5brhd65jbns60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBomiSHqSboteJu5UmTfyJsqA9HVKEtSAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106279244813-q1r6g62unqmml1hj3ma5brhd65jbns60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

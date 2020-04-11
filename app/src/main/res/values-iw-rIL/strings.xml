@@ -40,4 +40,8 @@
     <string name="update_button">עדכן תלמיד</string>
     <string name="student_name_to_update">תלמיד לעדכון</string>
     <string name="Update_student">עדכן תלמיד</string>
+    <string name="minutes">(דקות)</string>
+    <string name="seconds">(שניות)</string>
+    <string name="amount">(פעמים)</string>
+    <string name="cm">(ס\"מ)</string>
 </resources>
