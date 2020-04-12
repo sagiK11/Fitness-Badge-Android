@@ -12,7 +12,7 @@ The app provides the following features:
 - Option to send the student scores & grades via an SMS/Whatsapp.
 
 #### Demo
-![Farmers Market Finder Demo](http://g.recordit.co/nG4VDNsJAN.gif)
+![Farmers Market Finder Demo](http://g.recordit.co/lSVEVQxhE5.gif)
 
 
 #### Screenshots
