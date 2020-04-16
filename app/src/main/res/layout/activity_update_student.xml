@@ -10,6 +10,8 @@
     android:orientation="vertical"
     tools:layout_editor_absoluteY="81dp">
 
+
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -19,16 +21,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/enter_data_v2_student_to_display_id"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start"
-            android:inputType="textPersonName"
-            android:textAlignment="textStart" />
 
         <TextView
             android:id="@+id/textView25"
@@ -40,6 +32,18 @@
             android:gravity="center"
             android:text="@string/student_name"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/enter_data_v2_student_to_display_id"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="textPersonName"
+            android:textAlignment="textStart" />
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -52,6 +56,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/phone_number" />
+
         <EditText
             android:id="@+id/phone_number_to_enter_id"
             android:layout_width="wrap_content"
@@ -62,14 +75,7 @@
             android:inputType="number|phone"
             android:textAlignment="textEnd" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/phone_number" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -83,11 +89,27 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <com.rey.material.widget.Button
+            android:id="@+id/enter_data_v2_student_class_to_display_id"
+            style="@style/buttons_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/buttons"
+            android:layout_weight="1"
+            android:text="@string/Class"
+            app:rd_delayClick="untilRelease"
+            app:rd_enable="true"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"
+            app:rd_rippleType="touch" />
+
+        <com.rey.material.widget.Button
             android:id="@+id/gender_button_update"
             style="@style/buttons_style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
+            android:background="@drawable/buttons"
             android:layout_weight="1"
             android:text="@string/gender"
             app:rd_delayClick="untilRelease"
@@ -96,19 +118,7 @@
             app:rd_rippleColor="@color/colorPrimary"
             app:rd_rippleType="touch" />
 
-        <com.rey.material.widget.Button
-            android:id="@+id/enter_data_v2_student_class_to_display_id"
-            style="@style/buttons_style"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:text="@string/Class"
-            app:rd_delayClick="untilRelease"
-            app:rd_enable="true"
-            app:rd_maxRippleRadius="match_view"
-            app:rd_rippleColor="@color/colorPrimary"
-            app:rd_rippleType="touch" />
+
 
     </LinearLayout>
 
@@ -122,23 +132,13 @@
         tools:layout_editor_absoluteX="2dp">
 
         <TextView
-            android:id="@+id/update_student_aerobic_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView15"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/grade" />
+            android:text="@string/aerobic" />
 
-        <EditText
-            android:id="@+id/update_student_aerobic_id"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start"
-            android:inputType="numberDecimal"
-            android:textAlignment="textEnd" />
 
         <TextView
             android:id="@+id/textView"
@@ -148,13 +148,25 @@
             android:text="@string/minutes"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="35dp"
+        <EditText
+            android:id="@+id/update_student_aerobic_id"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/update_student_aerobic_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/aerobic" />
+            android:text="@string/grade" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -167,23 +179,12 @@
         tools:layout_editor_absoluteX="2dp">
 
         <TextView
-            android:id="@+id/update_student_abs_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView16"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/grade" />
-
-        <EditText
-            android:id="@+id/update_student_abs_id"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start"
-            android:inputType="numberDecimal"
-            android:textAlignment="textEnd" />
+            android:text="@string/abs" />
 
         <TextView
             android:id="@+id/textView30"
@@ -193,13 +194,30 @@
             android:text="@string/amount"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="35dp"
+        <EditText
+            android:id="@+id/update_student_abs_id"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart" />
+
+
+        <TextView
+            android:id="@+id/update_student_abs_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/abs" />
+            android:text="@string/grade" />
+
+
+
+
+
     </LinearLayout>
 
     <LinearLayout
@@ -212,23 +230,12 @@
         tools:layout_editor_absoluteX="2dp">
 
         <TextView
-            android:id="@+id/update_student_cubes_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView17"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/grade" />
-
-        <EditText
-            android:id="@+id/update_student_cubes_id"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start"
-            android:inputType="numberDecimal"
-            android:textAlignment="textEnd" />
+            android:text="@string/cubes" />
 
         <TextView
             android:id="@+id/textView31"
@@ -238,13 +245,25 @@
             android:text="@string/seconds"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="35dp"
+        <EditText
+            android:id="@+id/update_student_cubes_id"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:id="@+id/update_student_cubes_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/cubes" />
+            android:text="@string/grade" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -257,13 +276,20 @@
         tools:layout_editor_absoluteX="2dp">
 
         <TextView
-            android:id="@+id/update_student_hands_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView18"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/grade" />
+            android:text="@string/hands" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/minutes"
+            android:textAlignment="center" />
 
         <EditText
             android:id="@+id/update_student_hands_id"
@@ -271,25 +297,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:gravity="right"
+            android:gravity="start"
             android:inputType="numberDecimal"
-            android:textAlignment="textEnd" />
+            android:textAlignment="textStart" />
 
         <TextView
-            android:id="@+id/textView32"
-            android:layout_width="35dp"
+            android:id="@+id/update_student_hands_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/seconds"
-            android:textAlignment="center" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="35dp"
-            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/hands" />
+            android:text="@string/grade" />
     </LinearLayout>
 
     <LinearLayout
@@ -302,23 +321,12 @@
         tools:layout_editor_absoluteX="2dp">
 
         <TextView
-            android:id="@+id/update_student_jump_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView20"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/grade" />
-
-        <EditText
-            android:id="@+id/update_student_jump_id"
-            android:layout_width="140dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="start"
-            android:inputType="numberDecimal"
-            android:textAlignment="textEnd" />
+            android:text="@string/jump" />
 
         <TextView
             android:id="@+id/textView33"
@@ -328,13 +336,26 @@
             android:text="@string/cm"
             android:textAlignment="center" />
 
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="35dp"
+        <EditText
+            android:id="@+id/update_student_jump_id"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart" />
+
+
+        <TextView
+            android:id="@+id/update_student_jump_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/jump" />
+            android:text="@string/grade" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -349,6 +370,14 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
         <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/total_score" />
+
+        <TextView
             android:id="@+id/update_student_total_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -356,13 +385,6 @@
             android:gravity="center"
             android:text="@string/grade" />
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/total_score" />
     </LinearLayout>
 
     <LinearLayout
@@ -380,8 +402,9 @@
         <com.rey.material.widget.Button
             android:id="@+id/button_add_student_enter_data"
             style="@style/buttons_style"
-            android:layout_width="100dp"
+            android:layout_width="170dp"
             android:layout_height="45dp"
+            android:background="@drawable/buttons"
             android:layout_margin="12dp"
             android:layout_marginBottom="3dp"
             android:text="@string/save"

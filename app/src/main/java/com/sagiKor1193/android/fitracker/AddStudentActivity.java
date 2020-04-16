@@ -2,9 +2,7 @@ package com.sagiKor1193.android.fitracker;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,10 +10,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
+
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -78,30 +74,16 @@ public class AddStudentActivity extends StudentActivity {
 
 
     private void addStudentToFireBase( Student newStudent ) {
-
+        for ( Student student : MainActivity.studentList ) {
+            if ( studentExists( student, newStudent ) ) {
+                popFailWindow();
+                return;
+            }
+        }
         DatabaseReference dbRef = MainActivity.dbRef;
-        dbRef.addListenerForSingleValueEvent( new ValueEventListener() {
-            @Override
-            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                boolean exists = false;
-                for ( DataSnapshot obj : dataSnapshot.getChildren() ) {
-                    Student student = obj.getValue( Student.class );
-                    if ( studentExists( student, newStudent ) ) {
-                        popFailWindow();
-                        exists = true;
-                    }
-                }
-                if ( ! exists ) {
-                    dbRef.child( newStudent.getKey() ).setValue( newStudent );
-                    askForSendingSMS();
-                }
-            }
-
-            @Override
-            public void onCancelled( @NonNull DatabaseError databaseError ) {
-
-            }
-        } );
+        dbRef.child( newStudent.getKey() ).setValue( newStudent );
+        MainActivity.studentList.add( newStudent );
+        askForSendingSMS();
     }
 
     private boolean studentExists( Student student, Student newStudent ) {

@@ -12,15 +12,21 @@
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="65dp">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="337dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="250dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="45dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +45,7 @@
                 android:layout_marginTop="11dp"
                 android:layout_marginEnd="1dp"
                 android:background="@drawable/buttons"
-                android:drawableTop="@drawable/search_icon"
+                android:drawableTop="@drawable/ic_search_purple_24dp"
                 android:paddingTop="20dp"
                 android:text="@string/search"
                 android:textSize="18sp"
@@ -52,12 +58,12 @@
             <com.rey.material.widget.Button
                 android:id="@+id/button_add_student"
                 style="@style/buttons_style"
-                android:layout_width="165dp"
+                android:layout_width="160dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="11dp"
                 android:background="@drawable/buttons"
-                android:drawableTop="@drawable/add_person_icon"
+                android:drawableTop="@drawable/ic_person_add_purple_24dp"
                 android:paddingTop="20dp"
                 android:text="@string/enter_update_data"
                 android:textSize="18sp"
@@ -66,6 +72,7 @@
                 app:rd_maxRippleRadius="match_view"
                 app:rd_rippleColor="@color/colorPrimary"
                 app:rd_rippleType="touch" />
+
 
         </LinearLayout>
 
@@ -82,7 +89,7 @@
                 android:layout_height="130dp"
                 android:layout_marginEnd="1dp"
                 android:background="@drawable/buttons"
-                android:drawableTop="@drawable/mail_icon"
+                android:drawableTop="@drawable/ic_email_purple_24dp"
                 android:padding="16dp"
                 android:paddingTop="20dp"
                 android:text="@string/export_to_excel"
@@ -96,11 +103,11 @@
             <com.rey.material.widget.Button
                 android:id="@+id/button_update_student"
                 style="@style/buttons_style"
-                android:layout_width="165dp"
+                android:layout_width="160dp"
                 android:layout_height="130dp"
                 android:layout_marginStart="1dp"
                 android:background="@drawable/buttons"
-                android:drawableTop="@drawable/update_icon"
+                android:drawableTop="@drawable/ic_edit_purple_24dp"
                 android:padding="16dp"
                 android:paddingTop="20dp"
                 android:text="@string/Update_student"
@@ -114,7 +121,5 @@
 
         </LinearLayout>
     </LinearLayout>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

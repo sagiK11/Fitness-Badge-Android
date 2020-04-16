@@ -27,7 +27,7 @@
     <string name="student_name_to_update">student to update</string>
     <string name="did_you_enter_class" translatable="false">Have you entered student class?</string>
     <string name="enter_update_data">Add Student</string>
-    <string name="view_student_results">results</string>
+    <string name="view_student_results">Results</string>
     <string name="progress_text" translatable="false">Progress: </string>
     <string name="number_of_student" translatable="false">Total number of students:</string>
     <string name="number_of_student_in_db">Students Finished:</string>
@@ -45,7 +45,7 @@
     <string name="home" translatable="false">Home</string>
     <string name="delete_data">Delete all students</string>
     <string name="no_phone" translatable="false">no phone</string>
-    <string name="finished">finished</string>
+    <string name="finished">Finished</string>
     <string name="havnt_finished">did not finish</string>
     <string name="show">show</string>
     <string name="all">all</string>
@@ -60,6 +60,10 @@
     <string name="seconds">(seconds)</string>
     <string name="amount">(amount)</string>
     <string name="cm">(cm)</string>
+    <string name="statistics">Statistics</string>
+    <string name="watch_the_statistics">watch_the_statistics</string>
+    <string name="grades_avg">Grades Average</string>
+    <string name="finished_students">Finished Students</string>
 
 
 </resources>

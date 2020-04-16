@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity {
     private final String TAG = "Setting";
-    private final String[] answers = { "No", "Yes" };
+    private final String[] answers = { "לא", "כן" };
     private final int NO = 0, YES = 1;
 
 
@@ -25,18 +25,18 @@ public class SettingActivity extends AppCompatActivity {
 
     public void deleteAllStudents( View view ) {
         final AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle( "Are you sure you wish to delete all students?" );
+        builder.setTitle( "האם את/ה בטוח שאתה רוצה למחוק את כל התלמידים?" );
         builder.setItems( answers, ( dialog, which ) -> {
 
             switch ( which ) {
                 case NO: {
-                    popToast( "No student was deleted." );
+                    popToast( "לא נמחקו תלמידים" );
                     return;
                 }
                 case YES: {
                     Log.w( TAG, "user deleted all students" );
                     clearDataBase();
-                    popToast( "Students deleted successfully" );
+                    popToast( "התלמידים נמחקו בהצלחה." );
                     break;
                 }
             }
@@ -45,7 +45,8 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     private void clearDataBase() {
-        MainActivity.dbRef.child( "students" ).removeValue();
+        MainActivity.dbRef.removeValue();
+        MainActivity.studentList.clear();
     }
 
 

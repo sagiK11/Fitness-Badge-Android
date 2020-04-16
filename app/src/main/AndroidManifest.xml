@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sagiKor1193.android.fitracker">
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.STORAGE"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
 
     <application
@@ -14,11 +15,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_fitracker_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:replace="android:icon"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:icon">
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,21 +27,36 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AddStudentActivity"
-            android:label="@string/enter_update_data"/>
-            <meta-data android:name="android.app.default_searchable"
+        <activity
+            android:name=".AddStudentActivity"
+            android:theme="@style/AppSecondaryTheme"
+            android:label="@string/enter_update_data" />
+
+        <meta-data
+            android:name="android.app.default_searchable"
             android:value=".SearchableActivity" />
 
         <activity android:name=".StudentActivity" />
 
-        <activity android:name=".ViewStudentsActivity"
-            android:label="@string/view_student_results" />
+        <activity
+            android:name=".ViewStudentsActivity"
+            android:label="@string/view_student_results"
+            android:theme="@style/AppSecondaryTheme" />
 
-        <activity android:name=".UpdateStudentActivity"
-            android:label="@string/Update_student"/>
+        <activity
+            android:name=".UpdateStudentActivity"
+            android:label="@string/Update_student"
+            android:theme="@style/AppSecondaryTheme" />
 
-        <activity android:name=".SettingActivity"
-            android:label="@string/setting"/>
+        <activity
+            android:name=".StatisticsActivity"
+            android:label="@string/statistics"
+            android:theme="@style/AppSecondaryTheme" />
+
+        <activity
+            android:name=".SettingActivity"
+            android:theme="@style/AppSecondaryTheme"
+            android:label="@string/setting" />
 
 
     </application>

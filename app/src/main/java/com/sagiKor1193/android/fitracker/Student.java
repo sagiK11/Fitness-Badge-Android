@@ -13,7 +13,6 @@ public class Student implements Parcelable {
     private String updatedDate;
 
 
-
     private String key;
     private double aerobicScore, aerobicResult, cubesScore, cubesResult, absScore, absResult;
     private double jumpScore, jumpResult, handsScore, handsResult, totalScore, totalScoreWithoutAerobic;
@@ -41,6 +40,7 @@ public class Student implements Parcelable {
             this.phoneNumber = phoneNumber;
             return this;
         }
+
         Builder key( String key ) {
             this.key = key;
             return this;
@@ -116,7 +116,7 @@ public class Student implements Parcelable {
             student.setName( this.name );
             student.setStudentClass( this.studentClass );
             student.setGender( this.gender );
-            student.setKey(this.key);
+            student.setKey( this.key );
             student.setPhoneNumber( this.phoneNumber );
             student.setAerobicScore( this.aerobicScore );
             student.setCubesScore( this.cubesScore );
@@ -283,6 +283,14 @@ public class Student implements Parcelable {
 
     void setPhoneNumber( String phoneNumber ) {
         this.phoneNumber = phoneNumber;
+    }
+
+    boolean isFinished() {
+        final int MISSING = - 1;
+        return aerobicScore != MISSING && jumpScore != MISSING && absScore != MISSING
+                && handsScore != MISSING && cubesScore != MISSING;
+
+
     }
 
     public String toString() {

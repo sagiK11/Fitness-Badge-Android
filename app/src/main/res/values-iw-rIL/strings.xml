@@ -44,4 +44,8 @@
     <string name="seconds">(שניות)</string>
     <string name="amount">(פעמים)</string>
     <string name="cm">(ס\"מ)</string>
+    <string name="statistics">סטטיסטיקה</string>
+    <string name="watch_the_statistics">צפה בסטטיסטיקה</string>
+    <string name="grades_avg">ממוצע ציונים לפי מקצועות</string>
+    <string name="finished_students">תלמידים שסיימו באחוזים</string>
 </resources>
