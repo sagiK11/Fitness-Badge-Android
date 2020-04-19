@@ -32,6 +32,6 @@ This app empowers the user to:
 <img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/StatisticsScreen.jpeg" width="300" heigh="450">
 
 #### Credits
-PhilJay/MPAndroidChart
-
-rey5137/material
+- PhilJay/MPAndroidChart
+- rey5137/material
+- F0RIS/sweet-alert-dialog
