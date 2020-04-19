@@ -1,15 +1,18 @@
 # Fitracker
 
 ### General Description
-Made for gymnastic teachers for tracking students physical exams and calculating their results in each specific exam.
+A mobile app that allows Physical Education teachers to track their student's performance and calculate their respective scores
+automatically.
 
-Instead of writing the students results to a peace of paper and from there the teacher needs to type it to an excel file,
-for it to calculate the student grade, this app calculates the student grade. 
-The app provides the following features:
-
-- Calculates the student grade for each specific exam.
-- Exports the students scores & grades to an excel file to be sent via an email to the teacher.
-- Option to send the student scores & grades via an SMS/Whatsapp.
+Currently PE teachers record their student's performance using pen and paper, they then input
+this data to the computer, and lastly use various software products (usually Microsoft Excel) to calculate
+their student's scores.
+This process is grossly inefficient.
+This app empowers the user to: 
+- Track student's performance digitally, substituting pen and paper.
+- Calculate a student's score for each physical exam.
+- Export student's performance and scores to an excel file.
+- Send student’s performance and scores to the respective student, via an SMS or Whatsapp message.
 
 #### Demo
 ![Farmers Market Finder Demo](http://g.recordit.co/s8f3aLCS5x.gif)
@@ -29,6 +32,6 @@ The app provides the following features:
 <img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/StatisticsScreen.jpeg" width="300" heigh="450">
 
 #### Credits
-PhilJay/MPAndroidChart
-
-rey5137/material
+- PhilJay/MPAndroidChart
+- rey5137/material
+- F0RIS/sweet-alert-dialog
