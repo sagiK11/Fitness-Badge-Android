@@ -5,7 +5,7 @@ A mobile app that allows Physical Education teachers to track their student's pe
 automatically.
 
 Currently PE teachers record their student's performance using pen and paper, they then input
-this data to the computer, and lastly use various softwares (usually Microsoft Excel) to calculate
+this data to the computer, and lastly use various software products (usually Microsoft Excel) to calculate
 their student's scores.
 This process is grossly inefficient.
 This app empowers the user to: 
