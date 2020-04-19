@@ -58,7 +58,7 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Sagi1\Desktop\football-player.png" />
+                                      <entry key="imageAsset" value="C:\Users\Sagi1\Downloads\plank.jpg" />
                                       <entry key="outputName" value="male_avatar" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="000000" />
@@ -112,7 +112,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="scalingPercent" value="93" />
+                                                <entry key="scalingPercent" value="55" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -122,9 +122,10 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundImage" value="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\search_icon-playstore.png" />
-                                      <entry key="foregroundImage" value="C:\Users\Sagi1\Desktop\volleyball-player.png" />
-                                      <entry key="outputName" value="athlete_avatar" />
+                                      <entry key="foregroundImage" value="C:\Users\Sagi1\Downloads\plank.jpg" />
+                                      <entry key="outputName" value="plank_woman" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -164,6 +165,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="-10" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -174,9 +176,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="iconShape" value="NONE" />
-                                      <entry key="imageAsset" value="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable\search_button.png" />
-                                      <entry key="outputName" value="add_student" />
+                                      <entry key="imageAsset" value="C:\Users\Sagi1\Downloads\plank.jpg" />
+                                      <entry key="outputName" value="plank_woman" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -198,11 +199,33 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                      <entry key="image">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Sagi1\Downloads\plank.jpg" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="LAUNCHER_LEGACY" />
                           </map>
                         </option>
                       </PersistentState>

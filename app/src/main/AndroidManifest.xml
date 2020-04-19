@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sagiKor1193.android.fitracker">
+    package="com.sagikor.android.fitracker">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -39,7 +39,7 @@
         <activity android:name=".StudentActivity" />
 
         <activity
-            android:name=".ViewStudentsActivity"
+            android:name="com.sagikor.android.fitracker.ViewStudentsActivity"
             android:label="@string/view_student_results"
             android:theme="@style/AppSecondaryTheme" />
 

@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.sagiKor1193.android.fitracker"
+        applicationId "com.sagikor.android.fitracker"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 1

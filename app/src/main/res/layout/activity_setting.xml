@@ -8,7 +8,7 @@
 
 
     <com.rey.material.widget.Button
-        android:id="@+id/button2"
+        android:id="@+id/delete_all_students_button"
         style="@style/buttons_style"
         android:layout_width="0dp"
         android:layout_height="65dp"
