@@ -94,7 +94,6 @@ class EmailSendTask extends AsyncTask<String, String, String> {
         final String cubesScore = context.getResources().getString( R.string.cubes_score );
         final String finalScore = context.getResources().getString( R.string.final_score );
 
-
         return new String[]{ name, studentClass, aerobicScore, aerobicResult,
                 absScore, absResult, handsScore, handsResult, cubesScore, cubesResult
                 , jumpScore, jumpResult, finalScore };

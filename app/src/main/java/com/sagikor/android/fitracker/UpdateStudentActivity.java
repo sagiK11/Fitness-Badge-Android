@@ -14,7 +14,6 @@ public class UpdateStudentActivity extends StudentActivity {
     private static final String ZERO = "0";
     SportResultsArrayList sportResultsArrayList = new SportResultsArrayList();
 
-
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_update_student );
@@ -149,7 +148,6 @@ public class UpdateStudentActivity extends StudentActivity {
             }
         }
     }
-
 
     private boolean inputErrors() {
         aerobicScore = testInput( sAerobicScore, "aerobic score" );

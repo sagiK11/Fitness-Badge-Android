@@ -35,22 +35,17 @@ public class MainActivity extends AppCompatActivity {
     Button searchStudentsButton;
     Button mailResultsButton;
     Button updateStudentButton;
-
-
     Toolbar toolbar;
-
 
     @Override
     protected void onCreate( final Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-
         linkObjects();
         establishFireBase();
         addButtonsOnClickListeners();
         addStudentToStudentsList();
-
     }
 
 

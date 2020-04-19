@@ -11,10 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
-
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
 
 public class AddStudentActivity extends StudentActivity {
 
@@ -96,8 +93,6 @@ public class AddStudentActivity extends StudentActivity {
 
     private Student createNewStudent() {
         getUserInput();
-        //TODO
-        System.out.println("GENDER = " + sGenderString);
         String studentKey = MainActivity.dbRef.push().getKey();
         return new Student.Builder( getStudentName() )
                 .studentClass( sClassString )
@@ -118,7 +113,6 @@ public class AddStudentActivity extends StudentActivity {
                 .totalScoreWithoutAerobic( avgWithOutAerobic )
                 .updatedDate( Utility.getTodayDate() )
                 .build();
-
     }
 
     private String getStudentName() {
@@ -140,9 +134,7 @@ public class AddStudentActivity extends StudentActivity {
         sJumpScoreText.setText( calJumpGrade( sJumpScore.getText().toString() ) );
         sAbsScoreText.setText( calAbsGrade( sAbsScore.getText().toString() ) );
         calAverages();
-
         sTotalScoreText.setText( String.valueOf( avg ) );
-
     }
 
     private boolean errorsInStudentName() {
@@ -151,7 +143,6 @@ public class AddStudentActivity extends StudentActivity {
             return true;
         }
         return false;
-
     }
 
     private boolean errorsInStudentClass() {

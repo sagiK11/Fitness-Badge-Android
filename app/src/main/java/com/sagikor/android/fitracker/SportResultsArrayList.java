@@ -1,12 +1,10 @@
 package com.sagikor.android.fitracker;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class SportResultsArrayList {
-
 
     List<SportCategoryNode> gradesArrayList;
     private static final int WORST_RESULT = 30;

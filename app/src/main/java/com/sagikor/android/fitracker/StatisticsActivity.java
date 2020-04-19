@@ -47,7 +47,6 @@ public class StatisticsActivity extends AppCompatActivity {
         linkObjects();
         setupColumnsChart();
         setupPieChart();
-
     }
 
     private void setupPieChart() {
@@ -56,7 +55,6 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void setPieChartSetting() {
-
         pieChart.setUsePercentValues( true );
         pieChart.getDescription().setEnabled( false );
         pieChart.setExtraOffsets( 5, 10, 5, 5 );
@@ -78,7 +76,6 @@ public class StatisticsActivity extends AppCompatActivity {
 
         categories.add( new PieEntry( finishedArray[ FINISHED_INDEX ], DONE ) );
         categories.add( new PieEntry( finishedArray[ UNFINISHED_INDEX ], UNDONE ) );
-
 
         PieDataSet pieDataSet = new PieDataSet( categories, SCHOOL_NAME );
         pieDataSet.setSliceSpace( 3f );
