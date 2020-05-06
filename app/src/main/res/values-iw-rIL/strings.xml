@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fitracker</string>
+    <string name="app_name">אות הכושר</string>
     <string name="aerobic">אירובי</string>
     <string name="hands">ידיים</string>
     <string name="abs">בטן</string>
@@ -24,7 +24,7 @@
     <string name="done">סיימו</string>
     <string name="undone">לא-סיימו</string>
     <string name="finished">סיימו</string>
-    <string name="delete_data">מחק את כל הסטודנטים</string>
+    <string name="delete_data">מחק את כל התלמידים</string>
     <string name="import_excel_file">שלח למייל</string>
     <string name="setting">הגדרות</string>
     <string name="send_sms">שלח אסמס</string>
@@ -51,7 +51,7 @@
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="delete_student_question">למחוק תלמיד?</string>
-    <string name="school_name">תיכון מקיף בית ירח</string>
+    <string name="school_name">תיכון</string>
     <string name="choose_exercise">בחר סוג תרגיל</string>
     <string name="situp">כפיפות</string>
     <string name="static_type">סטטית</string>
@@ -121,4 +121,46 @@
     <string name="cubes_c">קוביות:</string>
     <string name="abs_c">בטן:</string>
     <string name="total_grade_c">ציון סופי:</string>
+    <string name="end_adding_question">הכנס תלמיד חדש?</string>
+    <string name="register">הירשם!</string>
+    <string name="email">אימייל</string>
+    <string name="password">סיסמה</string>
+    <string name="login">התחבר!</string>
+    <string name="dont_have_account">משתמש חדש</string>
+    <string name="sign_up">הירשם עכשיו!</string>
+    <string name="sign_up_screen">הרשמה</string>
+    <string name="login_screen">התחברות</string>
+    <string name="input_error">שגיאה כאן</string>
+    <string name="forgot_password">שכחתי סיסמה</string>
+    <string name="check_your_email">בדוק בתיבת הדואר הנכנס במייל.</string>
+    <string name="wrong_email">כתובת אימייל שגויה</string>
+    <string name="fill_email_field">מלא את כתובת המייל בשדה לעיל בבקשה</string>
+    <string name="at_least_seven_chars">לפחות 7 תווים</string>
+    <string name="password_guide">סיסמה צריכה להכיל לפחות  7 תווים.</string>
+    <string name="full_name">שם מלא</string>
+    <string name="sign_out">התנתק</string>
+    <string name="gender_to_always_girls">הגדר מגדר כ-\'בת\' תמיד</string>
+    <string name="gender_to_always_boys">הגדר מגדר כ-\'בן\' תמיד</string>
+    <string name="add_student_setting">מסך הוספת תלמיד</string>
+    <string name="students_setting">תלמידים</string>
+    <string name="exit_question">כבר לעזוב?</string>
+    <string name="student_details">פרטים אישיים</string>
+    <string name="student_scores">תוצאות התלמיד</string>
+    <string name="please_enter_student_name">הכנס את שם התלמיד</string>
+    <string name="please_enter_student_class">הכנס את כיתת התלמיד</string>
+    <string name="invalid_input">נתון לא תקין</string>
+    <string name="gender_error">בחר את מגדר התלמיד</string>
+    <string name="user_setting">הגדרות המשתמש שלי</string>
+    <string name="delete_user">מחק חשבון זה</string>
+    <string name="delete_account_question">כל המידע שלך ימחק להמשיך?</string>
+    <string name="farewell_user">עצוב לראות אותך עוזב..</string>
+    <string name="authentication_error">אחד או שניים מהפרטים שגויים</string>
+    <string name="opening_email">פותח אימייל</string>
+    <string name="export_completed">ייצוא לקובץ אקסל הושלם</string>
+    <string name="error_invalid_email">אימייל לא תקין.</string>
+    <string name="error_weak_password">סיסמה חלשה.</string>
+    <string name="error_user_exists">משתמש כבר קיים.</string>
+    <string name="student_list_view_instructions">לחיצה קצרה לעריכה. לחיצה ארוכה למחיקת התלמיד.</string>
+    <string name="choose_password">בחר סיסמה</string>
+    <string name="Calendar">לוח שנה</string>
 </resources>

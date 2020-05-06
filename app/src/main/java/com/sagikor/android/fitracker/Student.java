@@ -11,6 +11,7 @@ public class Student implements Parcelable {
     private String phoneNumber;
     private String updatedDate;
     private String key;
+    private String userId;
     private double aerobicScore;
     private double aerobicResult;
     private double jumpScore;
@@ -32,6 +33,7 @@ public class Student implements Parcelable {
         private String phoneNumber;
         private String updatedDate;
         private String key;
+        private String userId;
         private double aerobicScore;
         private double aerobicResult;
         private double jumpScore;
@@ -67,6 +69,11 @@ public class Student implements Parcelable {
 
         Builder key( String key ) {
             this.key = key;
+            return this;
+        }
+
+        Builder userId( String userId ) {
+            this.userId = userId;
             return this;
         }
 
@@ -141,6 +148,7 @@ public class Student implements Parcelable {
             student.setStudentClass( this.studentClass );
             student.setGender( this.gender );
             student.setKey( this.key );
+            student.setUserId( this.userId );
             student.setPhoneNumber( this.phoneNumber );
             student.setAerobicScore( this.aerobicScore );
             student.setCubesScore( this.cubesScore );
@@ -284,6 +292,15 @@ public class Student implements Parcelable {
         return handsResult;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId( String userId ) {
+        this.userId = userId;
+    }
+
+
     public double getTotalScore() {
         return totalScore;
     }
@@ -368,6 +385,7 @@ public class Student implements Parcelable {
         phoneNumber = in.readString();
         gender = in.readString();
         key = in.readString();
+        userId = in.readString();
     }
 
     @Override
@@ -388,6 +406,7 @@ public class Student implements Parcelable {
         dest.writeString( phoneNumber );
         dest.writeString( gender );
         dest.writeString( key );
+        dest.writeString( userId );
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {

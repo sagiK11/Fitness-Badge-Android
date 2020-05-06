@@ -36,6 +36,7 @@ public class StudentActivity extends AppCompatActivity {
     TextView sAbsScoreText;
     TextView sJumpScoreText;
     TextView sTotalScoreText;
+    TextView handsTypeText;
     Button chooseClassButton;
     Button genderButton;
     Button saveStudentButton;
@@ -55,12 +56,13 @@ public class StudentActivity extends AppCompatActivity {
     boolean isAbsSitUp;
     boolean isStaticHands;
 
-    private void popSuccessWindow() {
+    protected void popSuccessWindow() {
         final String STUDENT_SAVED = getResources().getString( R.string.student_saved );
         new SweetAlertDialog( this, SweetAlertDialog.SUCCESS_TYPE )
                 .setTitleText( STUDENT_SAVED )
                 .show();
     }
+
 
     void popFailWindow() {
         final String STUDENT_EXISTS = getResources().getString( R.string.student_exists );
@@ -81,12 +83,17 @@ public class StudentActivity extends AppCompatActivity {
                     .setConfirmClickListener( sDialog -> {
                         sDialog.dismissWithAnimation();
                         sendSms();
+                        popSuccessWindow();
                     } )
-                    .setCancelButton( NO, SweetAlertDialog::dismissWithAnimation )
+                    .setCancelButton( NO, sDialog -> {
+                        popSuccessWindow();
+                        sDialog.dismissWithAnimation();
+                    } )
                     .show();
         } else {
             popSuccessWindow();
         }
+
     }
 
     void chooseAbsTestOptionPopup() {
@@ -165,34 +172,38 @@ public class StudentActivity extends AppCompatActivity {
         final String SECONDS = getResources().getString( R.string.seconds );
         final String CM = getResources().getString( R.string.cm );
         final String SITUP = getResources().getString( R.string.situp );
+        final String AMOUNT = getResources().getString( R.string.amount );
+        String sGender = genderButton.getText().toString();
 
         res.append( HELLO + " " + sName.getText() + " " + CURRENT_GRADES + "\n" );
         if ( aerobicScore != MISSING ) {
             res.append( AEROBIC ).append( " " + aerobicScore + " " ).append( MINUTES ).
-                    append( " " + GRADE + " " ).append( aerobicGrade + "\n" );
+                    append( " " + GRADE + " " ).append( aerobicGrade + ".\n" );
             cnt++;
         }
         if ( jumpScore != MISSING ) {
             res.append( JUMP ).append( " " + jumpScore + " " ).append( CM ).
-                    append( " " + GRADE ).append( jumpGrade + "\n" );
+                    append( " " + GRADE ).append( jumpGrade + ".\n" );
             cnt++;
         }
         if ( absScore != MISSING ) {
-            res.append( ABS ).append( " " + absScore + " " ).
-                    append( GRADE ).append( " " + absGrade + "\n" );
+            res.append( ABS ).append( " " + absScore + " " ).append( AMOUNT )
+                    .append( " " + GRADE ).append( " " + absGrade + ".\n" );
             cnt++;
         }
         if ( cubesScore != MISSING ) {
             res.append( CUBES ).append( " " + cubesScore + " " ).append( SECONDS ).
-                    append( " " + GRADE ).append( " " + cubesGrade + "\n" );
+                    append( " " + GRADE ).append( " " + cubesGrade + ".\n" );
             cnt++;
         }
         if ( handsScore != MISSING ) {
-            res.append( HANDS ).append( " " + handsScore + " " ).append( MINUTES ).
-                    append( " " + GRADE ).append( " " + handsGrade );
+            res.append( HANDS ).append( " " + handsScore + " " )
+                    .append( sGender.equals( getResources().getString( R.string.boy ) ) ?
+                            AMOUNT : MINUTES ).
+                    append( " " + GRADE ).append( " " + handsGrade + "." );
             cnt++;
         }
-        return cnt == DONE ? res.append( "\n" + TOTAL_SCORE ).append( " " + avg + " " ).toString() : res.toString();
+        return cnt == DONE ? res.append( "\n" + TOTAL_SCORE ).append( " " + avg + "." ).toString() : res.toString();
     }
 
     String calCubesGrade( String score ) {
@@ -203,7 +214,10 @@ public class StudentActivity extends AppCompatActivity {
         } catch ( NumberFormatException e ) {
             Log.d( TAG, e.getMessage() );
         }
-        cubesGrade = sportResultsArrayList.getCubesResult( tempCubes );
+        if ( sGenderString.equals( getResources().getString( R.string.girl ) ) )
+            cubesGrade = sportResultsArrayList.getGirlsCubesResult( tempCubes );
+        else
+            cubesGrade = sportResultsArrayList.getBoysCubesResult( tempCubes );
         return String.valueOf( cubesGrade );
     }
 
@@ -215,7 +229,12 @@ public class StudentActivity extends AppCompatActivity {
         } catch ( NumberFormatException e ) {
             Log.d( TAG, e.getMessage() );
         }
-        aerobicGrade = sportResultsArrayList.getAerobicResult( tempAerobic );
+        if ( sGenderString.equals( getResources().getString( R.string.girl ) ) ) {
+            aerobicGrade = sportResultsArrayList.getGirlsAerobicResult( tempAerobic );
+        } else {
+            aerobicGrade = sportResultsArrayList.getBoysAerobicResult( tempAerobic );
+        }
+
         return String.valueOf( aerobicGrade );
     }
 
@@ -233,7 +252,13 @@ public class StudentActivity extends AppCompatActivity {
 //        else {
 //            handsGrade = sportResultsArrayList.getPushUpHandsResult( tempHands );
 //        }
-        handsGrade = sportResultsArrayList.getStaticHandsResult( tempHands );
+
+        if ( sGenderString.equals( getResources().getString( R.string.girl ) ) ) {
+            handsGrade = sportResultsArrayList.getGirlsStaticHandsResult( tempHands );
+        } else {
+            handsGrade = sportResultsArrayList.getBoysHandsResult( tempHands );
+        }
+
         return String.valueOf( handsGrade );
     }
 
@@ -244,7 +269,14 @@ public class StudentActivity extends AppCompatActivity {
         } catch ( NumberFormatException e ) {
             Log.d( TAG, e.getMessage() );
         }
-        jumpGrade = sportResultsArrayList.geJumpResult( tempJump );
+
+        if ( sGenderString.equals( getResources().getString( R.string.girl ) ) ) {
+            jumpGrade = sportResultsArrayList.getGirlsJumpResult( tempJump );
+        } else {
+            jumpGrade = sportResultsArrayList.getBoysJumpResult( tempJump );
+        }
+
+
         return String.valueOf( jumpGrade );
     }
 
@@ -262,7 +294,12 @@ public class StudentActivity extends AppCompatActivity {
 //        } else {
 //            absGrade = sportResultsArrayList.getPlankAbsResult( tempAbs );
 //        }
-        absGrade = sportResultsArrayList.getSitUpAbsResult( tempAbs );
+        if ( sGenderString.equals( getResources().getString( R.string.girl ) ) ) {
+            absGrade = sportResultsArrayList.getGirlsSitUpAbsResult( tempAbs );
+        } else {
+            absGrade = sportResultsArrayList.getBoysSitUpAbsResult( tempAbs );
+        }
+
         return String.valueOf( absGrade );
     }
 
@@ -276,13 +313,14 @@ public class StudentActivity extends AppCompatActivity {
 
 
     double testInput( EditText text, String place, Context context ) {
+        final String INVALID_INPUT_MSG = getResources().getString( R.string.invalid_input );
         try {
             Double.parseDouble( text.getText().toString() );
         } catch ( NumberFormatException e ) {
             if ( text.getText().toString().length() == 0 )
                 return MISSING_INPUT;
             else {
-                popToast( "Invalid input at " + place, Toast.LENGTH_LONG, context );
+                popToast( INVALID_INPUT_MSG + place, Toast.LENGTH_LONG, context );
                 return INVALID_INPUT;
             }
         }

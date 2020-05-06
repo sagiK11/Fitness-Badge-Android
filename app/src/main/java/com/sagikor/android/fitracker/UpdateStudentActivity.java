@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 
@@ -13,10 +14,11 @@ public class UpdateStudentActivity extends StudentActivity {
 
     private static final String ZERO = "0";
     SportResultsArrayList sportResultsArrayList = new SportResultsArrayList();
+    private boolean isStudentGirl;
 
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_update_student );
+        setContentView( R.layout.activity_add_student );
 
         linkObjects();
         getCurrentStudent();
@@ -25,6 +27,7 @@ public class UpdateStudentActivity extends StudentActivity {
 
     private void getCurrentStudent() {
         currentStudent = getIntent().getParcelableExtra( "student" );
+        isStudentGirl = currentStudent.getGender().equals( getResources().getString( R.string.girl ) );
     }
 
     private void setFieldsInApp() {
@@ -60,7 +63,6 @@ public class UpdateStudentActivity extends StudentActivity {
     }
 
     private void updateGradeTextFields() {
-
         sCubesScoreText.setText( calCubesGrade( sCubesScore.getText().toString() ) );
         sAerobicScoreText.setText( calAerobicGrade( sAerobicScore.getText().toString() ) );
         sHandsScoreText.setText( calHandGrade( sHandsScore.getText().toString() ) );
@@ -76,15 +78,18 @@ public class UpdateStudentActivity extends StudentActivity {
     }
 
     private void linkUserInputObjects() {
-        sName = findViewById( R.id.enter_data_v2_student_to_display_id );
-        sClassButton = findViewById( R.id.enter_data_v2_student_class_to_display_id );
-        genderButton = findViewById( R.id.gender_button_update );
+        sName = findViewById( R.id.student_name_to_enter_id );
+        sClassButton = findViewById( R.id.student_class_id );
+        genderButton = findViewById( R.id.gender_button );
         sPhoneNumber = findViewById( R.id.phone_number_to_enter_id );
         sAerobicScore = findViewById( R.id.update_student_aerobic_id );
         sCubesScore = findViewById( R.id.update_student_cubes_id );
         sHandsScore = findViewById( R.id.update_student_hands_id );
         sJumpScore = findViewById( R.id.update_student_jump_id );
         sAbsScore = findViewById( R.id.update_student_abs_id );
+        sName.setEnabled( false );
+        sClassButton.setEnabled( false );
+        genderButton.setEnabled( false );
         //TODO ISSUE 1183 & 1184 - WAITING FOR CLIENT SCORES TABLE
         //sAbsScore.setOnClickListener( e -> chooseAbsTestOptionPopup() );
         //sHandsScore.setOnClickListener( e -> chooseHandsTestOptionPopup() );
@@ -92,11 +97,11 @@ public class UpdateStudentActivity extends StudentActivity {
 
     private void linkTextToDisplayObjects() {
         sAerobicScoreText = findViewById( R.id.update_student_aerobic_text );
-        sCubesScoreText = findViewById( R.id.update_student_cubes_text );
-        sHandsScoreText = findViewById( R.id.update_student_hands_text );
-        sJumpScoreText = findViewById( R.id.update_student_jump_text );
-        sAbsScoreText = findViewById( R.id.update_student_abs_text );
-        sTotalScoreText = findViewById( R.id.update_student_total_score );
+        sCubesScoreText = findViewById( R.id.student_cubes_text );
+        sHandsScoreText = findViewById( R.id.student_hands_text );
+        sJumpScoreText = findViewById( R.id.student_jump_text );
+        sAbsScoreText = findViewById( R.id.student_abs_text );
+        sTotalScoreText = findViewById( R.id.student_total_score );
         saveStudentButton = findViewById( R.id.button_add_student_enter_data );
         saveStudentButton.setOnClickListener( e -> saveButtonClicked() );
     }
@@ -114,7 +119,7 @@ public class UpdateStudentActivity extends StudentActivity {
                 .studentClass( sClassButton.getText().toString() )
                 .phoneNumber( getStudentPhoneNumber() )
                 .key( currentStudent.getKey() )
-                .studentGender( sGenderString == null ? getDefaultGender() : sGenderString )
+                .studentGender( genderButton.getText().toString() )
                 .aerobicScore( aerobicScore )
                 .cubesScore( cubesScore )
                 .absScore( absScore )
@@ -136,7 +141,9 @@ public class UpdateStudentActivity extends StudentActivity {
 
     private void updateStudentInFireBase( Student updatedStudent ) {
         DatabaseReference dbRef = MainActivity.dbRef;
-        dbRef.child( currentStudent.getKey() ).setValue( updatedStudent );
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String studentsChild = "students";
+        dbRef.child( userId ).child( studentsChild ).child( updatedStudent.getKey() ).setValue( updatedStudent );
     }
 
     private void updateStudentInStudentsList( Student updatedStudent ) {
@@ -168,7 +175,12 @@ public class UpdateStudentActivity extends StudentActivity {
     String calCubesGrade( String score ) {
         if ( score.length() == 0 )
             return ZERO;
-        cubesGrade = sportResultsArrayList.getCubesResult( Double.parseDouble( score ) );
+
+        if ( isStudentGirl ) {
+            cubesGrade = sportResultsArrayList.getGirlsCubesResult( Double.parseDouble( score ) );
+        } else {
+            cubesGrade = sportResultsArrayList.getBoysCubesResult( Double.parseDouble( score ) );
+        }
         return String.valueOf( cubesGrade );
 
     }
@@ -177,7 +189,13 @@ public class UpdateStudentActivity extends StudentActivity {
     String calAerobicGrade( String score ) {
         if ( score.length() == 0 )
             return ZERO;
-        aerobicGrade = sportResultsArrayList.getAerobicResult( Double.parseDouble( score ) );
+
+        if ( isStudentGirl ) {
+            aerobicGrade = sportResultsArrayList.getGirlsAerobicResult( Double.parseDouble( score ) );
+        } else {
+            aerobicGrade = sportResultsArrayList.getBoysAerobicResult( Double.parseDouble( score ) );
+        }
+
         return String.valueOf( aerobicGrade );
 
     }
@@ -191,7 +209,12 @@ public class UpdateStudentActivity extends StudentActivity {
 //            handsGrade = sportResultsArrayList.getStaticHandsResult( Double.parseDouble( score ) );
 //        else
 //            handsGrade = sportResultsArrayList.getPushUpHandsResult( Double.parseDouble( score ) );
-        handsGrade = sportResultsArrayList.getStaticHandsResult( Double.parseDouble( score ) );
+
+        if ( isStudentGirl ) {
+            handsGrade = sportResultsArrayList.getGirlsStaticHandsResult( Double.parseDouble( score ) );
+        } else {
+            handsGrade = sportResultsArrayList.getBoysHandsResult( Double.parseDouble( score ) );
+        }
         return String.valueOf( handsGrade );
 
     }
@@ -200,7 +223,12 @@ public class UpdateStudentActivity extends StudentActivity {
     String calJumpGrade( String score ) {
         if ( score.length() == 0 )
             return ZERO;
-        jumpGrade = sportResultsArrayList.geJumpResult( (int) Double.parseDouble( score ) );
+
+        if ( isStudentGirl ) {
+            jumpGrade = sportResultsArrayList.getGirlsJumpResult( (int) Double.parseDouble( score ) );
+        } else {
+            jumpGrade = sportResultsArrayList.getBoysJumpResult( (int) Double.parseDouble( score ) );
+        }
         return String.valueOf( jumpGrade );
     }
 
@@ -213,17 +241,18 @@ public class UpdateStudentActivity extends StudentActivity {
 //            absGrade = sportResultsArrayList.getSitUpAbsResult( (int) Double.parseDouble( score ) );
 //        else
 //            absGrade = sportResultsArrayList.getPlankAbsResult( (int) Double.parseDouble( score ) );
-        absGrade = sportResultsArrayList.getSitUpAbsResult( (int) Double.parseDouble( score ) );
+
+        if ( isStudentGirl ) {
+            absGrade = sportResultsArrayList.getGirlsSitUpAbsResult( (int) Double.parseDouble( score ) );
+        } else {
+            absGrade = sportResultsArrayList.getBoysSitUpAbsResult( (int) Double.parseDouble( score ) );
+        }
         return String.valueOf( absGrade );
 
     }
 
     private double testInput( EditText text, String place ) {
         return super.testInput( text, place, getApplicationContext() );
-    }
-
-    private String getDefaultGender() {
-        return getResources().getString( R.string.girl );
     }
 
 }

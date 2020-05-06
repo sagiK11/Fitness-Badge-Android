@@ -7,26 +7,165 @@
     android:background="@color/white">
 
 
-    <com.rey.material.widget.Button
-        android:id="@+id/delete_all_students_button"
-        style="@style/buttons_style"
+    <LinearLayout
+        android:id="@+id/linearLayout15"
         android:layout_width="0dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="deleteAllStudents"
-        android:padding="8dp"
-        android:background="@drawable/buttons"
-        android:text="@string/delete_data"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textStyle="bold|italic"
+        android:layout_height="0dp"
+        android:layout_margin="12dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.48">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:id="@+id/_add_student_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:textStyle="bold"
+                android:text="@string/add_student_setting"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/guideline5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="3dp"
+                android:layout_centerVertical="true"
+                android:alpha="0.5"
+                android:layout_toEndOf="@+id/_add_student_setting"
+                android:background="@color/black"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_to_always_girls"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/switch_always_girls"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_to_always_boys"
+                android:textSize="17sp" />
+
+            <Switch
+                android:id="@+id/switch_always_boys"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:id="@+id/students_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:textStyle="bold"
+                android:text="@string/students_setting"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/guideline6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="3dp"
+                android:layout_centerVertical="true"
+                android:alpha="0.5"
+                android:layout_toEndOf="@+id/students_setting"
+                android:background="@color/black"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/delete_all_students_button"
+            style="@style/buttons_style"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/buttons"
+            android:padding="8dp"
+            android:text="@string/delete_data"
+            android:textAlignment="textStart"
+            />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_margin="6dp">
+
+            <TextView
+                android:id="@+id/user_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="3dp"
+                android:textStyle="bold"
+                android:text="@string/user_setting"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/guideline7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="3dp"
+                android:layout_centerVertical="true"
+                android:alpha="0.5"
+                android:layout_toEndOf="@+id/user_setting"
+                android:background="@color/black"
+                android:orientation="horizontal" />
+        </RelativeLayout>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/delete_account_button"
+            style="@style/buttons_style"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/buttons"
+            android:padding="8dp"
+            android:text="@string/delete_user"
+            android:textAlignment="textStart"
+            />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

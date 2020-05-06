@@ -31,12 +31,9 @@ class EmailSendTask extends AsyncTask<String, String, String> {
     protected void onPostExecute( String success ) {
         super.onPostExecute( success );
 
-        CharSequence exportCompleted = "Exporting to Excel file completed";
-        CharSequence openingEmail = "Opening email";
+        String exportCompleted = context.getResources().getString( R.string.export_completed );
         Toast toastOne = Toast.makeText( context, exportCompleted, Toast.LENGTH_SHORT );
         toastOne.show();
-        Toast toastTwo = Toast.makeText( context, openingEmail, Toast.LENGTH_SHORT );
-        toastTwo.show();
 
     }
 

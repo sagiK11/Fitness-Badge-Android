@@ -5,8 +5,9 @@ import android.text.format.DateFormat;
 import java.util.Date;
 
 public class Utility {
+    static final int PASS_LENGTH = 6;
 
-    private Utility(){
+    private Utility() {
         //NO OBJECTS SHOULD INSTANTIATE FROM THIS CLASS.
     }
 

@@ -1,0 +1,8 @@
+
+„
+java:S1450"bRemove the "deleteAccountButton" field and declare it as a local variable in the relevant methods.(µ£ךÿÿÿÿÿ8ן„„.
+r	java:S116"WRename this field "SHARED_PREFS" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ֱ¸ל>8גװ±—.
+€
+java:S1450"cRemove the "deleteStudentsButton" field and declare it as a local variable in the relevant methods.(כא¸ַ8‘Ù™.
+=
+java:S1170"!Make this final field static too.(ֱ¸ל>8גװ±—.

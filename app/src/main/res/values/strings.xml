@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fitracker</string>
+    <string name="app_name">Fitness Badge</string>
     <string name="Update_student">Update Student</string>
     <string name="aerobic">aerobic</string>
     <string name="hands">hands</string>
@@ -69,6 +69,7 @@
     <string name="delete_student_question">Delete student?</string>
     <string name="school_name">School name</string>
     <string name="choose_exercise">Choose exercise type</string>
+    <string name="choose_gender">Choose Gender</string>
     <string name="situp">Sit up</string>
     <string name="static_type">Static</string>
     <string name="student_saved">Student saved!</string>
@@ -126,7 +127,6 @@
     <string name="twelfth9">12th - 9</string>
     <string name="boy">Boy</string>
     <string name="girl">Girl</string>
-    <string name="choose_gender">Choose Gender</string>
     <string name="choose_class">Choose Class</string>
     <string name="hello">Hello</string>
     <string name="current_grades">These are your current grades</string>
@@ -137,6 +137,48 @@
     <string name="cubes_c">cubes:</string>
     <string name="abs_c">abs:</string>
     <string name="total_grade_c">Total grade:</string>
+    <string name="end_adding_question">Add another student?</string>
+    <string name="register">Register!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login!</string>
+    <string name="dont_have_account">New User</string>
+    <string name="sign_up">Sign up!</string>
+    <string name="sign_up_screen">Sign up</string>
+    <string name="login_screen">Login</string>
+    <string name="input_error">Input Error here</string>
+    <string name="forgot_password">Forgot my password</string>
+    <string name="check_your_email">Check Your Email</string>
+    <string name="wrong_email">Wrong Email</string>
+    <string name="fill_email_field">Fill Email Field Please</string>
+    <string name="at_least_seven_chars">At Least 6 Chars</string>
+    <string name="password_guide">Password Must contain at least 7 chars.</string>
+    <string name="full_name">Full Name</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="gender_to_always_girls">Set gender to Girl always</string>
+    <string name="gender_to_always_boys">Set gender to Boy always</string>
+    <string name="add_student_setting">Add Student Settings</string>
+    <string name="students_setting">Students Setting</string>
+    <string name="exit_question">Are you sure you wish to exit?</string>
+    <string name="student_details">Personal Details</string>
+    <string name="student_scores">Scores</string>
+    <string name="please_enter_student_name">Please enter student name</string>
+    <string name="please_enter_student_class">Please enter student class</string>
+    <string name="invalid_input">Invalid Input</string>
+    <string name="gender_error">Please enter student gender</string>
+    <string name="user_setting">My user setting</string>
+    <string name="delete_user">Delete my account</string>
+    <string name="delete_account_question">Are you sure you want to delete this account?</string>
+    <string name="farewell_user">Sad to see you leaving..</string>
+    <string name="authentication_error">Authentication error</string>
+    <string name="opening_email">Opening Email</string>
+    <string name="export_completed">Exporting Completed</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error_weak_password">Weak Password</string>
+    <string name="error_user_exists">User Already Exists</string>
+    <string name="student_list_view_instructions">Short click to edit. Long click to delete</string>
+    <string name="choose_password">Choose Password</string>
+    <string name="Calendar">Calendar</string>
 
 
 

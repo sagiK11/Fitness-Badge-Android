@@ -25,7 +25,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ce0117112d1ae4e40c" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_6_API_R" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -77,15 +77,16 @@
         <option value="resourceFile" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
+        <option value="JUnit4 Test Class" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="C:\Users\Sagi1\Desktop\release.jks" />
+    <option name="EXPORT_PRIVATE_KEY" value="false" />
+    <option name="KEY_STORE_PATH" value="C:\Sagi\Google Play\Fitracker\release.jks" />
     <option name="KEY_ALIAS" value="key0" />
     <option name="REMEMBER_PASSWORDS" value="true" />
-    <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="ProjectId" id="1YkpAe4k0A43XcU8bZVKIB3gorG" />
   <component name="PropertiesComponent">
@@ -93,27 +94,34 @@
     <property name="BundleExportedModule" value="app" />
     <property name="ExportApk.ApkPath" value="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app" />
     <property name="ExportApk.BuildVariants" value="release" />
-    <property name="ExportApk.SignV1" value="true" />
-    <property name="ExportApk.SignV2" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="device.picker.selection" value="ce0117112d1ae4e40c" />
     <property name="ignore.virus.scanning.warn.message" value="true" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/Images-to-PDF" />
-    <property name="project.structure.last.edited" value="SDK Location" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/androidTestDebug/aidl" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/release" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="PsdUISettings">
-    <option name="MODULE_TAB" value="Properties" />
+    <option name="MODULE_TAB" value="Default Config" />
+    <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.sagikor.android.fitracker" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable-xxhdpi-v24" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Sagi1\AndroidStudioProjects\fitracker\app\src\main\res\drawable" />
@@ -140,6 +148,57 @@
     </configuration>
     <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration name="GradesTest.testAbsScores" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sagikor.android.fitracker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sagikor.android.fitracker" />
+      <option name="MAIN_CLASS_NAME" value="com.sagikor.android.fitracker.GradesTest" />
+      <option name="METHOD_NAME" value="testAbsScores" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GradesTest.testJumpScores" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sagikor.android.fitracker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sagikor.android.fitracker" />
+      <option name="MAIN_CLASS_NAME" value="com.sagikor.android.fitracker.GradesTest" />
+      <option name="METHOD_NAME" value="testJumpScores" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SportResultsArrayListTest.testAerobicGirls" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.sagikor.android.fitracker.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.sagikor.android.fitracker" />
+      <option name="MAIN_CLASS_NAME" value="com.sagikor.android.fitracker.SportResultsArrayListTest" />
+      <option name="METHOD_NAME" value="testAerobicGirls" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <option name="TEST_OBJECT" value="class" />
@@ -194,7 +253,7 @@
         <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
-      <option name="ACTIVITY_CLASS" value="com.sagikor.android.fitracker.MainActivity" />
+      <option name="ACTIVITY_CLASS" value="com.sagikor.android.fitracker.WelcomeActivity" />
       <method v="2">
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
       </method>
@@ -239,8 +298,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Android App.app" />
+      <item itemvalue="Android JUnit.SportResultsArrayListTest.testAerobicGirls" />
+      <item itemvalue="Android JUnit.GradesTest.testAbsScores" />
+      <item itemvalue="Android JUnit.GradesTest.testJumpScores" />
+      <item itemvalue="Gradle.fitracker [signingReport]" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Android JUnit.GradesTest.testJumpScores" />
+        <item itemvalue="Android JUnit.GradesTest.testAbsScores" />
+        <item itemvalue="Android JUnit.SportResultsArrayListTest.testAerobicGirls" />
         <item itemvalue="Gradle.fitracker [signingReport]" />
       </list>
     </recent_temporary>

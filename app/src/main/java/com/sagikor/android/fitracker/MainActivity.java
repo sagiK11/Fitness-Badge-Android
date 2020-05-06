@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             openStatistics();
         } else if ( id == R.id.nav_settings ) {
             openSettings();
+        } else if ( id == R.id.nav_sign_out ) {
+            signOutQuestionPop();
         }
         return super.onOptionsItemSelected( item );
     }
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void establishFireBase() {
         FirebaseApp.initializeApp( this );
-        dbRef = FirebaseDatabase.getInstance().getReference( "students" );
+        dbRef = FirebaseDatabase.getInstance().getReference( "users" );
     }
 
 
@@ -129,13 +133,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addStudentToStudentsList() {
-        dbRef.addListenerForSingleValueEvent( new ValueEventListener() {
+        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        dbRef.child( USER_ID ).addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                for ( DataSnapshot obj : dataSnapshot.getChildren() ) {
+                final String STUDENTS_CHILD = "students";
+                for ( DataSnapshot obj : dataSnapshot.child( STUDENTS_CHILD ).getChildren() ) {
                     Student student = obj.getValue( Student.class );
-                    if ( student != null )
-                        studentList.add( student );
+                    studentList.add( student );
                 }
             }
 
@@ -146,5 +151,28 @@ public class MainActivity extends AppCompatActivity {
         } );
     }
 
+    private void signOutQuestionPop() {
+        final String SURE_QUESTION = getResources().getString( R.string.exit_question );
+        final String YES = getResources().getString( R.string.yes );
+        final String NO = getResources().getString( R.string.no );
+        new SweetAlertDialog( this, SweetAlertDialog.WARNING_TYPE )
+                .setTitleText( SURE_QUESTION )
+                .setConfirmText( YES )
+                .setConfirmClickListener( sDialog -> {
+                    sDialog.dismissWithAnimation();
+                    signOut();
+                } )
+                .setCancelButton( NO, SweetAlertDialog::dismissWithAnimation )
+                .show();
+
+    }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent( this, WelcomeActivity.class );
+        intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+        startActivity( intent );
+        finish();
+    }
 
 }

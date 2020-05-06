@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -30,6 +31,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private ListView listView;
     private EditText inputSearch;
     private List<Student> studentsList;
+    private static final String STUDENTS_CHILD = "students";
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -43,12 +45,11 @@ public class ViewStudentsActivity extends AppCompatActivity {
         addInputSearch();
 
         createStudentList();
+        createStudentAdapter();
+        setListViewAdapter();
         refreshList();
 
-        createStudentAdapter();
-
         addListViewItemListener();
-        setListViewAdapter();
     }
 
 
@@ -87,16 +88,18 @@ public class ViewStudentsActivity extends AppCompatActivity {
     }
 
     private void deleteStudent( Student currentStudent ) {
-        MainActivity.dbRef.child( currentStudent.getKey() ).removeValue();
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        MainActivity.dbRef.child( userId ).child( STUDENTS_CHILD ).child( currentStudent.getKey() ).removeValue();
         onRestart();
     }
 
     public void refreshList() {
-        MainActivity.dbRef.addValueEventListener( new ValueEventListener() {
+
+        MainActivity.dbRef.child( FirebaseAuth.getInstance().getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
                 studentsList.clear();
-                for ( DataSnapshot obj : dataSnapshot.getChildren() ) {
+                for ( DataSnapshot obj : dataSnapshot.child( STUDENTS_CHILD ).getChildren() ) {
                     Student student = obj.getValue( Student.class );
                     studentsList.add( student );
                 }
@@ -159,8 +162,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
     @Override
     public void onRestart() {
         super.onRestart();
-        Log.d( TAG, "restarted" );
-
         refreshList();
     }
 }

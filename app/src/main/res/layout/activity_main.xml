@@ -6,122 +6,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_bright"
+    android:background="@drawable/fitness_badge_background"
     android:layoutDirection="ltr"
     android:orientation="vertical"
     tools:context=".MainActivity"
     tools:layout_editor_absoluteY="65dp">
 
-    <include
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="337dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="45dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="337dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="250dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="45dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_margin="3dp"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal">
+            <com.rey.material.widget.Button
+                android:id="@+id/button_add_student"
+                style="@style/buttons_style"
+                android:layout_width="160dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/buttons"
+                android:drawableTop="@drawable/ic_person_add_purple_45dp"
+                android:paddingTop="20dp"
+                android:text="@string/enter_update_data"
+                android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
+                app:rd_enable="true"
+                app:rd_maxRippleRadius="match_view"
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
 
-                <com.rey.material.widget.Button
-                    android:id="@+id/button_search"
-                    style="@style/buttons_style"
-                    android:layout_width="165dp"
-                    android:layout_height="130dp"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="1dp"
-                    android:background="@drawable/buttons"
-                    android:drawableTop="@drawable/ic_search_purple_24dp"
-                    android:paddingTop="20dp"
-                    android:text="@string/search"
-                    android:textSize="18sp"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
-
-                <com.rey.material.widget.Button
-                    android:id="@+id/button_add_student"
-                    style="@style/buttons_style"
-                    android:layout_width="160dp"
-                    android:layout_height="130dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="11dp"
-                    android:background="@drawable/buttons"
-                    android:drawableTop="@drawable/ic_person_add_purple_24dp"
-                    android:paddingTop="20dp"
-                    android:text="@string/enter_update_data"
-                    android:textSize="18sp"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
+            <com.rey.material.widget.Button
+                android:id="@+id/button_search"
+                style="@style/buttons_style"
+                android:layout_width="165dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="11dp"
+                android:background="@drawable/buttons"
+                android:drawableTop="@drawable/ic_search_purple_45dp"
+                android:paddingTop="20dp"
+                android:text="@string/search"
+                android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
+                app:rd_enable="true"
+                app:rd_maxRippleRadius="match_view"
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal">
-
-                <com.rey.material.widget.Button
-                    android:id="@+id/button_mail_results"
-                    style="@style/buttons_style"
-                    android:layout_width="165dp"
-                    android:layout_height="130dp"
-                    android:layout_marginEnd="1dp"
-                    android:background="@drawable/buttons"
-                    android:drawableTop="@drawable/ic_email_purple_24dp"
-                    android:padding="16dp"
-                    android:paddingTop="20dp"
-                    android:text="@string/export_to_excel"
-                    android:textSize="18sp"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
-
-                <com.rey.material.widget.Button
-                    android:id="@+id/button_update_student"
-                    style="@style/buttons_style"
-                    android:layout_width="160dp"
-                    android:layout_height="130dp"
-                    android:layout_marginStart="1dp"
-                    android:background="@drawable/buttons"
-                    android:drawableTop="@drawable/ic_edit_purple_24dp"
-                    android:padding="16dp"
-                    android:paddingTop="20dp"
-                    android:text="@string/Update_student"
-                    android:textSize="18sp"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
-
-
-            </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:orientation="horizontal">
+
+
+            <com.rey.material.widget.Button
+                android:id="@+id/button_update_student"
+                style="@style/buttons_style"
+                android:layout_width="160dp"
+                android:layout_height="130dp"
+                android:layout_marginEnd="1dp"
+                android:background="@drawable/buttons"
+                android:drawableTop="@drawable/ic_edit_purple_45dp"
+                android:padding="16dp"
+                android:paddingTop="20dp"
+                android:text="@string/Update_student"
+                android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
+                app:rd_enable="true"
+                app:rd_maxRippleRadius="match_view"
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/button_mail_results"
+                style="@style/buttons_style"
+                android:layout_width="165dp"
+                android:layout_height="130dp"
+                android:layout_marginStart="1dp"
+                android:background="@drawable/buttons"
+                android:drawableTop="@drawable/ic_email_purple_45dp"
+                android:padding="16dp"
+                android:paddingTop="20dp"
+                android:text="@string/export_to_excel"
+                android:textSize="18sp"
+                app:rd_delayClick="untilRelease"
+                app:rd_enable="true"
+                app:rd_maxRippleRadius="match_view"
+                app:rd_rippleColor="@color/colorPrimary"
+                app:rd_rippleType="touch" />
+
+
+        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
