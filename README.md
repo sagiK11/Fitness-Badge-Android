@@ -1,4 +1,5 @@
 # Fitracker
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
 
 ### General Description
 A mobile app that allows Physical Education teachers to track their student's performance and calculate their respective scores
