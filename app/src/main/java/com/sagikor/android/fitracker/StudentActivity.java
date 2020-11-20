@@ -22,7 +22,7 @@ public class StudentActivity extends AppCompatActivity {
     static final int INVALID_INPUT = -2;
     static final int MISSING_INPUT = -1;
     Student currentStudent;
-    SportResultsArrayList sportResultsArrayList = new SportResultsArrayList();
+    SportResults sportResults = new SportResults();
     EditText sName;
     EditText sPhoneNumber;
     EditText sAerobicScore;
@@ -225,35 +225,35 @@ public class StudentActivity extends AppCompatActivity {
 
     private String calGrade(String sportType, boolean isGirl, double tempScore) {
         switch (sportType) {
-            case SportResultsArrayList.AEROBIC:
+            case SportResults.AEROBIC:
                 if (isGirl)
-                    aerobicGrade = sportResultsArrayList.getGirlsAerobicResult(tempScore);
+                    aerobicGrade = sportResults.getGirlsAerobicResult(tempScore);
                 else
-                    aerobicGrade = sportResultsArrayList.getBoysAerobicResult(tempScore);
+                    aerobicGrade = sportResults.getBoysAerobicResult(tempScore);
                 return String.valueOf(aerobicGrade);
-            case SportResultsArrayList.ABS:
+            case SportResults.ABS:
                 if (isGirl)
-                    absGrade = sportResultsArrayList.getGirlsSitUpAbsResult((int) tempScore);
+                    absGrade = sportResults.getGirlsSitUpAbsResult((int) tempScore);
                 else
-                    absGrade = sportResultsArrayList.getBoysSitUpAbsResult((int) tempScore);
+                    absGrade = sportResults.getBoysSitUpAbsResult((int) tempScore);
                 return String.valueOf(absGrade);
-            case SportResultsArrayList.JUMP:
+            case SportResults.JUMP:
                 if (isGirl)
-                    jumpGrade = sportResultsArrayList.getGirlsJumpResult((int) tempScore);
+                    jumpGrade = sportResults.getGirlsJumpResult((int) tempScore);
                 else
-                    jumpGrade = sportResultsArrayList.getBoysJumpResult((int) tempScore);
+                    jumpGrade = sportResults.getBoysJumpResult((int) tempScore);
                 return String.valueOf(jumpGrade);
-            case SportResultsArrayList.CUBES:
+            case SportResults.CUBES:
                 if (isGirl)
-                    cubesGrade = sportResultsArrayList.getGirlsCubesResult(tempScore);
+                    cubesGrade = sportResults.getGirlsCubesResult(tempScore);
                 else
-                    cubesGrade = sportResultsArrayList.getBoysCubesResult(tempScore);
+                    cubesGrade = sportResults.getBoysCubesResult(tempScore);
                 return String.valueOf(cubesGrade);
             default:
                 if (isGirl)
-                    handsGrade = sportResultsArrayList.getGirlsStaticHandsResult(tempScore);
+                    handsGrade = sportResults.getGirlsStaticHandsResult(tempScore);
                 else
-                    handsGrade = sportResultsArrayList.getBoysHandsResult(tempScore);
+                    handsGrade = sportResults.getBoysHandsResult(tempScore);
                 return String.valueOf(handsGrade);
         }
     }
@@ -306,27 +306,27 @@ public class StudentActivity extends AppCompatActivity {
     protected void addScoresTextChangedListeners() {
         sAerobicScore.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) ->
-                        sAerobicScoreText.setText(calGrade(charSequence.toString(), SportResultsArrayList.AEROBIC)));
+                        sAerobicScoreText.setText(calGrade(charSequence.toString(), SportResults.AEROBIC)));
         sCubesScore.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) ->
-                        sCubesScoreText.setText(calGrade(charSequence.toString(), SportResultsArrayList.CUBES)));
+                        sCubesScoreText.setText(calGrade(charSequence.toString(), SportResults.CUBES)));
         sHandsScore.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) ->
-                        sHandsScoreText.setText(calGrade(charSequence.toString(), SportResultsArrayList.HANDS)));
+                        sHandsScoreText.setText(calGrade(charSequence.toString(), SportResults.HANDS)));
         sJumpScore.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) ->
-                        sJumpScoreText.setText(calGrade(charSequence.toString(), SportResultsArrayList.JUMP)));
+                        sJumpScoreText.setText(calGrade(charSequence.toString(), SportResults.JUMP)));
         sAbsScore.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) ->
-                        sAbsScoreText.setText(calGrade(charSequence.toString(), SportResultsArrayList.ABS)));
+                        sAbsScoreText.setText(calGrade(charSequence.toString(), SportResults.ABS)));
     }
 
     protected void updateGradeTextFields() {
-        sCubesScoreText.setText(calGrade(sCubesScore.getText().toString(), SportResultsArrayList.CUBES));
-        sAerobicScoreText.setText(calGrade(sAerobicScore.getText().toString(), SportResultsArrayList.AEROBIC));
-        sHandsScoreText.setText(calGrade(sHandsScore.getText().toString(), SportResultsArrayList.HANDS));
-        sJumpScoreText.setText(calGrade(sJumpScore.getText().toString(), SportResultsArrayList.JUMP));
-        sAbsScoreText.setText(calGrade(sAbsScore.getText().toString(), SportResultsArrayList.ABS));
+        sCubesScoreText.setText(calGrade(sCubesScore.getText().toString(), SportResults.CUBES));
+        sAerobicScoreText.setText(calGrade(sAerobicScore.getText().toString(), SportResults.AEROBIC));
+        sHandsScoreText.setText(calGrade(sHandsScore.getText().toString(), SportResults.HANDS));
+        sJumpScoreText.setText(calGrade(sJumpScore.getText().toString(), SportResults.JUMP));
+        sAbsScoreText.setText(calGrade(sAbsScore.getText().toString(), SportResults.ABS));
         calAverages();
         sTotalScoreText.setText(String.valueOf(avg));
     }

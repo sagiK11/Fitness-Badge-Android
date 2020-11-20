@@ -7,69 +7,106 @@ public class SportCategoryNode {
     private double handsScore;
     private int absScore;
     private int jumpScore;
-    private int cubesResult;
-    private int absResult;
-    private int aerobicResult;
-    private int handsResult;
-    private int jumpResult;
+    private int result;
 
+    public static class Builder {
+        private double cubesScore;
+        private double aerobicScore;
+        private double handsScore;
+        private int absScore;
+        private int jumpScore;
+        private int result;
 
-    public SportCategoryNode( double cubes, int cubesRes, double aerobic, int aerobicRes, int abs, int absRes,
-                              int jump, int jumpRes, double hands, int handsRes ) {
-        cubesScore = cubes;
-        cubesResult = cubesRes;
+        Builder result(int result) {
+            this.result = result;
+            return this;
+        }
 
-        aerobicScore = aerobic;
-        aerobicResult = aerobicRes;
+        Builder cubesScore(double cubesScore) {
+            this.cubesScore = cubesScore;
+            return this;
+        }
 
-        absScore = abs;
-        absResult = absRes;
+        Builder aerobicScore(double aerobicScore) {
+            this.aerobicScore = aerobicScore;
+            return this;
+        }
 
-        jumpScore = jump;
-        jumpResult = jumpRes;
+        Builder handsScore(double handsScore) {
+            this.handsScore = handsScore;
+            return this;
+        }
 
-        handsScore = hands;
-        handsResult = handsRes;
+        Builder absScore(int absScore) {
+            this.absScore = absScore;
+            return this;
+        }
+
+        Builder jumpScore(int jumpScore) {
+            this.jumpScore = jumpScore;
+            return this;
+        }
+
+        SportCategoryNode build() {
+            SportCategoryNode sportCategoryNode = new SportCategoryNode();
+            sportCategoryNode.setResult(this.result);
+            sportCategoryNode.setAerobicScore(this.aerobicScore);
+            sportCategoryNode.setAbsScore(this.absScore);
+            sportCategoryNode.setJumpScore(this.jumpScore);
+            sportCategoryNode.setCubesScore(this.cubesScore);
+            sportCategoryNode.setHandsScore(this.handsScore);
+            return sportCategoryNode;
+        }
+    }
+
+    public SportCategoryNode() {
     }
 
     public double getCubesScore() {
         return cubesScore;
     }
 
+    public void setCubesScore(double score) {
+        this.cubesScore = score;
+    }
+
     public double getAerobicScore() {
         return aerobicScore;
+    }
+
+    public void setAerobicScore(double score) {
+        this.aerobicScore = score;
     }
 
     public int getAbsScore() {
         return absScore;
     }
 
+    public void setAbsScore(int score) {
+        this.absScore = score;
+    }
+
     public int getJumpScore() {
         return jumpScore;
+    }
+
+    public void setJumpScore(int score) {
+        this.jumpScore = score;
     }
 
     public double getHandsScore() {
         return handsScore;
     }
 
-    public int getCubesResult() {
-        return cubesResult;
+    void setHandsScore(double score) {
+        this.handsScore = score;
     }
 
-    public int getAbsResult() {
-        return absResult;
+    public int getResult() {
+        return result;
     }
 
-    public int getAerobicResult() {
-        return aerobicResult;
+    void setResult(int result) {
+        this.result = result;
     }
-
-    public int getHandsResult() {
-        return handsResult;
-    }
-
-    public int getJumpResult() {
-        return jumpResult;
-    }
-
 }

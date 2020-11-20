@@ -5,7 +5,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 
-import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -109,7 +108,7 @@ public class AddStudentActivity extends StudentActivity {
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String STUDENTS_CHILD = "students";
         System.out.println(newStudent);
-        FirebaseDatabase.getInstance().getReference( "users" ).child(USER_ID)
+        FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
                 .child(STUDENTS_CHILD).child(newStudent.getKey()).setValue(newStudent);
         MainActivity.studentList.add(newStudent);
         askForSendingSMS();
@@ -131,7 +130,7 @@ public class AddStudentActivity extends StudentActivity {
 
     private Student createNewStudent() {
         getUserInput();
-        String studentKey = FirebaseDatabase.getInstance().getReference( "users" ).push().getKey();
+        String studentKey = FirebaseDatabase.getInstance().getReference("users").push().getKey();
         return new Student.Builder(getStudentName())
                 .studentClass(sClassString)
                 .phoneNumber(sPhoneNumber.getText().toString())
