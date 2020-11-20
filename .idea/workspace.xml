@@ -18,14 +18,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49d5e8ec-7d61-4e18-be6f-1e2b95edabd1" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResults.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportCategoryNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportCategoryNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResultsArrayList.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StudentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResults.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -350,26 +346,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="506" y="0" width="888" height="1040" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605876432397" />
-    <state width="1878" height="701" key="GridCell.Tab.0.bottom" timestamp="1605882429836">
+    <state width="1878" height="274" key="GridCell.Tab.0.bottom" timestamp="1605888284983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="701" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605882429836" />
-    <state width="1878" height="701" key="GridCell.Tab.0.center" timestamp="1605882429833">
+    <state width="1878" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284983" />
+    <state width="1878" height="274" key="GridCell.Tab.0.center" timestamp="1605888284982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="701" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605882429833" />
-    <state width="1878" height="701" key="GridCell.Tab.0.left" timestamp="1605882429832">
+    <state width="1878" height="274" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284982" />
+    <state width="1878" height="274" key="GridCell.Tab.0.left" timestamp="1605888284982">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="701" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605882429832" />
-    <state width="1878" height="701" key="GridCell.Tab.0.right" timestamp="1605882429834">
+    <state width="1878" height="274" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284982" />
+    <state width="1878" height="274" key="GridCell.Tab.0.right" timestamp="1605888284983">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="701" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605882429834" />
-    <state x="670" y="248" width="579" height="544" key="find.popup" timestamp="1605869840935">
+    <state width="1878" height="274" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284983" />
+    <state x="670" y="248" width="579" height="544" key="find.popup" timestamp="1605883984939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="670" y="248" width="579" height="544" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605869840935" />
+    <state x="670" y="248" width="579" height="544" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605883984939" />
   </component>
   <component name="masterDetails">
     <states>

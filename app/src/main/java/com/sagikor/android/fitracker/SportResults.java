@@ -14,25 +14,29 @@ public class SportResults {
     static final String JUMP = "jump";
     static final String CUBES = "cubes";
     static final String HANDS = "hands";
-    private final int RECORDS_NUMBER = 45;
+    static final String GIRLS = "girls";
+    static final String BOYS = "boys";
+
 
     SportResults() {
         girlsGradesArrayList = new ArrayList<>();
         boysGradeArrayList = new ArrayList<>();
-        populateGirlsGradesList();
-        populateBoysGradesList();
+        populateGradesList(girlsGradesArrayList, GIRLS);
+        populateGradesList(boysGradeArrayList, BOYS);
     }
 
-    private void populateBoysGradesList() {
+    private void populateGradesList(List<SportCategoryNode> list, String gender) {
+        final int RECORDS_NUMBER = 66;
         int result = 100;
-        double cubesScore = 8.8;
-        double aerobicScore = 5.55;
-        int absScore = 97;
-        int jumpScore = 285;
-        int handsScore = 28;
+        boolean isBoysList = gender.equals(BOYS);
+        double cubesScore = isBoysList ? 8.8 : 9.9;
+        double aerobicScore = isBoysList ? 5.55 : 8.05;
+        int absScore = isBoysList ? 97 : 77;
+        int jumpScore = isBoysList ? 285 : 236;
+        double handsScore = isBoysList ? 28 : 1.3;
 
-        for (int i = 0; i < RECORDS_NUMBER; i++) {
-            boysGradeArrayList.add(new SportCategoryNode.Builder()
+        for (int i = 0; i < RECORDS_NUMBER; i++, result--, absScore--, jumpScore -= 2) {
+            list.add(new SportCategoryNode.Builder()
                     .result(result)
                     .cubesScore(cubesScore)
                     .aerobicScore(aerobicScore)
@@ -41,40 +45,28 @@ public class SportResults {
                     .handsScore(handsScore)
                     .build()
             );
-            result--;
-            cubesScore += (i % 2) != 0 ? 0.1 : 0;
-            aerobicScore += 0.03;
-            absScore -= 1;
-            handsScore -= (i % 2) != 0 ? 1 : 0;
-            jumpScore -= 2;
-        }
-    }
+            final int FIRST_PART = 15;
+            final int SECOND_PART = 25;
+            final double SECONDS_IN_MINUTE = 0.6;
+            final double MINUTES_OFFSET = 0.4;
+            final double CUBES_INCREASE = 0.1;
+            final double HANDS_INCREASE = 0.03;
+            final double AEROBIC_FIRST_INCREASE = 0.03;
+            final double AEROBIC_SECOND_INCREASE = 0.08;
+            final double AEROBIC_THIRD_INCREASE = 0.16;
 
-    private void populateGirlsGradesList() {
-        int result = 100;
-        double cubesScore = 9.9;
-        double aerobicScore = 08.05;
-        int absScore = 77;
-        int jumpScore = 236;
-        double handsScore = 1.30;
-
-        for (int i = 0; i < RECORDS_NUMBER; i++) {
-            girlsGradesArrayList.add(new SportCategoryNode.Builder()
-                    .result(result)
-                    .cubesScore(cubesScore)
-                    .aerobicScore(aerobicScore)
-                    .absScore(absScore)
-                    .jumpScore(jumpScore)
-                    .handsScore(handsScore)
-                    .build()
-            );
-            result--;
-            cubesScore += (i % 2) != 0 ? 0.01 : 0;
-            aerobicScore += 0.03;
-            absScore -= 1;
-            handsScore -= 0.03;
-            jumpScore -= 2;
-
+            cubesScore += (i % 2) != 0 ? CUBES_INCREASE : 0;
+            aerobicScore += i < FIRST_PART ? AEROBIC_FIRST_INCREASE :
+                    (i < SECOND_PART ? AEROBIC_SECOND_INCREASE : AEROBIC_THIRD_INCREASE);
+            handsScore -= isBoysList ? ((i % 2) != 0 ? 1 : 0) : HANDS_INCREASE;
+            //Aerobic score is based on time.
+            if (aerobicScore - Math.floor(aerobicScore) >= SECONDS_IN_MINUTE) {
+                aerobicScore -= -MINUTES_OFFSET;
+            }
+            //For females hands score is based on time.
+            if (!isBoysList && handsScore - Math.floor(handsScore) >= SECONDS_IN_MINUTE) {
+                handsScore -= MINUTES_OFFSET;
+            }
         }
     }
 
