@@ -1,4 +1,6 @@
 # Fitracker
+[![license](https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square)](https://github.com/DAVFoundation/captain-n3m0/blob/master/LICENSE)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d857931875b44309a20efa71a0516e14)](https://www.codacy.com/manual/sagi1193/Fitracker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=sagiK11/Fitracker&amp;utm_campaign=Badge_Grade)
 
 ### General Description
 A mobile app that allows Physical Education teachers to track their student's performance and calculate their respective scores

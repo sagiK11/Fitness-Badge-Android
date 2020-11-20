@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -89,13 +90,17 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     private void deleteStudent( Student currentStudent ) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        MainActivity.dbRef.child( userId ).child( STUDENTS_CHILD ).child( currentStudent.getKey() ).removeValue();
+        FirebaseDatabase.getInstance().getReference( "users" )
+                .child( userId ).child( STUDENTS_CHILD ).child( currentStudent.getKey() )
+                .removeValue();
         onRestart();
     }
 
     public void refreshList() {
 
-        MainActivity.dbRef.child( FirebaseAuth.getInstance().getCurrentUser().getUid() ).addValueEventListener( new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference( "users" )
+                .child( FirebaseAuth.getInstance().getCurrentUser().getUid() )
+                .addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
                 studentsList.clear();

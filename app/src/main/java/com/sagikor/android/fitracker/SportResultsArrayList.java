@@ -8,7 +8,13 @@ public class SportResultsArrayList {
 
     List<SportCategoryNode> girlsGradesArrayList;
     List<SportCategoryNode> boysGradeArrayList;
-    private static final int WORST_RESULT = 30;
+    static final int WORST_RESULT = 30;
+    static final String AEROBIC = "aerobic";
+    static final String ABS = "abs";
+    static final String JUMP = "jump";
+    static final String CUBES = "cubes";
+    static final String HANDS = "hands";
+
 
 
     SportResultsArrayList() {
@@ -498,19 +504,10 @@ public class SportResultsArrayList {
         return WORST_RESULT;
     }
 
-    //TODO ISSUE 1183 - WAITING FOR CLIENT SCORES TABLE FOR THIS EXAM.
-//    public int getPlankAbsResult( int score ) {
-//
-//    }
 
     public int getGirlsStaticHandsResult( double score ) {
         return getHandsResult( girlsGradesArrayList, score );
     }
-
-    //TODO ISSUE 1183 - WAITING FOR CLIENT SCORES TABLE FOR THIS EXAM.
-//    public int getPushUpHandsResult( double score ) {
-//
-//    }
 
     public int getBoysHandsResult( double score ) {
         return getHandsResult( boysGradeArrayList, score );

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="fitracker/app" />
-      <module fileurl="file://$PROJECT_DIR$/fitracker.iml" filepath="$PROJECT_DIR$/fitracker.iml" group="fitracker" />
-      <module fileurl="file://$PROJECT_DIR$/opencsv-2.4/opencsv-2.4.iml" filepath="$PROJECT_DIR$/opencsv-2.4/opencsv-2.4.iml" group="fitracker/opencsv-2.4" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Fitracker.iml" filepath="$PROJECT_DIR$/.idea/modules/Fitracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Fitracker.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Fitracker.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/opencsv-2.4/Fitracker.opencsv-2.4.iml" filepath="$PROJECT_DIR$/.idea/modules/opencsv-2.4/Fitracker.opencsv-2.4.iml" />
     </modules>
   </component>
 </project>

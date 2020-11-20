@@ -31,7 +31,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    static DatabaseReference dbRef;
     static List<Student> studentList = new ArrayList<>();
     Button addStudentButton;
     Button searchStudentsButton;
@@ -74,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void establishFireBase() {
         FirebaseApp.initializeApp( this );
-        dbRef = FirebaseDatabase.getInstance().getReference( "users" );
     }
 
 
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addStudentToStudentsList() {
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        dbRef.child( USER_ID ).addListenerForSingleValueEvent( new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference( "users" ).child( USER_ID ).addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
                 final String STUDENTS_CHILD = "students";

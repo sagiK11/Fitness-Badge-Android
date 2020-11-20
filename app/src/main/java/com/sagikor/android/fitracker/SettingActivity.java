@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class SettingActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     private Switch alwaysBoysSwitch;
     boolean isGirlsSwitchOn;
     boolean isBoysSwitchOn;
-    final String SHARED_PREFS = "sharedPrefs";
+    final  String SHARED_PREFS = "sharedPrefs";
 
     @Override
     protected void onCreate( @Nullable Bundle savedInstanceState ) {
@@ -120,7 +121,7 @@ public class SettingActivity extends AppCompatActivity {
     private void clearDataBase() {
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String STUDENTS_CHILD = "students";
-        MainActivity.dbRef.child( USER_ID ).child( STUDENTS_CHILD ).removeValue();
+        FirebaseDatabase.getInstance().getReference( "users" ).child( USER_ID ).child( STUDENTS_CHILD ).removeValue();
         MainActivity.studentList.clear();
     }
 
@@ -133,7 +134,7 @@ public class SettingActivity extends AppCompatActivity {
     private void deleteAccount() {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        MainActivity.dbRef.child( user.getUid() ).removeValue();
+        FirebaseDatabase.getInstance().getReference( "users" ).child( user.getUid() ).removeValue();
 
         user.delete().addOnCompleteListener( task -> {
             if ( task.isSuccessful() ) {
