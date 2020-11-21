@@ -48,121 +48,121 @@ public class Student implements Parcelable {
         private double totalScoreWithoutAerobic;
 
 
-        Builder( String name ) {
+        Builder(String name) {
             this.name = name;
         }
 
-        Builder studentGender( String gender ) {
+        Builder studentGender(String gender) {
             this.gender = gender;
             return this;
         }
 
-        Builder studentClass( String studentClass ) {
+        Builder studentClass(String studentClass) {
             this.studentClass = studentClass;
             return this;
         }
 
-        Builder phoneNumber( String phoneNumber ) {
+        Builder phoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
 
-        Builder key( String key ) {
+        Builder key(String key) {
             this.key = key;
             return this;
         }
 
-        Builder userId( String userId ) {
+        Builder userId(String userId) {
             this.userId = userId;
             return this;
         }
 
-        Builder updatedDate( String updatedDate ) {
+        Builder updatedDate(String updatedDate) {
             this.updatedDate = updatedDate;
             return this;
         }
 
-        Builder aerobicScore( double aerobicScore ) {
+        Builder aerobicScore(double aerobicScore) {
             this.aerobicScore = aerobicScore;
             return this;
         }
 
-        public Builder aerobicResult( double aerobicResult ) {
+        public Builder aerobicResult(double aerobicResult) {
             this.aerobicResult = aerobicResult;
             return this;
         }
 
-        public Builder cubesScore( double cubesScore ) {
+        public Builder cubesScore(double cubesScore) {
             this.cubesScore = cubesScore;
             return this;
         }
 
-        Builder cubesResult( double cubesResult ) {
+        Builder cubesResult(double cubesResult) {
             this.cubesResult = cubesResult;
             return this;
         }
 
-        Builder absScore( double absScore ) {
+        Builder absScore(double absScore) {
             this.absScore = absScore;
             return this;
         }
 
-        Builder absResult( double absResult ) {
+        Builder absResult(double absResult) {
             this.absResult = absResult;
             return this;
         }
 
-        Builder jumpScore( double jumpScore ) {
+        Builder jumpScore(double jumpScore) {
             this.jumpScore = jumpScore;
             return this;
         }
 
-        Builder jumpResult( double jumpResult ) {
+        Builder jumpResult(double jumpResult) {
             this.jumpResult = jumpResult;
             return this;
         }
 
-        Builder handsScore( double handsScore ) {
+        Builder handsScore(double handsScore) {
             this.handsScore = handsScore;
             return this;
         }
 
-        Builder handsResult( double handsResult ) {
+        Builder handsResult(double handsResult) {
             this.handsResult = handsResult;
             return this;
         }
 
-        Builder totalScore( double totalScore ) {
+        Builder totalScore(double totalScore) {
             this.totalScore = totalScore;
             return this;
         }
 
-        Builder totalScoreWithoutAerobic( double totalScoreWithoutAerobic ) {
+        Builder totalScoreWithoutAerobic(double totalScoreWithoutAerobic) {
             this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
             return this;
         }
 
         Student build() {
             Student student = new Student();
-            student.setName( this.name );
-            student.setStudentClass( this.studentClass );
-            student.setGender( this.gender );
-            student.setKey( this.key );
-            student.setUserId( this.userId );
-            student.setPhoneNumber( this.phoneNumber );
-            student.setAerobicScore( this.aerobicScore );
-            student.setCubesScore( this.cubesScore );
-            student.setAbsScore( this.absScore );
-            student.setJumpScore( this.jumpScore );
-            student.setHandsScore( this.handsScore );
-            student.setAbsResult( this.absResult );
-            student.setAerobicResult( this.aerobicResult );
-            student.setJumpResult( this.jumpResult );
-            student.setHandsResult( this.handsResult );
-            student.setCubesResult( this.cubesResult );
-            student.setTotalScore( this.totalScore );
-            student.setTotScoreWithoutAerobic( this.totalScoreWithoutAerobic );
-            student.setUpdateDate( this.updatedDate );
+            student.setName(this.name);
+            student.setStudentClass(this.studentClass);
+            student.setGender(this.gender);
+            student.setKey(this.key);
+            student.setUserId(this.userId);
+            student.setPhoneNumber(this.phoneNumber);
+            student.setAerobicScore(this.aerobicScore);
+            student.setCubesScore(this.cubesScore);
+            student.setAbsScore(this.absScore);
+            student.setJumpScore(this.jumpScore);
+            student.setHandsScore(this.handsScore);
+            student.setAbsResult(this.absResult);
+            student.setAerobicResult(this.aerobicResult);
+            student.setJumpResult(this.jumpResult);
+            student.setHandsResult(this.handsResult);
+            student.setCubesResult(this.cubesResult);
+            student.setTotalScore(this.totalScore);
+            student.setTotScoreWithoutAerobic(this.totalScoreWithoutAerobic);
+            student.setUpdateDate(this.updatedDate);
             return student;
         }
 
@@ -176,7 +176,7 @@ public class Student implements Parcelable {
         return name;
     }
 
-    public void setName( String name ) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -188,7 +188,7 @@ public class Student implements Parcelable {
         return gender;
     }
 
-    void setGender( String gender ) {
+    void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -200,35 +200,35 @@ public class Student implements Parcelable {
         return key;
     }
 
-    public void setKey( String key ) {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    void setUpdateDate( String date ) {
+    void setUpdateDate(String date) {
         this.updatedDate = date;
     }
 
-    void setAerobicResult( double aerobicResult ) {
+    void setAerobicResult(double aerobicResult) {
         this.aerobicResult = aerobicResult;
     }
 
-    void setCubesResult( double cubesResult ) {
+    void setCubesResult(double cubesResult) {
         this.cubesResult = cubesResult;
     }
 
-    void setAbsResult( double absResult ) {
+    void setAbsResult(double absResult) {
         this.absResult = absResult;
     }
 
-    void setJumpResult( double jumpResult ) {
+    void setJumpResult(double jumpResult) {
         this.jumpResult = jumpResult;
     }
 
-    void setHandsResult( double handsResult ) {
+    void setHandsResult(double handsResult) {
         this.handsResult = handsResult;
     }
 
-    void setStudentClass( String studentClass ) {
+    void setStudentClass(String studentClass) {
         this.studentClass = studentClass;
     }
 
@@ -236,7 +236,7 @@ public class Student implements Parcelable {
         return aerobicScore;
     }
 
-    void setAerobicScore( double aerobicScore ) {
+    void setAerobicScore(double aerobicScore) {
         this.aerobicScore = aerobicScore;
     }
 
@@ -244,7 +244,7 @@ public class Student implements Parcelable {
         return cubesScore;
     }
 
-    void setCubesScore( double cubesScore ) {
+    void setCubesScore(double cubesScore) {
         this.cubesScore = cubesScore;
     }
 
@@ -252,7 +252,7 @@ public class Student implements Parcelable {
         return absScore;
     }
 
-    void setAbsScore( double absScore ) {
+    void setAbsScore(double absScore) {
         this.absScore = absScore;
     }
 
@@ -260,7 +260,7 @@ public class Student implements Parcelable {
         return jumpScore;
     }
 
-    void setJumpScore( double jumpScore ) {
+    void setJumpScore(double jumpScore) {
         this.jumpScore = jumpScore;
     }
 
@@ -268,7 +268,7 @@ public class Student implements Parcelable {
         return handsScore;
     }
 
-    void setHandsScore( double handsScore ) {
+    void setHandsScore(double handsScore) {
         this.handsScore = handsScore;
     }
 
@@ -296,7 +296,7 @@ public class Student implements Parcelable {
         return userId;
     }
 
-    public void setUserId( String userId ) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -305,7 +305,7 @@ public class Student implements Parcelable {
         return totalScore;
     }
 
-    void setTotalScore( double totalScore ) {
+    void setTotalScore(double totalScore) {
         this.totalScore = totalScore;
     }
 
@@ -313,7 +313,7 @@ public class Student implements Parcelable {
         return totalScoreWithoutAerobic;
     }
 
-    void setTotScoreWithoutAerobic( double totalScoreWithoutAerobic ) {
+    void setTotScoreWithoutAerobic(double totalScoreWithoutAerobic) {
         this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
     }
 
@@ -322,12 +322,12 @@ public class Student implements Parcelable {
         return phoneNumber;
     }
 
-    void setPhoneNumber( String phoneNumber ) {
+    void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     boolean isFinished() {
-        final int MISSING = - 1;
+        final int MISSING = -1;
         return aerobicScore != MISSING && jumpScore != MISSING && absScore != MISSING
                 && handsScore != MISSING && cubesScore != MISSING;
 
@@ -344,17 +344,17 @@ public class Student implements Parcelable {
     }
 
     String[] toArray() {
-        String aerobicScoreString = String.valueOf( aerobicScore );
-        String aerobicResultString = String.valueOf( aerobicResult );
-        String absScoreString = String.valueOf( absScore );
-        String absResultString = String.valueOf( absResult );
-        String handsScoreString = String.valueOf( handsScore );
-        String handsResultString = String.valueOf( handsResult );
-        String jumpScoreString = String.valueOf( jumpScore );
-        String jumpResultString = String.valueOf( jumpResult );
-        String cubesScoreString = String.valueOf( cubesScore );
-        String cubesResultString = String.valueOf( cubesResult );
-        String totalScoreString = String.valueOf( totalScore );
+        String aerobicScoreString = String.valueOf(aerobicScore);
+        String aerobicResultString = String.valueOf(aerobicResult);
+        String absScoreString = String.valueOf(absScore);
+        String absResultString = String.valueOf(absResult);
+        String handsScoreString = String.valueOf(handsScore);
+        String handsResultString = String.valueOf(handsResult);
+        String jumpScoreString = String.valueOf(jumpScore);
+        String jumpResultString = String.valueOf(jumpResult);
+        String cubesScoreString = String.valueOf(cubesScore);
+        String cubesResultString = String.valueOf(cubesResult);
+        String totalScoreString = String.valueOf(totalScore);
         return new String[]{
                 name, studentClass, aerobicScoreString, aerobicResultString,
                 absScoreString, absResultString, handsScoreString, handsResultString,
@@ -368,7 +368,7 @@ public class Student implements Parcelable {
         return 0;
     }
 
-    private Student( Parcel in ) {
+    private Student(Parcel in) {
         name = in.readString();
         studentClass = in.readString();
         aerobicScore = in.readDouble();
@@ -389,35 +389,35 @@ public class Student implements Parcelable {
     }
 
     @Override
-    public void writeToParcel( Parcel dest, int flags ) {
-        dest.writeString( name );
-        dest.writeString( studentClass );
-        dest.writeDouble( aerobicScore );
-        dest.writeDouble( aerobicResult );
-        dest.writeDouble( cubesScore );
-        dest.writeDouble( cubesResult );
-        dest.writeDouble( absScore );
-        dest.writeDouble( absResult );
-        dest.writeDouble( jumpScore );
-        dest.writeDouble( jumpResult );
-        dest.writeDouble( handsScore );
-        dest.writeDouble( handsResult );
-        dest.writeDouble( totalScore );
-        dest.writeString( phoneNumber );
-        dest.writeString( gender );
-        dest.writeString( key );
-        dest.writeString( userId );
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(studentClass);
+        dest.writeDouble(aerobicScore);
+        dest.writeDouble(aerobicResult);
+        dest.writeDouble(cubesScore);
+        dest.writeDouble(cubesResult);
+        dest.writeDouble(absScore);
+        dest.writeDouble(absResult);
+        dest.writeDouble(jumpScore);
+        dest.writeDouble(jumpResult);
+        dest.writeDouble(handsScore);
+        dest.writeDouble(handsResult);
+        dest.writeDouble(totalScore);
+        dest.writeString(phoneNumber);
+        dest.writeString(gender);
+        dest.writeString(key);
+        dest.writeString(userId);
     }
 
     public static final Creator<Student> CREATOR = new Creator<Student>() {
         @Override
-        public Student createFromParcel( Parcel in ) {
-            return new Student( in );
+        public Student createFromParcel(Parcel in) {
+            return new Student(in);
         }
 
         @Override
-        public Student[] newArray( int size ) {
-            return new Student[ size ];
+        public Student[] newArray(int size) {
+            return new Student[size];
         }
     };
 }

@@ -38,7 +38,7 @@ public class UpdateStudentActivity extends StudentActivity {
         sName.setText(currentStudent.getName());
         sClassButton.setText(currentStudent.getStudentClass());
         genderButton.setText(currentStudent.getGender());
-        if(currentStudent.getGender().equals(getResources().getString(R.string.boy)))
+        if (currentStudent.getGender().equals(getResources().getString(R.string.boy)))
             handsTypeText.setText(getResources().getString(R.string.amount));
 
     }
@@ -132,16 +132,16 @@ public class UpdateStudentActivity extends StudentActivity {
     private void updateStudentInFirebase(Student updatedStudent) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String studentsChild = "students";
-        FirebaseDatabase.getInstance().getReference( "users" ).
+        FirebaseDatabase.getInstance().getReference("users").
                 child(userId).child(studentsChild).child(updatedStudent.getKey()).
                 setValue(updatedStudent);
     }
 
     private void updateStudentInStudentsList(Student updatedStudent) {
-        for (int i = 0; i < MainActivity.studentList.size(); i++) {
-            Student student = MainActivity.studentList.get(i);
+        for (int i = 0; i < MainActivity.currentUser.getStudentList().size(); i++) {
+            Student student = MainActivity.currentUser.getStudentList().get(i);
             if (student.getKey().equals(updatedStudent.getKey())) {
-                MainActivity.studentList.set(i, updatedStudent);
+                MainActivity.currentUser.getStudentList().set(i, updatedStudent);
                 return;
             }
         }

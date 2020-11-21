@@ -18,12 +18,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="49d5e8ec-7d61-4e18-be6f-1e2b95edabd1" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/EmailSendTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/EmailSendTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StatisticsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StatisticsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StudentTextWatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/StudentTextWatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/UpdateStudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/UpdateStudentActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/ViewStudentsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/ViewStudentsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +38,6 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ce0117112d1ae4e40c]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

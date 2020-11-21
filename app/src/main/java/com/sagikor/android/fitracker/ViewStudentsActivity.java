@@ -36,9 +36,9 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate( final Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_view_students );
+    protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_view_students);
 
         linkObjects();
         addInputSearch();
@@ -53,93 +53,93 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
 
     private void linkObjects() {
-        listView = findViewById( R.id.list_view );
-        inputSearch = findViewById( R.id.search_input );
+        listView = findViewById(R.id.list_view);
+        inputSearch = findViewById(R.id.search_input);
     }
 
     private void addListViewItemListener() {
-        listView.setOnItemClickListener( ( parent, view, position, id ) -> {
-            Intent enterData = new Intent( this, UpdateStudentActivity.class );
-            enterData.putExtra( "student", (Student) parent.getItemAtPosition( position ) );
-            startActivity( enterData );
-        } );
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Intent enterData = new Intent(this, UpdateStudentActivity.class);
+            enterData.putExtra("student", (Student) parent.getItemAtPosition(position));
+            startActivity(enterData);
+        });
 
-        final String YES = getResources().getString( R.string.yes );
-        final String NO = getResources().getString( R.string.no );
-        final String DELETE_STUDENT_QUESTION = getResources().getString( R.string.delete_student_question );
+        final String YES = getResources().getString(R.string.yes);
+        final String NO = getResources().getString(R.string.no);
+        final String DELETE_STUDENT_QUESTION = getResources().getString(R.string.delete_student_question);
 
-        listView.setOnItemLongClickListener( ( parent, view, position, id ) -> {
-            final Student currentStudent = (Student) parent.getItemAtPosition( position );
-            new SweetAlertDialog( this, SweetAlertDialog.WARNING_TYPE )
-                    .setTitleText( DELETE_STUDENT_QUESTION )
-                    .setConfirmText( YES )
-                    .setConfirmClickListener( sDialog -> {
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            final Student currentStudent = (Student) parent.getItemAtPosition(position);
+            new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+                    .setTitleText(DELETE_STUDENT_QUESTION)
+                    .setConfirmText(YES)
+                    .setConfirmClickListener(sDialog -> {
                         sDialog.dismissWithAnimation();
-                        deleteStudent( currentStudent );
-                    } )
-                    .setCancelButton( NO,
-                            SweetAlertDialog::dismissWithAnimation )
+                        deleteStudent(currentStudent);
+                    })
+                    .setCancelButton(NO,
+                            SweetAlertDialog::dismissWithAnimation)
                     .show();
             return true;
 
-        } );
+        });
 
     }
 
-    private void deleteStudent( Student currentStudent ) {
+    private void deleteStudent(Student currentStudent) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference( "users" )
-                .child( userId ).child( STUDENTS_CHILD ).child( currentStudent.getKey() )
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(userId).child(STUDENTS_CHILD).child(currentStudent.getKey())
                 .removeValue();
         onRestart();
     }
 
     public void refreshList() {
 
-        FirebaseDatabase.getInstance().getReference( "users" )
-                .child( FirebaseAuth.getInstance().getCurrentUser().getUid() )
-                .addValueEventListener( new ValueEventListener() {
-            @Override
-            public void onDataChange( @NonNull DataSnapshot dataSnapshot ) {
-                studentsList.clear();
-                for ( DataSnapshot obj : dataSnapshot.child( STUDENTS_CHILD ).getChildren() ) {
-                    Student student = obj.getValue( Student.class );
-                    studentsList.add( student );
-                }
-                adapter.notifyDataSetChanged();
-            }
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        studentsList.clear();
+                        for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
+                            Student student = obj.getValue(Student.class);
+                            studentsList.add(student);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
 
-            @Override
-            public void onCancelled( @NonNull DatabaseError databaseError ) {
-                Log.d( TAG, databaseError.getDetails() );
-            }
-        } );
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        Log.d(TAG, databaseError.getDetails());
+                    }
+                });
 
     }
 
     private void addInputSearch() {
 
-        inputSearch.addTextChangedListener( new TextWatcher() {
+        inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged( CharSequence charSequence, int i, int i1, int i2 ) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //AUTO-GENERATED
             }
 
             @Override
-            public void onTextChanged( CharSequence charSequence, int i, int i1, int i2 ) {
-                ViewStudentsActivity.this.adapter.getFilter().filter( charSequence );
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ViewStudentsActivity.this.adapter.getFilter().filter(charSequence);
             }
 
             @Override
-            public void afterTextChanged( Editable editable ) {
+            public void afterTextChanged(Editable editable) {
                 //AUTO-GENERATED
             }
-        } );
+        });
 
     }
 
     private void createStudentAdapter() {
-        adapter = new StudentAdapter( this, studentsList );
+        adapter = new StudentAdapter(this, studentsList);
     }
 
     private void createStudentList() {
@@ -147,7 +147,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
     }
 
     private void setListViewAdapter() {
-        listView.setAdapter( adapter );
+        listView.setAdapter(adapter);
     }
 
     @Override

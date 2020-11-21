@@ -110,12 +110,13 @@ public class AddStudentActivity extends StudentActivity {
         System.out.println(newStudent);
         FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
                 .child(STUDENTS_CHILD).child(newStudent.getKey()).setValue(newStudent);
-        MainActivity.studentList.add(newStudent);
+        //MainActivity.studentList.add(newStudent);
+        MainActivity.currentUser.addStudentToList(newStudent);
         askForSendingSMS();
     }
 
     private boolean studentExistsInFirebase(Student newStudent) {
-        for (Student student : MainActivity.studentList) {
+        for (Student student : MainActivity.currentUser.getStudentList()) {
             if (studentExists(student, newStudent)) {
                 popFailWindow();
                 return true;

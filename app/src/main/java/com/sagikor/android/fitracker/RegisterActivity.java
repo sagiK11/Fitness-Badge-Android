@@ -33,74 +33,74 @@ public class RegisterActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     @Override
-    protected void onCreate( @Nullable Bundle savedInstanceState ) {
-        super.onCreate( savedInstanceState );
-        setContentView( R.layout.activity_register );
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         linkObjects();
     }
 
 
     private void linkObjects() {
-        userFullNameEditText = findViewById( R.id.full_user_name_input_text );
-        userEmailEditText = findViewById( R.id.user_name_email_input_text );
-        userPasswordEditText = findViewById( R.id.user_name_password_input_text );
-        registerButton = findViewById( R.id.register_button );
-        progressBar = findViewById( R.id.progressBar_register_activity );
-        registerButton.setOnClickListener( e -> registerUser() );
+        userFullNameEditText = findViewById(R.id.full_user_name_input_text);
+        userEmailEditText = findViewById(R.id.user_name_email_input_text);
+        userPasswordEditText = findViewById(R.id.user_name_password_input_text);
+        registerButton = findViewById(R.id.register_button);
+        progressBar = findViewById(R.id.progressBar_register_activity);
+        registerButton.setOnClickListener(e -> registerUser());
 
     }
 
     private void registerUser() {
-        progressBar.setVisibility( View.VISIBLE );
+        progressBar.setVisibility(View.VISIBLE);
         String email = userEmailEditText.getText().toString().trim();
         String password = userPasswordEditText.getText().toString().trim();
-        if ( inputErrors() ) {
-            progressBar.setVisibility( View.GONE );
+        if (inputErrors()) {
+            progressBar.setVisibility(View.GONE);
             return;
         }
-        mAuth.createUserWithEmailAndPassword( email, password )
-                .addOnCompleteListener( this, task -> {
-                    if ( task.isSuccessful() ) {
-                        progressBar.setVisibility( View.GONE );
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        progressBar.setVisibility(View.GONE);
                         String userId = mAuth.getCurrentUser().getUid();
-                        User newUser = new User( userFullNameEditText.getText().toString(), email, userId );
+                        User newUser = new User(userFullNameEditText.getText().toString(), email, userId);
 
-                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference( "users" );
-                        dbRef.child( userId ).setValue( newUser ).addOnCompleteListener( task1 -> {
-                            if ( task1.isSuccessful() ) {
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
+                        dbRef.child(userId).setValue(newUser).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
                                 openMainActivity();
                             }
-                        } );
+                        });
                     } else {
-                        notifyErrorsToUser( task );
+                        notifyErrorsToUser(task);
                     }
-                    progressBar.setVisibility( View.GONE );
-                } );
+                    progressBar.setVisibility(View.GONE);
+                });
 
     }
 
     private void openMainActivity() {
-        Intent intent = new Intent( RegisterActivity.this, MainActivity.class );
-        intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
-        startActivity( intent );
+        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
-    private void notifyErrorsToUser( Task<AuthResult> task ) {
+    private void notifyErrorsToUser(Task<AuthResult> task) {
         try {
             throw task.getException();
-        } catch ( FirebaseAuthWeakPasswordException e ) {
-            userPasswordEditText.setError( getString( R.string.error_weak_password ) );
+        } catch (FirebaseAuthWeakPasswordException e) {
+            userPasswordEditText.setError(getString(R.string.error_weak_password));
             userPasswordEditText.requestFocus();
-        } catch ( FirebaseAuthInvalidCredentialsException e ) {
-            userEmailEditText.setError( getString( R.string.error_invalid_email ) );
+        } catch (FirebaseAuthInvalidCredentialsException e) {
+            userEmailEditText.setError(getString(R.string.error_invalid_email));
             userEmailEditText.requestFocus();
-        } catch ( FirebaseAuthUserCollisionException e ) {
-            userEmailEditText.setError( getString( R.string.error_user_exists ) );
+        } catch (FirebaseAuthUserCollisionException e) {
+            userEmailEditText.setError(getString(R.string.error_user_exists));
             userEmailEditText.requestFocus();
-        } catch ( Exception e ) {
-            Log.e( TAG, e.getMessage() );
-            progressBar.setVisibility( View.GONE );
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -109,26 +109,26 @@ public class RegisterActivity extends AppCompatActivity {
         String email = userEmailEditText.getText().toString().trim();
         String password = userPasswordEditText.getText().toString().trim();
 
-        if ( userFullName.isEmpty() ) {
-            userFullNameEditText.setError( getString( R.string.input_error ) );
+        if (userFullName.isEmpty()) {
+            userFullNameEditText.setError(getString(R.string.input_error));
             userFullNameEditText.requestFocus();
             return true;
         }
 
-        if ( email.isEmpty() ) {
-            userEmailEditText.setError( getString( R.string.input_error ) );
+        if (email.isEmpty()) {
+            userEmailEditText.setError(getString(R.string.input_error));
             userEmailEditText.requestFocus();
             return true;
         }
 
-        if ( password.isEmpty() ) {
-            userPasswordEditText.setError( getString( R.string.input_error ) );
+        if (password.isEmpty()) {
+            userPasswordEditText.setError(getString(R.string.input_error));
             userPasswordEditText.requestFocus();
             return true;
         }
 
-        if ( password.length() < Utility.PASS_LENGTH ) {
-            userPasswordEditText.setError( getString( R.string.error_weak_password ) );
+        if (password.length() < Utility.PASS_LENGTH) {
+            userPasswordEditText.setError(getString(R.string.error_weak_password));
             userPasswordEditText.requestFocus();
             return true;
         }
