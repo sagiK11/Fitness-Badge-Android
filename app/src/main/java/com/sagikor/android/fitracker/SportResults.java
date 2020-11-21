@@ -34,8 +34,11 @@ public class SportResults {
         int absScore = isBoysList ? 97 : 77;
         int jumpScore = isBoysList ? 285 : 236;
         double handsScore = isBoysList ? 28 : 1.3;
-
+        System.out.println("*************************************");
+        System.out.println(gender);
+        System.out.println("cubes\t|aerobic\t|abs\t|jump\t|hands\t|result%n");
         for (int i = 0; i < RECORDS_NUMBER; i++, result--, absScore--, jumpScore -= 2) {
+            System.out.printf("%.1f\t|%.3f\t|%d\t|%d\t|%f.2\t|%d|%n", cubesScore, aerobicScore, absScore, jumpScore, handsScore, result);
             list.add(new SportCategoryNode.Builder()
                     .result(result)
                     .cubesScore(cubesScore)
@@ -50,7 +53,8 @@ public class SportResults {
             final double SECONDS_IN_MINUTE = 0.6;
             final double MINUTES_OFFSET = 0.4;
             final double CUBES_INCREASE = 0.1;
-            final double HANDS_INCREASE = 0.03;
+            final double HANDS_FIRST_INCREASE = 0.03;
+            final double HANDS_SECOND_INCREASE = 0.01;
             final double AEROBIC_FIRST_INCREASE = 0.03;
             final double AEROBIC_SECOND_INCREASE = 0.08;
             final double AEROBIC_THIRD_INCREASE = 0.16;
@@ -58,7 +62,8 @@ public class SportResults {
             cubesScore += (i % 2) != 0 ? CUBES_INCREASE : 0;
             aerobicScore += i < FIRST_PART ? AEROBIC_FIRST_INCREASE :
                     (i < SECOND_PART ? AEROBIC_SECOND_INCREASE : AEROBIC_THIRD_INCREASE);
-            handsScore -= isBoysList ? ((i % 2) != 0 ? 1 : 0) : HANDS_INCREASE;
+            handsScore -= isBoysList ? ((i % 2) != 0 ? 1 : 0) :
+                    (i < FIRST_PART ? HANDS_FIRST_INCREASE : HANDS_SECOND_INCREASE);
             //Aerobic score is based on time.
             if (aerobicScore - Math.floor(aerobicScore) >= SECONDS_IN_MINUTE) {
                 aerobicScore -= -MINUTES_OFFSET;
@@ -68,6 +73,7 @@ public class SportResults {
                 handsScore -= MINUTES_OFFSET;
             }
         }
+        System.out.println("*************************************");
     }
 
     public int getGirlsCubesResult(double score) {
