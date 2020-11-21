@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView( R.layout.activity_main );
 
         linkObjects();
-        establishFireBase();
+        establishFirebase();
         addButtonsOnClickListeners();
         addStudentToStudentsList();
     }
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void establishFireBase() {
+    private void establishFirebase() {
         FirebaseApp.initializeApp( this );
     }
 

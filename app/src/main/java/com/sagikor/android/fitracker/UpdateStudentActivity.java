@@ -125,11 +125,11 @@ public class UpdateStudentActivity extends StudentActivity {
                 .updatedDate(Utility.getTodayDate())
                 .build();
 
-        updateStudentInFireBase(updatedStudent);
+        updateStudentInFirebase(updatedStudent);
         updateStudentInStudentsList(updatedStudent);
     }
 
-    private void updateStudentInFireBase(Student updatedStudent) {
+    private void updateStudentInFirebase(Student updatedStudent) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String studentsChild = "students";
         FirebaseDatabase.getInstance().getReference( "users" ).

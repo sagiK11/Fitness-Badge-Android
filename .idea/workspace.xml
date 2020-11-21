@@ -20,8 +20,10 @@
     <list default="true" id="49d5e8ec-7d61-4e18-be6f-1e2b95edabd1" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResults.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/SportResults.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/AddStudentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/UpdateStudentActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/UpdateStudentActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/ViewStudentsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/sagikor/android/fitracker/ViewStudentsActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +34,7 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[Nexus_5_API_26]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[ce0117112d1ae4e40c]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -121,7 +123,7 @@
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="settings.editor.selected.configurable" value="emulator" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="PsdUISettings">
@@ -338,34 +340,46 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="768" y="239" width="374" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1605871090556">
+    <state x="768" y="239" width="374" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1605948439683">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="768" y="239" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1605871090556" />
+    <state x="768" y="239" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1605948439683" />
     <state x="506" y="0" width="888" height="1040" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1605876432397">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="506" y="0" width="888" height="1040" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605876432397" />
-    <state width="1878" height="274" key="GridCell.Tab.0.bottom" timestamp="1605888284983">
+    <state width="1878" height="665" key="GridCell.Tab.0.bottom" timestamp="1605953145246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="274" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284983" />
-    <state width="1878" height="274" key="GridCell.Tab.0.center" timestamp="1605888284982">
+    <state width="1878" height="665" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1605953145246" />
+    <state width="1878" height="665" key="GridCell.Tab.0.center" timestamp="1605953145246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="274" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284982" />
-    <state width="1878" height="274" key="GridCell.Tab.0.left" timestamp="1605888284982">
+    <state width="1878" height="665" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1605953145246" />
+    <state width="1878" height="665" key="GridCell.Tab.0.left" timestamp="1605953145245">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="274" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284982" />
-    <state width="1878" height="274" key="GridCell.Tab.0.right" timestamp="1605888284983">
+    <state width="1878" height="665" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1605953145245" />
+    <state width="1878" height="665" key="GridCell.Tab.0.right" timestamp="1605953145246">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1878" height="274" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605888284983" />
-    <state x="670" y="248" width="579" height="544" key="find.popup" timestamp="1605883984939">
+    <state width="1878" height="665" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1605953145246" />
+    <state x="721" y="141" width="468" height="764" key="RollbackChangesDialog" timestamp="1605953133297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="670" y="248" width="579" height="544" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605883984939" />
+    <state x="721" y="141" width="468" height="764" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605953133297" />
+    <state x="464" y="155" width="992" height="737" key="SettingsEditor" timestamp="1605946635344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="464" y="155" width="992" height="737" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1605946635344" />
+    <state x="670" y="248" width="579" height="638" key="find.popup" timestamp="1605953378990">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="670" y="248" width="579" height="638" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605953378990" />
+    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1605951291482">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605951291482" />
   </component>
   <component name="masterDetails">
     <states>

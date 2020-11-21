@@ -98,11 +98,11 @@ public class AddStudentActivity extends StudentActivity {
 
     private void addStudent() {
         Student newStudent = createNewStudent();
-        addStudentToFireBase(newStudent);
+        addStudentToFirebase(newStudent);
     }
 
-    private void addStudentToFireBase(Student newStudent) {
-        if (studentExistsInFireBase(newStudent))
+    private void addStudentToFirebase(Student newStudent) {
+        if (studentExistsInFirebase(newStudent))
             return;
 
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -114,7 +114,7 @@ public class AddStudentActivity extends StudentActivity {
         askForSendingSMS();
     }
 
-    private boolean studentExistsInFireBase(Student newStudent) {
+    private boolean studentExistsInFirebase(Student newStudent) {
         for (Student student : MainActivity.studentList) {
             if (studentExists(student, newStudent)) {
                 popFailWindow();

@@ -35,12 +35,10 @@ public class ViewStudentsActivity extends AppCompatActivity {
     private static final String STUDENTS_CHILD = "students";
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate( final Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_view_students );
-        checkFilePermissions();
 
         linkObjects();
         addInputSearch();
@@ -117,18 +115,6 @@ public class ViewStudentsActivity extends AppCompatActivity {
             }
         } );
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkFilePermissions() {
-        if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP ) {
-            int permissionCheck = this.checkSelfPermission( "Manifest.permission.SEND_SMS" );
-            if ( permissionCheck != 0 ) {
-                this.requestPermissions( new String[]{ Manifest.permission.SEND_SMS }, 1001 ); //Any number
-            }
-        } else {
-            Log.d( TAG, "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP." );
-        }
     }
 
     private void addInputSearch() {
