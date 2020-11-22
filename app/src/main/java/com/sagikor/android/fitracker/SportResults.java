@@ -34,11 +34,8 @@ public class SportResults {
         int absScore = isBoysList ? 97 : 77;
         int jumpScore = isBoysList ? 285 : 236;
         double handsScore = isBoysList ? 28 : 1.3;
-        System.out.println("*************************************");
-        System.out.println(gender);
-        System.out.println("cubes\t|aerobic\t|abs\t|jump\t|hands\t|result%n");
+
         for (int i = 0; i < RECORDS_NUMBER; i++, result--, absScore--, jumpScore -= 2) {
-            System.out.printf("%.1f\t|%.3f\t|%d\t|%d\t|%f.2\t|%d|%n", cubesScore, aerobicScore, absScore, jumpScore, handsScore, result);
             list.add(new SportCategoryNode.Builder()
                     .result(result)
                     .cubesScore(cubesScore)
@@ -73,7 +70,6 @@ public class SportResults {
                 handsScore -= MINUTES_OFFSET;
             }
         }
-        System.out.println("*************************************");
     }
 
     public int getGirlsCubesResult(double score) {
