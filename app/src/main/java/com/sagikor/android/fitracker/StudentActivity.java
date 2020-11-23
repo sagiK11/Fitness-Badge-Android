@@ -258,7 +258,6 @@ public class StudentActivity extends AppCompatActivity {
         }
     }
 
-
     void calAverages() {
         final int CATEGORY_NUM = 5;
         int[] gradesArray = new int[CATEGORY_NUM];
@@ -282,7 +281,6 @@ public class StudentActivity extends AppCompatActivity {
             avg = (double) avg / activeGrades;
     }
 
-
     double testInput(EditText text, String place, Context context) {
         final String INVALID_INPUT_MSG = getResources().getString(R.string.invalid_input);
         try {
@@ -291,11 +289,17 @@ public class StudentActivity extends AppCompatActivity {
             if (text.getText().toString().length() == 0)
                 return MISSING_INPUT;
             else {
-                popToast(INVALID_INPUT_MSG + place, Toast.LENGTH_LONG, context);
+                popToast(INVALID_INPUT_MSG + " "+ place, Toast.LENGTH_LONG, context);
                 return INVALID_INPUT;
             }
         }
         return Double.parseDouble(text.getText().toString());
+    }
+
+    protected boolean isErrorsInStudentScores() {
+        return aerobicScore == INVALID_INPUT || jumpScore == INVALID_INPUT ||
+                absScore == INVALID_INPUT || cubesScore == INVALID_INPUT ||
+                handsScore == INVALID_INPUT;
     }
 
     void popToast(String msg, int duration, Context context) {

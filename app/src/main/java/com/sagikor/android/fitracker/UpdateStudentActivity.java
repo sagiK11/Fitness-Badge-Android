@@ -153,13 +153,7 @@ public class UpdateStudentActivity extends StudentActivity {
         absScore = testInput(sAbsScore, "abs score");
         cubesScore = testInput(sCubesScore, "cubes score");
         handsScore = testInput(sHandsScore, "hands Score");
-        if (aerobicScore == INVALID_INPUT || jumpScore == INVALID_INPUT || absScore == INVALID_INPUT
-                || cubesScore == INVALID_INPUT || handsScore == INVALID_INPUT) {
-
-            popToast("Invalid input!", Toast.LENGTH_SHORT, getApplicationContext());
-            return true;
-        }
-        return false;
+        return super.isErrorsInStudentScores();
     }
 
     private double testInput(EditText text, String place) {

@@ -25,7 +25,6 @@ public class AddStudentActivity extends StudentActivity {
         applyUserSetting();
     }
 
-
     private void linkObjects() {
         linkUserInputObjects();
         linkTextToDisplayObjects();
@@ -51,7 +50,6 @@ public class AddStudentActivity extends StudentActivity {
 
     }
 
-
     private void linkTextToDisplayObjects() {
         sAerobicScoreText = findViewById(R.id.update_student_aerobic_text);
         sCubesScoreText = findViewById(R.id.student_cubes_text);
@@ -60,7 +58,6 @@ public class AddStudentActivity extends StudentActivity {
         sAbsScoreText = findViewById(R.id.student_abs_text);
         sTotalScoreText = findViewById(R.id.student_total_score);
     }
-
 
     private void applyUserSetting() {
         final String SHARED_PREFS = "sharedPrefs";
@@ -84,16 +81,17 @@ public class AddStudentActivity extends StudentActivity {
     }
 
     public void addStudentClicked() {
-        if (inputErrorsDetected())
+        getAndTestUserInput();
+        if (isInputErrorsDetected())
             return;
 
         updateGradeTextFields();
         addStudent();
     }
 
-    private boolean inputErrorsDetected() {
-        return errorsInStudentName() || errorsInStudentClass() || errorsInStudentScores()
-                || errorsInGender();
+    private boolean isInputErrorsDetected() {
+        return isErrorsInStudentName() || isErrorsInStudentClass() || isErrorsInStudentScores()
+                || isErrorsInGender();
     }
 
     private void addStudent() {
@@ -102,22 +100,20 @@ public class AddStudentActivity extends StudentActivity {
     }
 
     private void addStudentToFirebase(Student newStudent) {
-        if (studentExistsInFirebase(newStudent))
+        if (isStudentExistsInFirebase(newStudent))
             return;
 
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String STUDENTS_CHILD = "students";
-        System.out.println(newStudent);
         FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
                 .child(STUDENTS_CHILD).child(newStudent.getKey()).setValue(newStudent);
-        //MainActivity.studentList.add(newStudent);
         MainActivity.currentUser.addStudentToList(newStudent);
         askForSendingSMS();
     }
 
-    private boolean studentExistsInFirebase(Student newStudent) {
+    private boolean isStudentExistsInFirebase(Student newStudent) {
         for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (studentExists(student, newStudent)) {
+            if (isStudentExists(student, newStudent)) {
                 popFailWindow();
                 return true;
             }
@@ -125,12 +121,11 @@ public class AddStudentActivity extends StudentActivity {
         return false;
     }
 
-    private boolean studentExists(Student student, Student newStudent) {
+    private boolean isStudentExists(Student student, Student newStudent) {
         return student.getName().equals(newStudent.getName()) && student.getClass().equals(newStudent.getClass());
     }
 
     private Student createNewStudent() {
-        getUserInput();
         String studentKey = FirebaseDatabase.getInstance().getReference("users").push().getKey();
         return new Student.Builder(getStudentName())
                 .studentClass(sClassString)
@@ -158,7 +153,7 @@ public class AddStudentActivity extends StudentActivity {
         return sName.getText().toString().trim();
     }
 
-    private void getUserInput() {
+    private void getAndTestUserInput() {
         aerobicScore = testInput(sAerobicScore, "aerobic score");
         jumpScore = testInput(sJumpScore, "jump score");
         absScore = testInput(sAbsScore, "abs score");
@@ -166,8 +161,7 @@ public class AddStudentActivity extends StudentActivity {
         handsScore = testInput(sHandsScore, "hands score");
     }
 
-
-    private boolean errorsInStudentName() {
+    private boolean isErrorsInStudentName() {
         final String STUDENT_NAME = getResources().getString(R.string.please_enter_student_name);
         if (sName.getText().toString().length() == 0) {
             popToast(STUDENT_NAME, Toast.LENGTH_LONG, getApplicationContext());
@@ -176,7 +170,7 @@ public class AddStudentActivity extends StudentActivity {
         return false;
     }
 
-    private boolean errorsInStudentClass() {
+    private boolean isErrorsInStudentClass() {
         final String STUDENT_CLASS = getResources().getString(R.string.please_enter_student_class);
         if (sClassString == null) {
             popToast(STUDENT_CLASS, Toast.LENGTH_LONG, getApplicationContext());
@@ -185,13 +179,9 @@ public class AddStudentActivity extends StudentActivity {
         return false;
     }
 
-    private boolean errorsInStudentScores() {
-        return aerobicScore == INVALID_INPUT || jumpScore == INVALID_INPUT ||
-                absScore == INVALID_INPUT || cubesScore == INVALID_INPUT ||
-                handsScore == INVALID_INPUT;
-    }
 
-    private boolean errorsInGender() {
+
+    private boolean isErrorsInGender() {
         final String GENDER_ERROR = getResources().getString(R.string.gender_error);
         if (sGenderString == null) {
             popToast(GENDER_ERROR, Toast.LENGTH_LONG, getApplicationContext());
@@ -203,7 +193,6 @@ public class AddStudentActivity extends StudentActivity {
     private double testInput(EditText text, String place) {
         return super.testInput(text, place, getApplicationContext());
     }
-
 
     private void selectStudentGender() {
         final String CHOOSE_GENDER = getResources().getString(R.string.choose_gender);
