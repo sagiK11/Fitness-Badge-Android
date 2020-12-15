@@ -7,6 +7,8 @@ import android.net.Uri;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -137,8 +139,7 @@ public class StudentActivity extends AppCompatActivity {
 
     void sendSms() {
         String studentPhoneNumber = getStudentPhoneNumber();
-        Uri uri = Uri.parse("smsto:" + studentPhoneNumber);
-        Intent smsIntent = new Intent(Intent.ACTION_SEND, uri);
+        Intent smsIntent = new Intent(Intent.ACTION_SEND);
 
         smsIntent.setType("text/plain");
         smsIntent.putExtra("address", studentPhoneNumber);
@@ -289,7 +290,7 @@ public class StudentActivity extends AppCompatActivity {
             if (text.getText().toString().length() == 0)
                 return MISSING_INPUT;
             else {
-                popToast(INVALID_INPUT_MSG + " "+ place, Toast.LENGTH_LONG, context);
+                popToast(INVALID_INPUT_MSG + " " + place, Toast.LENGTH_LONG, context);
                 return INVALID_INPUT;
             }
         }
