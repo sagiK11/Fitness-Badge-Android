@@ -179,8 +179,6 @@ public class AddStudentActivity extends StudentActivity {
         return false;
     }
 
-
-
     private boolean isErrorsInGender() {
         final String GENDER_ERROR = getResources().getString(R.string.gender_error);
         if (sGenderString == null) {
