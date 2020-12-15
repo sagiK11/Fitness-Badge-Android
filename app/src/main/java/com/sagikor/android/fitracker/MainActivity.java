@@ -104,10 +104,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void mailResults() {
+        //check if we already got permission.
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-
+            //if we're here then we have'nt got the permission yet.
+            //the line below prompts the window for the user.
             if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
