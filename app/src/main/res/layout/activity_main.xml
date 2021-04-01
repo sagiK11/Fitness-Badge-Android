@@ -9,7 +9,7 @@
     android:background="@drawable/fitness_badge_background"
     android:layoutDirection="ltr"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".ui.view.MainActivity"
     tools:layout_editor_absoluteY="65dp">
 
     <androidx.appcompat.widget.Toolbar

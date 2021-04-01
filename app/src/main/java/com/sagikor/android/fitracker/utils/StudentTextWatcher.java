@@ -1,4 +1,4 @@
-package com.sagikor.android.fitracker;
+package com.sagikor.android.fitracker.utils;
 
 import android.text.Editable;
 import android.text.TextWatcher;
