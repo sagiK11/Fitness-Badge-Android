@@ -1,4 +1,14 @@
 package com.sagikor.android.fitracker.data.db;
 
-public interface DatabaseHandler {
+import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
+import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
+
+public interface DatabaseHandler extends FirebaseHandler, SharedPreferencesHandler {
+
+    void cacheObject(Object obj);
+
+    Object getCachedObject();
+
+    void clearCache();
+
 }
