@@ -1,11 +1,19 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
+import com.sagikor.android.fitracker.data.model.Student;
+import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
+import com.sagikor.android.fitracker.ui.view.MainActivity;
+
+import java.util.List;
+
+import au.com.bytecode.opencsv.CSVWriter;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter {
-    MainActivityContract.View view;
-    DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+    private MainActivityContract.View view;
+    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
 
     @Override
     public void onSendToEmailClick() {
@@ -39,7 +47,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     @Override
     public void onDisconnectClick() {
+        FirebaseAuth.getInstance().signOut();
         view.disconnectUser();
+    }
+
+    @Override
+    public void writeStudentsData(CSVWriter writer) {
+        List<Student> studentList = databaseHandler.getStudents();
+        for (Student student : studentList) {
+            writer.writeNext(student.toArray());
+        }
     }
 
     @Override
