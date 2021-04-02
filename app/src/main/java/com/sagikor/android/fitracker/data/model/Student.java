@@ -1,10 +1,10 @@
-package com.sagikor.android.fitracker.data;
+package com.sagikor.android.fitracker.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 
-public class Student implements Parcelable {
+public class Student {
     private String name;
     private String gender;
     private String studentClass;
@@ -300,7 +300,6 @@ public class Student implements Parcelable {
         this.userId = userId;
     }
 
-
     public double getTotalScore() {
         return totalScore;
     }
@@ -317,7 +316,6 @@ public class Student implements Parcelable {
         this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
     }
 
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -330,12 +328,10 @@ public class Student implements Parcelable {
         final int MISSING = -1;
         return aerobicScore != MISSING && jumpScore != MISSING && absScore != MISSING
                 && handsScore != MISSING && cubesScore != MISSING;
-
-
     }
 
     public String toString() {
-        return "\nStudent name: " + name + "\nClass: " + studentClass + "\nPhone: " + "\'" + phoneNumber + "\'"
+        return "\nStudent name: " + name + "\nClass: " + studentClass + "\nPhone: " + "'" + phoneNumber + "'"
                 + " \nGender: " + gender
                 + "\nAerobic Score: " + aerobicScore
                 + "\ncubesScore: " + cubesScore + "\nabsScore: " + absScore + "\njumpScore: " + jumpScore
@@ -362,62 +358,4 @@ public class Student implements Parcelable {
                 totalScoreString
         };
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    private Student(Parcel in) {
-        name = in.readString();
-        studentClass = in.readString();
-        aerobicScore = in.readDouble();
-        aerobicResult = in.readDouble();
-        cubesScore = in.readDouble();
-        cubesResult = in.readDouble();
-        absScore = in.readDouble();
-        absResult = in.readDouble();
-        jumpScore = in.readDouble();
-        jumpResult = in.readDouble();
-        handsScore = in.readDouble();
-        handsResult = in.readDouble();
-        totalScore = in.readDouble();
-        phoneNumber = in.readString();
-        gender = in.readString();
-        key = in.readString();
-        userId = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(studentClass);
-        dest.writeDouble(aerobicScore);
-        dest.writeDouble(aerobicResult);
-        dest.writeDouble(cubesScore);
-        dest.writeDouble(cubesResult);
-        dest.writeDouble(absScore);
-        dest.writeDouble(absResult);
-        dest.writeDouble(jumpScore);
-        dest.writeDouble(jumpResult);
-        dest.writeDouble(handsScore);
-        dest.writeDouble(handsResult);
-        dest.writeDouble(totalScore);
-        dest.writeString(phoneNumber);
-        dest.writeString(gender);
-        dest.writeString(key);
-        dest.writeString(userId);
-    }
-
-    public static final Creator<Student> CREATOR = new Creator<Student>() {
-        @Override
-        public Student createFromParcel(Parcel in) {
-            return new Student(in);
-        }
-
-        @Override
-        public Student[] newArray(int size) {
-            return new Student[size];
-        }
-    };
 }

@@ -1,6 +1,4 @@
-package com.sagikor.android.fitracker.data;
-
-
+package com.sagikor.android.fitracker.data.model;
 
 
 import java.util.ArrayList;
@@ -32,6 +30,4 @@ public class User {
     public void clearStudentsList() {
         studentList.clear();
     }
-
-
 }
