@@ -1,27 +1,22 @@
 package com.sagikor.android.fitracker.ui.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import android.util.Log;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.FirebaseDatabase;
 import com.sagikor.android.fitracker.R;
+import com.sagikor.android.fitracker.ui.contracts.SettingsActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.SettingsActivityPresenter;
 
-
-public class SettingActivity extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity implements SettingsActivityContract.View {
 
     private Button deleteStudentsButton;
     private Button deleteAccountButton;
@@ -29,14 +24,29 @@ public class SettingActivity extends AppCompatActivity {
     private Switch alwaysBoysSwitch;
     boolean isGirlsSwitchOn;
     boolean isBoysSwitchOn;
-    final String SHARED_PREFS = "sharedPrefs";
+    private SettingsActivityContract.Presenter presenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         linkObjects();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(presenter == null)
+            presenter = new SettingsActivityPresenter();
+        presenter.bind(this,getSharedPreferences("sharedPreferences",MODE_PRIVATE));
         switchLogic();
+        enableSwitchesLogic();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        presenter.unbind();
     }
 
     private void linkObjects() {
@@ -46,41 +56,20 @@ public class SettingActivity extends AppCompatActivity {
         alwaysBoysSwitch = findViewById(R.id.switch_always_boys);
         deleteAccountButton = findViewById(R.id.delete_account_button);
         deleteAccountButton.setOnClickListener(e -> deleteAccountPop());
-        alwaysGirlsSwitch.setOnClickListener(e -> girlsSwitchEvent());
-        alwaysBoysSwitch.setOnClickListener(e -> boysSwitchEvent());
+        alwaysGirlsSwitch.setOnClickListener(e -> presenter.editGenderPreferences("Girls",alwaysGirlsSwitch.isChecked()));
+        alwaysBoysSwitch.setOnClickListener(e -> presenter.editGenderPreferences("Boys",alwaysBoysSwitch.isChecked()));
     }
 
-
-    private void switchLogic() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-
-        isGirlsSwitchOn = sharedPreferences.getBoolean("alwaysGirlsSwitch", false);
-        isBoysSwitchOn = sharedPreferences.getBoolean("alwaysBoysSwitch", false);
+    @Override
+    public void switchLogic() {
+        isGirlsSwitchOn = presenter.isGirlsSwitchOn();
+        isBoysSwitchOn = presenter.isBoysSwitchOn();
 
         alwaysGirlsSwitch.setChecked(isGirlsSwitchOn);
         alwaysBoysSwitch.setChecked(isBoysSwitchOn);
         enableSwitchesLogic();
     }
 
-    private void girlsSwitchEvent() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        isGirlsSwitchOn = alwaysGirlsSwitch.isChecked();
-
-        editor.putBoolean("alwaysGirlsSwitch", isGirlsSwitchOn);
-        editor.apply();
-        enableSwitchesLogic();
-    }
-
-    private void boysSwitchEvent() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        isBoysSwitchOn = alwaysBoysSwitch.isChecked();
-
-        editor.putBoolean("alwaysBoysSwitch", isBoysSwitchOn);
-        editor.apply();
-        enableSwitchesLogic();
-    }
 
     private void enableSwitchesLogic() {
         if (isGirlsSwitchOn) {
@@ -113,38 +102,18 @@ public class SettingActivity extends AppCompatActivity {
             if (choice == NO) {
                 popToast(NO_STUDENTS_DELETED);
             } else {
-                clearDataBase();
+                presenter.clearDatabase();
                 popToast(STUDENTS_DELETED_SUCCESSFULLY);
             }
         });
         builder.show();
     }
 
-    private void clearDataBase() {
-        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final String STUDENTS_CHILD = "students";
-        FirebaseDatabase.getInstance().getReference("users").child(USER_ID).child(STUDENTS_CHILD).removeValue();
-        MainActivity.currentUser.clearStudentsList();
-    }
-
-
     private void popToast(String msg) {
         Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
         toast.show();
     }
 
-    private void deleteAccount() {
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).removeValue();
-
-        user.delete().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Log.d("SettingActivity", "User account deleted.");
-                goodByeMessage();
-            }
-        });
-    }
 
     private void goodByeMessage() {
         final String SAD_TO_SEE_YOU_LEAVE = getResources().getString(R.string.farewell_user);
@@ -152,7 +121,7 @@ public class SettingActivity extends AppCompatActivity {
                 .setTitleText(SAD_TO_SEE_YOU_LEAVE)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    Intent intent = new Intent(this, WelcomeActivity.class);
+                    Intent intent = new Intent(this, SignInActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 })
@@ -168,7 +137,8 @@ public class SettingActivity extends AppCompatActivity {
                 .setConfirmText(YES)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    deleteAccount();
+                    goodByeMessage();
+                    presenter.deleteAccount();
 
                 })
                 .setCancelButton(NO, SweetAlertDialog::dismissWithAnimation)

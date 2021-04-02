@@ -1,38 +1,40 @@
 package com.sagikor.android.fitracker.ui.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+
 import android.util.Log;
+
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.data.Student;
+import com.sagikor.android.fitracker.data.model.Student;
+import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class ViewStudentsActivity extends AppCompatActivity {
+public class ViewStudentsActivity extends AppCompatActivity implements ViewStudentsActivityContract.View {
     private static final String TAG = "ViewDataActivity";
     StudentAdapter adapter;
     private ListView listView;
     private EditText inputSearch;
     private List<Student> studentsList;
-    private static final String STUDENTS_CHILD = "students";
+    private ViewStudentsActivityContract.Presenter presenter;
 
 
     @Override
@@ -40,29 +42,47 @@ public class ViewStudentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_students);
 
-        linkObjects();
+        bindViews();
         addInputSearch();
-
-        createStudentList();
-        createStudentAdapter();
-        setListViewAdapter();
-        refreshList();
 
         addListViewItemListener();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG,"onResume");
+        if (presenter == null)
+            presenter = new ViewStudentsActivityPresenter();
+        presenter.bind(this);
+        studentsList = presenter.getStudentsList();
+        adapter = new StudentAdapter(this,studentsList);
+        listView.setAdapter(adapter);
+        presenter.getStudentsList();
+        refreshList();
+    }
 
-    private void linkObjects() {
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.unbind();
+    }
+
+
+    private void bindViews() {
         listView = findViewById(R.id.list_view);
         inputSearch = findViewById(R.id.search_input);
     }
 
+    @Override
+    public void navToStudentUpdate() {
+        startActivity(new Intent(this, UpdateStudentActivity.class));
+    }
+
+
     private void addListViewItemListener() {
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Intent enterData = new Intent(this, UpdateStudentActivity.class);
-            enterData.putExtra("student", (Student) parent.getItemAtPosition(position));
-            startActivity(enterData);
-        });
+        listView.setOnItemClickListener((parent, view, position, id) ->
+                presenter.onStudentClick(parent.getItemAtPosition(position)));
 
         final String YES = getResources().getString(R.string.yes);
         final String NO = getResources().getString(R.string.no);
@@ -75,7 +95,7 @@ public class ViewStudentsActivity extends AppCompatActivity {
                     .setConfirmText(YES)
                     .setConfirmClickListener(sDialog -> {
                         sDialog.dismissWithAnimation();
-                        deleteStudent(currentStudent);
+                        presenter.deleteStudent(currentStudent);
                     })
                     .setCancelButton(NO,
                             SweetAlertDialog::dismissWithAnimation)
@@ -86,35 +106,11 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     }
 
-    private void deleteStudent(Student currentStudent) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child(STUDENTS_CHILD).child(currentStudent.getKey())
-                .removeValue();
-        onRestart();
-    }
-
+    @Override
     public void refreshList() {
-
-        FirebaseDatabase.getInstance().getReference("users")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        studentsList.clear();
-                        for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
-                            Student student = obj.getValue(Student.class);
-                            studentsList.add(student);
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.d(TAG, databaseError.getDetails());
-                    }
-                });
-
+        //TODO I delete a piece of code here. watch out.
+        adapter.notifyDataSetChanged();
+        onRestart();
     }
 
     private void addInputSearch() {
@@ -138,21 +134,51 @@ public class ViewStudentsActivity extends AppCompatActivity {
 
     }
 
-    private void createStudentAdapter() {
-        adapter = new StudentAdapter(this, studentsList);
-    }
+    public static class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
+        private OnItemClickListener mListener;
 
-    private void createStudentList() {
-        studentsList = new ArrayList<>();
-    }
+        public interface OnItemClickListener {
+            public void onItemClick(View view, int position);
 
-    private void setListViewAdapter() {
-        listView.setAdapter(adapter);
-    }
+            public void onLongItemClick(View view, int position);
+        }
 
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        refreshList();
+        GestureDetector mGestureDetector;
+
+        public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
+            mListener = listener;
+            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapUp(MotionEvent e) {
+                    return true;
+                }
+
+                @Override
+                public void onLongPress(MotionEvent e) {
+                    View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                    if (child != null && mListener != null) {
+                        mListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child));
+                    }
+                }
+            });
+        }
+
+        @Override
+        public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
+            View childView = view.findChildViewUnder(e.getX(), e.getY());
+            if (childView != null && mListener != null && mGestureDetector.onTouchEvent(e)) {
+                mListener.onItemClick(childView, view.getChildAdapterPosition(childView));
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) {
+        }
+
+        @Override
+        public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        }
     }
 }

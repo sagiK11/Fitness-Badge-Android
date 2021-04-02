@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.view;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -9,31 +8,49 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.data.Student;
-import com.sagikor.android.fitracker.utils.Utility;
+import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.AddStudentActivityPresenter;
+import com.sagikor.android.fitracker.utils.datastructure.SportResults;
+import com.sagikor.android.fitracker.utils.StudentTextWatcher;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class AddStudentActivity extends StudentActivity {
+public class AddStudentActivity extends StudentActivity implements AddStudentActivityContract.View {
+
+    protected AddStudentActivityContract.Presenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
-        linkObjects();
-        applyUserSetting();
+        bindViews();
     }
 
-    private void linkObjects() {
-        linkUserInputObjects();
-        linkTextToDisplayObjects();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(presenter == null)
+            presenter = new AddStudentActivityPresenter();
+        presenter.bind(this,getSharedPreferences("sharedPreferences",MODE_PRIVATE));
+        presenter.applyUserSetting();
     }
 
-    private void linkUserInputObjects() {
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.unbind();
+    }
+
+    private void bindViews() {
+        bindUserInputViews();
+        bindTextToDisplayViews();
+        addScoresTextChangedListeners();
+    }
+
+    private void bindUserInputViews() {
         sName = findViewById(R.id.student_name_to_enter_id);
         sPhoneNumber = findViewById(R.id.phone_number_to_enter_id);
         chooseClassButton = findViewById(R.id.student_class_id);
@@ -45,15 +62,13 @@ public class AddStudentActivity extends StudentActivity {
         sJumpScore = findViewById(R.id.update_student_jump_id);
         sAbsScore = findViewById(R.id.update_student_abs_id);
         handsTypeText = findViewById(R.id.hands_minutes_text_view);
-        chooseClassButton.setOnClickListener(e -> selectStudentClass());
-        genderButton.setOnClickListener(e -> selectStudentGender());
-        saveStudentButton.setOnClickListener(e -> addStudentClicked());
+        chooseClassButton.setOnClickListener(e -> presenter.onSelectStudentClass());
+        genderButton.setOnClickListener(e -> presenter.onSelectStudentGender());
+        saveStudentButton.setOnClickListener(e -> presenter.onAddStudentClick());
         sName.requestFocus();
-        addScoresTextChangedListeners();
-
     }
 
-    private void linkTextToDisplayObjects() {
+    private void bindTextToDisplayViews() {
         sAerobicScoreText = findViewById(R.id.update_student_aerobic_text);
         sCubesScoreText = findViewById(R.id.student_cubes_text);
         sHandsScoreText = findViewById(R.id.student_hands_text);
@@ -62,140 +77,8 @@ public class AddStudentActivity extends StudentActivity {
         sTotalScoreText = findViewById(R.id.student_total_score);
     }
 
-    private void applyUserSetting() {
-        final String SHARED_PREFS = "sharedPrefs";
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        boolean isGirlsSwitchOn = sharedPreferences.getBoolean("alwaysGirlsSwitch", false);
-        boolean isBoysSwitchOn = sharedPreferences.getBoolean("alwaysBoysSwitch", false);
-
-        if (isGirlsSwitchOn) {
-            genderButton.setText(getResources().getString(R.string.girl));
-            genderButton.setEnabled(false);
-            sGenderString = getResources().getString(R.string.girl);
-            handsTypeText.setText(getResources().getString(R.string.minutes));
-        } else if (isBoysSwitchOn) {
-            genderButton.setText(getResources().getString(R.string.boy));
-            genderButton.setEnabled(false);
-            sGenderString = getResources().getString(R.string.boy);
-            handsTypeText.setText(getResources().getString(R.string.amount));
-        } else {
-            genderButton.setText(getResources().getString(R.string.choose_gender));
-        }
-    }
-
-    public void addStudentClicked() {
-        getAndTestUserInput();
-        if (isInputErrorsDetected())
-            return;
-
-        updateGradeTextFields();
-        addStudent();
-    }
-
-    private boolean isInputErrorsDetected() {
-        return isErrorsInStudentName() || isErrorsInStudentClass() || isErrorsInStudentScores()
-                || isErrorsInGender();
-    }
-
-    private void addStudent() {
-        Student newStudent = createNewStudent();
-        addStudentToFirebase(newStudent);
-    }
-
-    private void addStudentToFirebase(Student newStudent) {
-        if (isStudentExistsInFirebase(newStudent))
-            return;
-
-        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final String STUDENTS_CHILD = "students";
-        FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
-                .child(STUDENTS_CHILD).child(newStudent.getKey()).setValue(newStudent);
-        MainActivity.currentUser.addStudentToList(newStudent);
-        askForSendingSMS();
-    }
-
-    private boolean isStudentExistsInFirebase(Student newStudent) {
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (isStudentExists(student, newStudent)) {
-                popFailWindow();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isStudentExists(Student student, Student newStudent) {
-        return student.getName().equals(newStudent.getName()) && student.getClass().equals(newStudent.getClass());
-    }
-
-    private Student createNewStudent() {
-        String studentKey = FirebaseDatabase.getInstance().getReference("users").push().getKey();
-        return new Student.Builder(getStudentName())
-                .studentClass(sClassString)
-                .phoneNumber(sPhoneNumber.getText().toString())
-                .key(studentKey)
-                .userId(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .studentGender(sGenderString)
-                .aerobicScore(aerobicScore)
-                .cubesScore(cubesScore)
-                .absScore(absScore)
-                .jumpScore(jumpScore)
-                .handsScore(handsScore)
-                .absResult(absGrade)
-                .aerobicResult(aerobicGrade)
-                .jumpResult(jumpGrade)
-                .handsResult(handsGrade)
-                .cubesResult(cubesGrade)
-                .totalScore(avg)
-                .totalScoreWithoutAerobic(avgWithOutAerobic)
-                .updatedDate(Utility.getTodayDate())
-                .build();
-    }
-
-    private String getStudentName() {
-        return sName.getText().toString().trim();
-    }
-
-    private void getAndTestUserInput() {
-        aerobicScore = testInput(sAerobicScore, "aerobic score");
-        jumpScore = testInput(sJumpScore, "jump score");
-        absScore = testInput(sAbsScore, "abs score");
-        cubesScore = testInput(sCubesScore, "cubes score");
-        handsScore = testInput(sHandsScore, "hands score");
-    }
-
-    private boolean isErrorsInStudentName() {
-        final String STUDENT_NAME = getResources().getString(R.string.please_enter_student_name);
-        if (sName.getText().toString().length() == 0) {
-            popToast(STUDENT_NAME, Toast.LENGTH_LONG, getApplicationContext());
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isErrorsInStudentClass() {
-        final String STUDENT_CLASS = getResources().getString(R.string.please_enter_student_class);
-        if (sClassString == null) {
-            popToast(STUDENT_CLASS, Toast.LENGTH_LONG, getApplicationContext());
-            return true;
-        }
-        return false;
-    }
-
-    private boolean isErrorsInGender() {
-        final String GENDER_ERROR = getResources().getString(R.string.gender_error);
-        if (sGenderString == null) {
-            popToast(GENDER_ERROR, Toast.LENGTH_LONG, getApplicationContext());
-            return true;
-        }
-        return false;
-    }
-
-    private double testInput(EditText text, String place) {
-        return super.testInput(text, place, getApplicationContext());
-    }
-
-    private void selectStudentGender() {
+    @Override
+    public void selectStudentGender() {
         final String CHOOSE_GENDER = getResources().getString(R.string.choose_gender);
         final String BOY = getResources().getString(R.string.boy);
         final String GIRL = getResources().getString(R.string.girl);
@@ -205,20 +88,38 @@ public class AddStudentActivity extends StudentActivity {
                 .setConfirmText(GIRL)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    sGenderString = GIRL;
-                    genderButton.setText(sGenderString);
+                    genderButton.setText(GIRL);
                     handsTypeText.setText(getResources().getString(R.string.minutes));
 
                 })
                 .setCancelButton(BOY, sDialog -> {
                     sDialog.dismissWithAnimation();
-                    sGenderString = BOY;
                     handsTypeText.setText(getResources().getString(R.string.amount));
-                    genderButton.setText(sGenderString);
+                    genderButton.setText(BOY);
                 })
                 .show();
     }
 
+    @Override
+    public void setGirlsPreferences() {
+        genderButton.setText(getResources().getString(R.string.girl));
+        genderButton.setEnabled(false);
+        handsTypeText.setText(getResources().getString(R.string.minutes));
+    }
+
+    @Override
+    public void setBoysPreferences() {
+        genderButton.setText(getResources().getString(R.string.boy));
+        genderButton.setEnabled(false);
+        handsTypeText.setText(getResources().getString(R.string.amount));
+    }
+
+    @Override
+    public void setDefaultPreferences() {
+        genderButton.setText(getResources().getString(R.string.choose_gender));
+    }
+
+    @Override
     public void selectStudentClass() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         View row = getLayoutInflater().inflate(R.layout.class_list_item, null);
@@ -240,8 +141,35 @@ public class AddStudentActivity extends StudentActivity {
         dialog.show();
     }
 
+    @Override
+    public void askForSendingSMS() {
+        super.askForSendingSMS();
+    }
+
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
+
+    protected void addScoresTextChangedListeners() {
+        String sGenderString = genderButton.getText().toString();
+        addScoreListener(sAerobicScore,sAerobicScoreText, SportResults.AEROBIC, sGenderString);
+        addScoreListener(sCubesScore,sCubesScoreText, SportResults.CUBES, sGenderString);
+        addScoreListener(sHandsScore,sHandsScoreText, SportResults.HANDS, sGenderString);
+        addScoreListener(sJumpScore,sJumpScoreText, SportResults.JUMP, sGenderString);
+        addScoreListener(sAbsScore,sAbsScoreText, SportResults.ABS, sGenderString);
+    }
+
+    private void addScoreListener(EditText editText, TextView tvGrade, String type, String gender) {
+        editText.addTextChangedListener((StudentTextWatcher)
+                (charSequence, start, count, after) -> {
+                    String grade = presenter.calculateGrade(charSequence.toString(), type, gender);
+                    tvGrade.setText(grade);
+                }
+        );
+    }
+
     private void setClass(String sClass) {
-        this.sClassString = sClass;
         chooseClassButton.setText(sClass);
     }
 

@@ -18,14 +18,15 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.data.Student;
+import com.sagikor.android.fitracker.ui.contracts.StatisticsActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.StatisticsActivityPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class StatisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity implements StatisticsActivityContract.View {
 
     private BarChart averageGradesChart;
     private PieChart pieChart;
@@ -39,7 +40,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private static final int FINISHED_INDEX = 0;
     private static final int UNFINISHED_INDEX = 1;
     private static final int MISSING = -1;
-
+    private StatisticsActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -49,6 +50,20 @@ public class StatisticsActivity extends AppCompatActivity {
         linkObjects();
         setupColumnsChart();
         setupPieChart();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(presenter == null)
+            presenter = new StatisticsActivityPresenter();
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        presenter.unbind();
     }
 
     private void setupPieChart() {
@@ -94,14 +109,14 @@ public class StatisticsActivity extends AppCompatActivity {
     private void getFinishedStudentNum(float[] finishedArray) {
         float finishedStudentsCounter = 0;
         float unFinishedStudentsCounter = 0;
-
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.isFinished()) {
-                finishedStudentsCounter++;
-            } else {
-                unFinishedStudentsCounter++;
-            }
-        }
+            //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.isFinished()) {
+//                finishedStudentsCounter++;
+//            } else {
+//                unFinishedStudentsCounter++;
+//            }
+//        }
         finishedArray[FINISHED_INDEX] = finishedStudentsCounter;
         finishedArray[UNFINISHED_INDEX] = unFinishedStudentsCounter;
     }
@@ -182,24 +197,26 @@ public class StatisticsActivity extends AppCompatActivity {
     private void calculateAerobicAverage() {
         int aerobicGradesCounter = 0;
         float sumAerobic = 0;
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.getAerobicResult() != MISSING) {
-                aerobicGradesCounter++;
-                sumAerobic += student.getAerobicResult();
-            }
-        }
+        //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.getAerobicResult() != MISSING) {
+//                aerobicGradesCounter++;
+//                sumAerobic += student.getAerobicResult();
+//            }
+//        }
         aerobicGradesAverage = aerobicGradesCounter != 0 ? sumAerobic / aerobicGradesCounter : 0;
     }
 
     private void calculateHandsAverage() {
         int handsGradesCounter = 0;
         float sumHands = 0;
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.getHandsResult() != MISSING) {
-                handsGradesCounter++;
-                sumHands += student.getHandsResult();
-            }
-        }
+        //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.getHandsResult() != MISSING) {
+//                handsGradesCounter++;
+//                sumHands += student.getHandsResult();
+//            }
+//        }
         handsGradeAverage = handsGradesCounter != 0 ? sumHands / handsGradesCounter : 0;
     }
 
@@ -207,12 +224,13 @@ public class StatisticsActivity extends AppCompatActivity {
     private void calculateCubesAverage() {
         int cubesGradesCounter = 0;
         float sumCubes = 0;
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.getCubesResult() != MISSING) {
-                cubesGradesCounter++;
-                sumCubes += student.getCubesResult();
-            }
-        }
+        //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.getCubesResult() != MISSING) {
+//                cubesGradesCounter++;
+//                sumCubes += student.getCubesResult();
+//            }
+//        }
         cubesGradeAverage = cubesGradesCounter != 0 ? sumCubes / cubesGradesCounter : 0;
     }
 
@@ -220,12 +238,13 @@ public class StatisticsActivity extends AppCompatActivity {
     private void calculateJumpAverage() {
         int jumpGradesCounter = 0;
         float sumJump = 0;
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.getJumpResult() != MISSING) {
-                jumpGradesCounter++;
-                sumJump += student.getJumpResult();
-            }
-        }
+        //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.getJumpResult() != MISSING) {
+//                jumpGradesCounter++;
+//                sumJump += student.getJumpResult();
+//            }
+//        }
         jumpGradesAverage = jumpGradesCounter != 0 ? sumJump / jumpGradesCounter : 0;
     }
 
@@ -233,12 +252,13 @@ public class StatisticsActivity extends AppCompatActivity {
     private void calculateAbsAverage() {
         int absGradesCounter = 0;
         float sumAbs = 0;
-        for (Student student : MainActivity.currentUser.getStudentList()) {
-            if (student.getAbsResult() != MISSING) {
-                absGradesCounter++;
-                sumAbs += student.getAbsResult();
-            }
-        }
+        //TODO uncomment this and see the error
+//        for (Student student : MainActivity.currentUser.getStudentList()) {
+//            if (student.getAbsResult() != MISSING) {
+//                absGradesCounter++;
+//                sumAbs += student.getAbsResult();
+//            }
+//        }
         absGradesAverage = absGradesCounter != 0 ? sumAbs / absGradesCounter : 0;
     }
 

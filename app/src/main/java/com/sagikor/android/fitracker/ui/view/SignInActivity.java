@@ -13,12 +13,14 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.sagikor.android.fitracker.R;
+import com.sagikor.android.fitracker.ui.contracts.SignInActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.SignInActivityPresenter;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity implements SignInActivityContract.View {
 
     Button loginButton;
     Button resetPasswordButton;
@@ -28,6 +30,7 @@ public class WelcomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private static final String TAG = "WelcomeActivity";
+    private SignInActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +38,19 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         getSupportActionBar().setTitle(R.string.login_screen);
         linkObjects();
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(presenter == null)
+            presenter = new SignInActivityPresenter();
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        presenter.unbind();
     }
 
     private void linkObjects() {
@@ -130,7 +146,7 @@ public class WelcomeActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if (isUserSigned(user)) {
-            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         } else {

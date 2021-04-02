@@ -17,7 +17,9 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.data.User;
+import com.sagikor.android.fitracker.data.model.User;
+import com.sagikor.android.fitracker.ui.contracts.RegisterActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.RegisterActivityPresenter;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import android.widget.EditText;
@@ -25,7 +27,7 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements RegisterActivityContract.View {
 
     private FirebaseAuth mAuth;
     private static final String TAG = "FirstActivity";
@@ -34,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText userPasswordEditText;
     Button registerButton;
     ProgressBar progressBar;
+    private RegisterActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +44,20 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
         linkObjects();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(presenter == null)
+            presenter = new RegisterActivityPresenter();
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.unbind();
     }
 
 
