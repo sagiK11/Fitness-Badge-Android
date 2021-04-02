@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.data.Student;
+import com.sagikor.android.fitracker.data.model.Student;
 
 import java.util.List;
 
@@ -22,8 +22,7 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         this.context = context;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View listItemView = convertView;
+    public View getView(int position, View listItemView, ViewGroup parent) {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.student_list_item, parent, false);
