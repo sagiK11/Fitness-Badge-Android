@@ -6,9 +6,10 @@ import java.util.Date;
 
 public class Utility {
     public static final int PASS_LENGTH = 6;
+    public static final int MISSING_INPUT = -1;
 
     private Utility() {
-        //NO OBJECTS SHOULD INSTANTIATE FROM THIS CLASS.
+        //Not meant to be initiated
     }
 
     public static String getTodayDate() {
