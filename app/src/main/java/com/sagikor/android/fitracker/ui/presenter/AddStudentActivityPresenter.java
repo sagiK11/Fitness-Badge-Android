@@ -2,18 +2,19 @@ package com.sagikor.android.fitracker.ui.presenter;
 
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.sagikor.android.fitracker.data.model.Student;
-import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
-import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
+
 public class AddStudentActivityPresenter extends StudentActivityPresenter implements AddStudentActivityContract.Presenter {
-    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+
+    private static final String TAG = "AddStudentActivityPres";
     private AddStudentActivityContract.View view;
 
     @Override
@@ -28,11 +29,14 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     @Override
     public void onAddStudentClick() {
-        //TODO test here the user input
+        if (!isValidInput())
+            return;
 
         Student newStudent = createNewStudent();
-        if (databaseHandler.isStudentExistsInFirebase(newStudent))
+        if (databaseHandler.isStudentExistsInFirebase(newStudent)) {
+            view.popFailWindow();
             return;
+        }
         addStudentToFirebase(newStudent);
         //TODO show total score in the view.
         //view.updateTotalScore(score);
@@ -40,12 +44,14 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     @Override
     public void bind(AddStudentActivityContract.View view, SharedPreferences sharedPreferences) {
+        super.bind(view);
         this.view = view;
         databaseHandler.setSharedPreferences(sharedPreferences);
     }
 
     @Override
     public void unbind() {
+        super.unbind();
         this.view = null;
         databaseHandler.setSharedPreferences(null);
 
@@ -93,5 +99,43 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         databaseHandler.addStudent(newStudent);
         view.askForSendingSMS();
     }
+
+    @Override
+    public boolean isValidClass(String classInput) {
+        String chooseClassLabel = view.getClassStringResource();
+        return !(classInput.equals(chooseClassLabel));
+    }
+
+
+    @Override
+    public boolean isValidGender(String genderInput) {
+        String chooseGenderLabel = view.getGenderStringResource();
+        return !(genderInput.equals(chooseGenderLabel));
+    }
+
+
+    private boolean isValidInput() {
+        if (!isValidName(view.getStudentName())) {
+            view.popMessage("invalid name");
+            return false;
+        } else if (!super.isValidPhoneNo(view.getStudentPhoneNo())) {
+            view.popMessage("invalid phone number");
+            return false;
+        } else if (!isValidClass(view.getStudentClass())) {
+            view.popMessage("please select class");
+            return false;
+        } else if (!isValidGender(view.getStudentGender())) {
+            view.popMessage("please select gender");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isValidName(String nameInput) {
+        //regex will match latin and hebrew characters.
+        return isNonEmptyInput(nameInput) && nameInput.matches("^[a-zA-Z\\u0590-\\u05fe']+$");
+    }
+
 
 }

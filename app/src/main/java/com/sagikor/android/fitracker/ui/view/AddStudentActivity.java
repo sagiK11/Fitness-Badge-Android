@@ -6,35 +6,30 @@ import androidx.appcompat.app.AlertDialog;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.AddStudentActivityPresenter;
-import com.sagikor.android.fitracker.utils.datastructure.SportResults;
-import com.sagikor.android.fitracker.utils.StudentTextWatcher;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class AddStudentActivity extends StudentActivity implements AddStudentActivityContract.View {
-
     protected AddStudentActivityContract.Presenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
-        bindViews();
+        this.bindViews();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(presenter == null)
+        if (presenter == null)
             presenter = new AddStudentActivityPresenter();
-        presenter.bind(this,getSharedPreferences("sharedPreferences",MODE_PRIVATE));
+        presenter.bind(this, getSharedPreferences("sharedPreferences", MODE_PRIVATE));
         presenter.applyUserSetting();
     }
 
@@ -44,38 +39,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         presenter.unbind();
     }
 
-    private void bindViews() {
-        bindUserInputViews();
-        bindTextToDisplayViews();
-        addScoresTextChangedListeners();
-    }
-
-    private void bindUserInputViews() {
-        sName = findViewById(R.id.student_name_to_enter_id);
-        sPhoneNumber = findViewById(R.id.phone_number_to_enter_id);
-        chooseClassButton = findViewById(R.id.student_class_id);
-        genderButton = findViewById(R.id.gender_button);
-        saveStudentButton = findViewById(R.id.button_add_student_enter_data);
-        sAerobicScore = findViewById(R.id.update_student_aerobic_id);
-        sCubesScore = findViewById(R.id.update_student_cubes_id);
-        sHandsScore = findViewById(R.id.update_student_hands_id);
-        sJumpScore = findViewById(R.id.update_student_jump_id);
-        sAbsScore = findViewById(R.id.update_student_abs_id);
-        handsTypeText = findViewById(R.id.hands_minutes_text_view);
-        chooseClassButton.setOnClickListener(e -> presenter.onSelectStudentClass());
-        genderButton.setOnClickListener(e -> presenter.onSelectStudentGender());
-        saveStudentButton.setOnClickListener(e -> presenter.onAddStudentClick());
-        sName.requestFocus();
-    }
-
-    private void bindTextToDisplayViews() {
-        sAerobicScoreText = findViewById(R.id.update_student_aerobic_text);
-        sCubesScoreText = findViewById(R.id.student_cubes_text);
-        sHandsScoreText = findViewById(R.id.student_hands_text);
-        sJumpScoreText = findViewById(R.id.student_jump_text);
-        sAbsScoreText = findViewById(R.id.student_abs_text);
-        sTotalScoreText = findViewById(R.id.student_total_score);
-    }
 
     @Override
     public void selectStudentGender() {
@@ -148,26 +111,33 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
 
     @Override
     public void popMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    protected void addScoresTextChangedListeners() {
-        String sGenderString = genderButton.getText().toString();
-        addScoreListener(sAerobicScore,sAerobicScoreText, SportResults.AEROBIC, sGenderString);
-        addScoreListener(sCubesScore,sCubesScoreText, SportResults.CUBES, sGenderString);
-        addScoreListener(sHandsScore,sHandsScoreText, SportResults.HANDS, sGenderString);
-        addScoreListener(sJumpScore,sJumpScoreText, SportResults.JUMP, sGenderString);
-        addScoreListener(sAbsScore,sAbsScoreText, SportResults.ABS, sGenderString);
+    @Override
+    public String getClassStringResource() {
+        return getResources().getString(R.string.Class);
     }
 
-    private void addScoreListener(EditText editText, TextView tvGrade, String type, String gender) {
-        editText.addTextChangedListener((StudentTextWatcher)
-                (charSequence, start, count, after) -> {
-                    String grade = presenter.calculateGrade(charSequence.toString(), type, gender);
-                    tvGrade.setText(grade);
-                }
-        );
+    @Override
+    public String getGenderStringResource() {
+        return getResources().getString(R.string.choose_gender);
     }
+
+    @Override
+    public String getGradeStringResource() {
+        return getResources().getString(R.string.grade);
+    }
+
+    @Override
+    protected void bindViews() {
+        super.bindViews();
+        chooseClassButton.setOnClickListener(e -> presenter.onSelectStudentClass());
+        genderButton.setOnClickListener(e -> presenter.onSelectStudentGender());
+        saveStudentButton.setOnClickListener(e -> presenter.onAddStudentClick());
+        sName.requestFocus();
+    }
+
 
     private void setClass(String sClass) {
         chooseClassButton.setText(sClass);

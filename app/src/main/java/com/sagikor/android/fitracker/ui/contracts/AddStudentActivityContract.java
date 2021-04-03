@@ -2,6 +2,7 @@ package com.sagikor.android.fitracker.ui.contracts;
 
 import android.content.SharedPreferences;
 
+
 public interface AddStudentActivityContract {
     interface Presenter extends StudentActivityContract.Presenter {
         void onSelectStudentClass();
@@ -16,6 +17,12 @@ public interface AddStudentActivityContract {
 
         void unbind();
 
+        boolean isValidGender(String genderInput);
+
+        boolean isValidClass(String classInput);
+
+        boolean isValidName(String nameInput);
+
     }
 
     interface View extends StudentActivityContract.View {
@@ -29,5 +36,10 @@ public interface AddStudentActivityContract {
 
         void setDefaultPreferences();
 
+        String getClassStringResource();
+
+        String getGenderStringResource();
+
+        String getGradeStringResource();
     }
 }
