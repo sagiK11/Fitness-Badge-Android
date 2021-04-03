@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
-import com.sagikor.android.fitracker.data.model.Student;
 
 public interface UpdateStudentActivityContract extends StudentActivityContract {
     interface Presenter extends StudentActivityContract.Presenter {

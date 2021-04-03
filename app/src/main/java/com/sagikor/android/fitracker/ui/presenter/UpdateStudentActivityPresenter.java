@@ -1,16 +1,17 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.model.Student;
-import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
-import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.UpdateStudentActivityContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 public class UpdateStudentActivityPresenter extends StudentActivityPresenter implements UpdateStudentActivityContract.Presenter {
-    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+
+    private static final String TAG = "UpdateStudentActPre";
     private UpdateStudentActivityContract.View view;
     private Student currentStudent;
 
@@ -26,9 +27,16 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
 
     @Override
     public void bind(UpdateStudentActivityContract.View view) {
+        super.bind(view);
         this.view = view;
         currentStudent = getCachedObject();
         updateViewFields();
+    }
+
+    @Override
+    public void unbind() {
+        super.unbind();
+        view = null;
     }
 
     private void updateViewFields() {
@@ -36,7 +44,7 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
         view.setStudentClass(currentStudent.getStudentClass());
         view.setStudentGender(currentStudent.getGender());
         if (currentStudent.getAerobicScore() != MISSING_INPUT)
-            view.setAbsScore(String.valueOf(currentStudent.getAbsScore()));
+            view.setAerobicScore(String.valueOf(currentStudent.getAerobicScore()));
         if (currentStudent.getCubesScore() != MISSING_INPUT)
             view.setCubesScore(String.valueOf(currentStudent.getCubesScore()));
         if (currentStudent.getHandsScore() != MISSING_INPUT)
@@ -49,17 +57,12 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
             view.setStudentPhoneNo(currentStudent.getPhoneNumber());
     }
 
-    @Override
-    public void unbind() {
-        view = null;
-        databaseHandler.clearCache();
-    }
 
     private void updateStudent() {
         Student updatedStudent = new Student.Builder(view.getStudentName())
                 .studentClass(view.getStudentClass())
                 .phoneNumber(view.getStudentPhoneNo())
-                //.key()//TODO
+                .key(currentStudent.getKey())
                 .userId(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .studentGender(view.getStudentGender())
                 .aerobicScore(parse(view.getAerobicScore()))
