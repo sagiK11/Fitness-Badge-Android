@@ -4,7 +4,15 @@ package com.sagikor.android.fitracker.ui.contracts;
 public interface StudentActivityContract {
     interface Presenter {
 
-        String calculateGrade(String score, String sportType, String gender);
+        boolean isValidPhoneNo(String phoneNoInput);
+
+        boolean isValidScore(String scoreInput);
+
+        String calculateGrade(String score, String sportType, boolean isFemale);
+
+        void bind(StudentActivityContract.View view);
+
+        void unbind();
 
     }
 
@@ -44,5 +52,7 @@ public interface StudentActivityContract {
         void popFailWindow();
 
         void popMessage(String message);
+
+        String getGradeStringResource();
     }
 }

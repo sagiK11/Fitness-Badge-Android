@@ -13,12 +13,16 @@ import android.widget.Toast;
 
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
+import com.sagikor.android.fitracker.ui.presenter.StudentActivityPresenter;
+import com.sagikor.android.fitracker.ui.presenter.UpdateStudentActivityPresenter;
+import com.sagikor.android.fitracker.utils.StudentTextWatcher;
+import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public abstract class StudentActivity extends AppCompatActivity implements StudentActivityContract.View {
-    protected StudentActivityContract.Presenter presenter;
+public class StudentActivity extends AppCompatActivity implements StudentActivityContract.View {
     private static final String TAG = "StudentActivity";
+    private StudentActivityContract.Presenter presenter;
 
     EditText sName;
     EditText sPhoneNumber;
@@ -112,7 +116,12 @@ public abstract class StudentActivity extends AppCompatActivity implements Stude
 
     @Override
     public void popMessage(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public String getGradeStringResource() {
+        return getResources().getString(R.string.grade);
     }
 
     private String cleanText(TextView textView) {
@@ -160,7 +169,6 @@ public abstract class StudentActivity extends AppCompatActivity implements Stude
         }
 
     }
-
 
     boolean studentHasPhoneNumber() {
         return getStudentPhoneNumber().length() > 1;
@@ -243,6 +251,70 @@ public abstract class StudentActivity extends AppCompatActivity implements Stude
     @Override
     public void updateTotalScore(int avg) {
         sTotalScoreText.setText(String.valueOf(avg));
+    }
+
+    protected void addScoresTextChangedListeners() {
+        boolean isFemale = genderButton.getText().toString().equals(getResources().getString(R.string.girl));
+        addScoreListener(sAerobicScore, sAerobicScoreText, SportResults.AEROBIC, isFemale);
+        addScoreListener(sCubesScore, sCubesScoreText, SportResults.CUBES, isFemale);
+        addScoreListener(sHandsScore, sHandsScoreText, SportResults.HANDS, isFemale);
+        addScoreListener(sJumpScore, sJumpScoreText, SportResults.JUMP, isFemale);
+        addScoreListener(sAbsScore, sAbsScoreText, SportResults.ABS, isFemale);
+    }
+
+    private void addScoreListener(EditText editText, TextView tvGrade, String type, boolean isFemale) {
+        editText.addTextChangedListener((StudentTextWatcher)
+                (charSequence, start, count, after) -> {
+                    String input = charSequence.toString().trim();
+                    if (presenter.isValidScore(input)) {
+                        String grade = presenter.calculateGrade(input, type, isFemale);
+                        tvGrade.setText(grade);
+                    }
+                }
+        );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (presenter == null)
+            presenter = new StudentActivityPresenter();
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.unbind();
+    }
+
+    protected void bindViews() {
+        bindUserInputViews();
+        bindTextToDisplayViews();
+        addScoresTextChangedListeners();
+    }
+
+    protected void bindUserInputViews() {
+        sName = findViewById(R.id.student_name_to_enter_id);
+        sPhoneNumber = findViewById(R.id.phone_number_to_enter_id);
+        chooseClassButton = findViewById(R.id.student_class_id);
+        genderButton = findViewById(R.id.gender_button);
+        saveStudentButton = findViewById(R.id.button_add_student_enter_data);
+        sAerobicScore = findViewById(R.id.update_student_aerobic_id);
+        sCubesScore = findViewById(R.id.update_student_cubes_id);
+        sHandsScore = findViewById(R.id.update_student_hands_id);
+        sJumpScore = findViewById(R.id.update_student_jump_id);
+        sAbsScore = findViewById(R.id.update_student_abs_id);
+        handsTypeText = findViewById(R.id.hands_minutes_text_view);
+    }
+
+    protected void bindTextToDisplayViews() {
+        sAerobicScoreText = findViewById(R.id.update_student_aerobic_text);
+        sCubesScoreText = findViewById(R.id.student_cubes_text);
+        sHandsScoreText = findViewById(R.id.student_hands_text);
+        sJumpScoreText = findViewById(R.id.student_jump_text);
+        sAbsScoreText = findViewById(R.id.student_abs_text);
+        sTotalScoreText = findViewById(R.id.student_total_score);
     }
 
 }
