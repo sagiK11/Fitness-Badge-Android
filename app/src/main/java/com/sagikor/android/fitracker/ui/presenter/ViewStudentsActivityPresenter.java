@@ -5,6 +5,7 @@ import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewStudentsActivityPresenter implements ViewStudentsActivityContract.Presenter {
@@ -12,8 +13,8 @@ public class ViewStudentsActivityPresenter implements ViewStudentsActivityContra
     private ViewStudentsActivityContract.View view;
 
     @Override
-    public void onStudentClick(Object obj) {
-        databaseHandler.cacheObject(obj);
+    public void onStudentClick(int position) {
+        databaseHandler.cacheObject(position);
         view.navToStudentUpdate();
     }
 
@@ -25,6 +26,17 @@ public class ViewStudentsActivityPresenter implements ViewStudentsActivityContra
     @Override
     public void deleteStudent(Student student) {
         databaseHandler.deleteStudent(student);
+    }
+
+    @Override
+    public List<Student> getFilteredList(String prefix) {
+        List<Student> filteredList = new ArrayList<>();
+
+        for (Student student : getStudentsList()) {
+            if (student.getName().startsWith(prefix))
+                filteredList.add(student);
+        }
+        return filteredList;
     }
 
     @Override
