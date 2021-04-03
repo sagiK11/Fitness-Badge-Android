@@ -5,10 +5,8 @@ import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesH
 
 public interface DatabaseHandler extends FirebaseHandler, SharedPreferencesHandler {
 
-    void cacheObject(Object obj);
+    void cacheObject(int objIndex);
 
     Object getCachedObject();
-
-    void clearCache();
 
 }

@@ -22,7 +22,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     private static AppFirebaseHandler init() {
         studentList = new ArrayList<>();
-        refreshList();
+        populateListFromFirebase();
         return new AppFirebaseHandler();
     }
 
@@ -40,18 +40,21 @@ public class AppFirebaseHandler implements FirebaseHandler {
         return studentList;
     }
 
-    private static void refreshList() {
+    private static void populateListFromFirebase() {
+        Log.d(TAG, "method: populateListFromFirebase");
         studentList.clear();
         final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         final String debug_id = "IPyH6cDYq5TKJ9gpDwD81eHwKG13";//TODO don't forget this
         FirebaseDatabase.getInstance().getReference("users").child(debug_id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d(TAG, "onDataChange triggered");
                 final String STUDENTS_CHILD = "students";
                 for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
                     Student student = obj.getValue(Student.class);
                     studentList.add(student);
                 }
+                Log.d(TAG, "finished loading students from firebase");
             }
 
             @Override
@@ -67,15 +70,13 @@ public class AppFirebaseHandler implements FirebaseHandler {
         final String STUDENTS_CHILD = "students";
         FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
                 .child(STUDENTS_CHILD).child(Student.getKey()).setValue(Student);
-        refreshList();
     }
 
     @Override
     public boolean isStudentExistsInFirebase(Student student) {
-        //TODO this needs to be tested.
-        for (int i = 0; i < studentList.size() ; i++) {
-            Student curr = studentList.get(i);
-            if(student.getName().equals(curr.getName()) && student.getClass().equals(curr.getClass())){
+        for (Student curr : studentList) {
+            if (student.getName().equals(curr.getName()) &&
+                    student.getStudentClass().equals(curr.getStudentClass())) {
                 return true;
             }
         }
@@ -87,26 +88,27 @@ public class AppFirebaseHandler implements FirebaseHandler {
         //update in firebase
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String studentsChild = "students";
+        Log.d(TAG, "updating " + student.getName() + " in firebase");
         FirebaseDatabase.getInstance().getReference("users").
                 child(userId).child(studentsChild).child(student.getKey()).
                 setValue(student);
         //update in local list
         for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getKey().equals(student.getKey())) {
+            Student cur = studentList.get(i);
+            if (cur.getKey().equals(student.getKey())) {
                 studentList.set(i, student);
+                Log.d(TAG, "updating student in local list:" + student);
                 break;
             }
         }
-        refreshList();
     }
 
     @Override
-    public void deleteStudent(Student Student) {
+    public void deleteStudent(Student student) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("students").child(Student.getKey())
+                .child(userId).child("students").child(student.getKey())
                 .removeValue();
-        refreshList();
     }
 
     @Override
@@ -123,7 +125,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Log.d("SettingActivity", "User account deleted.");
+                Log.d(TAG, "User account deleted.");
             }
         });
     }

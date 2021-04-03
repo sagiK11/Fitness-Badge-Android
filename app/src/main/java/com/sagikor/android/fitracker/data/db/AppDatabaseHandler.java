@@ -15,7 +15,7 @@ public class AppDatabaseHandler implements DatabaseHandler {
     private static final AppDatabaseHandler appDatabaseHandler = init();
     private final FirebaseHandler firebaseHandler = AppFirebaseHandler.getInstance();
     private final SharedPreferencesHandler sharedPreferencesHandler = AppSharedPreferencesHandler.getInstance();
-    private Object cachedObject;
+    private int cachedObjectIndex;
 
     private static AppDatabaseHandler init() {
         return new AppDatabaseHandler();
@@ -81,21 +81,16 @@ public class AppDatabaseHandler implements DatabaseHandler {
 
     @Override
     public void editGenderPreferences(String gender, boolean isChecked) {
-        sharedPreferencesHandler.editGenderPreferences(gender,isChecked);
+        sharedPreferencesHandler.editGenderPreferences(gender, isChecked);
     }
 
     @Override
-    public void cacheObject(Object obj) {
-        cachedObject = obj;
+    public void cacheObject(int index) {
+        cachedObjectIndex = index;
     }
 
     @Override
-    public Object getCachedObject() {
-        return cachedObject;
-    }
-
-    @Override
-    public void clearCache() {
-        cachedObject = null;
+    public Student getCachedObject() {
+        return getStudents().get(cachedObjectIndex);
     }
 }
