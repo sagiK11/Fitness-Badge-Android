@@ -9,3 +9,12 @@
 /captures
 .externalNativeBuild
 /.idea/
+
+#built application files
+*.apk
+*.ap_
+*.aab
+
+# generated files
+bin/
+gen/
