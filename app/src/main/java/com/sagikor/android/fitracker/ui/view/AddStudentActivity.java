@@ -51,35 +51,35 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
                 .setConfirmText(GIRL)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    genderButton.setText(GIRL);
-                    handsTypeText.setText(getResources().getString(R.string.minutes));
+                    btnChooseGender.setText(GIRL);
+                    tvHandsType.setText(getResources().getString(R.string.minutes));
 
                 })
                 .setCancelButton(BOY, sDialog -> {
                     sDialog.dismissWithAnimation();
-                    handsTypeText.setText(getResources().getString(R.string.amount));
-                    genderButton.setText(BOY);
+                    tvHandsType.setText(getResources().getString(R.string.amount));
+                    btnChooseGender.setText(BOY);
                 })
                 .show();
     }
 
     @Override
     public void setGirlsPreferences() {
-        genderButton.setText(getResources().getString(R.string.girl));
-        genderButton.setEnabled(false);
-        handsTypeText.setText(getResources().getString(R.string.minutes));
+        btnChooseGender.setText(getResources().getString(R.string.girl));
+        btnChooseGender.setEnabled(false);
+        tvHandsType.setText(getResources().getString(R.string.minutes));
     }
 
     @Override
     public void setBoysPreferences() {
-        genderButton.setText(getResources().getString(R.string.boy));
-        genderButton.setEnabled(false);
-        handsTypeText.setText(getResources().getString(R.string.amount));
+        btnChooseGender.setText(getResources().getString(R.string.boy));
+        btnChooseGender.setEnabled(false);
+        tvHandsType.setText(getResources().getString(R.string.amount));
     }
 
     @Override
     public void setDefaultPreferences() {
-        genderButton.setText(getResources().getString(R.string.choose_gender));
+        btnChooseGender.setText(getResources().getString(R.string.choose_gender));
     }
 
     @Override
@@ -104,10 +104,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         dialog.show();
     }
 
-    @Override
-    public void askForSendingSMS() {
-        super.askForSendingSMS();
-    }
 
     @Override
     public void popMessage(String message) {
@@ -132,15 +128,15 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
     @Override
     protected void bindViews() {
         super.bindViews();
-        chooseClassButton.setOnClickListener(e -> presenter.onSelectStudentClass());
-        genderButton.setOnClickListener(e -> presenter.onSelectStudentGender());
-        saveStudentButton.setOnClickListener(e -> presenter.onAddStudentClick());
-        sName.requestFocus();
+        btnChooseClass.setOnClickListener(e -> presenter.onSelectStudentClass());
+        btnChooseGender.setOnClickListener(e -> presenter.onSelectStudentGender());
+        btnSaveStudent.setOnClickListener(e -> presenter.onAddStudentClick());
+        etStudentName.requestFocus();
     }
 
 
     private void setClass(String sClass) {
-        chooseClassButton.setText(sClass);
+        btnChooseClass.setText(sClass);
     }
 
     private String[] getStudentsClasses() {
