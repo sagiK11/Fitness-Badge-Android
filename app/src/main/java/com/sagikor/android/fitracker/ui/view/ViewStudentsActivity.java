@@ -17,11 +17,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import com.sagikor.android.fitracker.R;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentAdapter;
 
-public class ViewStudentsActivity extends AppCompatActivity implements ViewStudentsActivityContract.View {
+public class ViewStudentsActivity extends AppCompatActivity implements
+        ViewStudentsActivityContract.View,
+        BaseContract.LoaderView {
     private static final String TAG = "ViewDataActivity";
     private StudentAdapter adapter;
     private RecyclerView listView;
