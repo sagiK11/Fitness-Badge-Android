@@ -3,12 +3,17 @@ package com.sagikor.android.fitracker.ui.presenter;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewStudentsActivityPresenter implements ViewStudentsActivityContract.Presenter {
+public class ViewStudentsActivityPresenter implements
+        ViewStudentsActivityContract.Presenter,
+        BaseContract.LoaderPresenter,
+        BaseContract.DeleterPresenter {
+
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private ViewStudentsActivityContract.View view;
 
@@ -42,10 +47,35 @@ public class ViewStudentsActivityPresenter implements ViewStudentsActivityContra
     @Override
     public void bind(ViewStudentsActivityContract.View view) {
         this.view = view;
+        databaseHandler.setLoaderPresenter(this);
+        databaseHandler.setDeleterPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
+        databaseHandler.setLoaderPresenter(null);
+        databaseHandler.setDeleterPresenter(null);
+    }
+
+    @Override
+    public void onFinishedLoadingData() {
+        view.notifyAdapterDataChanged();
+        view.hideProgressBar();
+    }
+
+    @Override
+    public void onLoadingData() {
+        view.showProgressBar();
+    }
+
+    @Override
+    public void onDeleteStudentSuccess(Student student) {
+        //TODO
+    }
+
+    @Override
+    public void onDeleteStudentFailed() {
+        //TODO
     }
 }

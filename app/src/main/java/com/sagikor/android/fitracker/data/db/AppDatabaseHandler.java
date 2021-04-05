@@ -8,6 +8,8 @@ import com.sagikor.android.fitracker.data.db.firebase.AppFirebaseHandler;
 import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
+import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 
 import java.util.List;
 
@@ -57,6 +59,31 @@ public class AppDatabaseHandler implements DatabaseHandler {
     @Override
     public void deleteAccount() {
         firebaseHandler.deleteAccount();
+    }
+
+    @Override
+    public void setLoaderPresenter(BaseContract.LoaderPresenter presenter) {
+        firebaseHandler.setLoaderPresenter(presenter);
+    }
+
+    @Override
+    public void setAdderPresenter(BaseContract.AdderPresenter presenter) {
+        firebaseHandler.setAdderPresenter(presenter);
+    }
+
+    @Override
+    public void setUpdaterPresenter(BaseContract.UpdaterPresenter presenter) {
+        firebaseHandler.setUpdaterPresenter(presenter);
+    }
+
+    @Override
+    public void setDeleterPresenter(BaseContract.DeleterPresenter presenter) {
+        firebaseHandler.setDeleterPresenter(presenter);
+    }
+
+    @Override
+    public boolean isLoadingData() {
+        return firebaseHandler.isLoadingData();
     }
 
     @Override

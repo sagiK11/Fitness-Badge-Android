@@ -5,7 +5,7 @@ import com.sagikor.android.fitracker.data.model.Student;
 import java.util.List;
 
 public interface ViewStudentsActivityContract {
-    interface Presenter {
+    interface Presenter extends BaseContract.BasePresenter {
         void onStudentClick(int position);
 
         List<Student> getStudentsList();
@@ -20,7 +20,13 @@ public interface ViewStudentsActivityContract {
 
     }
 
-    interface View {
+    interface View extends BaseContract.BaseView{
         void navToStudentUpdate();
+
+        void showProgressBar();
+
+        void hideProgressBar();
+
+        void notifyAdapterDataChanged();
     }
 }

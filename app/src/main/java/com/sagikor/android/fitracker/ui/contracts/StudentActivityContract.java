@@ -1,12 +1,16 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
 
+import com.sagikor.android.fitracker.data.model.Student;
+
 public interface StudentActivityContract {
-    interface Presenter {
+    interface Presenter extends BaseContract.BasePresenter {
 
         boolean isValidPhoneNo(String phoneNoInput);
 
         boolean isValidScore(String scoreInput);
+
+        boolean isGenderSelected();
 
         String calculateGrade(String score, String sportType, boolean isFemale);
 
@@ -14,12 +18,15 @@ public interface StudentActivityContract {
 
         void unbind();
 
+
     }
 
-    interface View {
-        void updateTotalScore(int score);
+    interface View extends BaseContract.BaseView {
+        void updateTotalScore(double score);
 
-        void askForSendingSMS();
+        void askForSendingSMS(Student student);
+
+        void popSuccessWindow();
 
         String getStudentName();
 
@@ -49,10 +56,12 @@ public interface StudentActivityContract {
 
         String getJumpScore();
 
-        void popFailWindow();
+        void popFailWindow(String error);
 
         void popMessage(String message);
 
         String getGradeStringResource();
+
+        String getGenderStringResource();
     }
 }

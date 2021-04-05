@@ -9,10 +9,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
 
-public class AddStudentActivityPresenter extends StudentActivityPresenter implements AddStudentActivityContract.Presenter {
+public class AddStudentActivityPresenter extends StudentActivityPresenter implements
+        AddStudentActivityContract.Presenter, BaseContract.AdderPresenter {
 
     private static final String TAG = "AddStudentActivityPres";
     private AddStudentActivityContract.View view;
@@ -34,12 +36,10 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
         Student newStudent = createNewStudent();
         if (databaseHandler.isStudentExistsInFirebase(newStudent)) {
-            view.popFailWindow();
+            view.popFailWindow("Student already exists");
             return;
         }
-        addStudentToFirebase(newStudent);
-        //TODO show total score in the view.
-        //view.updateTotalScore(score);
+        databaseHandler.addStudent(newStudent);
     }
 
     @Override
@@ -47,6 +47,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         super.bind(view);
         this.view = view;
         databaseHandler.setSharedPreferences(sharedPreferences);
+        databaseHandler.setAdderPresenter(this);
     }
 
     @Override
@@ -54,6 +55,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         super.unbind();
         this.view = null;
         databaseHandler.setSharedPreferences(null);
+        databaseHandler.setAdderPresenter(null);
 
     }
 
@@ -75,7 +77,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
                 .jumpResult(parse(view.getJumpGrade()))
                 .handsResult(parse(view.getHandsGrade()))
                 .cubesResult(parse(view.getCubesGrade()))
-                //.totalScore(view.getAvg()) TODO this should be calculated here
+                .totalScore(super.getAverage()) //TODO test it
                 .updatedDate(Utility.getTodayDate())
                 .build();
     }
@@ -92,12 +94,6 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         } else {
             view.setDefaultPreferences();
         }
-    }
-
-
-    private void addStudentToFirebase(Student newStudent) {
-        databaseHandler.addStudent(newStudent);
-        view.askForSendingSMS();
     }
 
     @Override
@@ -133,9 +129,19 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     @Override
     public boolean isValidName(String nameInput) {
-        //regex will match latin and hebrew characters.
+        //regex will match latin and hebrew characters.//TODO test it
         return isNonEmptyInput(nameInput) && nameInput.matches("^[a-zA-Z\\u0590-\\u05fe']+$");
     }
 
+    @Override
+    public void onAddStudentSuccess(Student student) {
+        view.updateTotalScore(student.getTotalScore());
+        view.popSuccessWindow();
+        view.askForSendingSMS(student);
+    }
 
+    @Override
+    public void onAddStudentFailed() {
+        view.popFailWindow("Ho no! Something wen't wrong!");
+    }
 }

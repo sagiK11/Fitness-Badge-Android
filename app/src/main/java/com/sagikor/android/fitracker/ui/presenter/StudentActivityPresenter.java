@@ -7,6 +7,11 @@ import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 public class StudentActivityPresenter implements StudentActivityContract.Presenter {
@@ -35,6 +40,11 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean isGenderSelected() {
+        return !view.getStudentGender().equals(view.getGenderStringResource());
     }
 
 
@@ -99,6 +109,30 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
         else if (target.equals(view.getGradeStringResource()))//parsing the grade
             return 0;
         return Double.parseDouble(target);
+    }
+
+    protected double getAverage() {
+        List<Double> gradesList = new ArrayList<>();
+
+        double average = 0;
+        fillGradesList(gradesList, parse(view.getAerobicGrade()));
+        fillGradesList(gradesList, parse(view.getAbsGrade()));
+        fillGradesList(gradesList, parse(view.getCubesGrade()));
+        fillGradesList(gradesList, parse(view.getHandsGrade()));
+        fillGradesList(gradesList, parse(view.getJumpGrade()));
+        for (Double grade : gradesList) {
+            average += grade;
+        }
+        if (gradesList.size() > 0)
+            average /= gradesList.size();
+        else
+            average = 0;
+        return BigDecimal.valueOf(average).setScale(2, RoundingMode.HALF_UP).doubleValue();
+    }
+
+    private void fillGradesList(List<Double> gradesList, double grade) {
+        if (grade != 0)
+            gradesList.add(grade);
     }
 
 }

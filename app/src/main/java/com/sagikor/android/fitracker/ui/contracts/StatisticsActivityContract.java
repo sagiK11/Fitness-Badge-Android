@@ -1,14 +1,38 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
+import com.sagikor.android.fitracker.data.model.Student;
+
+import java.util.List;
+
 public interface StatisticsActivityContract {
-    interface Presenter {
-        void bind(StatisticsActivityContract.View view);
+    interface Presenter extends BaseContract.LoaderPresenter {
+        void bind(BaseContract.LoaderView view);
 
         void unbind();
 
+        List<Student> getStudentsList();
+
+        void calculateFinishedNoOfStudents();
+
+        void calculateGradesAverage();
+
+        float getAerobicGradesAverage();
+
+        float getAbsGradesAverage();
+
+        float getHandsGradeAverage();
+
+        float getCubesGradeAverage();
+
+        float getJumpGradesAverage();
+
+        float getFinishedNo();
+
+        float getUnFinishedNo();
+
     }
 
-    interface View {
+    interface View extends BaseContract.BaseView{
 
     }
 }

@@ -4,12 +4,14 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.model.Student;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.UpdateStudentActivityContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
-public class UpdateStudentActivityPresenter extends StudentActivityPresenter implements UpdateStudentActivityContract.Presenter {
+public class UpdateStudentActivityPresenter extends StudentActivityPresenter implements
+        UpdateStudentActivityContract.Presenter, BaseContract.UpdaterPresenter {
 
     private static final String TAG = "UpdateStudentActPre";
     private UpdateStudentActivityContract.View view;
@@ -29,6 +31,7 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
     public void bind(UpdateStudentActivityContract.View view) {
         super.bind(view);
         this.view = view;
+        databaseHandler.setUpdaterPresenter(this);
         currentStudent = getCachedObject();
         updateViewFields();
     }
@@ -37,6 +40,7 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
     public void unbind() {
         super.unbind();
         view = null;
+        databaseHandler.setUpdaterPresenter(null);
     }
 
     private void updateViewFields() {
@@ -55,6 +59,7 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
             view.setJumpScore(String.valueOf(currentStudent.getJumpScore()));
         if (currentStudent.getPhoneNumber() != null)
             view.setStudentPhoneNo(currentStudent.getPhoneNumber());
+        view.updateTotalScore(currentStudent.getTotalScore());
     }
 
 
@@ -75,12 +80,22 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
                 .jumpResult(parse(view.getJumpGrade()))
                 .handsResult(parse(view.getHandsGrade()))
                 .cubesResult(parse(view.getCubesGrade()))
-                // .totalScore(parse(view.getAvg())) //TODO
-                //.totalScoreWithoutAerobic(parse(view.getAvgWithoutAerobic()) //TODO
+                 .totalScore(super.getAverage())
                 .updatedDate(Utility.getTodayDate())
                 .build();
 
         databaseHandler.updateStudent(updatedStudent);
-        view.askForSendingSMS();
+    }
+
+    @Override
+    public void onUpdateStudentSuccess(Student student) {
+        view.updateTotalScore(student.getTotalScore());
+        view.popSuccessWindow();
+        view.askForSendingSMS(student);
+    }
+
+    @Override
+    public void onUpdateStudentFailed() {
+        view.popFailWindow("Ho no! Something wen't wrong!");
     }
 }

@@ -30,6 +30,5 @@ public interface UpdateStudentActivityContract extends StudentActivityContract {
         void setHandsScore(String score);
 
         void setJumpScore(String score);
-
     }
 }
