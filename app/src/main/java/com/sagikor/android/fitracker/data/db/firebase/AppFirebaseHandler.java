@@ -1,6 +1,8 @@
 package com.sagikor.android.fitracker.data.db.firebase;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -13,7 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.Student;
+import com.sagikor.android.fitracker.data.model.User;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 
@@ -28,6 +32,9 @@ public class AppFirebaseHandler implements FirebaseHandler {
     private BaseContract.AdderPresenter adderPresenter;
     private BaseContract.UpdaterPresenter updaterPresenter;
     private BaseContract.DeleterPresenter deleterPresenter;
+    private BaseContract.SignInPresenter signInPresenter;
+    private BaseContract.RegisterPresenter registerPresenter;
+    private FirebaseAuth mAuth;
     private static boolean isLoadingData = true;
 
     private static AppFirebaseHandler init() {
@@ -195,8 +202,74 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     @Override
+    public void setSignInPresenter(BaseContract.SignInPresenter presenter) {
+        signInPresenter = presenter;
+    }
+
+    @Override
+    public void setRegisterPresenter(BaseContract.RegisterPresenter presenter) {
+        registerPresenter = presenter;
+    }
+
+    @Override
     public boolean isLoadingData() {
         return isLoadingData;
+    }
+
+    @Override
+    public void signInWithEmailAndPassword(String email, String password) {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener( task -> {
+                    if (task.isSuccessful()) {
+                        Log.d(TAG, "signInWithEmail:success");
+                        signInPresenter.onSignInSuccess();
+
+                    } else {
+                        signInPresenter.onSignInFailure();
+                        Log.e(TAG, task.getException().toString());
+                    }
+                });
+    }
+
+    @Override
+    public void createUserWithEmailAndPassword(String email, String password,String userName) {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener( task -> {
+                    if (task.isSuccessful()) {
+                        String userId = mAuth.getCurrentUser().getUid();
+                        User newUser = new User(userName, email, userId);
+
+                        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
+                        dbRef.child(userId).setValue(newUser).addOnCompleteListener(task1 -> {
+                            if (task1.isSuccessful()) {
+                                registerPresenter.onRegisterSuccess();
+                            }
+                        });
+                    } else {
+                        registerPresenter.onRegisterFailure(task);
+                    }
+                });
+    }
+
+    @Override
+    public void resetPassword(String userEmail) {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.sendPasswordResetEmail(userEmail)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        signInPresenter.onResetPassSuccess();
+                    } else {
+                        signInPresenter.onResetPassFailure();
+                    }
+                });
+    }
+
+    @Override
+    public boolean isUserSigned() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user != null;
     }
 
 }

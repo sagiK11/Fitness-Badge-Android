@@ -71,11 +71,11 @@ public class ViewStudentsActivityPresenter implements
 
     @Override
     public void onDeleteStudentSuccess(Student student) {
-        //TODO
+        //TODO this can be left empty for the moment
     }
 
     @Override
     public void onDeleteStudentFailed() {
-        //TODO
+        //TODO this can be left empty for the moment
     }
 }

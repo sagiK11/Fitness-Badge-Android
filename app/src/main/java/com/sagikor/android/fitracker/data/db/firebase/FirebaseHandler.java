@@ -31,5 +31,18 @@ public interface FirebaseHandler {
 
     void setDeleterPresenter(BaseContract.DeleterPresenter presenter);
 
+    void setSignInPresenter(BaseContract.SignInPresenter presenter);
+
+    void setRegisterPresenter(BaseContract.RegisterPresenter presenter);
+
     boolean isLoadingData();
+
+    void signInWithEmailAndPassword(String email,String password);
+
+    void createUserWithEmailAndPassword(String email,String password,String name);
+
+    void resetPassword(String userEmail);
+
+    boolean isUserSigned();
+
 }

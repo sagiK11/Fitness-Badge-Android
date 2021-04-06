@@ -9,7 +9,7 @@ import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
-import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
+
 
 import java.util.List;
 
@@ -82,8 +82,38 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
+    public void setSignInPresenter(BaseContract.SignInPresenter presenter) {
+        firebaseHandler.setSignInPresenter(presenter);
+    }
+
+    @Override
+    public void setRegisterPresenter(BaseContract.RegisterPresenter presenter) {
+        firebaseHandler.setRegisterPresenter(presenter);
+    }
+
+    @Override
     public boolean isLoadingData() {
         return firebaseHandler.isLoadingData();
+    }
+
+    @Override
+    public void signInWithEmailAndPassword(String email, String password) {
+        firebaseHandler.signInWithEmailAndPassword(email,password);
+    }
+
+    @Override
+    public void createUserWithEmailAndPassword(String email, String password, String name) {
+        firebaseHandler.createUserWithEmailAndPassword(email,password,name);
+    }
+
+    @Override
+    public void resetPassword(String userEmail) {
+        firebaseHandler.resetPassword(userEmail);
+    }
+
+    @Override
+    public boolean isUserSigned() {
+        return firebaseHandler.isUserSigned();
     }
 
     @Override
