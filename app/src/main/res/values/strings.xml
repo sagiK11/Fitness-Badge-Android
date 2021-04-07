@@ -38,7 +38,7 @@
     <string name="setting">Setting</string>
     <string name="send_sms">Send Grade With SMS</string>
     <string name="sms">phone </string>
-    <string name="phone_number">phone</string>
+    <string name="phone_number">phone (optional)</string>
     <string name="hint_phone_number" translatable="false">050123456</string>
     <string name="export_to_excel">Mail Results</string>
     <string name="total_students" translatable="false">Total Students</string>

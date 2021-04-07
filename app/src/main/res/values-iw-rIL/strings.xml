@@ -28,7 +28,7 @@
     <string name="import_excel_file">שלח למייל</string>
     <string name="setting">הגדרות</string>
     <string name="send_sms">שלח אסמס</string>
-    <string name="phone_number">מספר טלפון</string>
+    <string name="phone_number">מספר טלפון (לא חובה)</string>
     <string name="export_to_excel">שלח למייל</string>
     <string name="havnt_finished">לא סיימו</string>
     <string name="show">הראה</string>
