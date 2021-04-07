@@ -28,18 +28,17 @@ public class AppFirebaseHandler implements FirebaseHandler {
     public static AppFirebaseHandler appFirebaseHandler = init();
     private static List<Student> studentList;
     private final static String TAG = "AppFirebaseHandler";
-    private static BaseContract.LoaderPresenter loaderPresenter;
+    private BaseContract.LoaderPresenter loaderPresenter;
     private BaseContract.AdderPresenter adderPresenter;
     private BaseContract.UpdaterPresenter updaterPresenter;
     private BaseContract.DeleterPresenter deleterPresenter;
     private BaseContract.SignInPresenter signInPresenter;
     private BaseContract.RegisterPresenter registerPresenter;
-    private FirebaseAuth mAuth;
-    private static boolean isLoadingData = true;
+    private FirebaseAuth firebaseAuth;
+    private boolean isDataLoaded;
 
     private static AppFirebaseHandler init() {
         studentList = new ArrayList<>();
-        populateListFromFirebase();
         return new AppFirebaseHandler();
     }
 
@@ -49,6 +48,8 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     private AppFirebaseHandler() {
+        if (isUserSigned())
+            getDataFromDatabase();
     }
 
 
@@ -57,36 +58,38 @@ public class AppFirebaseHandler implements FirebaseHandler {
         return studentList;
     }
 
-    private static void populateListFromFirebase() {
-        Log.d(TAG, "method: populateListFromFirebase");
-        studentList.clear();
-        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final String debug_id = "IPyH6cDYq5TKJ9gpDwD81eHwKG13";//TODO don't forget this
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(debug_id);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (loaderPresenter != null)
-                    loaderPresenter.onLoadingData();
-                studentList.clear();
-                isLoadingData = true;
-                Log.d(TAG, "loading students from firebase..");
-                final String STUDENTS_CHILD = "students";
-                for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
-                    Student student = obj.getValue(Student.class);
-                    studentList.add(student);
+    @Override
+    public void getDataFromDatabase() {
+        new Thread(() -> {
+            studentList.clear();
+            final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            final String debug_id = "IPyH6cDYq5TKJ9gpDwD81eHwKG13";//TODO don't forget this
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(debug_id);
+            ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (loaderPresenter != null)
+                        loaderPresenter.onLoadingData();
+                    studentList.clear();
+                    Log.d(TAG, "loading students from firebase..");
+                    final String STUDENTS_CHILD = "students";
+                    for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
+                        Student student = obj.getValue(Student.class);
+                        studentList.add(student);
+                    }
+                    if (loaderPresenter != null)
+                        loaderPresenter.onFinishedLoadingData();
+                    isDataLoaded = true;
+                    Log.d(TAG, "finished loading students from firebase");
                 }
-                if (loaderPresenter != null)
-                    loaderPresenter.onFinishedLoadingData();
-                isLoadingData = false;
-                Log.d(TAG, "finished loading students from firebase");
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.v(TAG, databaseError.getDetails());
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Log.v(TAG, databaseError.getDetails());
+                }
+            });
+        }).start();
+
     }
 
     @Override
@@ -95,7 +98,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
         final String STUDENTS_CHILD = "students";
         FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
                 .child(STUDENTS_CHILD).child(student.getKey()).setValue(student)
-                .addOnCompleteListener(task-> {
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         adderPresenter.onAddStudentSuccess(student);
                         studentList.add(student);
@@ -139,7 +142,6 @@ public class AppFirebaseHandler implements FirebaseHandler {
             Student cur = studentList.get(i);
             if (cur.getKey().equals(student.getKey())) {
                 studentList.set(i, student);
-                Log.d(TAG, "updating student in local list:" + student);
                 return;
             }
         }
@@ -212,17 +214,18 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     @Override
-    public boolean isLoadingData() {
-        return isLoadingData;
+    public boolean isDataLoaded() {
+        return isDataLoaded;
     }
 
     @Override
     public void signInWithEmailAndPassword(String email, String password) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener( task -> {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithEmail:success");
+                        getDataFromDatabase();
                         signInPresenter.onSignInSuccess();
 
                     } else {
@@ -233,17 +236,18 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     @Override
-    public void createUserWithEmailAndPassword(String email, String password,String userName) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener( task -> {
+    public void createUserWithEmailAndPassword(String email, String password, String userName) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String userId = mAuth.getCurrentUser().getUid();
+                        String userId = firebaseAuth.getCurrentUser().getUid();
                         User newUser = new User(userName, email, userId);
 
                         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("users");
                         dbRef.child(userId).setValue(newUser).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
+                                getDataFromDatabase();
                                 registerPresenter.onRegisterSuccess();
                             }
                         });
@@ -255,8 +259,8 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public void resetPassword(String userEmail) {
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.sendPasswordResetEmail(userEmail)
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.sendPasswordResetEmail(userEmail)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         signInPresenter.onResetPassSuccess();

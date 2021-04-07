@@ -11,7 +11,6 @@ import java.util.List;
 
 public class ViewStudentsActivityPresenter implements
         ViewStudentsActivityContract.Presenter,
-        BaseContract.LoaderPresenter,
         BaseContract.DeleterPresenter {
 
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
@@ -47,26 +46,13 @@ public class ViewStudentsActivityPresenter implements
     @Override
     public void bind(ViewStudentsActivityContract.View view) {
         this.view = view;
-        databaseHandler.setLoaderPresenter(this);
         databaseHandler.setDeleterPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setLoaderPresenter(null);
         databaseHandler.setDeleterPresenter(null);
-    }
-
-    @Override
-    public void onFinishedLoadingData() {
-        view.notifyAdapterDataChanged();
-        view.hideProgressBar();
-    }
-
-    @Override
-    public void onLoadingData() {
-        view.showProgressBar();
     }
 
     @Override

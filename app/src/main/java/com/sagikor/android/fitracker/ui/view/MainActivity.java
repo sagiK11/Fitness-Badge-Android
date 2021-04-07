@@ -22,7 +22,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.firebase.FirebaseApp;
@@ -36,12 +39,16 @@ import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
 
-    Button addStudentButton;
-    Button searchStudentsButton;
-    Button mailResultsButton;
-    Button updateStudentButton;
+    private static final String TAG = "MainActivity";
+    Button btnAddStudent;
+    Button btnSearchStudent;
+    Button btnMailResults;
+    Button btnUpdateStudent;
+    ProgressBar progressBar;
+    ImageView ivBackgroundImage;
     Toolbar toolbar;
     MainActivityPresenter presenter;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -51,6 +58,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         bindViews();
         addButtonsOnClickListeners();
         initFirebase();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (presenter == null)
+            presenter = new MainActivityPresenter();
+        presenter.bind(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.unbind();
     }
 
 
@@ -99,9 +120,35 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                         MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
         } else {
-             new EmailSendTask().execute();
+            new EmailSendTask().execute();
         }
 
+    }
+
+    @Override
+    public void setActiveMode() {
+        hideProgressBar();
+        setViewsEnableMode(true);
+    }
+
+
+    @Override
+    public void setLoadingMode() {
+        showProgressBar();
+        setViewsEnableMode(false);
+    }
+
+    private void setViewsEnableMode(boolean isEnable) {
+        btnAddStudent.setClickable(isEnable);
+        btnSearchStudent.setClickable(isEnable);
+        btnMailResults.setClickable(isEnable);
+        btnUpdateStudent.setClickable(isEnable);
+        ivBackgroundImage.setAlpha(isEnable ? 1f : 0.1f);
+        btnAddStudent.setAlpha(isEnable ? 1f : 0.1f);
+        btnSearchStudent.setAlpha(isEnable ? 1f : 0.1f);
+        btnMailResults.setAlpha(isEnable ? 1f : 0.1f);
+        btnUpdateStudent.setAlpha(isEnable ? 1f : 0.1f);
+        toolbar.setAlpha(isEnable ? 1f : 0f);
     }
 
     @Override
@@ -109,29 +156,27 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         signOutQuestionPop();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(presenter == null)
-            presenter = new MainActivityPresenter();
-        presenter.bind(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        presenter.unbind();
-    }
-
 
     private void bindViews() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        addStudentButton = findViewById(R.id.button_add_student);
-        searchStudentsButton = findViewById(R.id.button_search);
-        mailResultsButton = findViewById(R.id.button_mail_results);
-        updateStudentButton = findViewById(R.id.button_update_student);
+        btnAddStudent = findViewById(R.id.button_add_student);
+        btnSearchStudent = findViewById(R.id.button_search);
+        btnMailResults = findViewById(R.id.button_mail_results);
+        btnUpdateStudent = findViewById(R.id.button_update_student);
+        progressBar = findViewById(R.id.main_activity_progress_bar);
+        ivBackgroundImage = findViewById(R.id.background_image);
+        setButtonsBackgroundAlpha();
     }
+
+
+    private void setButtonsBackgroundAlpha() {
+        btnAddStudent.getBackground().setAlpha(50);
+        btnSearchStudent.getBackground().setAlpha(50);
+        btnMailResults.getBackground().setAlpha(50);
+        btnUpdateStudent.getBackground().setAlpha(50);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,10 +200,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     private void addButtonsOnClickListeners() {
-        addStudentButton.setOnClickListener(e -> presenter.onNavToAddStudentClick());
-        searchStudentsButton.setOnClickListener(e -> presenter.onNavToViewStudentsClick());
-        mailResultsButton.setOnClickListener(e -> presenter.onSendToEmailClick());
-        updateStudentButton.setOnClickListener(e -> presenter.onNavToUpdateStudentClick());
+        btnAddStudent.setOnClickListener(e -> presenter.onNavToAddStudentClick());
+        btnSearchStudent.setOnClickListener(e -> presenter.onNavToViewStudentsClick());
+        btnMailResults.setOnClickListener(e -> presenter.onSendToEmailClick());
+        btnUpdateStudent.setOnClickListener(e -> presenter.onNavToUpdateStudentClick());
     }
 
 
@@ -183,6 +228,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 
 

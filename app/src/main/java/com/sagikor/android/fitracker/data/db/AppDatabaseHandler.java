@@ -32,6 +32,11 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
+    public void getDataFromDatabase() {
+        firebaseHandler.getDataFromDatabase();
+    }
+
+    @Override
     public List<Student> getStudents() {
         return firebaseHandler.getStudents();
     }
@@ -92,8 +97,8 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public boolean isLoadingData() {
-        return firebaseHandler.isLoadingData();
+    public boolean isDataLoaded() {
+        return firebaseHandler.isDataLoaded();
     }
 
     @Override

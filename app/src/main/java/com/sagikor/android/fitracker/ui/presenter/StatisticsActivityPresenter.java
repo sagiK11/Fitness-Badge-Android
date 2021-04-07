@@ -1,18 +1,21 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
+import android.util.Log;
+
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.StatisticsActivityContract;
+
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 import java.util.List;
 
-public class StatisticsActivityPresenter implements StatisticsActivityContract.Presenter,
-        BaseContract.LoaderPresenter {
+public class StatisticsActivityPresenter implements StatisticsActivityContract.Presenter{
+    private static final String TAG = "StatisticsActivityPres";
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
-    private BaseContract.LoaderView  view;
+    private StatisticsActivityContract.View view;
     private float aerobicGradesAverage;
     private float absGradesAverage;
     private float handsGradeAverage;
@@ -23,15 +26,13 @@ public class StatisticsActivityPresenter implements StatisticsActivityContract.P
     private final float[] finishedArray = new float[2];
 
     @Override
-    public void bind(BaseContract.LoaderView view) {
+    public void bind(StatisticsActivityContract.View view) {
         this.view = view;
-        databaseHandler.setLoaderPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setLoaderPresenter(null);
     }
 
     @Override
@@ -159,15 +160,5 @@ public class StatisticsActivityPresenter implements StatisticsActivityContract.P
             }
         }
         absGradesAverage = absGradesCounter != 0 ? sumAbs / absGradesCounter : 0;
-    }
-
-    @Override
-    public void onFinishedLoadingData() {
-        view.hideProgressBar();
-    }
-
-    @Override
-    public void onLoadingData() {
-        view.showProgressBar();
     }
 }

@@ -20,9 +20,7 @@ public interface ViewStudentsActivityContract {
 
     }
 
-    interface View extends BaseContract.LoaderView{
+    interface View extends BaseContract.BaseView{
         void navToStudentUpdate();
-
-        void notifyAdapterDataChanged();
     }
 }

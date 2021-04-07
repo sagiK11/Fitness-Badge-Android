@@ -23,13 +23,11 @@ import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentAdapter;
 
 public class ViewStudentsActivity extends AppCompatActivity implements
-        ViewStudentsActivityContract.View,
-        BaseContract.LoaderView {
+        ViewStudentsActivityContract.View{
     private static final String TAG = "ViewDataActivity";
     private StudentAdapter adapter;
     private RecyclerView listView;
     private EditText inputSearch;
-    private ProgressBar progressBar;
     private ViewStudentsActivityContract.Presenter presenter;
 
 
@@ -69,7 +67,6 @@ public class ViewStudentsActivity extends AppCompatActivity implements
     private void bindViews() {
         listView = findViewById(R.id.list_view);
         inputSearch = findViewById(R.id.search_input);
-        progressBar = findViewById(R.id.view_students_progress_bar);
         listView.addItemDecoration(new DividerItemDecoration(listView.getContext(),
                 DividerItemDecoration.VERTICAL));
     }
@@ -77,21 +74,6 @@ public class ViewStudentsActivity extends AppCompatActivity implements
     @Override
     public void navToStudentUpdate() {
         startActivity(new Intent(this, UpdateStudentActivity.class));
-    }
-
-    @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void notifyAdapterDataChanged() {
-        adapter.notifyDataSetChanged();
     }
 
     private void addInputSearch() {

@@ -1,4 +1,4 @@
-package com.sagikor.android.fitracker.data.db.firebase;
+ package com.sagikor.android.fitracker.data.db.firebase;
 
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
@@ -8,6 +8,8 @@ import com.sagikor.android.fitracker.ui.view.ViewStudentsActivity;
 import java.util.List;
 
 public interface FirebaseHandler {
+
+    void getDataFromDatabase();
 
     List<Student> getStudents();
 
@@ -35,8 +37,6 @@ public interface FirebaseHandler {
 
     void setRegisterPresenter(BaseContract.RegisterPresenter presenter);
 
-    boolean isLoadingData();
-
     void signInWithEmailAndPassword(String email,String password);
 
     void createUserWithEmailAndPassword(String email,String password,String name);
@@ -44,5 +44,7 @@ public interface FirebaseHandler {
     void resetPassword(String userEmail);
 
     boolean isUserSigned();
+
+    boolean isDataLoaded();
 
 }

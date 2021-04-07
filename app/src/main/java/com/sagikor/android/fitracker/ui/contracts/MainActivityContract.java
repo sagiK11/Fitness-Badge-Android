@@ -3,7 +3,7 @@ package com.sagikor.android.fitracker.ui.contracts;
 import au.com.bytecode.opencsv.CSVWriter;
 
 public interface MainActivityContract {
-    interface Presenter {
+    interface Presenter extends BaseContract.LoaderPresenter {
         void onSendToEmailClick();
 
         void onNavToSettingsClick();
@@ -26,7 +26,7 @@ public interface MainActivityContract {
 
     }
 
-    interface View {
+    interface View extends BaseContract.LoaderView {
         void navToAddStudentScreen();
 
         void navToUpdateStudentScreen();
@@ -40,6 +40,10 @@ public interface MainActivityContract {
         void disconnectUser();
 
         void sendDatabaseToEmail();
+
+        void setActiveMode();
+
+        void setLoadingMode();
 
     }
 }

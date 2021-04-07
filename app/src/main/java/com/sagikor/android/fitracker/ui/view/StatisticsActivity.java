@@ -30,21 +30,16 @@ import java.util.List;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StatisticsActivity extends AppCompatActivity implements
-        StatisticsActivityContract.View,
-        BaseContract.LoaderView
-{
+        StatisticsActivityContract.View {
 
     private BarChart averageGradesChart;
     private PieChart pieChart;
-
     private List<BarEntry> barEntryList;
     private List<String> labelsName;
-    private ProgressBar progressBar;//TODO bind it
     private StatisticsActivityContract.Presenter presenter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        //TODO add progress bar to layout while loading from firebase
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         BindViews();
@@ -64,6 +59,7 @@ public class StatisticsActivity extends AppCompatActivity implements
     protected void onPause() {
         super.onPause();
         presenter.unbind();
+        presenter = null;
     }
 
     private void setupPieChart() {
@@ -164,19 +160,8 @@ public class StatisticsActivity extends AppCompatActivity implements
         labelsName.add(JUMP);
     }
 
-
     private void BindViews() {
         averageGradesChart = findViewById(R.id.avg_grades_chart);
         pieChart = findViewById(R.id.finished_chart);
-    }
-
-    @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
     }
 }
