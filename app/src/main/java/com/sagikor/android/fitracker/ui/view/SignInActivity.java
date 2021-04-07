@@ -18,11 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignInActivity extends AppCompatActivity implements SignInActivityContract.View {
 
-    Button loginButton;
-    Button resetPasswordButton;
-    TextView signUpButton;
-    EditText userEmailEditText;
-    EditText userPasswordEditText;
+    Button btnLogin;
+    Button btnResetPassword;
+    TextView btnSignUp;
+    EditText etUserEmail;
+    EditText etUserPassword;
     ProgressBar progressBar;
     private static final String TAG = "WelcomeActivity";
     private SignInActivityContract.Presenter presenter;
@@ -76,22 +76,22 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
 
     @Override
     public void setErrorInEmail() {
-        setError(userPasswordEditText);
+        setError(etUserPassword);
     }
 
     @Override
     public void setErrorInPassword() {
-        setError(userEmailEditText);
+        setError(etUserEmail);
     }
 
     @Override
     public String getUserEmail() {
-        return userEmailEditText.getText().toString().trim();
+        return etUserEmail.getText().toString().trim();
     }
 
     @Override
     public String getUserPassword() {
-        return userPasswordEditText.getText().toString().trim();
+        return etUserPassword.getText().toString().trim();
     }
 
     @Override
@@ -136,14 +136,21 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
     }
 
     private void bindViews() {
-        loginButton = findViewById(R.id.login_button_welcome_activity);
-        signUpButton = findViewById(R.id.sign_up_button_welcome_activity);
-        userEmailEditText = findViewById(R.id.user_email_welcome_activity);
-        userPasswordEditText = findViewById(R.id.user_password_welcome_activity);
-        resetPasswordButton = findViewById(R.id.forgot_pass_button_welcome_activity);
+        btnLogin = findViewById(R.id.login_button_welcome_activity);
+        btnSignUp = findViewById(R.id.sign_up_button_welcome_activity);
+        etUserEmail = findViewById(R.id.user_email_welcome_activity);
+        etUserPassword = findViewById(R.id.user_password_welcome_activity);
+        btnResetPassword = findViewById(R.id.forgot_pass_button_welcome_activity);
         progressBar = findViewById(R.id.progressBar_welcome_activity);
-        loginButton.setOnClickListener(e -> presenter.onLoginClick());
-        signUpButton.setOnClickListener(e -> presenter.onRegisterClick());
-        resetPasswordButton.setOnClickListener(e -> presenter.onResetPasswordClick());
+        btnLogin.setOnClickListener(e -> presenter.onLoginClick());
+        btnSignUp.setOnClickListener(e -> presenter.onRegisterClick());
+        btnResetPassword.setOnClickListener(e -> presenter.onResetPasswordClick());
+        setButtonsAlpha();
+    }
+
+    private void setButtonsAlpha() {
+        btnLogin.getBackground().setAlpha(50);
+        btnSignUp.getBackground().setAlpha(50);
+        btnResetPassword.getBackground().setAlpha(50);
     }
 }
