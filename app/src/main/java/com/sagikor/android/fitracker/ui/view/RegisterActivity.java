@@ -136,6 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterActiv
         registerButton = findViewById(R.id.register_button);
         progressBar = findViewById(R.id.progressBar_register_activity);
         registerButton.setOnClickListener(e -> presenter.onRegisterClick());
+        registerButton.getBackground().setAlpha(50);
     }
 
     private String cleanText(EditText editText){
