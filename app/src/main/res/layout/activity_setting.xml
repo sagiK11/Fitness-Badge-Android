@@ -7,165 +7,186 @@
     android:background="@color/white">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout15"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <RelativeLayout
+        android:id="@+id/_add_student_setting_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/set_female_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48">
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_chainStyle="packed">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/_add_student_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_margin="6dp">
+            android:layout_marginEnd="3dp"
+            android:text="@string/add_student_setting"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/_add_student_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:textStyle="bold"
-                android:text="@string/add_student_setting"
-                android:textSize="15sp" />
-
-            <View
-                android:id="@+id/guideline5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="3dp"
-                android:layout_centerVertical="true"
-                android:alpha="0.5"
-                android:layout_toEndOf="@+id/_add_student_setting"
-                android:background="@color/black"
-                android:orientation="horizontal" />
-        </RelativeLayout>
-
-        <LinearLayout
+        <View
+            android:id="@+id/guideline5"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:orientation="horizontal">
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/_add_student_setting"
+            android:alpha="0.5"
+            android:background="@color/black"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender_to_always_girls"
-                android:textSize="17sp" />
 
-            <Switch
-                android:id="@+id/switch_always_girls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
+    <TextView
+        android:id="@+id/set_female_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/gender_to_always_girls"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/set_male_text_view"
+        app:layout_constraintEnd_toStartOf="@id/switch_always_girls"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_add_student_setting_layout" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:orientation="horizontal">
+    <Switch
+        android:id="@+id/switch_always_girls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/set_female_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/set_female_text_view" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender_to_always_boys"
-                android:textSize="17sp" />
 
-            <Switch
-                android:id="@+id/switch_always_boys"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+    <TextView
+        android:id="@+id/set_male_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/gender_to_always_boys"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/switch_always_boys"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_female_text_view" />
 
-        </LinearLayout>
+    <Switch
+        android:id="@+id/switch_always_boys"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:layout_constraintBaseline_toBaselineOf="@+id/set_male_text_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/set_male_text_view" />
 
-        <RelativeLayout
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/delete_all_students_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_male_text_view">
+
+        <TextView
+            android:id="@+id/students_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_margin="6dp">
+            android:layout_marginEnd="3dp"
+            android:text="@string/students_setting"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/students_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:textStyle="bold"
-                android:text="@string/students_setting"
-                android:textSize="15sp" />
-
-            <View
-                android:id="@+id/guideline6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="3dp"
-                android:layout_centerVertical="true"
-                android:alpha="0.5"
-                android:layout_toEndOf="@+id/students_setting"
-                android:background="@color/black"
-                android:orientation="horizontal" />
-        </RelativeLayout>
-
-        <com.rey.material.widget.Button
-            android:id="@+id/delete_all_students_button"
-            style="@style/buttons_style"
+        <View
+            android:id="@+id/guideline6"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_margin="6dp"
-            android:background="@drawable/buttons"
-            android:padding="8dp"
-            android:text="@string/delete_data"
-            android:textAlignment="textStart"
-            />
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/students_setting"
+            android:alpha="0.5"
+            android:background="@color/black"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
-        <RelativeLayout
+    <com.rey.material.widget.Button
+        android:id="@+id/delete_all_students_button"
+        style="@style/buttons_style"
+        android:layout_width="0dp"
+        android:layout_height="65dp"
+        android:layout_margin="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/buttons"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/delete_data"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_all_students_button">
+
+        <TextView
+            android:id="@+id/user_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_margin="6dp">
+            android:layout_marginEnd="3dp"
+            android:text="@string/user_setting"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/user_setting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:textStyle="bold"
-                android:text="@string/user_setting"
-                android:textSize="15sp" />
-
-            <View
-                android:id="@+id/guideline7"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="3dp"
-                android:layout_centerVertical="true"
-                android:alpha="0.5"
-                android:layout_toEndOf="@+id/user_setting"
-                android:background="@color/black"
-                android:orientation="horizontal" />
-        </RelativeLayout>
-
-        <com.rey.material.widget.Button
-            android:id="@+id/delete_account_button"
-            style="@style/buttons_style"
+        <View
+            android:id="@+id/guideline7"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_margin="6dp"
-            android:background="@drawable/buttons"
-            android:padding="8dp"
-            android:text="@string/delete_user"
-            android:textAlignment="textStart"
-            />
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="3dp"
+            android:layout_toEndOf="@+id/user_setting"
+            android:alpha="0.5"
+            android:background="@color/black"
+            android:orientation="horizontal" />
+    </RelativeLayout>
 
-    </LinearLayout>
+    <com.rey.material.widget.Button
+        android:id="@+id/delete_account_button"
+        style="@style/buttons_style"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_margin="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/buttons"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/delete_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

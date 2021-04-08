@@ -1,520 +1,501 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentEnd="true"
     android:background="@color/white"
-    android:layoutDirection="ltr"
-    android:orientation="vertical"
-    tools:layout_editor_absoluteY="81dp">
+    android:fillViewport="true">
 
-
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/student_details"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp">
-
-                <TextView
-                    android:id="@+id/student_details"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:textStyle="bold"
-                    android:text="@string/student_details"
-                    android:textSize="15sp" />
-
-                <View
-                    android:id="@+id/guideline5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_centerVertical="true"
-                    android:alpha="0.5"
-                    android:layout_toEndOf="@+id/student_details"
-                    android:background="@color/black"
-                    android:orientation="horizontal" />
-            </RelativeLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="3dp"
-                android:focusable="true"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textField1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_marginStart="2dp"
-                    android:padding="5dp"
-                    android:layout_weight="1"
-                    android:hint="@string/name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/student_name_to_enter_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:focusable="true"
-                        android:background="@color/transparent"
-                        android:focusableInTouchMode="true"
-                        android:gravity="start"
-                        android:nextFocusForward="@+id/phone_number_to_enter_id"
-                        android:nextFocusDown="@+id/phone_number_to_enter_id"
-                        android:nextFocusLeft="@+id/phone_number_to_enter_id"
-                        android:nextFocusRight="@+id/phone_number_to_enter_id"
-                        android:nextFocusUp="@+id/phone_number_to_enter_id"
-                        android:inputType="textPersonName"
-                        android:textAlignment="viewStart" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textField2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="1dp"
-                    android:layout_weight="1"
-                    android:padding="5dp"
-                    android:layout_marginEnd="2dp"
-                    android:hint="@string/phone_number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phone_number_to_enter_id"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:ems="10"
-                        android:background="@color/transparent"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:gravity="start"
-                        android:inputType="phone"
-                        android:textAlignment="textStart" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="1dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-
-                <com.rey.material.widget.Button
-                    android:id="@+id/student_class_id"
-                    style="@style/buttons_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/buttons"
-                    android:text="@string/Class"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
-
-                <com.rey.material.widget.Button
-                    android:id="@+id/gender_button"
-                    style="@style/buttons_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/buttons"
-                    android:text="@string/gender"
-                    app:rd_delayClick="untilRelease"
-                    app:rd_enable="true"
-                    app:rd_maxRippleRadius="match_view"
-                    app:rd_rippleColor="@color/colorPrimary"
-                    app:rd_rippleType="touch" />
-
-            </LinearLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="2dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp">
-
-                <TextView
-                    android:id="@+id/student_scores"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
-                    android:textStyle="bold"
-                    android:text="@string/student_scores"
-                    android:textSize="15sp" />
-
-                <View
-                    android:id="@+id/guideline6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="3dp"
-                    android:layout_centerVertical="true"
-                    android:alpha="0.5"
-                    android:layout_toEndOf="@+id/student_scores"
-                    android:background="@color/black"
-                    android:orientation="horizontal" />
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                tools:layout_editor_absoluteX="2dp">
-
-
-
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/aerobic" />
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/minutes"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/update_student_aerobic_id"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="textStart" />
-
-                <TextView
-                    android:id="@+id/update_student_aerobic_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/grade" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
-                tools:layout_editor_absoluteX="2dp">
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/abs" />
-
-                <TextView
-                    android:id="@+id/textView30"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/amount"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/update_student_abs_id"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="textStart" />
-
-                <TextView
-                    android:id="@+id/student_abs_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/grade" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout6"
-                tools:layout_editor_absoluteX="2dp">
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/cubes" />
-
-
-                <TextView
-                    android:id="@+id/textView31"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/seconds"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/update_student_cubes_id"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="textStart" />
-
-                <TextView
-                    android:id="@+id/student_cubes_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/grade" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
-                tools:layout_editor_absoluteX="2dp">
-
-                <TextView
-                    android:id="@+id/textView18"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/hands" />
-
-                <TextView
-                    android:id="@+id/hands_minutes_text_view"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/minutes"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/update_student_hands_id"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="textStart" />
-
-
-                <TextView
-                    android:id="@+id/student_hands_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/grade" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout8"
-                tools:layout_editor_absoluteX="2dp">
-
-                <TextView
-                    android:id="@+id/textView20"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/jump" />
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/cm"
-                    android:textAlignment="center" />
-
-                <EditText
-                    android:id="@+id/update_student_jump_id"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:gravity="start"
-                    android:inputType="numberDecimal"
-                    android:textAlignment="textStart" />
-
-                <TextView
-                    android:id="@+id/student_jump_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/grade" />
-
-            </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout10"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="6dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout11"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/student_details"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textInput_layout_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
 
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/total_score" />
-
-            <TextView
-                android:id="@+id/student_total_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/grade" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_marginBottom="10dp"
-            android:gravity="center"
+        <View
+            android:id="@+id/guideline5"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
+            android:alpha="0.5"
+            android:background="@color/black"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/textInput_layout_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/student_details"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput_layout_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
+            android:hint="@string/name"
+            app:layout_constraintBottom_toTopOf="@+id/student_class_id"
+            app:layout_constraintEnd_toStartOf="@+id/textField2"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/student_details">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/student_name_to_enter_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="start"
+                android:inputType="textPersonName"
+                android:nextFocusLeft="@+id/phone_number_to_enter_id"
+                android:nextFocusRight="@+id/phone_number_to_enter_id"
+                android:nextFocusUp="@+id/phone_number_to_enter_id"
+                android:nextFocusDown="@+id/phone_number_to_enter_id"
+                android:nextFocusForward="@+id/phone_number_to_enter_id"
+                android:textAlignment="viewStart" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textField2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="8dp"
+            android:hint="@string/phone_number"
+            app:layout_constraintBottom_toTopOf="@+id/gender_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textInput_layout_name"
+            app:layout_constraintTop_toBottomOf="@+id/student_details">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/phone_number_to_enter_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="start"
+                android:inputType="phone"
+                android:textAlignment="textStart" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.rey.material.widget.Button
+            android:id="@+id/student_class_id"
+            style="@style/buttons_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
+            android:background="@drawable/buttons"
+            android:text="@string/Class"
+            app:layout_constraintBottom_toTopOf="@+id/student_scores"
+            app:layout_constraintEnd_toStartOf="@+id/gender_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInput_layout_name"
+            app:rd_delayClick="untilRelease"
+            app:rd_enable="true"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"
+            app:rd_rippleType="touch" />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/gender_button"
+            style="@style/buttons_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/buttons"
+            android:text="@string/gender"
+            app:layout_constraintBaseline_toBaselineOf="@+id/student_class_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/student_class_id"
+            app:rd_delayClick="untilRelease"
+            app:rd_enable="true"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"
+            app:rd_rippleType="touch" />
+
+
+        <TextView
+            android:id="@+id/student_scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/student_scores"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView15"
+            app:layout_constraintEnd_toStartOf="@+id/guideline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/student_class_id" />
+
+        <View
+            android:id="@+id/guideline6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toEndOf="@+id/student_scores"
+            android:alpha="0.5"
+            android:background="@color/black"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/update_student_aerobic_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/student_scores"
+            app:layout_constraintTop_toBottomOf="@+id/student_class_id" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/aerobic"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/student_scores" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/minutes"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_aerobic_id"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/hands_minutes_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/minutes"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_hands_id"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/textView18" />
+
+        <EditText
+            android:id="@+id/update_student_aerobic_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_aerobic_text"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/textView" />
+
+
+        <TextView
+            android:id="@+id/update_student_aerobic_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/grade"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/update_student_aerobic_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/update_student_aerobic_id" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/abs"
+            app:layout_constraintBottom_toTopOf="@+id/textView17"
+            app:layout_constraintEnd_toStartOf="@+id/textView30"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/amount"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_abs_id"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/textView16" />
+
+
+        <EditText
+            android:id="@+id/update_student_abs_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+            app:layout_constraintEnd_toStartOf="@+id/student_abs_text"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/textView30" />
+
+        <TextView
+            android:id="@+id/student_abs_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/grade"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/update_student_abs_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/update_student_abs_id" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/cubes"
+            app:layout_constraintBottom_toTopOf="@+id/textView18"
+            app:layout_constraintEnd_toStartOf="@+id/textView31"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/seconds"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView17"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_cubes_id"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/textView17" />
+
+
+        <EditText
+            android:id="@+id/update_student_cubes_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
+            app:layout_constraintEnd_toStartOf="@+id/student_cubes_text"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/textView31" />
+
+        <TextView
+            android:id="@+id/student_cubes_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/grade"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/update_student_cubes_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/update_student_cubes_id" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/hands"
+            app:layout_constraintBottom_toTopOf="@+id/textView20"
+            app:layout_constraintEnd_toStartOf="@+id/hands_minutes_text_view"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+        <EditText
+            android:id="@+id/update_student_hands_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/hands_minutes_text_view"
+            app:layout_constraintEnd_toStartOf="@+id/student_hands_text"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/hands_minutes_text_view" />
+
+        <TextView
+            android:id="@+id/student_hands_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/grade"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/update_student_hands_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/update_student_hands_id" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="2dp"
+            android:text="@string/jump"
+            app:layout_constraintBottom_toTopOf="@+id/textView23"
+            app:layout_constraintEnd_toStartOf="@+id/textView33"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="3dp"
+            android:text="@string/cm"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView20"
+            app:layout_constraintEnd_toStartOf="@+id/update_student_jump_id"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/textView20" />
+
+        <EditText
+            android:id="@+id/update_student_jump_id"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="numberDecimal"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
+            app:layout_constraintEnd_toStartOf="@+id/student_jump_text"
+            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintStart_toEndOf="@+id/textView33" />
+
+        <TextView
+            android:id="@+id/student_jump_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="@string/grade"
+            android:textAlignment="center"
+            app:layout_constraintBaseline_toBaselineOf="@+id/update_student_jump_id"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/update_student_jump_id" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/total_score"
+            app:layout_constraintBottom_toTopOf="@+id/button_add_student_enter_data"
+            app:layout_constraintEnd_toStartOf="@+id/student_total_score"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+        <TextView
+            android:id="@+id/student_total_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/grade"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView23"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView23" />
+
+        <com.rey.material.widget.Button
+            android:id="@+id/button_add_student_enter_data"
+            style="@style/buttons_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/buttons"
+            android:text="@string/save"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+            app:layout_constraintTop_toBottomOf="@+id/textView23"
+            app:rd_delayClick="untilRelease"
+            app:rd_enable="true"
+            app:rd_maxRippleRadius="match_view"
+            app:rd_rippleColor="@color/colorPrimary"
+            app:rd_rippleType="touch" />
 
-            <com.rey.material.widget.Button
-                android:id="@+id/button_add_student_enter_data"
-                style="@style/buttons_style"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="3dp"
-                android:layout_marginBottom="3dp"
-                android:background="@drawable/buttons"
-                android:text="@string/save"
-                app:rd_delayClick="untilRelease"
-                app:rd_enable="true"
-                app:rd_maxRippleRadius="match_view"
-                app:rd_rippleColor="@color/colorPrimary"
-                app:rd_rippleType="touch" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

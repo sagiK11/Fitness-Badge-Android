@@ -32,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:text="@string/grades_avg"
-                android:textSize="17sp"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="17sp" />
 
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/avg_grades_chart"
@@ -61,9 +61,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
-                android:textSize="17sp"
                 android:text="@string/finished_students"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textSize="17sp" />
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/finished_chart"
@@ -71,6 +71,6 @@
                 android:layout_height="match_parent" />
         </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
