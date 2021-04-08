@@ -3,7 +3,7 @@ package com.sagikor.android.fitracker.ui.contracts;
 import android.content.SharedPreferences;
 
 public interface SettingsActivityContract {
-    interface Presenter {
+    interface Presenter extends BaseContract.BasePresenter {
         void clearDatabase();
 
         void bind(SettingsActivityContract.View view, SharedPreferences sharedPreferences);
@@ -20,7 +20,7 @@ public interface SettingsActivityContract {
 
     }
 
-    interface View {
+    interface View extends BaseContract.BaseView {
         void switchLogic();
     }
 }
