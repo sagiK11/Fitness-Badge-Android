@@ -69,6 +69,7 @@ public class ViewStudentsActivity extends AppCompatActivity implements
         inputSearch = findViewById(R.id.search_input);
         listView.addItemDecoration(new DividerItemDecoration(listView.getContext(),
                 DividerItemDecoration.VERTICAL));
+        listView.requestFocus();
     }
 
     @Override
