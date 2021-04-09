@@ -17,7 +17,7 @@ public class AppDatabaseHandler implements DatabaseHandler {
     private static final AppDatabaseHandler appDatabaseHandler = init();
     private final FirebaseHandler firebaseHandler = AppFirebaseHandler.getInstance();
     private final SharedPreferencesHandler sharedPreferencesHandler = AppSharedPreferencesHandler.getInstance();
-    private int cachedObjectIndex;
+    private String cachedObjectKey;
 
     private static AppDatabaseHandler init() {
         return new AppDatabaseHandler();
@@ -103,12 +103,12 @@ public class AppDatabaseHandler implements DatabaseHandler {
 
     @Override
     public void signInWithEmailAndPassword(String email, String password) {
-        firebaseHandler.signInWithEmailAndPassword(email,password);
+        firebaseHandler.signInWithEmailAndPassword(email, password);
     }
 
     @Override
     public void createUserWithEmailAndPassword(String email, String password, String name) {
-        firebaseHandler.createUserWithEmailAndPassword(email,password,name);
+        firebaseHandler.createUserWithEmailAndPassword(email, password, name);
     }
 
     @Override
@@ -147,12 +147,17 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void cacheObject(int index) {
-        cachedObjectIndex = index;
+    public void cacheObject(String objKey) {
+        cachedObjectKey = objKey;
     }
 
     @Override
     public Student getCachedObject() {
-        return getStudents().get(cachedObjectIndex);
+        for (Student student : getStudents()) {
+            if (student.getKey().equals(cachedObjectKey)) {
+                return student;
+            }
+        }
+        throw new RuntimeException("Student not found");
     }
 }

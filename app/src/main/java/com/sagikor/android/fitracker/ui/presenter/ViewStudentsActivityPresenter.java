@@ -17,8 +17,8 @@ public class ViewStudentsActivityPresenter implements
     private ViewStudentsActivityContract.View view;
 
     @Override
-    public void onStudentClick(int position) {
-        databaseHandler.cacheObject(position);
+    public void onStudentClick(String key) {
+        databaseHandler.cacheObject(key);
         view.navToStudentUpdate();
     }
 

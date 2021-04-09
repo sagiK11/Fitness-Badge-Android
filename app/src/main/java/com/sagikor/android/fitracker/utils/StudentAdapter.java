@@ -60,7 +60,7 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         final String DELETE_STUDENT_QUESTION = context.getResources().getString(R.string.delete_student_question);
         //short click
         holder.itemView.setOnClickListener(e -> {
-            presenter.onStudentClick(position);
+            presenter.onStudentClick(student.getKey());
         });
         //long click
         holder.itemView.setOnLongClickListener(e->{

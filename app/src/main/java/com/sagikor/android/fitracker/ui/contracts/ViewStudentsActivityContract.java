@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ViewStudentsActivityContract {
     interface Presenter extends BaseContract.BasePresenter {
-        void onStudentClick(int position);
+        void onStudentClick(String key);
 
         List<Student> getStudentsList();
 
