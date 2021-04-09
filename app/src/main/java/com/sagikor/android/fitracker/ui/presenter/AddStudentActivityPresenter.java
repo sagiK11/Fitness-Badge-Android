@@ -10,6 +10,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.Utility;
 
 
@@ -31,12 +32,19 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     @Override
     public void onAddStudentClick() {
-        if (!isValidInput())
+
+        try {
+            checkInput();
+        } catch (AppExceptions.Input e) {
+            view.popMessage(e.getMessage());
             return;
+        }
 
         Student newStudent = createNewStudent();
-        if (databaseHandler.isStudentExistsInFirebase(newStudent)) {
-            view.popFailWindow("Student already exists");
+        try {
+            databaseHandler.checkStudentExistsInFirebase(newStudent);
+        } catch (AppExceptions.StudentExistsAlready e) {
+            view.popFailWindow(e.getMessage());
             return;
         }
         databaseHandler.addStudent(newStudent);
@@ -110,27 +118,32 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
     }
 
 
-    private boolean isValidInput() {
+    private void checkInput() throws AppExceptions.Input {
         if (!isValidName(view.getStudentName())) {
-            view.popMessage("invalid name");
-            return false;
+            throw new AppExceptions.Input("please select name");
         } else if (!super.isValidPhoneNo(view.getStudentPhoneNo())) {
-            view.popMessage("invalid phone number");
-            return false;
+            throw new AppExceptions.Input("invalid phone number");
         } else if (!isValidClass(view.getStudentClass())) {
-            view.popMessage("please select class");
-            return false;
+            throw new AppExceptions.Input("please select class");
         } else if (!isValidGender(view.getStudentGender())) {
-            view.popMessage("please select gender");
-            return false;
+            throw new AppExceptions.Input("please select gender");
         }
-        return true;
     }
 
     @Override
     public boolean isValidName(String nameInput) {
-        //regex will match latin and hebrew characters.//TODO test it
-        return isNonEmptyInput(nameInput) && nameInput.matches("^[a-zA-Z\\u0590-\\u05fe']+$");
+        final int maxLength = 25;
+        return isNonEmptyInput(nameInput) && nameInput.length() < maxLength
+                && isAlphabetic(nameInput);
+    }
+
+    private boolean isAlphabetic(String nameInput) {
+        for (Character ch : nameInput.toCharArray()) {
+            if (!Character.isAlphabetic(ch) && ch != ' ' && ch != '\'') {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

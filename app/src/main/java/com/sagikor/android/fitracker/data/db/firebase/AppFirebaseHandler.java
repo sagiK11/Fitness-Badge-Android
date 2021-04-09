@@ -20,6 +20,7 @@ import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.data.model.User;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,14 +111,14 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
 
     @Override
-    public boolean isStudentExistsInFirebase(Student student) {
+    public void checkStudentExistsInFirebase(Student student) throws AppExceptions.StudentExistsAlready {
         for (Student curr : studentList) {
             if (student.getName().equals(curr.getName()) &&
                     student.getStudentClass().equals(curr.getStudentClass())) {
-                return true;
+                throw new AppExceptions.StudentExistsAlready();
             }
         }
-        return false;
+
     }
 
     @Override

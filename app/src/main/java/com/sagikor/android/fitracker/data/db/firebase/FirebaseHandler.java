@@ -1,9 +1,8 @@
- package com.sagikor.android.fitracker.data.db.firebase;
+package com.sagikor.android.fitracker.data.db.firebase;
 
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
-import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
-import com.sagikor.android.fitracker.ui.view.ViewStudentsActivity;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface FirebaseHandler {
 
     void deleteStudent(Student student);
 
-    boolean isStudentExistsInFirebase(Student student);
+    void checkStudentExistsInFirebase(Student student) throws AppExceptions.StudentExistsAlready;
 
     void clearDatabase();
 
@@ -37,9 +36,9 @@ public interface FirebaseHandler {
 
     void setRegisterPresenter(BaseContract.RegisterPresenter presenter);
 
-    void signInWithEmailAndPassword(String email,String password);
+    void signInWithEmailAndPassword(String email, String password);
 
-    void createUserWithEmailAndPassword(String email,String password,String name);
+    void createUserWithEmailAndPassword(String email, String password, String name);
 
     void resetPassword(String userEmail);
 

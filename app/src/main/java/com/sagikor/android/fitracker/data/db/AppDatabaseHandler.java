@@ -9,6 +9,7 @@ import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 
 
 import java.util.List;
@@ -122,8 +123,8 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public boolean isStudentExistsInFirebase(Student student) {
-        return firebaseHandler.isStudentExistsInFirebase(student);
+    public void checkStudentExistsInFirebase(Student student) throws AppExceptions.StudentExistsAlready {
+         firebaseHandler.checkStudentExistsInFirebase(student);
     }
 
     @Override
@@ -158,6 +159,6 @@ public class AppDatabaseHandler implements DatabaseHandler {
                 return student;
             }
         }
-        throw new RuntimeException("Student not found");
+        throw new AppExceptions.StudentNotFound();
     }
 }
