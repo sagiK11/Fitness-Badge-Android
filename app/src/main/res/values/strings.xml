@@ -179,6 +179,10 @@
     <string name="student_list_view_instructions">Short click to edit. Long click to delete</string>
     <string name="choose_password">Choose Password</string>
     <string name="Calendar">Calendar</string>
+    <string name="add_classes">Add classes</string>
+    <string name="current_classes">current classes</string>
+    <string name="delete_class_question">Delete class?</string>
+    <string name="adding_classes">Adding Classes</string>
 
 
 

@@ -60,7 +60,6 @@
         android:id="@+id/switch_always_girls"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         app:layout_constraintBaseline_toBaselineOf="@+id/set_female_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/set_female_text_view" />
@@ -71,9 +70,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/gender_to_always_boys"
         android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_classes"
         app:layout_constraintEnd_toStartOf="@+id/switch_always_boys"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/set_female_text_view" />
@@ -82,10 +82,26 @@
         android:id="@+id/switch_always_boys"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         app:layout_constraintBaseline_toBaselineOf="@+id/set_male_text_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/set_male_text_view" />
+
+    <com.rey.material.widget.Button
+        android:id="@+id/btn_add_classes"
+        style="@style/buttons_style"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/buttons"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="@string/add_classes"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_male_text_view" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -96,7 +112,7 @@
         app:layout_constraintBottom_toTopOf="@+id/delete_all_students_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_male_text_view">
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_classes">
 
         <TextView
             android:id="@+id/students_setting"

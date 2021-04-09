@@ -16,7 +16,7 @@
         tools:replace="android:icon">
 
         <activity
-            android:name=".ui.view.WelcomeActivity"
+            android:name=".ui.view.SignInActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppSecondaryTheme">
             <intent-filter  >
@@ -40,6 +40,7 @@
 
         <activity
             android:name=".ui.view.AddStudentActivity"
+            android:screenOrientation="portrait"
             android:label="@string/enter_update_data"
             android:theme="@style/AppThirdTheme" />
 
@@ -57,6 +58,7 @@
 
         <activity
             android:name=".ui.view.UpdateStudentActivity"
+            android:screenOrientation="portrait"
             android:label="@string/Update_student"
             android:theme="@style/AppThirdTheme" />
 
@@ -67,9 +69,15 @@
             android:theme="@style/AppSecondaryTheme" />
 
         <activity
-            android:name=".ui.view.SettingActivity"
+            android:name=".ui.view.SettingsActivity"
             android:screenOrientation="portrait"
             android:label="@string/setting"
+            android:theme="@style/AppThirdTheme" />
+
+        <activity
+            android:name=".ui.view.AddClassesActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/adding_classes"
             android:theme="@style/AppThirdTheme" />
 
 

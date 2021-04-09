@@ -4,13 +4,11 @@ import android.content.SharedPreferences;
 
 public interface SettingsActivityContract {
     interface Presenter extends BaseContract.BasePresenter {
-        void clearDatabase();
+        void onClearDatabaseClick();
 
-        void bind(SettingsActivityContract.View view, SharedPreferences sharedPreferences);
+        void onDeleteAccountClick();
 
-        void unbind();
-
-        void deleteAccount();
+        void onAddClassesClick();
 
         void editGenderPreferences(String gender, boolean isChecked);
 
@@ -18,9 +16,15 @@ public interface SettingsActivityContract {
 
         boolean isBoysSwitchOn();
 
+        void bind(SettingsActivityContract.View view, SharedPreferences sharedPreferences);
+
+        void unbind();
+
     }
 
     interface View extends BaseContract.BaseView {
         void switchLogic();
+
+        void navToAddClasses();
     }
 }

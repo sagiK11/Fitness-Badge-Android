@@ -133,8 +133,8 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
         return textView.getText().toString().trim();
     }
 
-
-    protected void popSuccessWindow() {
+    @Override
+    public void popSuccessWindow() {
         final String STUDENT_SAVED = getResources().getString(R.string.student_saved);
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText(STUDENT_SAVED)
@@ -142,10 +142,9 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     @Override
-    public void popFailWindow() {
-        final String STUDENT_EXISTS = getResources().getString(R.string.student_exists);
+    public void popFailWindow(String error) {
         new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText(STUDENT_EXISTS)
+                .setTitleText(error)
                 .show();
     }
 
@@ -155,27 +154,20 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
         final String YES = getResources().getString(R.string.yes);
         final String NO = getResources().getString(R.string.no);
 
-        if (studentHaetStudentPhoneNo()) {
+        if (isStudentHasStudentPhoneNo()) {
             new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                     .setTitleText(SEND_QUESTION)
                     .setConfirmText(YES)
                     .setConfirmClickListener(sDialog -> {
                         sDialog.dismissWithAnimation();
                         sendSms(student);
-                        popSuccessWindow();
                     })
-                    .setCancelButton(NO, sDialog -> {
-                        popSuccessWindow();
-                        sDialog.dismissWithAnimation();
-                    })
+                    .setCancelButton(NO, SweetAlertDialog::dismissWithAnimation)
                     .show();
-        } else {
-            popSuccessWindow();
         }
-
     }
 
-    boolean studentHaetStudentPhoneNo() {
+    boolean isStudentHasStudentPhoneNo() {
         return getStudentPhoneNumber().length() > 1;
     }
 
@@ -326,6 +318,8 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                         if (presenter.isValidScore(input)) {
                             String grade = presenter.calculateGrade(input, type, isFemale);
                             tvGrade.setText(grade);
+                        }else{
+                            tvGrade.setText(getResources().getString(R.string.grade));
                         }
                     } else {
                         popMessage(getResources().getString(R.string.gender_error));

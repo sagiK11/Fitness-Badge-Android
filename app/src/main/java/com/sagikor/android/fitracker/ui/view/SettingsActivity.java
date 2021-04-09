@@ -18,10 +18,11 @@ import com.sagikor.android.fitracker.ui.presenter.SettingsActivityPresenter;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsActivityContract.View {
 
-    private Button deleteStudentsButton;
-    private Button deleteAccountButton;
-    private Switch alwaysGirlsSwitch;
-    private Switch alwaysBoysSwitch;
+    private Button btnDeleteStudents;
+    private Button btnDeleteAccount;
+    private Button btnAddClasses;
+    private Switch switchIsAlwaysFemale;
+    private Switch switchIsAlwaysMale;
     boolean isGirlsSwitchOn;
     boolean isBoysSwitchOn;
     private SettingsActivityContract.Presenter presenter;
@@ -30,34 +31,43 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        linkObjects();
+        bindViews();
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        if(presenter == null)
+        if (presenter == null)
             presenter = new SettingsActivityPresenter();
-        presenter.bind(this,getSharedPreferences("sharedPreferences",MODE_PRIVATE));
+        presenter.bind(this, getSharedPreferences("sharedPreferences", MODE_PRIVATE));
         switchLogic();
         enableSwitchesLogic();
     }
 
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         presenter.unbind();
     }
 
-    private void linkObjects() {
-        deleteStudentsButton = findViewById(R.id.delete_all_students_button);
-        deleteStudentsButton.setOnClickListener(e -> deleteAllStudents());
-        alwaysGirlsSwitch = findViewById(R.id.switch_always_girls);
-        alwaysBoysSwitch = findViewById(R.id.switch_always_boys);
-        deleteAccountButton = findViewById(R.id.delete_account_button);
-        deleteAccountButton.setOnClickListener(e -> deleteAccountPop());
-        alwaysGirlsSwitch.setOnClickListener(e -> presenter.editGenderPreferences("Girls",alwaysGirlsSwitch.isChecked()));
-        alwaysBoysSwitch.setOnClickListener(e -> presenter.editGenderPreferences("Boys",alwaysBoysSwitch.isChecked()));
+    private void bindViews() {
+        btnDeleteStudents = findViewById(R.id.delete_all_students_button);
+        btnDeleteStudents.setOnClickListener(e -> deleteAllStudentsPopWarning());
+        switchIsAlwaysFemale = findViewById(R.id.switch_always_girls);
+        switchIsAlwaysMale = findViewById(R.id.switch_always_boys);
+        btnDeleteAccount = findViewById(R.id.delete_account_button);
+        btnDeleteAccount.setOnClickListener(e -> deleteAccountPopWarning());
+        btnAddClasses = findViewById(R.id.btn_add_classes);
+        btnAddClasses.setOnClickListener(e -> presenter.onAddClassesClick());
+        switchIsAlwaysFemale.setOnClickListener(e -> presenter.editGenderPreferences("Girls", switchIsAlwaysFemale.isChecked()));
+        switchIsAlwaysMale.setOnClickListener(e -> presenter.editGenderPreferences("Boys", switchIsAlwaysMale.isChecked()));
+        setButtonsAlpha();
+    }
+
+    private void setButtonsAlpha() {
+        btnAddClasses.getBackground().setAlpha(50);
+        btnDeleteStudents.getBackground().setAlpha(50);
+        btnDeleteAccount.getBackground().setAlpha(50);
     }
 
     @Override
@@ -65,30 +75,35 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         isGirlsSwitchOn = presenter.isGirlsSwitchOn();
         isBoysSwitchOn = presenter.isBoysSwitchOn();
 
-        alwaysGirlsSwitch.setChecked(isGirlsSwitchOn);
-        alwaysBoysSwitch.setChecked(isBoysSwitchOn);
+        switchIsAlwaysFemale.setChecked(isGirlsSwitchOn);
+        switchIsAlwaysMale.setChecked(isBoysSwitchOn);
         enableSwitchesLogic();
+    }
+
+    @Override
+    public void navToAddClasses() {
+        startActivity(new Intent(this, AddClassesActivity.class));
     }
 
 
     private void enableSwitchesLogic() {
         if (isGirlsSwitchOn) {
-            alwaysBoysSwitch.setEnabled(false);
-            alwaysBoysSwitch.setChecked(false);
-            alwaysGirlsSwitch.setEnabled(true);
+            switchIsAlwaysMale.setEnabled(false);
+            switchIsAlwaysMale.setChecked(false);
+            switchIsAlwaysFemale.setEnabled(true);
         } else if (isBoysSwitchOn) {
-            alwaysGirlsSwitch.setEnabled(false);
-            alwaysGirlsSwitch.setChecked(false);
-            alwaysBoysSwitch.setEnabled(true);
+            switchIsAlwaysFemale.setEnabled(false);
+            switchIsAlwaysFemale.setChecked(false);
+            switchIsAlwaysMale.setEnabled(true);
         } else {
-            alwaysGirlsSwitch.setEnabled(true);
-            alwaysBoysSwitch.setEnabled(true);
-            alwaysGirlsSwitch.setChecked(false);
-            alwaysBoysSwitch.setChecked(false);
+            switchIsAlwaysFemale.setEnabled(true);
+            switchIsAlwaysMale.setEnabled(true);
+            switchIsAlwaysFemale.setChecked(false);
+            switchIsAlwaysMale.setChecked(false);
         }
     }
 
-    private void deleteAllStudents() {
+    private void deleteAllStudentsPopWarning() {
         final int NO = 0;
         final String DELETE_STUDENTS_QUESTION = getResources().getString(R.string.delete_all_students_question);
         final String NO_STUDENTS_DELETED = getResources().getString(R.string.no_students_were_deleted);
@@ -102,7 +117,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
             if (choice == NO) {
                 popToast(NO_STUDENTS_DELETED);
             } else {
-                presenter.clearDatabase();
+                presenter.onClearDatabaseClick();
                 popToast(STUDENTS_DELETED_SUCCESSFULLY);
             }
         });
@@ -128,7 +143,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
                 .show();
     }
 
-    private void deleteAccountPop() {
+    private void deleteAccountPopWarning() {
         final String YES = getResources().getString(R.string.yes);
         final String NO = getResources().getString(R.string.no);
         final String DELETE_QUESTION = getResources().getString(R.string.delete_account_question);
@@ -138,7 +153,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
                     goodByeMessage();
-                    presenter.deleteAccount();
+                    presenter.onDeleteAccountClick();
 
                 })
                 .setCancelButton(NO, SweetAlertDialog::dismissWithAnimation)

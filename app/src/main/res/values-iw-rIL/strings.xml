@@ -163,4 +163,8 @@
     <string name="student_list_view_instructions">לחיצה קצרה לעריכה. לחיצה ארוכה למחיקת התלמיד.</string>
     <string name="choose_password">בחר סיסמה</string>
     <string name="Calendar">לוח שנה</string>
+    <string name="add_classes">הוסף כיתות שאני מלמד</string>
+    <string name="current_classes">הכיתות שאני מלמד</string>
+    <string name="delete_class_question">למחוק כיתה?</string>
+    <string name="adding_classes">הוספת כיתות</string>
 </resources>

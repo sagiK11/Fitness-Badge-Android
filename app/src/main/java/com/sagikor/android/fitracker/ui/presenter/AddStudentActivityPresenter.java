@@ -13,6 +13,9 @@ import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.Utility;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AddStudentActivityPresenter extends StudentActivityPresenter implements
         AddStudentActivityContract.Presenter, BaseContract.AdderPresenter {
@@ -135,6 +138,11 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         final int maxLength = 25;
         return isNonEmptyInput(nameInput) && nameInput.length() < maxLength
                 && isAlphabetic(nameInput);
+    }
+
+    @Override
+    public List<String> getTeacherClasses() {
+        return new ArrayList<>(databaseHandler.getClassesUserTeaches());
     }
 
     private boolean isAlphabetic(String nameInput) {

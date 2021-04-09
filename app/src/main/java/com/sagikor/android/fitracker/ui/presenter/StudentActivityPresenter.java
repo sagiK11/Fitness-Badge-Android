@@ -34,9 +34,11 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
 
     @Override
     public boolean isValidScore(String scoreInput) {
+        if (scoreInput == null || scoreInput.length() == 0)
+            return false;
         try {
             Double.parseDouble(scoreInput);
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException e) {
             return false;
         }
         return true;
@@ -51,41 +53,37 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
     @Override
     public String calculateGrade(String score, String sportType, boolean isFemale) {
         //this method is called only after we made user input testing and it passed.
-        final double grade;
         final double tempScore = Double.parseDouble(score);
 
-        switch (sportType) {
-            case SportResults.AEROBIC:
-                if (isFemale)
-                    grade = sportResults.getGirlsAerobicResult(tempScore);
-                else
-                    grade = sportResults.getBoysAerobicResult(tempScore);
-                return String.valueOf(grade);
-            case SportResults.ABS:
-                if (isFemale)
-                    grade = sportResults.getGirlsSitUpAbsResult((int) tempScore);
-                else
-                    grade = sportResults.getBoysSitUpAbsResult((int) tempScore);
-                return String.valueOf(grade);
-            case SportResults.JUMP:
-                if (isFemale)
-                    grade = sportResults.getGirlsJumpResult((int) tempScore);
-                else
-                    grade = sportResults.getBoysJumpResult((int) tempScore);
-                return String.valueOf(grade);
-            case SportResults.CUBES:
-                if (isFemale)
-                    grade = sportResults.getGirlsCubesResult(tempScore);
-                else
-                    grade = sportResults.getBoysCubesResult(tempScore);
-                return String.valueOf(grade);
-            default:
-                if (isFemale)
-                    grade = sportResults.getGirlsStaticHandsResult(tempScore);
-                else
-                    grade = sportResults.getBoysHandsResult(tempScore);
-                return String.valueOf(grade);
+        if (isFemale) {
+            switch (sportType) {
+                case SportResults.AEROBIC:
+                    return String.valueOf(sportResults.getGirlsAerobicResult(tempScore));
+                case SportResults.ABS:
+                    return String.valueOf(sportResults.getGirlsSitUpAbsResult((int) tempScore));
+                case SportResults.JUMP:
+                    return String.valueOf(sportResults.getGirlsJumpResult((int) tempScore));
+                case SportResults.CUBES:
+                    return String.valueOf(sportResults.getGirlsCubesResult(tempScore));
+                default:
+                    return String.valueOf(sportResults.getGirlsStaticHandsResult(tempScore));
+            }
+        } else {
+            switch (sportType) {
+                case SportResults.AEROBIC:
+                    return String.valueOf(sportResults.getBoysAerobicResult(tempScore));
+                case SportResults.ABS:
+                    return String.valueOf(sportResults.getBoysSitUpAbsResult((int) tempScore));
+                case SportResults.JUMP:
+                    return String.valueOf(sportResults.getBoysJumpResult((int) tempScore));
+                case SportResults.CUBES:
+                    return String.valueOf(sportResults.getBoysCubesResult(tempScore));
+                default:
+                    return String.valueOf(sportResults.getBoysHandsResult(tempScore));
+            }
         }
+
+
     }
 
     @Override

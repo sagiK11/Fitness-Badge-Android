@@ -2,16 +2,22 @@ package com.sagikor.android.fitracker.data.db.sharedprefrences;
 
 
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class AppSharedPreferencesHandler implements SharedPreferencesHandler {
     private final static AppSharedPreferencesHandler sharedPreferencesHandler = init();
+    private static final String CLASSES_USER_TEACHES = "CLASSES_USER_TEACHES";
+    private static final String TAG = "AppSharedPrefHandler";
     private SharedPreferences sharedPreferences;
 
     private static AppSharedPreferencesHandler init() {
         return new AppSharedPreferencesHandler();
     }
 
-    public static AppSharedPreferencesHandler getInstance(){
+    public static AppSharedPreferencesHandler getInstance() {
         return sharedPreferencesHandler;
     }
 
@@ -32,13 +38,40 @@ public class AppSharedPreferencesHandler implements SharedPreferencesHandler {
     }
 
     @Override
-    public void editGenderPreferences(String gender,boolean isChecked) {
+    public void editGenderPreferences(String gender, boolean isChecked) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        if(gender.equals("Girls")){
+        if (gender.equals("Girls")) {
             editor.putBoolean("alwaysGirlsSwitch", isChecked);
-        }else if(gender.equals("Boys")){
+        } else if (gender.equals("Boys")) {
             editor.putBoolean("alwaysBoysSwitch", isChecked);
         }
+        editor.apply();
+    }
+
+    @Override
+    public Set<String> getClassesUserTeaches() {
+        return sharedPreferences.getStringSet(CLASSES_USER_TEACHES, null);
+    }
+
+    @Override
+    public void addClassUserTeaches(String classToTeach) {
+        Set<String> set = getClassesUserTeaches();
+        if (set == null)
+            set = new HashSet<>();
+        set.add(classToTeach);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putStringSet(CLASSES_USER_TEACHES, set);
+        editor.apply();
+    }
+
+    @Override
+    public void deleteClassUserTeaches(String classToTeach) {
+        Set<String> set = getClassesUserTeaches();
+        set.remove(classToTeach);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.putStringSet(CLASSES_USER_TEACHES, set);
         editor.apply();
     }
 }

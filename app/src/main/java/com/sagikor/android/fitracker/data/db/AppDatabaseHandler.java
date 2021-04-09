@@ -13,6 +13,7 @@ import com.sagikor.android.fitracker.utils.AppExceptions;
 
 
 import java.util.List;
+import java.util.Set;
 
 public class AppDatabaseHandler implements DatabaseHandler {
     private static final AppDatabaseHandler appDatabaseHandler = init();
@@ -145,6 +146,21 @@ public class AppDatabaseHandler implements DatabaseHandler {
     @Override
     public void editGenderPreferences(String gender, boolean isChecked) {
         sharedPreferencesHandler.editGenderPreferences(gender, isChecked);
+    }
+
+    @Override
+    public Set<String> getClassesUserTeaches() {
+        return sharedPreferencesHandler.getClassesUserTeaches();
+    }
+
+    @Override
+    public void addClassUserTeaches(String classToTeach) {
+        sharedPreferencesHandler.addClassUserTeaches(classToTeach);
+    }
+
+    @Override
+    public void deleteClassUserTeaches(String classToTeach) {
+        sharedPreferencesHandler.deleteClassUserTeaches(classToTeach);
     }
 
     @Override

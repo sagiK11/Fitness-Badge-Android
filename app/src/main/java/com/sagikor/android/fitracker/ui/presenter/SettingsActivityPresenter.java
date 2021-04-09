@@ -11,7 +11,7 @@ public class SettingsActivityPresenter implements SettingsActivityContract.Prese
     private SettingsActivityContract.View view;
 
     @Override
-    public void clearDatabase() {
+    public void onClearDatabaseClick() {
         databaseHandler.clearDatabase();
     }
 
@@ -28,8 +28,13 @@ public class SettingsActivityPresenter implements SettingsActivityContract.Prese
     }
 
     @Override
-    public void deleteAccount() {
+    public void onDeleteAccountClick() {
         databaseHandler.deleteAccount();
+    }
+
+    @Override
+    public void onAddClassesClick() {
+        view.navToAddClasses();
     }
 
 

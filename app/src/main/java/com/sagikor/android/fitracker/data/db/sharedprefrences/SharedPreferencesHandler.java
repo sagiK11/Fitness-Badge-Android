@@ -2,6 +2,8 @@ package com.sagikor.android.fitracker.data.db.sharedprefrences;
 
 import android.content.SharedPreferences;
 
+import java.util.Set;
+
 public interface SharedPreferencesHandler {
 
     void setSharedPreferences(SharedPreferences sharedPreferences);
@@ -10,5 +12,11 @@ public interface SharedPreferencesHandler {
 
     boolean isBoysSwitchOn();
 
-    void editGenderPreferences(String gender,boolean isChecked);
+    void editGenderPreferences(String gender, boolean isChecked);
+
+    Set<String> getClassesUserTeaches();
+
+    void addClassUserTeaches(String classToTeach);
+
+    void deleteClassUserTeaches(String classToTeach);
 }
