@@ -5,11 +5,9 @@ import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
-import com.sagikor.android.fitracker.ui.view.MainActivity;
 
 import java.util.List;
 
-import au.com.bytecode.opencsv.CSVWriter;
 
 public class MainActivityPresenter implements MainActivityContract.Presenter {
     private MainActivityContract.View view;
@@ -46,24 +44,22 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     @Override
+    public void onCompleteDataWrite() {
+        view.hideProgressBar();
+    }
+
+    @Override
     public void onDisconnectClick() {
         FirebaseAuth.getInstance().signOut();
         view.disconnectUser();
     }
 
-    @Override
-    public void writeStudentsData(CSVWriter writer) {
-        List<Student> studentList = databaseHandler.getStudents();
-        for (Student student : studentList) {
-            writer.writeNext(student.toArray());
-        }
-    }
 
     @Override
     public void bind(MainActivityContract.View view) {
         this.view = view;
         databaseHandler.setLoaderPresenter(this);
-        if(!databaseHandler.isDataLoaded()) {
+        if (!databaseHandler.isDataLoaded()) {
             view.setLoadingMode();
         }
     }
@@ -82,5 +78,15 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void onLoadingData() {
         view.setLoadingMode();
+    }
+
+    @Override
+    public String getStudentsAsCSV() {
+        List<Student> studentList = databaseHandler.getStudents();
+        StringBuilder sb = new StringBuilder();
+        for (Student student : studentList) {
+            sb.append("\n").append(student.asCSV());
+        }
+        return sb.toString();
     }
 }

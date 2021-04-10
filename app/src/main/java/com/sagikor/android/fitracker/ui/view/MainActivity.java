@@ -1,7 +1,6 @@
 package com.sagikor.android.fitracker.ui.view;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,8 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
-import au.com.bytecode.opencsv.CSVWriter;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import android.os.Environment;
@@ -34,6 +34,8 @@ import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.MainActivityPresenter;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -74,11 +76,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         presenter.unbind();
     }
 
-
-    private void initFirebase() {
-        FirebaseApp.initializeApp(this);
-    }
-
     @Override
     public void navToAddStudentScreen() {
         startActivity(new Intent(this, AddStudentActivity.class));
@@ -106,23 +103,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void sendDatabaseToEmail() {
-        //check if we already got permission.
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //if we're here then we have'nt got the permission yet.
-            //the line below prompts the window for the user.
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 1;
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            }
-        } else {
-            new EmailSendTask().execute();
-        }
-
+        showProgressBar();
+        Thread sender = new Thread(new EmailSendThread());
+        sender.start();
     }
 
     @Override
@@ -131,11 +114,49 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         setViewsEnableMode(true);
     }
 
-
     @Override
     public void setLoadingMode() {
         showProgressBar();
         setViewsEnableMode(false);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_drawer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_statistics) {
+            presenter.onNavToStatisticsClick();
+        } else if (id == R.id.nav_settings) {
+            presenter.onNavToSettingsClick();
+        } else if (id == R.id.nav_sign_out) {
+            presenter.onDisconnectClick();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void disconnectUser() {
+        signOutQuestionPop();
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    private void initFirebase() {
+        FirebaseApp.initializeApp(this);
     }
 
     private void setViewsEnableMode(boolean isEnable) {
@@ -151,12 +172,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         toolbar.setAlpha(isEnable ? 1f : 0f);
     }
 
-    @Override
-    public void disconnectUser() {
-        signOutQuestionPop();
-    }
-
-
     private void bindViews() {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -169,34 +184,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         setButtonsBackgroundAlpha();
     }
 
-
     private void setButtonsBackgroundAlpha() {
         btnAddStudent.getBackground().setAlpha(50);
         btnSearchStudent.getBackground().setAlpha(50);
         btnMailResults.getBackground().setAlpha(50);
         btnUpdateStudent.getBackground().setAlpha(50);
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_drawer, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_statistics) {
-            presenter.onNavToStatisticsClick();
-        } else if (id == R.id.nav_settings) {
-            presenter.onNavToSettingsClick();
-        } else if (id == R.id.nav_sign_out) {
-            presenter.onDisconnectClick();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void addButtonsOnClickListeners() {
@@ -205,7 +197,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         btnMailResults.setOnClickListener(e -> presenter.onSendToEmailClick());
         btnUpdateStudent.setOnClickListener(e -> presenter.onNavToUpdateStudentClick());
     }
-
 
     private void signOutQuestionPop() {
         final String SURE_QUESTION = getResources().getString(R.string.exit_question);
@@ -230,73 +221,40 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         finish();
     }
 
-    @Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-
-    public class EmailSendTask extends AsyncTask<String, String, String> {
-        private static final String TAG = "EmailSendTask";
+    private class EmailSendThread extends Thread {
+        private static final String TAG = "EmailSendThread";
 
         @Override
-        protected void onPreExecute() {
-            // AUTO GENERATED
-        }
+        public void run() {
+            final String students_grade = getResources().getString(R.string.students_grades);
+            //get students data
+            StringBuilder sb = new StringBuilder();
+            sb.append(getExcelHeaders());
+            sb.append(presenter.getStudentsAsCSV());
 
-        @Override
-        protected void onPostExecute(String success) {
-            super.onPostExecute(success);
 
-            String exportCompleted = getResources().getString(R.string.export_completed);
-            Toast toastOne = Toast.makeText(MainActivity.this, exportCompleted, Toast.LENGTH_SHORT);
-            toastOne.show();
-
-        }
-
-        @Override
-        protected String doInBackground(final String... strings) {
-            File file = getNewFile();
-            try (CSVWriter csvWrite = new CSVWriter(new FileWriter(file))) {
-                writeHeader(csvWrite, getExcelHeaders());
-                writeStudentsData(csvWrite);
-                sendEmail(file);
+            try {
+                FileOutputStream out = openFileOutput(students_grade + ".csv", MODE_PRIVATE);
+                out.write((sb.toString()).getBytes());
+                out.close();
             } catch (IOException e) {
-                Log.e(TAG, e.getMessage(), e);
+                e.printStackTrace();
             }
-            return null;
+
+            //exporting
+            File file = new File(getFilesDir(), students_grade + ".csv");
+            String authority = getApplicationContext().getPackageName() + ".provider";
+            Uri path = FileProvider.getUriForFile(getApplicationContext(), authority, file);
+            presenter.onCompleteDataWrite();
+            Intent fileIntent = new Intent(Intent.ACTION_SEND);
+            fileIntent.setType("text/csv");
+            fileIntent.putExtra(Intent.EXTRA_SUBJECT, students_grade);
+            fileIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            fileIntent.putExtra(Intent.EXTRA_STREAM, path);
+            startActivity(Intent.createChooser(fileIntent, "Send mail"));
         }
 
-        private void sendEmail(File file) {
-            Intent sendToMail = new Intent(Intent.ACTION_SENDTO);
-            sendToMail.setData(Uri.parse("mailto:"));
-            sendToMail.putExtra(Intent.EXTRA_SUBJECT, "Students Test Grades");
-            sendToMail.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file.getAbsoluteFile()));
-            if (sendToMail.resolveActivity(getPackageManager()) != null)
-                startActivity(sendToMail);
-        }
-
-        private void writeStudentsData(CSVWriter csvWrite) {
-            presenter.writeStudentsData(csvWrite);
-        }
-
-        private void writeHeader(CSVWriter csvWrite, String[] excelHeaders) {
-            csvWrite.writeNext(excelHeaders);
-        }
-
-
-        private File getNewFile() {
-            File exportDir = new File(Environment.getExternalStorageDirectory(), "");
-            return new File(exportDir, "ExcelFile.csv");
-        }
-
-
-        private String[] getExcelHeaders() {
+        private String getExcelHeaders() {
             final String name = getResources().getString(R.string.name);
             final String studentClass = getResources().getString(R.string.student_class);
             final String aerobicResult = getResources().getString(R.string.aerobic_result);
@@ -310,11 +268,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
             final String cubesResult = getResources().getString(R.string.cubes_result);
             final String cubesScore = getResources().getString(R.string.cubes_score);
             final String finalScore = getResources().getString(R.string.final_score);
-
-            return new String[]{name, studentClass, aerobicScore, aerobicResult,
-                    absScore, absResult, handsScore, handsResult, cubesScore, cubesResult
-                    , jumpScore, jumpResult, finalScore};
-
+            StringBuilder sb = new StringBuilder();
+            return sb.append(name).append(",").append(studentClass).append(",").append(aerobicScore)
+                    .append(",").append(aerobicResult).append(",").append(absScore)
+                    .append(",").append(absResult).append(",").append(handsScore).append(",")
+                    .append(handsResult).append(",").append(cubesScore).append(",")
+                    .append(cubesResult).append(",").append(jumpScore).append(",")
+                    .append(jumpResult).append(",").append(finalScore).toString();
         }
     }
 
