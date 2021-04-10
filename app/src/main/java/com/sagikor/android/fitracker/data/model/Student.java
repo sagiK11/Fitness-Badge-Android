@@ -1,8 +1,5 @@
 package com.sagikor.android.fitracker.data.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 
 public class Student {
     private String name;
@@ -337,6 +334,16 @@ public class Student {
                 + "\ncubesScore: " + cubesScore + "\nabsScore: " + absScore + "\njumpScore: " + jumpScore
                 + "\nHandsScore: " + handsScore + "\nTotalScore: " + totalScore
                 + "\nKey: " + key;
+    }
+
+    public String asCSV() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(name).append(",").append(studentClass).append(",").append(aerobicScore)
+                .append(",").append(aerobicResult).append(",").append(absScore)
+                .append(",").append(absResult).append(",").append(handsScore).append(",")
+                .append(handsResult).append(",").append(cubesScore).append(",")
+                .append(cubesResult).append(",").append(jumpScore).append(",")
+                .append(jumpResult).append(",").append(totalScore).toString();
     }
 
     public String[] toArray() {
