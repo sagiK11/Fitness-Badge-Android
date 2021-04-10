@@ -8,12 +8,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 import com.sagikor.android.fitracker.data.model.Student;
+
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.Utility;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -141,8 +143,8 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
     }
 
     @Override
-    public List<String> getTeacherClasses() {
-        return new ArrayList<>(databaseHandler.getClassesUserTeaches());
+    public List<UserClass> getTeacherClasses() {
+        return databaseHandler.getClassesUserTeaches();
     }
 
     private boolean isAlphabetic(String nameInput) {

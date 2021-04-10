@@ -48,30 +48,4 @@ public class AppSharedPreferencesHandler implements SharedPreferencesHandler {
         editor.apply();
     }
 
-    @Override
-    public Set<String> getClassesUserTeaches() {
-        return sharedPreferences.getStringSet(CLASSES_USER_TEACHES, null);
-    }
-
-    @Override
-    public void addClassUserTeaches(String classToTeach) {
-        Set<String> set = getClassesUserTeaches();
-        if (set == null)
-            set = new HashSet<>();
-        set.add(classToTeach);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.putStringSet(CLASSES_USER_TEACHES, set);
-        editor.apply();
-    }
-
-    @Override
-    public void deleteClassUserTeaches(String classToTeach) {
-        Set<String> set = getClassesUserTeaches();
-        set.remove(classToTeach);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.putStringSet(CLASSES_USER_TEACHES, set);
-        editor.apply();
-    }
 }

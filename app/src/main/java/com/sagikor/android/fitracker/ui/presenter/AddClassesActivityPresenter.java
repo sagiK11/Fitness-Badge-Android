@@ -4,12 +4,12 @@ import android.content.SharedPreferences;
 
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter {
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
@@ -23,21 +23,19 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
         } catch (AppExceptions.Input e) {
             view.popMessage(e.getMessage());
         }
-        databaseHandler.addClassUserTeaches(classToTeach);
+
+        databaseHandler.addClassUserTeaches(new UserClass(classToTeach));
         view.updateList();
     }
 
     @Override
-    public void onDeleteClassToTeach(String classToTeach) {
+    public void onDeleteClassToTeach(UserClass classToTeach) {
         databaseHandler.deleteClassUserTeaches(classToTeach);
     }
 
     @Override
-    public List<String> getClassesUserTeaches() {
-        Set<String> set = databaseHandler.getClassesUserTeaches();
-        if (set == null)
-            return new ArrayList<>();
-        return new ArrayList<>(set);
+    public List<UserClass> getClassesUserTeaches() {
+        return databaseHandler.getClassesUserTeaches();
     }
 
     private void checkValidInput(String classToTeach) throws AppExceptions.Input {

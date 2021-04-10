@@ -10,9 +10,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.sagikor.android.fitracker.R;
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.AddStudentActivityPresenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -90,13 +92,17 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         View row = getLayoutInflater().inflate(R.layout.class_list_view, null);
 
         ListView listView = row.findViewById(R.id.class_list_view);
-        List<String> classesList = presenter.getTeacherClasses();
-        if (classesList.isEmpty()) {
+
+        if (presenter.getTeacherClasses().isEmpty()) {
             popFailWindow("Please add the classes you teach in the Settings");
             return;
         }
+        List<String> list = new ArrayList<>();
+        for (UserClass clss : presenter.getTeacherClasses()) {
+            list.add(clss.getClassName());
+        }
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, classesList);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         listView.setAdapter(arrayAdapter);
         arrayAdapter.notifyDataSetChanged();

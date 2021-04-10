@@ -2,6 +2,8 @@ package com.sagikor.android.fitracker.ui.contracts;
 
 import android.content.SharedPreferences;
 
+import com.sagikor.android.fitracker.data.model.UserClass;
+
 import java.util.List;
 
 
@@ -11,9 +13,9 @@ public interface AddClassesActivityContract {
 
         void onAddClassClick();
 
-        void onDeleteClassToTeach(String classToTeach);
+        void onDeleteClassToTeach(UserClass classToTeach);
 
-        List<String> getClassesUserTeaches();
+        List<UserClass> getClassesUserTeaches();
 
         void bind(AddClassesActivityContract.View view, SharedPreferences sharedPreferences);
 

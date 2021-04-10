@@ -14,9 +14,4 @@ public interface SharedPreferencesHandler {
 
     void editGenderPreferences(String gender, boolean isChecked);
 
-    Set<String> getClassesUserTeaches();
-
-    void addClassUserTeaches(String classToTeach);
-
-    void deleteClassUserTeaches(String classToTeach);
 }

@@ -2,6 +2,8 @@ package com.sagikor.android.fitracker.ui.contracts;
 
 import android.content.SharedPreferences;
 
+import com.sagikor.android.fitracker.data.model.UserClass;
+
 import java.util.List;
 
 
@@ -25,7 +27,7 @@ public interface AddStudentActivityContract {
 
         boolean isValidName(String nameInput);
 
-        List<String> getTeacherClasses();
+        List<UserClass> getTeacherClasses();
 
     }
 

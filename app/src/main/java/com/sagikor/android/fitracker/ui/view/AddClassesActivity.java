@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sagikor.android.fitracker.R;
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.AddClassesActivityPresenter;
 
@@ -90,7 +91,7 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
 
     private static class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.CustomViewHolder> {
         private static final String TAG = "ClassAdapter";
-        private List<String> list = presenter.getClassesUserTeaches();
+        private List<UserClass> list = presenter.getClassesUserTeaches();
 
         @NonNull
         @Override
@@ -102,14 +103,14 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
 
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-            String classToTeach = list.get(position);
-            holder.tvClassToTeach.setText(classToTeach);
+            UserClass classToTeach = list.get(position);
+            holder.tvClassToTeach.setText(classToTeach.getClassName());
             setClassToTeachOnClickListener(holder, position);
 
         }
 
         private void setClassToTeachOnClickListener(CustomViewHolder holder, int position) {
-            String classToTeach = list.get(position);
+            UserClass classToTeach = list.get(position);
             Context context = holder.tvClassToTeach.getContext();
             final String YES = context.getString(R.string.yes);
             final String NO = context.getResources().getString(R.string.no);
@@ -139,7 +140,7 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
             notifyItemRangeChanged(position, list.size());
         }
 
-        public void updateList(List<String> list) {
+        public void updateList(List<UserClass> list) {
             this.list = list;
             notifyDataSetChanged();
         }

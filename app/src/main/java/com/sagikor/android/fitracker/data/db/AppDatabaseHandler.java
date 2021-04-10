@@ -8,12 +8,12 @@ import com.sagikor.android.fitracker.data.db.firebase.AppFirebaseHandler;
 import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 
 import java.util.List;
-import java.util.Set;
 
 public class AppDatabaseHandler implements DatabaseHandler {
     private static final AppDatabaseHandler appDatabaseHandler = init();
@@ -125,7 +125,7 @@ public class AppDatabaseHandler implements DatabaseHandler {
 
     @Override
     public void checkStudentExistsInFirebase(Student student) throws AppExceptions.StudentExistsAlready {
-         firebaseHandler.checkStudentExistsInFirebase(student);
+        firebaseHandler.checkStudentExistsInFirebase(student);
     }
 
     @Override
@@ -149,18 +149,18 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public Set<String> getClassesUserTeaches() {
-        return sharedPreferencesHandler.getClassesUserTeaches();
+    public List<UserClass> getClassesUserTeaches() {
+        return firebaseHandler.getClassesUserTeaches();
     }
 
     @Override
-    public void addClassUserTeaches(String classToTeach) {
-        sharedPreferencesHandler.addClassUserTeaches(classToTeach);
+    public void addClassUserTeaches(UserClass classToTeach) {
+        firebaseHandler.addClassUserTeaches(classToTeach);
     }
 
     @Override
-    public void deleteClassUserTeaches(String classToTeach) {
-        sharedPreferencesHandler.deleteClassUserTeaches(classToTeach);
+    public void deleteClassUserTeaches(UserClass classToTeach) {
+        firebaseHandler.deleteClassUserTeaches(classToTeach);
     }
 
     @Override

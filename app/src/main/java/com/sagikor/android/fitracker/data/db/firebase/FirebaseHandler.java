@@ -1,6 +1,8 @@
 package com.sagikor.android.fitracker.data.db.firebase;
 
 import com.sagikor.android.fitracker.data.model.Student;
+
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
@@ -45,5 +47,11 @@ public interface FirebaseHandler {
     boolean isUserSigned();
 
     boolean isDataLoaded();
+
+    List<UserClass> getClassesUserTeaches();
+
+    void addClassUserTeaches(UserClass classToTeach);
+
+    void deleteClassUserTeaches(UserClass classToTeach);
 
 }

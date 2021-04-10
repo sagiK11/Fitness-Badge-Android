@@ -1,5 +1,6 @@
 package com.sagikor.android.fitracker.data.db.firebase;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -18,16 +19,21 @@ import com.google.firebase.database.ValueEventListener;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.data.model.User;
+import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Consumer;
 
 public class AppFirebaseHandler implements FirebaseHandler {
     public static AppFirebaseHandler appFirebaseHandler = init();
     private static List<Student> studentList;
+    private static List<UserClass> classesList;
     private final static String TAG = "AppFirebaseHandler";
     private BaseContract.LoaderPresenter loaderPresenter;
     private BaseContract.AdderPresenter adderPresenter;
@@ -37,9 +43,12 @@ public class AppFirebaseHandler implements FirebaseHandler {
     private BaseContract.RegisterPresenter registerPresenter;
     private FirebaseAuth firebaseAuth;
     private boolean isDataLoaded;
+    private boolean isStudentsLoaded;
+    private boolean isClassesLoaded;
 
     private static AppFirebaseHandler init() {
         studentList = new ArrayList<>();
+        classesList = new ArrayList<>();
         return new AppFirebaseHandler();
     }
 
@@ -49,8 +58,9 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     private AppFirebaseHandler() {
-        if (isUserSigned())
+        if (isUserSigned()) {
             getDataFromDatabase();
+        }
     }
 
 
@@ -61,44 +71,56 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public void getDataFromDatabase() {
-        new Thread(() -> {
-            studentList.clear();
-            final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            final String debug_id = "IPyH6cDYq5TKJ9gpDwD81eHwKG13";//TODO don't forget this
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(debug_id);
-            ref.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (loaderPresenter != null)
-                        loaderPresenter.onLoadingData();
-                    studentList.clear();
-                    Log.d(TAG, "loading students from firebase..");
-                    final String STUDENTS_CHILD = "students";
-                    for (DataSnapshot obj : dataSnapshot.child(STUDENTS_CHILD).getChildren()) {
-                        Student student = obj.getValue(Student.class);
-                        studentList.add(student);
-                    }
-                    if (loaderPresenter != null)
-                        loaderPresenter.onFinishedLoadingData();
-                    isDataLoaded = true;
-                    Log.d(TAG, "finished loading students from firebase");
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.v(TAG, databaseError.getDetails());
-                }
-            });
-        }).start();
+        Thread t1 = new Thread(this::getAllDataFromDatabase);
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
+
+    private void getAllDataFromDatabase() {
+        //get Students
+        final String user_id = getUserId();
+        final String students_child = getStudentsChild();
+        final DatabaseReference students_node = FirebaseDatabase.getInstance().getReference("users")
+                .child(user_id).child(students_child);
+        students_node.get().addOnSuccessListener(dataSnapshot -> {
+            Log.i(TAG, "starting to load user students..");
+            dataSnapshot.getChildren().forEach(dataSnapshot1 -> {
+                Log.d(TAG, "loading student");
+                studentList.add(dataSnapshot1.getValue(Student.class));
+            });
+        }).addOnCompleteListener(e -> {
+            Log.i(TAG, "finished loading user students");
+            isStudentsLoaded = true;
+        });
+        // get classes
+        final DatabaseReference classes_node = FirebaseDatabase.getInstance().getReference("users")
+                .child(user_id).child(getClassesChild());
+        classes_node.get().addOnSuccessListener(dataSnapshot -> {
+            Log.i(TAG, "starting to load user classes..");
+            dataSnapshot.getChildren().forEach(dataSnapshot1 -> {
+                Log.d(TAG, "loading class: " + dataSnapshot1.getValue(UserClass.class).getClassName());
+                classesList.add(dataSnapshot1.getValue(UserClass.class));
+            });
+        }).addOnCompleteListener(e -> {
+            Log.i(TAG, "finished loading user classes");
+            isClassesLoaded = true;
+            if (loaderPresenter != null) loaderPresenter.onFinishedLoadingData();
+        });
+    }
+
+
     @Override
     public void addStudent(Student student) {
-        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final String STUDENTS_CHILD = "students";
-        FirebaseDatabase.getInstance().getReference("users").child(USER_ID)
-                .child(STUDENTS_CHILD).child(student.getKey()).setValue(student)
+        final String user_id = getUserId();
+        final String students_child = getStudentsChild();
+        FirebaseDatabase.getInstance().getReference("users").child(user_id)
+                .child(students_child).child(student.getKey()).setValue(student)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         adderPresenter.onAddStudentSuccess(student);
@@ -108,7 +130,6 @@ public class AppFirebaseHandler implements FirebaseHandler {
                     }
                 });
     }
-
 
     @Override
     public void checkStudentExistsInFirebase(Student student) throws AppExceptions.StudentExistsAlready {
@@ -123,11 +144,11 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public void updateStudent(Student student) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String studentsChild = "students";
+        final String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String students_child = getStudentsChild();
         Log.d(TAG, "updating " + student.getName() + " in firebase");
         FirebaseDatabase.getInstance().getReference("users").
-                child(userId).child(studentsChild).child(student.getKey()).
+                child(user_id).child(students_child).child(student.getKey()).
                 setValue(student).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 updaterPresenter.onUpdateStudentSuccess(student);
@@ -151,9 +172,10 @@ public class AppFirebaseHandler implements FirebaseHandler {
     @Override
     public void deleteStudent(Student student) {
         //delete in firebase
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final String user_id = getUserId();
+        final String students_child = getClassesChild();
         FirebaseDatabase.getInstance().getReference("users")
-                .child(userId).child("students").child(student.getKey())
+                .child(user_id).child(students_child).child(student.getKey())
                 .removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 deleterPresenter.onDeleteStudentSuccess(student);
@@ -166,10 +188,47 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     @Override
+    public List<UserClass> getClassesUserTeaches() {
+        return classesList;
+    }
+
+    @Override
+    public void addClassUserTeaches(UserClass classToTeach) {
+        final String user_id = getUserId();
+        final String class_child = getClassesChild();
+
+        String classKey = FirebaseDatabase.getInstance().getReference("users").push().getKey();
+        classToTeach.setKey(classKey);
+        FirebaseDatabase.getInstance().getReference("users").child(user_id)
+                .child(class_child).child(classKey).setValue(classToTeach)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        classesList.add(classToTeach);
+                    }
+                });
+
+    }
+
+    @Override
+    public void deleteClassUserTeaches(UserClass classToTeach) {
+        String user_id = getUserId();
+        String classes_child = getClassesChild();
+        FirebaseDatabase.getInstance().getReference("users")
+                .child(user_id).child(classes_child).child(classToTeach.getKey())
+                .removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                //deleterPresenter.onDeleteClassSuccess(classToTeach); TODO
+            } else {
+                // deleterPresenter.onDeleteClassFailed();
+            }
+        });
+    }
+
+    @Override
     public void clearDatabase() {
-        final String USER_ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final String STUDENTS_CHILD = "students";
-        FirebaseDatabase.getInstance().getReference("users").child(USER_ID).child(STUDENTS_CHILD).removeValue();
+        final String user_id = getUserId();
+        final String students_child = getStudentsChild();
+        FirebaseDatabase.getInstance().getReference("users").child(user_id).child(students_child).removeValue();
     }
 
     @Override
@@ -216,7 +275,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public boolean isDataLoaded() {
-        return isDataLoaded;
+        return isStudentsLoaded && isClassesLoaded;
     }
 
     @Override
@@ -275,6 +334,18 @@ public class AppFirebaseHandler implements FirebaseHandler {
     public boolean isUserSigned() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         return user != null;
+    }
+
+    private String getUserId() {
+        return FirebaseAuth.getInstance().getCurrentUser().getUid();
+    }
+
+    private String getStudentsChild() {
+        return "students";
+    }
+
+    private String getClassesChild() {
+        return "classes";
     }
 
 }
