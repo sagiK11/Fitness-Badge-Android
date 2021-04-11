@@ -38,6 +38,8 @@ public interface FirebaseHandler {
 
     void setRegisterPresenter(BaseContract.RegisterPresenter presenter);
 
+    void setClassAdderPresenter(BaseContract.ClassAdderPresenter presenter);
+
     void signInWithEmailAndPassword(String email, String password);
 
     void createUserWithEmailAndPassword(String email, String password, String name);
@@ -53,5 +55,7 @@ public interface FirebaseHandler {
     void addClassUserTeaches(UserClass classToTeach);
 
     void deleteClassUserTeaches(UserClass classToTeach);
+
+    String getUserName();
 
 }

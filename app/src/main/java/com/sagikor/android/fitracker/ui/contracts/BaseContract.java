@@ -3,6 +3,7 @@ package com.sagikor.android.fitracker.ui.contracts;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.sagikor.android.fitracker.data.model.Student;
+import com.sagikor.android.fitracker.data.model.UserClass;
 
 public interface BaseContract {
     interface BasePresenter {
@@ -60,5 +61,12 @@ public interface BaseContract {
         void onRegisterSuccess();
 
         void onRegisterFailure(Task<AuthResult> task);
+    }
+
+    interface ClassAdderPresenter extends BaseContract.BasePresenter {
+
+        void onAddClassSuccess(UserClass userClass);
+
+        void onAddSClassFailed();
     }
 }

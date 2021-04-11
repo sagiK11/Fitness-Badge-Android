@@ -99,6 +99,11 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
+    public void setClassAdderPresenter(BaseContract.ClassAdderPresenter presenter) {
+        firebaseHandler.setClassAdderPresenter(presenter);
+    }
+
+    @Override
     public boolean isDataLoaded() {
         return firebaseHandler.isDataLoaded();
     }
@@ -161,6 +166,11 @@ public class AppDatabaseHandler implements DatabaseHandler {
     @Override
     public void deleteClassUserTeaches(UserClass classToTeach) {
         firebaseHandler.deleteClassUserTeaches(classToTeach);
+    }
+
+    @Override
+    public String getUserName() {
+        return firebaseHandler.getUserName();
     }
 
     @Override

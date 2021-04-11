@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/set_female_text_view"
+        app:layout_constraintBottom_toTopOf="@+id/female_layout_switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,66 +42,78 @@
             android:orientation="horizontal" />
     </RelativeLayout>
 
-
+    <LinearLayout
+        android:id="@+id/female_layout_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_add_student_setting_layout"
+        app:layout_constraintBottom_toTopOf="@+id/male_layout_switch"
+        >
     <TextView
         android:id="@+id/set_female_text_view"
         android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="@string/gender_to_always_girls"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/set_male_text_view"
-        app:layout_constraintEnd_toStartOf="@id/switch_always_girls"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_add_student_setting_layout" />
+        style="@style/settings_buttons" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_always_girls"
         android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
-        app:layout_constraintBaseline_toBaselineOf="@+id/set_female_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/set_female_text_view" />
+      />
 
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/male_layout_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/female_layout_switch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_classes"
+        >
 
     <TextView
         android:id="@+id/set_male_text_view"
         android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/gender_to_always_boys"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add_classes"
-        app:layout_constraintEnd_toStartOf="@+id/switch_always_boys"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_female_text_view" />
+        style="@style/settings_buttons" />
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_always_boys"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBaseline_toBaselineOf="@+id/set_male_text_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/set_male_text_view" />
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
 
-    <com.rey.material.widget.Button
+    <TextView
         android:id="@+id/btn_add_classes"
-        style="@style/buttons_style"
         android:layout_width="0dp"
+        style="@style/settings_buttons"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/buttons"
         android:gravity="center_vertical"
         android:padding="8dp"
         android:text="@string/add_classes"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_male_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/male_layout_switch" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -136,15 +148,14 @@
             android:orientation="horizontal" />
     </RelativeLayout>
 
-    <com.rey.material.widget.Button
+    <TextView
         android:id="@+id/delete_all_students_button"
-        style="@style/buttons_style"
+        style="@style/settings_buttons"
         android:layout_width="0dp"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_margin="6dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/buttons"
         android:gravity="center_vertical"
         android:padding="8dp"
         android:text="@string/delete_data"
@@ -159,7 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
+        app:layout_constraintBottom_toTopOf="@+id/user_details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/delete_all_students_button">
@@ -186,23 +197,34 @@
             android:orientation="horizontal" />
     </RelativeLayout>
 
-    <com.rey.material.widget.Button
-        android:id="@+id/delete_account_button"
-        style="@style/buttons_style"
+    <TextView
+        android:id="@+id/user_details"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_margin="6dp"
-        android:layout_marginStart="16dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:padding="5dp"
+        style="@style/settings_buttons"
+        app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+    <TextView
+        android:id="@+id/delete_account_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="6dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/buttons"
         android:gravity="center_vertical"
         android:padding="8dp"
+        style="@style/settings_buttons"
         android:text="@string/delete_user"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/user_details" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

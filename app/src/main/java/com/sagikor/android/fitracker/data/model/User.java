@@ -10,6 +10,10 @@ public class User {
     private String userID;
     private List<String> classes = new ArrayList<>();
 
+    private User(){
+
+    }
+
     public User(String fullName, String email, String userId) {
         this.fullName = fullName;
         this.email = email;

@@ -28,6 +28,11 @@ public class SettingsActivityPresenter implements SettingsActivityContract.Prese
     }
 
     @Override
+    public String getUserName() {
+        return databaseHandler.getUserName();
+    }
+
+    @Override
     public void onDeleteAccountClick() {
         databaseHandler.deleteAccount();
     }

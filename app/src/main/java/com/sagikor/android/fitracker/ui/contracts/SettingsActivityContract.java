@@ -20,6 +20,8 @@ public interface SettingsActivityContract {
 
         void unbind();
 
+        String getUserName();
+
     }
 
     interface View extends BaseContract.BaseView {

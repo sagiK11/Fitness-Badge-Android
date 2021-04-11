@@ -8,23 +8,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import android.widget.Button;
-import android.widget.Switch;
+import android.util.Log;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.SettingsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.SettingsActivityPresenter;
 
 public class SettingsActivity extends AppCompatActivity implements SettingsActivityContract.View {
 
-    private Button btnDeleteStudents;
-    private Button btnDeleteAccount;
-    private Button btnAddClasses;
-    private Switch switchIsAlwaysFemale;
-    private Switch switchIsAlwaysMale;
+    private static final String TAG = "SettingsActivity";
+    private TextView btnDeleteStudents;
+    private TextView btnDeleteAccount;
+    private TextView btnAddClasses;
+    private SwitchMaterial switchIsAlwaysFemale;
+    private SwitchMaterial switchIsAlwaysMale;
     boolean isGirlsSwitchOn;
     boolean isBoysSwitchOn;
+    private TextView tvUserName;
     private SettingsActivityContract.Presenter presenter;
 
     @Override
@@ -40,6 +44,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         if (presenter == null)
             presenter = new SettingsActivityPresenter();
         presenter.bind(this, getSharedPreferences("sharedPreferences", MODE_PRIVATE));
+        tvUserName.setText(presenter.getUserName());
         switchLogic();
         enableSwitchesLogic();
     }
@@ -61,14 +66,9 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         btnAddClasses.setOnClickListener(e -> presenter.onAddClassesClick());
         switchIsAlwaysFemale.setOnClickListener(e -> presenter.editGenderPreferences("Girls", switchIsAlwaysFemale.isChecked()));
         switchIsAlwaysMale.setOnClickListener(e -> presenter.editGenderPreferences("Boys", switchIsAlwaysMale.isChecked()));
-        setButtonsAlpha();
+        tvUserName = findViewById(R.id.user_details);
     }
 
-    private void setButtonsAlpha() {
-        btnAddClasses.getBackground().setAlpha(50);
-        btnDeleteStudents.getBackground().setAlpha(50);
-        btnDeleteAccount.getBackground().setAlpha(50);
-    }
 
     @Override
     public void switchLogic() {
