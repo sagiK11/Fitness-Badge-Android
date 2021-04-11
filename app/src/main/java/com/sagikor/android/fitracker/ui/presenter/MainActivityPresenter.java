@@ -61,6 +61,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
         databaseHandler.setLoaderPresenter(this);
         if (!databaseHandler.isDataLoaded()) {
             view.setLoadingMode();
+        }else{
+            view.setActiveMode();
         }
     }
 

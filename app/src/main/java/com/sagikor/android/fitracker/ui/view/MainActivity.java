@@ -1,23 +1,17 @@
 package com.sagikor.android.fitracker.ui.view;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,7 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
 
 import com.google.firebase.FirebaseApp;
 import com.sagikor.android.fitracker.R;
@@ -34,9 +28,7 @@ import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.MainActivityPresenter;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
@@ -104,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void sendDatabaseToEmail() {
         showProgressBar();
-        Thread sender = new Thread(new EmailSendThread());
+        Thread sender = new EmailSendThread();
         sender.start();
     }
 
@@ -217,6 +209,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     private void signOut() {
         Intent intent = new Intent(this, SignInActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
     }

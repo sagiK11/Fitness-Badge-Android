@@ -38,7 +38,7 @@ public interface FirebaseHandler {
 
     void setRegisterPresenter(BaseContract.RegisterPresenter presenter);
 
-    void setClassAdderPresenter(BaseContract.ClassAdderPresenter presenter);
+    void setClassOperationPresenter(BaseContract.ClassOperationsPresenter presenter);
 
     void signInWithEmailAndPassword(String email, String password);
 

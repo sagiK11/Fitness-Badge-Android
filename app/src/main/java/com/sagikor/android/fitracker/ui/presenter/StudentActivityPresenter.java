@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.util.Log;
 
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
@@ -16,7 +15,7 @@ import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 public class StudentActivityPresenter implements StudentActivityContract.Presenter {
     private final SportResults sportResults = new SportResults();
-    private final static String TAG = "StudentActivityPre";
+    private static final String TAG = "StudentActivityPre";
     protected final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private StudentActivityContract.View view;
 
@@ -121,7 +120,7 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
         for (Double grade : gradesList) {
             average += grade;
         }
-        if (gradesList.size() > 0)
+        if (!gradesList.isEmpty())
             average /= gradesList.size();
         else
             average = 0;

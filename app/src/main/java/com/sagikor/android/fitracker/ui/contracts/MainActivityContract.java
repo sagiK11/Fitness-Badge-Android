@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
-//import au.com.bytecode.opencsv.CSVWriter;
 
 public interface MainActivityContract {
     interface Presenter extends BaseContract.LoaderPresenter {

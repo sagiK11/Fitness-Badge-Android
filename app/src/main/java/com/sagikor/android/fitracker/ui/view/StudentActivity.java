@@ -193,7 +193,6 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     String getStudentMessage(Student student) {
-        //TODO test it
         StringBuilder message = new StringBuilder();
         int finishedNo = 0;
 

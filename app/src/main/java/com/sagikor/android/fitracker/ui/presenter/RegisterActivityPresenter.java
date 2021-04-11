@@ -1,10 +1,8 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.view.View;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;

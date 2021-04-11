@@ -12,7 +12,8 @@ import com.sagikor.android.fitracker.utils.AppExceptions;
 import java.util.List;
 
 
-public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter, BaseContract.ClassAdderPresenter {
+public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter,
+        BaseContract.ClassOperationsPresenter {
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private AddClassesActivityContract.View view;
 
@@ -23,6 +24,7 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
             checkValidInput(classToTeach);
         } catch (AppExceptions.Input e) {
             view.popMessage(e.getMessage());
+            return;
         }
 
         databaseHandler.addClassUserTeaches(new UserClass(classToTeach));
@@ -51,14 +53,14 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     public void bind(AddClassesActivityContract.View view, SharedPreferences sharedPreferences) {
         this.view = view;
         databaseHandler.setSharedPreferences(sharedPreferences);
-        databaseHandler.setClassAdderPresenter(this);
+        databaseHandler.setClassOperationPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
         databaseHandler.setSharedPreferences(null);
-        databaseHandler.setClassAdderPresenter(null);
+        databaseHandler.setClassOperationPresenter(null);
     }
 
     @Override
@@ -68,6 +70,16 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
 
     @Override
     public void onAddSClassFailed() {
-        //TODO this can be left empty for the moment
+        view.popMessage("Ho no! Something wen't wrong!");
+    }
+
+    @Override
+    public void onDeleteClassSuccess(UserClass userClass) {
+        view.updateList();
+    }
+
+    @Override
+    public void onDeleteClassFailed() {
+        view.popMessage("Ho no! Something wen't wrong!");
     }
 }

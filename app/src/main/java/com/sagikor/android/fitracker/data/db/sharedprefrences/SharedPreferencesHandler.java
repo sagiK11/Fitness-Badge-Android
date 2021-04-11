@@ -2,7 +2,6 @@ package com.sagikor.android.fitracker.data.db.sharedprefrences;
 
 import android.content.SharedPreferences;
 
-import java.util.Set;
 
 public interface SharedPreferencesHandler {
 

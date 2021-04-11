@@ -2,7 +2,6 @@ package com.sagikor.android.fitracker.ui.presenter;
 
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -90,7 +89,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
                 .jumpResult(parse(view.getJumpGrade()))
                 .handsResult(parse(view.getHandsGrade()))
                 .cubesResult(parse(view.getCubesGrade()))
-                .totalScore(super.getAverage()) //TODO test it
+                .totalScore(super.getAverage())
                 .updatedDate(Utility.getTodayDate())
                 .build();
     }

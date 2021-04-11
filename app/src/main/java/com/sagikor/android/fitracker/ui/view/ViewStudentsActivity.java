@@ -11,13 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentAdapter;

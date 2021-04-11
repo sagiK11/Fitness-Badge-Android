@@ -3,8 +3,6 @@ package com.sagikor.android.fitracker.ui.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -20,7 +18,6 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.sagikor.android.fitracker.R;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.StatisticsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.StatisticsActivityPresenter;
 
@@ -42,7 +39,7 @@ public class StatisticsActivity extends AppCompatActivity implements
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
-        BindViews();
+        bindViews();
     }
 
     @Override
@@ -160,7 +157,7 @@ public class StatisticsActivity extends AppCompatActivity implements
         labelsName.add(JUMP);
     }
 
-    private void BindViews() {
+    private void bindViews() {
         averageGradesChart = findViewById(R.id.avg_grades_chart);
         pieChart = findViewById(R.id.finished_chart);
     }

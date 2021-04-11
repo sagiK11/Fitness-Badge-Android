@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import android.util.Log;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 

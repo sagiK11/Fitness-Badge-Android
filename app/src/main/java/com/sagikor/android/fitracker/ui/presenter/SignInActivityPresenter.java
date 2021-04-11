@@ -1,10 +1,6 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
-import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;

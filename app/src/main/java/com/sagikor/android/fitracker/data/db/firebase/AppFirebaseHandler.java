@@ -1,14 +1,10 @@
 package com.sagikor.android.fitracker.data.db.firebase;
 
-import android.content.SharedPreferences;
+
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -16,36 +12,31 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.data.model.User;
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
-import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
 
 public class AppFirebaseHandler implements FirebaseHandler {
     public static AppFirebaseHandler appFirebaseHandler = init();
     private List<Student> studentList;
     private List<UserClass> classesList;
     private String userName;
-    private final static String USERS_CHILD = "users";
-    private final static String STUDENT_CHILD = "students";
-    private final static String CLASSES_CHILD = "classes";
-    private final static String TAG = "AppFirebaseHandler";
+    private static final String USERS_CHILD = "users";
+    private static final String STUDENT_CHILD = "students";
+    private static final String CLASSES_CHILD = "classes";
+    private static final String TAG = "AppFirebaseHandler";
     private BaseContract.LoaderPresenter loaderPresenter;
     private BaseContract.AdderPresenter adderPresenter;
     private BaseContract.UpdaterPresenter updaterPresenter;
     private BaseContract.DeleterPresenter deleterPresenter;
     private BaseContract.SignInPresenter signInPresenter;
     private BaseContract.RegisterPresenter registerPresenter;
-    private BaseContract.ClassAdderPresenter classAdderPresenter;
+    private BaseContract.ClassOperationsPresenter classOperationPresenter;
     private FirebaseAuth firebaseAuth;
     private boolean isStudentsLoaded;
     private boolean isClassesLoaded;
@@ -145,7 +136,6 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public void updateStudent(Student student) {
-        Log.i(TAG, "updating " + student.getName() + " in firebase");
         FirebaseDatabase.getInstance().getReference(USERS_CHILD).
                 child(getUserId()).child(STUDENT_CHILD).child(student.getKey()).
                 setValue(student).addOnCompleteListener(task -> {
@@ -194,14 +184,15 @@ public class AppFirebaseHandler implements FirebaseHandler {
         String classKey = FirebaseDatabase.getInstance().getReference(USERS_CHILD).push().getKey();
         classToTeach.setKey(classKey);
 
+        assert (classKey != null) : "oops: classKey is null";
         FirebaseDatabase.getInstance().getReference(USERS_CHILD).child(getUserId())
                 .child(CLASSES_CHILD).child(classKey).setValue(classToTeach)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         classesList.add(classToTeach);
-                        classAdderPresenter.onAddClassSuccess(classToTeach);
+                        classOperationPresenter.onAddClassSuccess(classToTeach);
                     } else {
-                        classAdderPresenter.onAddSClassFailed();
+                        classOperationPresenter.onAddSClassFailed();
                     }
                 });
 
@@ -213,9 +204,9 @@ public class AppFirebaseHandler implements FirebaseHandler {
                 .child(getUserId()).child(CLASSES_CHILD).child(classToTeach.getKey())
                 .removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                //deleterPresenter.onDeleteClassSuccess(classToTeach); TODO
+                classOperationPresenter.onDeleteClassSuccess(classToTeach);
             } else {
-                // deleterPresenter.onDeleteClassFailed();
+                classOperationPresenter.onDeleteClassFailed();
             }
         });
     }
@@ -236,9 +227,10 @@ public class AppFirebaseHandler implements FirebaseHandler {
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseDatabase.getInstance().getReference(USERS_CHILD).child(getUserId()).removeValue();
 
+        assert (user != null) : "oops: user is null";
         user.delete().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                Log.d(TAG, "User account deleted.");
+                Log.i(TAG, "user account deleted.");
             }
         });
     }
@@ -274,8 +266,8 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     @Override
-    public void setClassAdderPresenter(BaseContract.ClassAdderPresenter presenter) {
-        classAdderPresenter = presenter;
+    public void setClassOperationPresenter(BaseContract.ClassOperationsPresenter presenter) {
+        classOperationPresenter = presenter;
     }
 
     @Override
@@ -289,12 +281,13 @@ public class AppFirebaseHandler implements FirebaseHandler {
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Log.d(TAG, "signInWithEmail:success");
+                        Log.i(TAG, "signInWithEmail:success");
                         getDataFromDatabase();
                         signInPresenter.onSignInSuccess();
 
                     } else {
                         signInPresenter.onSignInFailure();
+                        assert task.getException() != null : "oops: task's exception is null";
                         Log.e(TAG, task.getException().toString());
                     }
                 });
@@ -306,6 +299,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        assert (firebaseAuth.getCurrentUser() != null) : "oops: user is null";
                         String userId = firebaseAuth.getCurrentUser().getUid();
                         User newUser = new User(userName, email, userId);
 
@@ -342,6 +336,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
     }
 
     private String getUserId() {
+        assert FirebaseAuth.getInstance().getCurrentUser() != null : "oops: user is null";
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 

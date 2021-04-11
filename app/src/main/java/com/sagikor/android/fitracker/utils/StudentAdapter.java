@@ -2,7 +2,6 @@ package com.sagikor.android.fitracker.utils;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,9 +58,9 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         final String NO = context.getResources().getString(R.string.no);
         final String DELETE_STUDENT_QUESTION = context.getResources().getString(R.string.delete_student_question);
         //short click
-        holder.itemView.setOnClickListener(e -> {
-            presenter.onStudentClick(student.getKey());
-        });
+        holder.itemView.setOnClickListener(e ->
+            presenter.onStudentClick(student.getKey())
+        );
         //long click
         holder.itemView.setOnLongClickListener(e->{
             new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)

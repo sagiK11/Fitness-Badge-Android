@@ -99,8 +99,8 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void setClassAdderPresenter(BaseContract.ClassAdderPresenter presenter) {
-        firebaseHandler.setClassAdderPresenter(presenter);
+    public void setClassOperationPresenter(BaseContract.ClassOperationsPresenter presenter) {
+        firebaseHandler.setClassOperationPresenter(presenter);
     }
 
     @Override

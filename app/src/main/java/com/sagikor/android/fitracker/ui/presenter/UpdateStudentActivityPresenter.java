@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.model.Student;

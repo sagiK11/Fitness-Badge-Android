@@ -2,14 +2,10 @@ package com.sagikor.android.fitracker.data.db.sharedprefrences;
 
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class AppSharedPreferencesHandler implements SharedPreferencesHandler {
-    private final static AppSharedPreferencesHandler sharedPreferencesHandler = init();
-    private static final String CLASSES_USER_TEACHES = "CLASSES_USER_TEACHES";
+    private static final AppSharedPreferencesHandler sharedPreferencesHandler = init();
     private static final String TAG = "AppSharedPrefHandler";
     private SharedPreferences sharedPreferences;
 

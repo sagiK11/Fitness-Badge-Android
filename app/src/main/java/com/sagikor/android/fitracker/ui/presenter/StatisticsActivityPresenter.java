@@ -1,11 +1,9 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.util.Log;
 
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.Student;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.StatisticsActivityContract;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;

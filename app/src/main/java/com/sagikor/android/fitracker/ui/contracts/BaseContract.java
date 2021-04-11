@@ -8,7 +8,6 @@ import com.sagikor.android.fitracker.data.model.UserClass;
 public interface BaseContract {
     interface BasePresenter {
 
-
     }
 
     interface BaseView {
@@ -63,10 +62,14 @@ public interface BaseContract {
         void onRegisterFailure(Task<AuthResult> task);
     }
 
-    interface ClassAdderPresenter extends BaseContract.BasePresenter {
+    interface ClassOperationsPresenter extends BaseContract.BasePresenter {
 
         void onAddClassSuccess(UserClass userClass);
 
         void onAddSClassFailed();
+
+        void onDeleteClassSuccess(UserClass userClass);
+
+        void onDeleteClassFailed();
     }
 }

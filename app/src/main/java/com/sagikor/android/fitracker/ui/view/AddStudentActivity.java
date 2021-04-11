@@ -22,6 +22,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AddStudentActivity extends StudentActivity implements AddStudentActivityContract.View {
     protected AddStudentActivityContract.Presenter presenter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student);
