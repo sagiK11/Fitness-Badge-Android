@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
 
     Button btnLogin;
     Button btnResetPassword;
-    TextView btnSignUp;
+    Button btnSignUp;
     EditText etUserEmail;
     EditText etUserPassword;
     ProgressBar progressBar;
@@ -76,12 +76,12 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
 
     @Override
     public void setErrorInEmail() {
-        setError(etUserPassword);
+        setError(etUserEmail);
     }
 
     @Override
     public void setErrorInPassword() {
-        setError(etUserEmail);
+        setError(etUserPassword);
     }
 
     @Override
