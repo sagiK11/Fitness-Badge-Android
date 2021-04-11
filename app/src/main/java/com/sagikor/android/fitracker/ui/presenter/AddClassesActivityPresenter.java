@@ -6,12 +6,13 @@ import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.List;
 
 
-public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter {
+public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter, BaseContract.ClassAdderPresenter {
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private AddClassesActivityContract.View view;
 
@@ -50,11 +51,23 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     public void bind(AddClassesActivityContract.View view, SharedPreferences sharedPreferences) {
         this.view = view;
         databaseHandler.setSharedPreferences(sharedPreferences);
+        databaseHandler.setClassAdderPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
         databaseHandler.setSharedPreferences(null);
+        databaseHandler.setClassAdderPresenter(null);
+    }
+
+    @Override
+    public void onAddClassSuccess(UserClass userClass) {
+        view.updateList();
+    }
+
+    @Override
+    public void onAddSClassFailed() {
+        //TODO this can be left empty for the moment
     }
 }

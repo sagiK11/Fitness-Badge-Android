@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_class_layout"
+        app:layout_constraintBottom_toTopOf="@+id/text_input_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,46 +39,44 @@
             android:orientation="horizontal" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/input_class_layout"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/text_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/current_classes_layout"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add_class"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/_add_classes_layout">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/input_class_to_teach"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/small_class" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_class_to_teach"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/small_class" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.rey.material.widget.Button
-            android:id="@+id/btn_add_class"
-            style="@style/buttons_style"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:letterSpacing="0.05"
-
-            android:text="@string/save" />
-    </LinearLayout>
+    <com.rey.material.widget.Button
+        android:id="@+id/btn_add_class"
+        style="@style/buttons_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:text="@string/save"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/current_classes_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout" />
 
     <RelativeLayout
         android:id="@+id/current_classes_layout"
@@ -88,7 +86,7 @@
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_class_layout">
+        app:layout_constraintTop_toBottomOf="@+id/btn_add_class">
 
         <TextView
             android:id="@+id/current_classes"
