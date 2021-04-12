@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.firebase.FirebaseApp;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     Button btnUpdateStudent;
     ProgressBar progressBar;
     ImageView ivBackgroundImage;
-    Toolbar toolbar;
+    MaterialToolbar toolbar;
     MainActivityPresenter presenter;
 
 
