@@ -168,4 +168,5 @@
     <string name="delete_class_question">למחוק כיתה?</string>
     <string name="adding_classes">הוספת כיתות</string>
     <string name="students_grades">ציוני התלמידים</string>
+    <string name="search_hint">חפש תלמיד..</string>
 </resources>

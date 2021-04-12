@@ -34,7 +34,7 @@
     <string name="open_memory" translatable="false">Open File</string>
     <string name="back_memory" translatable="false">Back</string>
     <string name="import_excel_file">open file</string>
-    <string name="search_hint" translatable="false">enter name</string>
+    <string name="search_hint" translatable="false">search a student..</string>
     <string name="setting">Setting</string>
     <string name="send_sms">Send Grade With SMS</string>
     <string name="sms">phone </string>

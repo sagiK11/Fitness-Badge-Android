@@ -19,12 +19,12 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomViewHolder> {
+public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CustomViewHolder> {
     private static final String TAG = "StudentAdapter";
     private List<Student> list;
     private final ViewStudentsActivityContract.Presenter presenter;
 
-    public StudentAdapter( ViewStudentsActivityContract.Presenter presenter){
+    public StudentAdapter(ViewStudentsActivityContract.Presenter presenter) {
         this.list = presenter.getStudentsList();
         this.presenter = presenter;
     }
@@ -33,7 +33,7 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
     @Override
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.student_list_item,parent,false);
+        View view = layoutInflater.inflate(R.layout.student_list_item, parent, false);
         return new CustomViewHolder(view);
     }
 
@@ -42,16 +42,16 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         Student student = list.get(position);
         holder.tvName.setText(student.getName());
         holder.tvClass.setText(student.getStudentClass());
-        String female =  holder.ivAvatar.getContext().getResources().getString(R.string.girl);
-        if(list.get(position).getGender().equals(female))
-            holder.ivAvatar.setImageResource(R.mipmap.female_athlete_avatar);
-        else
-            holder.ivAvatar.setImageResource(R.mipmap.male_avatar);
-        setStudentOnClickListener(holder,position);
+        String female = holder.ivAvatar.getContext().getResources().getString(R.string.girl);
+        boolean isFemale = student.getGender().equals(female);
+        holder.ivAvatar.setImageResource(isFemale ? R.mipmap.female_athlete_avatar : R.mipmap.male_avatar);
+        holder.ivBadge.setVisibility(student.isFinished() ? View.VISIBLE : View.INVISIBLE);
+
+        setStudentOnClickListener(holder, position);
 
     }
 
-    private void setStudentOnClickListener(CustomViewHolder holder,int position) {
+    private void setStudentOnClickListener(CustomViewHolder holder, int position) {
         Student student = list.get(position);
         Context context = holder.ivAvatar.getContext();
         final String YES = context.getString(R.string.yes);
@@ -59,10 +59,10 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         final String DELETE_STUDENT_QUESTION = context.getResources().getString(R.string.delete_student_question);
         //short click
         holder.itemView.setOnClickListener(e ->
-            presenter.onStudentClick(student.getKey())
+                presenter.onStudentClick(student.getKey())
         );
         //long click
-        holder.itemView.setOnLongClickListener(e->{
+        holder.itemView.setOnLongClickListener(e -> {
             new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
                     .setTitleText(DELETE_STUDENT_QUESTION)
                     .setConfirmText(YES)
@@ -85,7 +85,7 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         notifyItemRangeChanged(position, list.size());
     }
 
-    public void updateList(List<Student> list){
+    public void updateList(List<Student> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -95,20 +95,22 @@ public class StudentAdapter extends  RecyclerView.Adapter<StudentAdapter.CustomV
         return list.size();
     }
 
-    static class CustomViewHolder extends RecyclerView.ViewHolder{
+    static class CustomViewHolder extends RecyclerView.ViewHolder {
         public final View view;
 
         private final TextView tvName;
         private final TextView tvClass;
         private final ImageView ivAvatar;
+        private final ImageView ivBadge;
 
-        public CustomViewHolder(View view){
+        public CustomViewHolder(View view) {
             super(view);
             this.view = view;
 
             tvName = view.findViewById(R.id.student_name_view_data_id);
             tvClass = view.findViewById(R.id.student_class_view_data_id);
             ivAvatar = view.findViewById(R.id.avatar_image_view);
+            ivBadge = view.findViewById(R.id.badge);
         }
     }
 }

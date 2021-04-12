@@ -19,7 +19,10 @@
         android:inputType="textPersonName"
         android:textAlignment="textStart"
         android:textColor="@color/black"
-        android:textColorHint="@color/black" />
+        android:layout_marginStart="5dp"
+        android:drawableStart="@drawable/ic_search"
+        android:hint="@string/search_hint"
+        android:textColorHint="#999999" />
 
 
     <androidx.recyclerview.widget.RecyclerView
