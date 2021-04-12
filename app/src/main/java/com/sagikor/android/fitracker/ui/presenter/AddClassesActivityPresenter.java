@@ -8,6 +8,7 @@ import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
 import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
+import com.sagikor.android.fitracker.utils.Utility;
 
 import java.util.List;
 
@@ -41,12 +42,15 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
         return databaseHandler.getClassesUserTeaches();
     }
 
-    private void checkValidInput(String classToTeach) throws AppExceptions.Input {
+    @Override
+    public void checkValidInput(String classToTeach) throws AppExceptions.Input {
         final int max_class_name = 10;
         if (classToTeach == null || classToTeach.length() == 0)
             throw new AppExceptions.Input("please insert class to teach");
         else if (classToTeach.length() > max_class_name)
             throw new AppExceptions.Input("class name too long");
+        else if (!Utility.isValidClassName(classToTeach))
+            throw new AppExceptions.Input("please insert valid class name");
     }
 
     @Override
@@ -70,7 +74,7 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
 
     @Override
     public void onAddSClassFailed() {
-        view.popMessage("Ho no! Something wen't wrong!");
+        view.popMessage(Utility.GENERIC_ERROR_MESSAGE);
     }
 
     @Override
@@ -80,6 +84,6 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
 
     @Override
     public void onDeleteClassFailed() {
-        view.popMessage("Ho no! Something wen't wrong!");
+        view.popMessage(Utility.GENERIC_ERROR_MESSAGE);
     }
 }

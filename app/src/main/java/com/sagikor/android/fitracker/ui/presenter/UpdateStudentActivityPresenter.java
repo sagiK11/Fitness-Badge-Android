@@ -95,6 +95,6 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
 
     @Override
     public void onUpdateStudentFailed() {
-        view.popFailWindow("Ho no! Something wen't wrong!");
+        view.popFailWindow(Utility.GENERIC_ERROR_MESSAGE);
     }
 }

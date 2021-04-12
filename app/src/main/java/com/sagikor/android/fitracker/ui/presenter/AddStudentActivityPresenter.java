@@ -164,6 +164,6 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     @Override
     public void onAddStudentFailed() {
-        view.popFailWindow("Ho no! Something wen't wrong!");
+        view.popFailWindow(Utility.GENERIC_ERROR_MESSAGE);
     }
 }
