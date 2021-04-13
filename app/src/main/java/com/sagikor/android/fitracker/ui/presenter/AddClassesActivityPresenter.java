@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import android.content.SharedPreferences;
 
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
@@ -54,16 +53,14 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     }
 
     @Override
-    public void bind(AddClassesActivityContract.View view, SharedPreferences sharedPreferences) {
+    public void bind(AddClassesActivityContract.View view) {
         this.view = view;
-        databaseHandler.setSharedPreferences(sharedPreferences);
         databaseHandler.setClassOperationPresenter(this);
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setSharedPreferences(null);
         databaseHandler.setClassOperationPresenter(null);
     }
 

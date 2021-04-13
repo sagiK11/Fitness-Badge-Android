@@ -56,7 +56,7 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
         super.onResume();
         if (presenter == null)
             presenter = new AddClassesActivityPresenter();
-        presenter.bind(this, getSharedPreferences("sharedPreferences", MODE_PRIVATE));
+        presenter.bind(this);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
 
     private void generateDataList() {
         presenter = new AddClassesActivityPresenter();
-        presenter.bind(this, getSharedPreferences("sharedPreferences", MODE_PRIVATE));
+        presenter.bind(this);
         classAdapter = new ClassAdapter();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AddClassesActivity.this);
         listView.setLayoutManager(layoutManager);

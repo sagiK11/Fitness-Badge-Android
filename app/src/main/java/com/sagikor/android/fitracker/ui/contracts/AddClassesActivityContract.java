@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
-import android.content.SharedPreferences;
 
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.utils.AppExceptions;
@@ -20,7 +19,7 @@ public interface AddClassesActivityContract {
 
         void checkValidInput(String input) throws AppExceptions.Input;
 
-        void bind(AddClassesActivityContract.View view, SharedPreferences sharedPreferences);
+        void bind(AddClassesActivityContract.View view);
 
         void unbind();
 
