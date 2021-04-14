@@ -139,8 +139,8 @@
     <string name="password_guide">סיסמה צריכה להכיל לפחות  7 תווים.</string>
     <string name="full_name">שם מלא</string>
     <string name="sign_out">התנתק</string>
-    <string name="gender_to_always_girls">הגדר מגדר כ-\'בת\' תמיד</string>
-    <string name="gender_to_always_boys">הגדר מגדר כ-\'בן\' תמיד</string>
+    <string name="gender_to_always_girls">הגדר מגדר כבנות</string>
+    <string name="gender_to_always_boys">הגדר מגדר כבנים</string>
     <string name="add_student_setting">מסך הוספת תלמיד</string>
     <string name="students_setting">תלמידים</string>
     <string name="exit_question">כבר לעזוב?</string>
