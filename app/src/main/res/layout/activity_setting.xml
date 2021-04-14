@@ -11,14 +11,12 @@
         android:id="@+id/_add_student_setting_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/switch_always_girls"
+        app:layout_constraintBottom_toTopOf="@+id/female_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintVertical_chainStyle="packed">
+        >
 
         <TextView
             android:id="@+id/_add_student_setting"
@@ -45,67 +43,99 @@
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_always_girls"
+        style="@style/settings_buttons"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:text="@string/gender_to_always_girls"
+        android:textColor="#696969"
+        app:layout_constraintBottom_toBottomOf="@+id/female_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/female_icon"
+        app:layout_constraintTop_toTopOf="@+id/female_icon" />
+
+
+    <ImageView
+        android:id="@+id/female_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:drawablePadding="10dp"
-        style="@style/settings_buttons"
-        android:textColor="#696969"
-        android:text="@string/gender_to_always_girls"
+        android:src="@mipmap/female_athlete_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/male_icon"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/switch_always_girls"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/_add_student_setting_layout"
-        app:layout_constraintBottom_toTopOf="@+id/switch_always_boys"
-        android:layout_height="wrap_content"
-        app:drawableEndCompat="@mipmap/female_athlete_avatar"
-      />
+        app:layout_constraintTop_toBottomOf="@+id/_add_student_setting_layout" />
 
 
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switch_always_boys"
+        style="@style/settings_buttons"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+
         android:layout_marginEnd="16dp"
+        android:text="@string/gender_to_always_boys"
+        android:textColor="#696969"
+        app:layout_constraintBottom_toBottomOf="@+id/male_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/male_icon"
+        app:layout_constraintTop_toTopOf="@+id/male_icon" />
+
+    <ImageView
+        android:id="@+id/male_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:drawablePadding="10dp"
-        android:textColor="#696969"
-        style="@style/settings_buttons"
-        app:drawableEndCompat="@mipmap/male_avatar"
-        android:text="@string/gender_to_always_boys"
-        app:layout_constraintTop_toBottomOf="@+id/switch_always_girls"
+        android:src="@mipmap/male_avatar"
+        app:layout_constraintBottom_toTopOf="@+id/add_icon"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/switch_always_boys"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btn_add_classes"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/female_icon" />
+
+    <ImageView
+        android:id="@+id/add_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_classes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/male_icon"
+        app:srcCompat="@drawable/ic_add_classes" />
 
     <TextView
         android:id="@+id/btn_add_classes"
-        android:layout_width="0dp"
         style="@style/settings_buttons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
         android:text="@string/add_classes"
-        android:drawablePadding="10dp"
-        app:drawableEndCompat="@drawable/ic_add_classes"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintBottom_toBottomOf="@+id/add_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch_always_boys" />
+        app:layout_constraintStart_toEndOf="@+id/add_icon"
+        app:layout_constraintTop_toTopOf="@+id/add_icon" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/delete_all_students_button"
+        app:layout_constraintBottom_toTopOf="@+id/delete_students_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_add_classes">
+        app:layout_constraintTop_toBottomOf="@+id/add_icon">
 
         <TextView
             android:id="@+id/students_setting"
@@ -135,27 +165,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:drawablePadding="10dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/delete_data"
         android:gravity="center_vertical"
-        app:drawableEndCompat="@drawable/ic_delete"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        android:text="@string/delete_data"
+        app:layout_constraintBottom_toBottomOf="@+id/delete_students_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+        app:layout_constraintStart_toEndOf="@+id/delete_students_icon"
+        app:layout_constraintTop_toTopOf="@+id/delete_students_icon" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/user_details"
+        app:layout_constraintBottom_toTopOf="@+id/person_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_all_students_button">
+        app:layout_constraintTop_toBottomOf="@+id/delete_students_icon">
 
         <TextView
             android:id="@+id/user_setting"
@@ -179,38 +206,73 @@
             android:orientation="horizontal" />
     </RelativeLayout>
 
+
     <TextView
         android:id="@+id/user_details"
-        android:layout_width="match_parent"
+        style="@style/settings_buttons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
-        style="@style/settings_buttons"
-        android:drawablePadding="10dp"
-        app:drawableEndCompat="@drawable/ic_person"
-        app:layout_constraintBottom_toTopOf="@+id/delete_account_button"
+        app:layout_constraintBottom_toBottomOf="@+id/person_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintStart_toEndOf="@+id/person_icon"
+        app:layout_constraintTop_toTopOf="@+id/person_icon" />
 
     <TextView
         android:id="@+id/delete_account_button"
-        android:layout_width="match_parent"
+        style="@style/settings_buttons"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:gravity="center_vertical"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        style="@style/settings_buttons"
         android:text="@string/delete_user"
-        android:drawablePadding="10dp"
-        app:drawableEndCompat="@drawable/ic_delete_account"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+    <ImageView
+        android:id="@+id/delete_students_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/delete_all_students_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_details" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
+        app:srcCompat="@drawable/ic_delete" />
+
+    <ImageView
+        android:id="@+id/person_icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/user_details"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:srcCompat="@drawable/ic_person" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="0.8"
+        app:layout_constraintEnd_toStartOf="@+id/delete_account_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/person_icon"
+        app:srcCompat="@drawable/ic_delete_account" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
