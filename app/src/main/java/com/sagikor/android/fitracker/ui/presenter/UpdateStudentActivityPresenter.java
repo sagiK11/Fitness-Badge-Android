@@ -3,14 +3,13 @@ package com.sagikor.android.fitracker.ui.presenter;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.model.Student;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.UpdateStudentActivityContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 public class UpdateStudentActivityPresenter extends StudentActivityPresenter implements
-        UpdateStudentActivityContract.Presenter, BaseContract.UpdaterPresenter {
+        UpdateStudentActivityContract.Presenter {
 
     private static final String TAG = "UpdateStudentActPre";
     private UpdateStudentActivityContract.View view;
@@ -30,7 +29,6 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
     public void bind(UpdateStudentActivityContract.View view) {
         super.bind(view);
         this.view = view;
-        databaseHandler.setUpdaterPresenter(this);
         currentStudent = getCachedObject();
         updateViewFields();
     }
@@ -39,7 +37,6 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
     public void unbind() {
         super.unbind();
         view = null;
-        databaseHandler.setUpdaterPresenter(null);
     }
 
     private void updateViewFields() {
@@ -61,7 +58,6 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
         view.updateTotalScore(currentStudent.getTotalScore());
     }
 
-
     private void updateStudent() {
         Student updatedStudent = new Student.Builder(view.getStudentName())
                 .studentClass(view.getStudentClass())
@@ -79,11 +75,11 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
                 .jumpResult(parse(view.getJumpGrade()))
                 .handsResult(parse(view.getHandsGrade()))
                 .cubesResult(parse(view.getCubesGrade()))
-                 .totalScore(super.getAverage())
+                .totalScore(super.getAverage())
                 .updatedDate(Utility.getTodayDate())
                 .build();
 
-        databaseHandler.updateStudent(updatedStudent);
+        databaseHandler.updateStudent(this, updatedStudent);
     }
 
     @Override

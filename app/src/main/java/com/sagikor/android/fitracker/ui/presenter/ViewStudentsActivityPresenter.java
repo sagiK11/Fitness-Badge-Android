@@ -3,17 +3,14 @@ package com.sagikor.android.fitracker.ui.presenter;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewStudentsActivityPresenter implements
-        ViewStudentsActivityContract.Presenter,
-        BaseContract.DeleterPresenter {
+public class ViewStudentsActivityPresenter implements ViewStudentsActivityContract.Presenter {
 
-    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+    private DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private ViewStudentsActivityContract.View view;
 
     @Override
@@ -29,7 +26,7 @@ public class ViewStudentsActivityPresenter implements
 
     @Override
     public void deleteStudent(Student student) {
-        databaseHandler.deleteStudent(student);
+        databaseHandler.deleteStudent(this, student);
     }
 
     @Override
@@ -46,13 +43,13 @@ public class ViewStudentsActivityPresenter implements
     @Override
     public void bind(ViewStudentsActivityContract.View view) {
         this.view = view;
-        databaseHandler.setDeleterPresenter(this);
+        databaseHandler = AppDatabaseHandler.getInstance();
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setDeleterPresenter(null);
+        databaseHandler = null;
     }
 
     @Override

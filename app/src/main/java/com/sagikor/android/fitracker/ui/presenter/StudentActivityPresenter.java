@@ -30,7 +30,6 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
         return phoneNoInput.matches("^[0-9]+$");
     }
 
-
     @Override
     public boolean isValidScore(String scoreInput) {
         if (scoreInput == null || scoreInput.length() == 0)
@@ -47,7 +46,6 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
     public boolean isGenderSelected() {
         return !view.getStudentGender().equals(view.getGenderStringResource());
     }
-
 
     @Override
     public String calculateGrade(String score, String sportType, boolean isFemale) {

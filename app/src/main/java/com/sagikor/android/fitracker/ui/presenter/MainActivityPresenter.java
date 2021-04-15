@@ -1,6 +1,5 @@
 package com.sagikor.android.fitracker.ui.presenter;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.Student;
@@ -50,7 +49,7 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
 
     @Override
     public void onDisconnectClick() {
-        FirebaseAuth.getInstance().signOut();
+        databaseHandler.signOut();
         view.disconnectUser();
     }
 
@@ -58,18 +57,16 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void bind(MainActivityContract.View view) {
         this.view = view;
-        databaseHandler.setLoaderPresenter(this);
-        if (!databaseHandler.isDataLoaded()) {
-            view.setLoadingMode();
-        }else{
+        if (!databaseHandler.isDataLoaded())
+            databaseHandler.getDataFromDatabase(this);
+        else
             view.setActiveMode();
-        }
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setLoaderPresenter(null);
+
     }
 
     @Override

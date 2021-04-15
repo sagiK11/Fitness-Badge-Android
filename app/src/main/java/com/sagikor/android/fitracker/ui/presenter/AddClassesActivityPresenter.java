@@ -5,16 +5,14 @@ import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.Utility;
 
 import java.util.List;
 
 
-public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter,
-        BaseContract.ClassOperationsPresenter {
-    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter {
+    private DatabaseHandler databaseHandler;
     private AddClassesActivityContract.View view;
 
     @Override
@@ -27,13 +25,13 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
             return;
         }
 
-        databaseHandler.addClassUserTeaches(new UserClass(classToTeach));
+        databaseHandler.addClassUserTeaches(this, new UserClass(classToTeach));
         view.updateList();
     }
 
     @Override
     public void onDeleteClassToTeach(UserClass classToTeach) {
-        databaseHandler.deleteClassUserTeaches(classToTeach);
+        databaseHandler.deleteClassUserTeaches(this, classToTeach);
     }
 
     @Override
@@ -55,13 +53,13 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     @Override
     public void bind(AddClassesActivityContract.View view) {
         this.view = view;
-        databaseHandler.setClassOperationPresenter(this);
+        databaseHandler = AppDatabaseHandler.getInstance();
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setClassOperationPresenter(null);
+        databaseHandler = null;
     }
 
     @Override

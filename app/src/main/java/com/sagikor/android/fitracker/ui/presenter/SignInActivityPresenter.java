@@ -3,14 +3,11 @@ package com.sagikor.android.fitracker.ui.presenter;
 
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.ui.contracts.SignInActivityContract;
 import com.sagikor.android.fitracker.utils.Utility;
 
-public class SignInActivityPresenter implements
-        SignInActivityContract.Presenter,
-        BaseContract.SignInPresenter {
-    private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+public class SignInActivityPresenter implements SignInActivityContract.Presenter {
+    private DatabaseHandler databaseHandler;
     private SignInActivityContract.View view;
 
     @Override
@@ -29,7 +26,7 @@ public class SignInActivityPresenter implements
             view.setErrorInPassword();
             return;
         }
-        databaseHandler.signInWithEmailAndPassword(email, password);
+        databaseHandler.signInWithEmailAndPassword(this, email, password);
     }
 
     @Override
@@ -44,24 +41,24 @@ public class SignInActivityPresenter implements
             view.notifyUserToFillEmail();
             return;
         }
-        databaseHandler.resetPassword(view.getUserEmail());
+        databaseHandler.resetPassword(this, view.getUserEmail());
     }
 
     @Override
     public void bind(SignInActivityContract.View view) {
         this.view = view;
-        databaseHandler.setSignInPresenter(this);
+        databaseHandler = AppDatabaseHandler.getInstance();
     }
 
     @Override
     public void unbind() {
         this.view = null;
-        databaseHandler.setSignInPresenter(null);
+        databaseHandler = null;
     }
 
     @Override
     public void onStart() {
-        //Moving to main activity if the user is already signed in.
+        //Moving to main activity if the user is already signed in with his device.
         boolean isUserSigned = databaseHandler.isUserSigned();
         if (isUserSigned)
             view.navSignedUserToHomeScreen();

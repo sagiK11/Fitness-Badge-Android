@@ -10,7 +10,6 @@ import com.sagikor.android.fitracker.data.model.Student;
 
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.Utility;
 
@@ -19,7 +18,7 @@ import java.util.List;
 
 
 public class AddStudentActivityPresenter extends StudentActivityPresenter implements
-        AddStudentActivityContract.Presenter, BaseContract.AdderPresenter {
+        AddStudentActivityContract.Presenter {
 
     private static final String TAG = "AddStudentActivityPres";
     private AddStudentActivityContract.View view;
@@ -51,7 +50,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
             view.popFailWindow(e.getMessage());
             return;
         }
-        databaseHandler.addStudent(newStudent);
+        databaseHandler.addStudent(this, newStudent);
     }
 
     @Override
@@ -59,7 +58,6 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         super.bind(view);
         this.view = view;
         databaseHandler.setSharedPreferences(sharedPreferences);
-        databaseHandler.setAdderPresenter(this);
     }
 
     @Override
@@ -67,8 +65,6 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         super.unbind();
         this.view = null;
         databaseHandler.setSharedPreferences(null);
-        databaseHandler.setAdderPresenter(null);
-
     }
 
     private Student createNewStudent() {

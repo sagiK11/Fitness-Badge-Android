@@ -10,7 +10,7 @@ import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 import java.util.List;
 
-public class StatisticsActivityPresenter implements StatisticsActivityContract.Presenter{
+public class StatisticsActivityPresenter implements StatisticsActivityContract.Presenter {
     private static final String TAG = "StatisticsActivityPres";
     private final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
     private StatisticsActivityContract.View view;
@@ -121,7 +121,6 @@ public class StatisticsActivityPresenter implements StatisticsActivityContract.P
         handsGradeAverage = handsGradesCounter != 0 ? sumHands / handsGradesCounter : 0;
     }
 
-
     private void calculateCubesAverage() {
         int cubesGradesCounter = 0;
         float sumCubes = 0;
@@ -134,7 +133,6 @@ public class StatisticsActivityPresenter implements StatisticsActivityContract.P
         cubesGradeAverage = cubesGradesCounter != 0 ? sumCubes / cubesGradesCounter : 0;
     }
 
-
     private void calculateJumpAverage() {
         int jumpGradesCounter = 0;
         float sumJump = 0;
@@ -146,7 +144,6 @@ public class StatisticsActivityPresenter implements StatisticsActivityContract.P
         }
         jumpGradesAverage = jumpGradesCounter != 0 ? sumJump / jumpGradesCounter : 0;
     }
-
 
     private void calculateAbsAverage() {
         int absGradesCounter = 0;
