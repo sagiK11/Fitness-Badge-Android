@@ -11,9 +11,13 @@ public interface RegisterActivityContract {
 
         void onRegisterClick();
 
+        void onRegisterSuccess();
+
+        void onRegisterFailure(Task<AuthResult> task);
+
     }
 
-    interface View extends BaseContract.LoaderView {
+    interface View extends BaseContract.BaseView {
 
         String getUserEmail();
 
@@ -33,6 +37,9 @@ public interface RegisterActivityContract {
 
         void setNameError();
 
+        void showProgressBar();
+
+        void hideProgressBar();
 
     }
 }

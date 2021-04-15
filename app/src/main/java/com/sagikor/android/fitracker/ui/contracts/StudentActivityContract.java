@@ -17,8 +17,6 @@ public interface StudentActivityContract {
         void bind(StudentActivityContract.View view);
 
         void unbind();
-
-
     }
 
     interface View extends BaseContract.BaseView {
@@ -57,8 +55,6 @@ public interface StudentActivityContract {
         String getJumpScore();
 
         void popFailWindow(String error);
-
-        void popMessage(String message);
 
         String getGradeStringResource();
 

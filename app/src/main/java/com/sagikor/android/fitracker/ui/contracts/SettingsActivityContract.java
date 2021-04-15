@@ -2,6 +2,8 @@ package com.sagikor.android.fitracker.ui.contracts;
 
 import android.content.SharedPreferences;
 
+import com.sagikor.android.fitracker.data.model.Student;
+
 public interface SettingsActivityContract {
     interface Presenter extends BaseContract.BasePresenter {
         void onClearDatabaseClick();
@@ -22,11 +24,23 @@ public interface SettingsActivityContract {
 
         String getUserName();
 
+        void onDeleteStudentSuccess(Student student);
+
+        void onDeleteStudentFailed();
+
+        void onDeleteAccountSuccess();
+
+        void onDeleteAccountFailure();
+
     }
 
     interface View extends BaseContract.BaseView {
         void switchLogic();
 
         void navToAddClasses();
+
+        void navToSignInScreen();
+
+        void popMessage(String message);
     }
 }

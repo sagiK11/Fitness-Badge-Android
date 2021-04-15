@@ -13,6 +13,14 @@ public interface SignInActivityContract {
         void unbind();
 
         void onStart();
+
+        void onSignInSuccess();
+
+        void onSignInFailure();
+
+        void onResetPassSuccess();
+
+        void onResetPassFailure();
     }
 
     interface View extends BaseContract.BaseView {

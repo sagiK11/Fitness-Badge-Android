@@ -5,6 +5,7 @@ import com.sagikor.android.fitracker.data.model.Student;
 import java.util.List;
 
 public interface StatisticsActivityContract {
+
     interface Presenter extends BaseContract.BasePresenter {
         void bind(StatisticsActivityContract.View view);
 
@@ -32,7 +33,7 @@ public interface StatisticsActivityContract {
 
     }
 
-    interface View extends BaseContract.BaseView{
+    interface View extends BaseContract.BaseView {
 
     }
 }

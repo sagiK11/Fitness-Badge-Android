@@ -1,8 +1,7 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
-
 public interface MainActivityContract {
-    interface Presenter extends BaseContract.LoaderPresenter {
+    interface Presenter extends BaseContract.BasePresenter {
         void onSendToEmailClick();
 
         void onNavToSettingsClick();
@@ -25,9 +24,13 @@ public interface MainActivityContract {
 
         void unbind();
 
+        void onFinishedLoadingData();
+
+        void onLoadingData();
+
     }
 
-    interface View extends BaseContract.LoaderView {
+    interface View extends BaseContract.BaseView {
         void navToAddStudentScreen();
 
         void navToUpdateStudentScreen();
@@ -45,6 +48,10 @@ public interface MainActivityContract {
         void setActiveMode();
 
         void setLoadingMode();
+
+        void showProgressBar();
+
+        void hideProgressBar();
 
     }
 }

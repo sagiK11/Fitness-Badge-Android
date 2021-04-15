@@ -18,9 +18,12 @@ public interface ViewStudentsActivityContract {
 
         void unbind();
 
+        void onDeleteStudentSuccess(Student student);
+
+        void onDeleteStudentFailed();
     }
 
-    interface View extends BaseContract.BaseView{
+    interface View extends BaseContract.BaseView {
         void navToStudentUpdate();
     }
 }

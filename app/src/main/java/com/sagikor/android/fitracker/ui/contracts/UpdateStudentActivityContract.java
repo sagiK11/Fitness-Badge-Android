@@ -1,6 +1,8 @@
 package com.sagikor.android.fitracker.ui.contracts;
 
 
+import com.sagikor.android.fitracker.data.model.Student;
+
 public interface UpdateStudentActivityContract extends StudentActivityContract {
     interface Presenter extends StudentActivityContract.Presenter {
         void onSaveButtonClick();
@@ -10,6 +12,10 @@ public interface UpdateStudentActivityContract extends StudentActivityContract {
         void bind(UpdateStudentActivityContract.View view);
 
         void unbind();
+
+        void onUpdateStudentSuccess(Student student);
+
+        void onUpdateStudentFailed();
     }
 
     interface View extends StudentActivityContract.View {

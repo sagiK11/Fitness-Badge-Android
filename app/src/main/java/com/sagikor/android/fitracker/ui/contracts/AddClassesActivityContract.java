@@ -8,7 +8,6 @@ import java.util.List;
 
 
 public interface AddClassesActivityContract {
-
     interface Presenter extends BaseContract.BasePresenter {
 
         void onAddClassClick();
@@ -22,6 +21,14 @@ public interface AddClassesActivityContract {
         void bind(AddClassesActivityContract.View view);
 
         void unbind();
+
+        void onAddClassSuccess(UserClass userClass);
+
+        void onAddSClassFailed();
+
+        void onDeleteClassSuccess(UserClass userClass);
+
+        void onDeleteClassFailed();
 
     }
 
