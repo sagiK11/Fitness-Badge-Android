@@ -36,10 +36,10 @@
             android:alpha="0.5"
             android:background="@color/black"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/textInput_layout_name"
+            app:layout_constraintBottom_toBottomOf="@+id/student_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/student_details"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/student_details" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInput_layout_name"
@@ -82,10 +82,10 @@
             android:layout_marginStart="2dp"
             android:layout_marginEnd="8dp"
             android:hint="@string/phone_number"
-            app:layout_constraintBottom_toTopOf="@+id/gender_button"
+            app:layout_constraintBottom_toBottomOf="@+id/textInput_layout_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textInput_layout_name"
-            app:layout_constraintTop_toBottomOf="@+id/student_details">
+            app:layout_constraintTop_toTopOf="@+id/textInput_layout_name">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/phone_number_to_enter_id"
@@ -161,17 +161,16 @@
             android:layout_height="1dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/student_scores"
             android:alpha="0.5"
             android:background="@color/black"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/update_student_aerobic_id"
+            app:layout_constraintBottom_toBottomOf="@+id/student_scores"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/student_scores"
-            app:layout_constraintTop_toBottomOf="@+id/student_class_id" />
+            app:layout_constraintTop_toTopOf="@+id/student_scores" />
 
         <TextView
             android:id="@+id/textView15"
@@ -223,7 +222,7 @@
             android:textAlignment="textStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView"
             app:layout_constraintEnd_toStartOf="@+id/update_student_aerobic_text"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/textView" />
 
 
@@ -278,7 +277,7 @@
             android:textAlignment="textStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
             app:layout_constraintEnd_toStartOf="@+id/student_abs_text"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/textView30" />
 
         <TextView
@@ -333,7 +332,7 @@
             android:textAlignment="textStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView31"
             app:layout_constraintEnd_toStartOf="@+id/student_cubes_text"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/textView31" />
 
         <TextView
@@ -375,7 +374,7 @@
             android:textAlignment="textStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/hands_minutes_text_view"
             app:layout_constraintEnd_toStartOf="@+id/student_hands_text"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/hands_minutes_text_view" />
 
         <TextView
@@ -430,7 +429,7 @@
             android:textAlignment="textStart"
             app:layout_constraintBaseline_toBaselineOf="@+id/textView33"
             app:layout_constraintEnd_toStartOf="@+id/student_jump_text"
-            app:layout_constraintHorizontal_weight="3"
+            app:layout_constraintHorizontal_weight="2.5"
             app:layout_constraintStart_toEndOf="@+id/textView33" />
 
         <TextView
