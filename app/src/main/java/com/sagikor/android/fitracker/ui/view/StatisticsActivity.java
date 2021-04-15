@@ -3,6 +3,7 @@ package com.sagikor.android.fitracker.ui.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -97,7 +98,6 @@ public class StatisticsActivity extends AppCompatActivity implements
         pieChart.setData(data);
     }
 
-
     private void setupColumnsChart() {
         createLabelsName();
         createBarEntryList();
@@ -160,5 +160,10 @@ public class StatisticsActivity extends AppCompatActivity implements
     private void bindViews() {
         averageGradesChart = findViewById(R.id.avg_grades_chart);
         pieChart = findViewById(R.id.finished_chart);
+    }
+
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
@@ -19,7 +20,7 @@ import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentAdapter;
 
 public class ViewStudentsActivity extends AppCompatActivity implements
-        ViewStudentsActivityContract.View{
+        ViewStudentsActivityContract.View {
     private static final String TAG = "ViewDataActivity";
     private StudentAdapter adapter;
     private RecyclerView listView;
@@ -59,7 +60,6 @@ public class ViewStudentsActivity extends AppCompatActivity implements
         presenter.unbind();
     }
 
-
     private void bindViews() {
         listView = findViewById(R.id.list_view);
         inputSearch = findViewById(R.id.search_input);
@@ -90,5 +90,10 @@ public class ViewStudentsActivity extends AppCompatActivity implements
                 //AUTO-GENERATE
             }
         });
+    }
+
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

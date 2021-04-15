@@ -44,7 +44,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         presenter.unbind();
     }
 
-
     @Override
     public void selectStudentGender() {
         final String CHOOSE_GENDER = getResources().getString(R.string.choose_gender);
@@ -119,7 +118,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         dialog.show();
     }
 
-
     @Override
     public void popMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
@@ -148,7 +146,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         btnSaveStudent.setOnClickListener(e -> presenter.onAddStudentClick());
         etStudentName.requestFocus();
     }
-
 
     private void setClass(String sClass) {
         btnChooseClass.setText(sClass);

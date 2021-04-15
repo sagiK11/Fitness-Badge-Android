@@ -49,7 +49,6 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
         presenter.unbind();
     }
 
-
     @Override
     public void navToHomeScreen() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -151,5 +150,10 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
         btnLogin.getBackground().setAlpha(50);
         btnSignUp.getBackground().setAlpha(50);
         btnResetPassword.getBackground().setAlpha(50);
+    }
+
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

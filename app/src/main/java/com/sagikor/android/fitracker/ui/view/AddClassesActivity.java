@@ -37,12 +37,12 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_classes);
-        bindObjects();
+        bindViews();
         generateDataList();
 
     }
 
-    private void bindObjects() {
+    private void bindViews() {
         listView = findViewById(R.id.saved_classes_list_view);
         btnAddClass = findViewById(R.id.btn_add_class);
         etClass = findViewById(R.id.input_class_to_teach);

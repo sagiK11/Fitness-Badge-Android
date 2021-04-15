@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 
 import com.google.android.material.appbar.MaterialToolbar;
@@ -213,6 +214,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private class EmailSendThread extends Thread {

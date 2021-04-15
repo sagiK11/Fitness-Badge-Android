@@ -67,7 +67,6 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         tvUserName = findViewById(R.id.user_details);
     }
 
-
     @Override
     public void switchLogic() {
         isGirlsSwitchOn = presenter.isGirlsSwitchOn();
@@ -83,6 +82,13 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         startActivity(new Intent(this, AddClassesActivity.class));
     }
 
+    @Override
+    public void navToSignInScreen() {
+        Intent intent = new Intent(this, SignInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+    }
 
     private void enableSwitchesLogic() {
         if (isGirlsSwitchOn) {
@@ -105,7 +111,6 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         final int NO = 0;
         final String DELETE_STUDENTS_QUESTION = getResources().getString(R.string.delete_all_students_question);
         final String NO_STUDENTS_DELETED = getResources().getString(R.string.no_students_were_deleted);
-        final String STUDENTS_DELETED_SUCCESSFULLY = getResources().getString(R.string.students_deleted_successfully);
         final String[] answers = {getResources().getString(R.string.no),
                 getResources().getString(R.string.yes)};
 
@@ -113,30 +118,26 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         builder.setTitle(DELETE_STUDENTS_QUESTION);
         builder.setItems(answers, (dialog, choice) -> {
             if (choice == NO) {
-                popToast(NO_STUDENTS_DELETED);
+                popMessage(NO_STUDENTS_DELETED);
             } else {
                 presenter.onClearDatabaseClick();
-                popToast(STUDENTS_DELETED_SUCCESSFULLY);
             }
         });
         builder.show();
     }
 
-    private void popToast(String msg) {
-        Toast toast = Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT);
-        toast.show();
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
-
 
     private void goodByeMessage() {
         final String SAD_TO_SEE_YOU_LEAVE = getResources().getString(R.string.farewell_user);
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText(SAD_TO_SEE_YOU_LEAVE)
                 .setConfirmClickListener(sDialog -> {
+                    presenter.onDeleteAccountClick();
                     sDialog.dismissWithAnimation();
-                    Intent intent = new Intent(this, SignInActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
                 })
                 .show();
     }
@@ -151,8 +152,6 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
                     goodByeMessage();
-                    presenter.onDeleteAccountClick();
-
                 })
                 .setCancelButton(NO, SweetAlertDialog::dismissWithAnimation)
                 .show();

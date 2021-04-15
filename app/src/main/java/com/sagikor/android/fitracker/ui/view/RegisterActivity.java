@@ -18,6 +18,7 @@ import com.sagikor.android.fitracker.ui.contracts.RegisterActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.RegisterActivityPresenter;
 
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterActiv
     @Override
     protected void onResume() {
         super.onResume();
-        if(presenter == null)
+        if (presenter == null)
             presenter = new RegisterActivityPresenter();
         presenter.bind(this);
     }
@@ -139,8 +140,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterActiv
         registerButton.getBackground().setAlpha(50);
     }
 
-    private String cleanText(EditText editText){
+    private String cleanText(EditText editText) {
         return editText.getText().toString().trim();
     }
 
+    @Override
+    public void popMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 }

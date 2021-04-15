@@ -207,7 +207,6 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                 : message.toString();
     }
 
-
     private void appendGreetings(StringBuilder res) {
         final String HELLO = getResources().getString(R.string.hello);
         final String CURRENT_GRADES = getResources().getString(R.string.current_grades);
@@ -220,7 +219,6 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
         return res.append("\n").append(TOTAL_SCORE).append(" ")
                 .append(student.getTotalScore()).append(".").toString();
     }
-
 
     private int appendAerobicText(StringBuilder res, Student student) {
         final String AEROBIC = getResources().getString(R.string.aero_c);
@@ -317,7 +315,7 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                         if (presenter.isValidScore(input)) {
                             String grade = presenter.calculateGrade(input, type, isFemale);
                             tvGrade.setText(grade);
-                        }else{
+                        } else {
                             tvGrade.setText(getResources().getString(R.string.grade));
                         }
                     } else {
