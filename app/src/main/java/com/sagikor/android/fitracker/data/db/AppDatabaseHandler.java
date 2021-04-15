@@ -9,7 +9,14 @@ import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.model.UserClass;
-import com.sagikor.android.fitracker.ui.contracts.BaseContract;
+import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.RegisterActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.SettingsActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.SignInActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.UpdateStudentActivityContract;
+import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 
@@ -34,8 +41,8 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void getDataFromDatabase() {
-        firebaseHandler.getDataFromDatabase();
+    public void getDataFromDatabase(MainActivityContract.Presenter presenter) {
+        firebaseHandler.getDataFromDatabase(presenter);
     }
 
     @Override
@@ -44,63 +51,28 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void addStudent(Student student) {
-        firebaseHandler.addStudent(student);
+    public void addStudent(AddStudentActivityContract.Presenter presenter, Student student) {
+        firebaseHandler.addStudent(presenter, student);
     }
 
     @Override
-    public void updateStudent(Student student) {
-        firebaseHandler.updateStudent(student);
+    public void updateStudent(UpdateStudentActivityContract.Presenter presenter, Student student) {
+        firebaseHandler.updateStudent(presenter, student);
     }
 
     @Override
-    public void deleteStudent(Student student) {
-        firebaseHandler.deleteStudent(student);
+    public void deleteStudent(ViewStudentsActivityContract.Presenter presenter, Student student) {
+        firebaseHandler.deleteStudent(presenter, student);
     }
 
     @Override
-    public void clearDatabase() {
-        firebaseHandler.clearDatabase();
+    public void clearDatabase(SettingsActivityContract.Presenter presenter) {
+        firebaseHandler.clearDatabase(presenter);
     }
 
     @Override
-    public void deleteAccount() {
-        firebaseHandler.deleteAccount();
-    }
-
-    @Override
-    public void setLoaderPresenter(BaseContract.LoaderPresenter presenter) {
-        firebaseHandler.setLoaderPresenter(presenter);
-    }
-
-    @Override
-    public void setAdderPresenter(BaseContract.AdderPresenter presenter) {
-        firebaseHandler.setAdderPresenter(presenter);
-    }
-
-    @Override
-    public void setUpdaterPresenter(BaseContract.UpdaterPresenter presenter) {
-        firebaseHandler.setUpdaterPresenter(presenter);
-    }
-
-    @Override
-    public void setDeleterPresenter(BaseContract.DeleterPresenter presenter) {
-        firebaseHandler.setDeleterPresenter(presenter);
-    }
-
-    @Override
-    public void setSignInPresenter(BaseContract.SignInPresenter presenter) {
-        firebaseHandler.setSignInPresenter(presenter);
-    }
-
-    @Override
-    public void setRegisterPresenter(BaseContract.RegisterPresenter presenter) {
-        firebaseHandler.setRegisterPresenter(presenter);
-    }
-
-    @Override
-    public void setClassOperationPresenter(BaseContract.ClassOperationsPresenter presenter) {
-        firebaseHandler.setClassOperationPresenter(presenter);
+    public void deleteAccount(SettingsActivityContract.Presenter presenter) {
+        firebaseHandler.deleteAccount(presenter);
     }
 
     @Override
@@ -109,18 +81,20 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void signInWithEmailAndPassword(String email, String password) {
-        firebaseHandler.signInWithEmailAndPassword(email, password);
+    public void signInWithEmailAndPassword(SignInActivityContract.Presenter signInPresenter,
+                                           String email, String password) {
+        firebaseHandler.signInWithEmailAndPassword(signInPresenter, email, password);
     }
 
     @Override
-    public void createUserWithEmailAndPassword(String email, String password, String name) {
-        firebaseHandler.createUserWithEmailAndPassword(email, password, name);
+    public void createUserWithEmailAndPassword(RegisterActivityContract.Presenter presenter,
+                                               String email, String password, String name) {
+        firebaseHandler.createUserWithEmailAndPassword(presenter, email, password, name);
     }
 
     @Override
-    public void resetPassword(String userEmail) {
-        firebaseHandler.resetPassword(userEmail);
+    public void resetPassword(SignInActivityContract.Presenter presenter, String userEmail) {
+        firebaseHandler.resetPassword(presenter, userEmail);
     }
 
     @Override
@@ -159,13 +133,15 @@ public class AppDatabaseHandler implements DatabaseHandler {
     }
 
     @Override
-    public void addClassUserTeaches(UserClass classToTeach) {
-        firebaseHandler.addClassUserTeaches(classToTeach);
+    public void addClassUserTeaches(AddClassesActivityContract.Presenter presenter,
+                                    UserClass classToTeach) {
+        firebaseHandler.addClassUserTeaches(presenter, classToTeach);
     }
 
     @Override
-    public void deleteClassUserTeaches(UserClass classToTeach) {
-        firebaseHandler.deleteClassUserTeaches(classToTeach);
+    public void deleteClassUserTeaches(AddClassesActivityContract.Presenter presenter,
+                                       UserClass classToTeach) {
+        firebaseHandler.deleteClassUserTeaches(presenter, classToTeach);
     }
 
     @Override
@@ -186,5 +162,10 @@ public class AppDatabaseHandler implements DatabaseHandler {
             }
         }
         throw new AppExceptions.StudentNotFound();
+    }
+
+    @Override
+    public void signOut() {
+        firebaseHandler.signOut();
     }
 }
