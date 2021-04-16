@@ -18,6 +18,8 @@ import com.sagikor.android.fitracker.ui.presenter.StudentActivityPresenter;
 import com.sagikor.android.fitracker.utils.StudentTextWatcher;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 
+import java.io.InputStream;
+
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
@@ -127,6 +129,16 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     @Override
     public String getGenderStringResource() {
         return getResources().getString(R.string.gender);
+    }
+
+    @Override
+    public InputStream getFemaleGradesFile() {
+        return getResources().openRawResource(R.raw.female_grades);
+    }
+
+    @Override
+    public InputStream getMaleGradesFile() {
+        return getResources().openRawResource(R.raw.male_grades);
     }
 
     private String cleanText(TextView textView) {
@@ -299,20 +311,20 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     protected void addScoresTextChangedListeners() {
-        boolean isFemale = btnChooseGender.getText().toString().equals(getResources().getString(R.string.girl));
-        addScoreListener(etAerobicScore, tvAerobicScore, SportResults.AEROBIC, isFemale);
-        addScoreListener(etCubesScore, tvCubesScore, SportResults.CUBES, isFemale);
-        addScoreListener(etHandsScore, tvHandsScore, SportResults.HANDS, isFemale);
-        addScoreListener(etJumpScore, tvJumpScore, SportResults.JUMP, isFemale);
-        addScoreListener(etAbsScore, tvAbsScore, SportResults.ABS, isFemale);
+        addScoreListener(etAerobicScore, tvAerobicScore, SportResults.AEROBIC);
+        addScoreListener(etCubesScore, tvCubesScore, SportResults.CUBES);
+        addScoreListener(etHandsScore, tvHandsScore, SportResults.HANDS);
+        addScoreListener(etJumpScore, tvJumpScore, SportResults.JUMP);
+        addScoreListener(etAbsScore, tvAbsScore, SportResults.ABS);
     }
 
-    private void addScoreListener(EditText editText, TextView tvGrade, String type, boolean isFemale) {
+    private void addScoreListener(EditText editText, TextView tvGrade, String type) {
         editText.addTextChangedListener((StudentTextWatcher)
                 (charSequence, start, count, after) -> {
                     if (presenter.isGenderSelected()) {
                         String input = charSequence.toString().trim();
                         if (presenter.isValidScore(input)) {
+                            boolean isFemale = btnChooseGender.getText().toString().equals(getResources().getString(R.string.girl));
                             String grade = presenter.calculateGrade(input, type, isFemale);
                             tvGrade.setText(grade);
                         } else {

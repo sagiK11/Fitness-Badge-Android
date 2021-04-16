@@ -5,7 +5,9 @@ import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
+import com.sagikor.android.fitracker.utils.datastructure.SportResultsHandler;
 
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -14,9 +16,10 @@ import java.util.List;
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
 public class StudentActivityPresenter implements StudentActivityContract.Presenter {
-    private final SportResults sportResults = new SportResults();
+
     private static final String TAG = "StudentActivityPre";
     protected final DatabaseHandler databaseHandler = AppDatabaseHandler.getInstance();
+    private SportResultsHandler sportResults;
     private StudentActivityContract.View view;
 
     @Override
@@ -55,28 +58,28 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
         if (isFemale) {
             switch (sportType) {
                 case SportResults.AEROBIC:
-                    return String.valueOf(sportResults.getGirlsAerobicResult(tempScore));
+                    return String.valueOf(sportResults.getFemalesAerobicResult(tempScore));
                 case SportResults.ABS:
-                    return String.valueOf(sportResults.getGirlsSitUpAbsResult((int) tempScore));
+                    return String.valueOf(sportResults.getFemalesSitUpAbsResult((int) tempScore));
                 case SportResults.JUMP:
-                    return String.valueOf(sportResults.getGirlsJumpResult((int) tempScore));
+                    return String.valueOf(sportResults.getFemalesJumpResult((int) tempScore));
                 case SportResults.CUBES:
-                    return String.valueOf(sportResults.getGirlsCubesResult(tempScore));
+                    return String.valueOf(sportResults.getFemalesCubesResult(tempScore));
                 default:
-                    return String.valueOf(sportResults.getGirlsStaticHandsResult(tempScore));
+                    return String.valueOf(sportResults.getFemalesStaticHandsResult(tempScore));
             }
         } else {
             switch (sportType) {
                 case SportResults.AEROBIC:
-                    return String.valueOf(sportResults.getBoysAerobicResult(tempScore));
+                    return String.valueOf(sportResults.getMalesAerobicResult(tempScore));
                 case SportResults.ABS:
-                    return String.valueOf(sportResults.getBoysSitUpAbsResult((int) tempScore));
+                    return String.valueOf(sportResults.getMalesSitUpAbsResult((int) tempScore));
                 case SportResults.JUMP:
-                    return String.valueOf(sportResults.getBoysJumpResult((int) tempScore));
+                    return String.valueOf(sportResults.getMalesJumpResult((int) tempScore));
                 case SportResults.CUBES:
-                    return String.valueOf(sportResults.getBoysCubesResult(tempScore));
+                    return String.valueOf(sportResults.getMalesCubesResult(tempScore));
                 default:
-                    return String.valueOf(sportResults.getBoysHandsResult(tempScore));
+                    return String.valueOf(sportResults.getMalesHandsResult(tempScore));
             }
         }
 
@@ -86,6 +89,9 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
     @Override
     public void bind(StudentActivityContract.View view) {
         this.view = view;
+        final InputStream femaleGrades = view.getFemaleGradesFile();
+        final InputStream maleGrades = view.getMaleGradesFile();
+        sportResults = new SportResults(femaleGrades,maleGrades);
     }
 
     @Override

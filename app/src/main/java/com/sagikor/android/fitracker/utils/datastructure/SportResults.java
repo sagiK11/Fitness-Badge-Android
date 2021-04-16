@@ -1,66 +1,72 @@
 package com.sagikor.android.fitracker.utils.datastructure;
 
-import com.sagikor.android.fitracker.utils.datastructure.SportCategoryNode;
 
-import java.math.BigDecimal;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SportResults {
+public class SportResults implements SportResultsHandler {
 
-    List<SportCategoryNode> girlsGradesArrayList;
-    List<SportCategoryNode> boysGradeArrayList;
+    List<SportCategoryNode> femaleGradesArrayList;
+    List<SportCategoryNode> malesGradeArrayList;
     public static final int WORST_RESULT = 30;
     public static final String AEROBIC = "aerobic";
     public static final String ABS = "abs";
     public static final String JUMP = "jump";
     public static final String CUBES = "cubes";
     public static final String HANDS = "hands";
-    public static final String GIRLS = "girls";
-    public static final String BOYS = "boys";
 
 
-    public SportResults() {
-        girlsGradesArrayList = new ArrayList<>();
-        boysGradeArrayList = new ArrayList<>();
-        populateGradesList(girlsGradesArrayList, GIRLS);
-        populateGradesList(boysGradeArrayList, BOYS);
+    public SportResults(InputStream femaleGrades, InputStream maleGrades) {
+        femaleGradesArrayList = new ArrayList<>();
+        malesGradeArrayList = new ArrayList<>();
+
+        BufferedReader bfFemale = new BufferedReader(new InputStreamReader(femaleGrades));
+        BufferedReader bfMale = new BufferedReader(new InputStreamReader(maleGrades));
+
+        populateGradesList(femaleGradesArrayList, bfFemale);
+        populateGradesList(malesGradeArrayList, bfMale);
     }
 
-
-
-    private void populateGradesList(List<SportCategoryNode> list, String gender) {
-        final int RECORDS_NUMBER = 66;
-        int result = 100;
-        boolean isBoysList = gender.equals(BOYS);
-        BigDecimal cubesScore = BigDecimal.valueOf(isBoysList ? 8.8 : 9.9);
-        BigDecimal aerobicScore = BigDecimal.valueOf(isBoysList ? 5.55 : 8.05);
-        int absScore = isBoysList ? 97 : 77;
-        int jumpScore = isBoysList ? 285 : 236;
-        BigDecimal handsScore = BigDecimal.valueOf(isBoysList ? 28 : 1.3);
-
-        for (int i = 0; i < RECORDS_NUMBER; i++, result--, absScore--, jumpScore -= 2) {
-            list.add(new SportCategoryNode.Builder()
-                    .result(result)
-                    .cubesScore(cubesScore.doubleValue())
-                    .aerobicScore(aerobicScore.doubleValue())
-                    .absScore(absScore)
-                    .jumpScore(jumpScore)
-                    .handsScore(handsScore.doubleValue())
-                    .build());
-            cubesScore = cubesIncrease(i, cubesScore);
-            aerobicScore = aerobicIncrease(i, aerobicScore);
-            handsScore = handsIncrease(i, handsScore, isBoysList);
+    private void populateGradesList(List<SportCategoryNode> list, BufferedReader bf) {
+        String line = "";
+        final int hands = 0;
+        final int jump = 1;
+        final int aerobic = 2;
+        final int cubes = 3;
+        final int abs = 4;
+        final int grade = 5;
+        try {
+            bf.readLine();//skipping the headers
+            while ((line = bf.readLine()) != null) {
+                String[] tokens = line.split(",");
+                list.add(new SportCategoryNode.Builder()
+                        .result(Integer.parseInt(tokens[grade]))
+                        .handsScore(Double.parseDouble(tokens[hands]))
+                        .absScore(Integer.parseInt(tokens[abs]))
+                        .jumpScore(Integer.parseInt(tokens[jump]))
+                        .cubesScore(Double.parseDouble(tokens[cubes]))
+                        .aerobicScore(Double.parseDouble(tokens[aerobic]))
+                        .build()
+                );
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public int getGirlsCubesResult(double score) {
-        return getCubesResult(girlsGradesArrayList, score);
+    @Override
+    public int getFemalesCubesResult(double score) {
+        return getCubesResult(femaleGradesArrayList, score);
     }
 
-    public int getBoysCubesResult(double score) {
-        return getCubesResult(boysGradeArrayList, score);
+    @Override
+    public int getMalesCubesResult(double score) {
+        return getCubesResult(malesGradeArrayList, score);
     }
 
     private int getCubesResult(List<SportCategoryNode> arrayList, double score) {
@@ -75,12 +81,14 @@ public class SportResults {
         return WORST_RESULT;
     }
 
-    public int getGirlsAerobicResult(double score) {
-        return getAerobicResult(girlsGradesArrayList, score);
+    @Override
+    public int getFemalesAerobicResult(double score) {
+        return getAerobicResult(femaleGradesArrayList, score);
     }
 
-    public int getBoysAerobicResult(double score) {
-        return getAerobicResult(boysGradeArrayList, score);
+    @Override
+    public int getMalesAerobicResult(double score) {
+        return getAerobicResult(malesGradeArrayList, score);
     }
 
     private int getAerobicResult(List<SportCategoryNode> arrayList, double score) {
@@ -95,12 +103,14 @@ public class SportResults {
         return WORST_RESULT;
     }
 
-    public int getGirlsSitUpAbsResult(int score) {
-        return getAbsResult(girlsGradesArrayList, score);
+    @Override
+    public int getFemalesSitUpAbsResult(int score) {
+        return getAbsResult(femaleGradesArrayList, score);
     }
 
-    public int getBoysSitUpAbsResult(int score) {
-        return getAbsResult(boysGradeArrayList, score);
+    @Override
+    public int getMalesSitUpAbsResult(int score) {
+        return getAbsResult(malesGradeArrayList, score);
     }
 
     private int getAbsResult(List<SportCategoryNode> arrayList, int score) {
@@ -114,13 +124,14 @@ public class SportResults {
         return WORST_RESULT;
     }
 
-
-    public int getGirlsStaticHandsResult(double score) {
-        return getHandsResult(girlsGradesArrayList, score);
+    @Override
+    public int getFemalesStaticHandsResult(double score) {
+        return getHandsResult(femaleGradesArrayList, score);
     }
 
-    public int getBoysHandsResult(double score) {
-        return getHandsResult(boysGradeArrayList, score);
+    @Override
+    public int getMalesHandsResult(double score) {
+        return getHandsResult(malesGradeArrayList, score);
     }
 
     private int getHandsResult(List<SportCategoryNode> ArrayList, double score) {
@@ -134,12 +145,14 @@ public class SportResults {
         return WORST_RESULT;
     }
 
-    public int getGirlsJumpResult(int score) {
-        return getJumpResult(girlsGradesArrayList, score);
+    @Override
+    public int getFemalesJumpResult(int score) {
+        return getJumpResult(femaleGradesArrayList, score);
     }
 
-    public int getBoysJumpResult(int score) {
-        return getJumpResult(boysGradeArrayList, score);
+    @Override
+    public int getMalesJumpResult(int score) {
+        return getJumpResult(malesGradeArrayList, score);
     }
 
     public int getJumpResult(List<SportCategoryNode> arrayList, int score) {
@@ -152,49 +165,6 @@ public class SportResults {
             }
         }
         return WORST_RESULT;
-    }
-
-    private BigDecimal cubesIncrease(int i, BigDecimal currentScore) {
-        final BigDecimal CUBES_INCREASE = new BigDecimal("0.1");
-        final BigDecimal ZERO = new BigDecimal("0");
-        return currentScore.add((i % 2) != 0 ? CUBES_INCREASE : ZERO);
-    }
-
-    private BigDecimal aerobicIncrease(int i , BigDecimal currentScore){
-        final BigDecimal AEROBIC_FIRST_INCREASE = new BigDecimal("0.03");
-        final BigDecimal AEROBIC_SECOND_INCREASE = new BigDecimal("0.08");
-        final BigDecimal AEROBIC_THIRD_INCREASE = new BigDecimal("0.16");
-        final BigDecimal SECONDS_IN_MINUTE = new BigDecimal("0.6");
-        final BigDecimal MINUTES_OFFSET = new BigDecimal("0.4");
-        final int FIRST_PART = 15;
-        final int SECOND_PART = 25;
-        BigDecimal result = currentScore.add(i < FIRST_PART ? AEROBIC_FIRST_INCREASE :
-                (i < SECOND_PART ? AEROBIC_SECOND_INCREASE : AEROBIC_THIRD_INCREASE));
-        //Aerobic score is based on time.
-        if (result.doubleValue() - Math.floor(result.doubleValue())
-                >= SECONDS_IN_MINUTE.doubleValue()) {
-            result = result.add(MINUTES_OFFSET);
-        }
-        return result;
-    }
-    private BigDecimal handsIncrease(int i , BigDecimal currentScore, boolean isBoysList){
-        final BigDecimal SECONDS_IN_MINUTE = new BigDecimal("0.6");
-        final BigDecimal MINUTES_OFFSET = new BigDecimal("0.4");
-        final BigDecimal HANDS_FIRST_INCREASE = new BigDecimal("0.03");
-        final BigDecimal HANDS_SECOND_INCREASE = new BigDecimal("0.01");
-        final BigDecimal ONE = new BigDecimal("1");
-        final BigDecimal ZERO = new BigDecimal("0");
-        final int FIRST_PART = 15;
-        BigDecimal result = currentScore.subtract(isBoysList ? ((i % 2) != 0 ? ONE : ZERO) :
-                (i < FIRST_PART ? HANDS_FIRST_INCREASE : HANDS_SECOND_INCREASE));
-
-        //For females hands score is based on time.
-        if (!isBoysList && currentScore.doubleValue() - Math.floor(currentScore.doubleValue())
-                >= SECONDS_IN_MINUTE.doubleValue()) {
-            result = currentScore.subtract(MINUTES_OFFSET);
-        }
-        return result;
-
     }
 
 }

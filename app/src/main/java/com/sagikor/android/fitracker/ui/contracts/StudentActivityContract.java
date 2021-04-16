@@ -3,6 +3,8 @@ package com.sagikor.android.fitracker.ui.contracts;
 
 import com.sagikor.android.fitracker.data.model.Student;
 
+import java.io.InputStream;
+
 public interface StudentActivityContract {
     interface Presenter extends BaseContract.BasePresenter {
 
@@ -59,5 +61,9 @@ public interface StudentActivityContract {
         String getGradeStringResource();
 
         String getGenderStringResource();
+
+        InputStream getFemaleGradesFile();
+
+        InputStream getMaleGradesFile();
     }
 }
