@@ -11,8 +11,8 @@ import java.util.List;
 
 public class SportResults implements SportResultsHandler {
 
-    List<SportCategoryNode> femaleGradesArrayList;
-    List<SportCategoryNode> malesGradeArrayList;
+    List<SportCategoriesEntry> femaleGradesList;
+    List<SportCategoriesEntry> malesGradeList;
     public static final int WORST_RESULT = 30;
     public static final String AEROBIC = "aerobic";
     public static final String ABS = "abs";
@@ -22,37 +22,33 @@ public class SportResults implements SportResultsHandler {
 
 
     public SportResults(InputStream femaleGrades, InputStream maleGrades) {
-        femaleGradesArrayList = new ArrayList<>();
-        malesGradeArrayList = new ArrayList<>();
+        femaleGradesList = new ArrayList<>();
+        malesGradeList = new ArrayList<>();
 
-        BufferedReader bfFemale = new BufferedReader(new InputStreamReader(femaleGrades));
-        BufferedReader bfMale = new BufferedReader(new InputStreamReader(maleGrades));
-
-        populateGradesList(femaleGradesArrayList, bfFemale);
-        populateGradesList(malesGradeArrayList, bfMale);
+        populateGradesList(femaleGradesList, new InputStreamReader(femaleGrades));
+        populateGradesList(malesGradeList, new InputStreamReader(maleGrades));
     }
 
-    private void populateGradesList(List<SportCategoryNode> list, BufferedReader bf) {
-        String line = "";
+    private void populateGradesList(List<SportCategoriesEntry> list, InputStreamReader isr) {
+        String line;
         final int hands = 0;
         final int jump = 1;
         final int aerobic = 2;
         final int cubes = 3;
         final int abs = 4;
         final int grade = 5;
-        try {
+        try (BufferedReader bf = new BufferedReader(isr)) {
             bf.readLine();//skipping the headers
             while ((line = bf.readLine()) != null) {
                 String[] tokens = line.split(",");
-                list.add(new SportCategoryNode.Builder()
+                list.add(new SportCategoriesEntry.Builder()
                         .result(Integer.parseInt(tokens[grade]))
                         .handsScore(Double.parseDouble(tokens[hands]))
                         .absScore(Integer.parseInt(tokens[abs]))
                         .jumpScore(Integer.parseInt(tokens[jump]))
                         .cubesScore(Double.parseDouble(tokens[cubes]))
                         .aerobicScore(Double.parseDouble(tokens[aerobic]))
-                        .build()
-                );
+                        .build());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,107 +57,107 @@ public class SportResults implements SportResultsHandler {
 
     @Override
     public int getFemalesCubesResult(double score) {
-        return getCubesResult(femaleGradesArrayList, score);
+        return getCubesResult(femaleGradesList, score);
     }
 
     @Override
     public int getMalesCubesResult(double score) {
-        return getCubesResult(malesGradeArrayList, score);
+        return getCubesResult(malesGradeList, score);
     }
-
-    private int getCubesResult(List<SportCategoryNode> arrayList, double score) {
-        SportCategoryNode node;
-        boolean emptyField = score == 0;
-        for (int i = 0; i < arrayList.size(); i++) {
-            node = arrayList.get(i);
-            if (node.getCubesScore() >= score) {
-                return emptyField ? WORST_RESULT : node.getResult();
-            }
-        }
-        return WORST_RESULT;
-    }
-
+    
     @Override
     public int getFemalesAerobicResult(double score) {
-        return getAerobicResult(femaleGradesArrayList, score);
+        return getAerobicResult(femaleGradesList, score);
     }
 
     @Override
     public int getMalesAerobicResult(double score) {
-        return getAerobicResult(malesGradeArrayList, score);
-    }
-
-    private int getAerobicResult(List<SportCategoryNode> arrayList, double score) {
-        SportCategoryNode node;
-        boolean emptyField = score == 0;
-        for (int i = 0; i < arrayList.size(); i++) {
-            node = arrayList.get(i);
-            if (node.getAerobicScore() >= score) {
-                return emptyField ? WORST_RESULT : node.getResult();
-            }
-        }
-        return WORST_RESULT;
+        return getAerobicResult(malesGradeList, score);
     }
 
     @Override
     public int getFemalesSitUpAbsResult(int score) {
-        return getAbsResult(femaleGradesArrayList, score);
+        return getAbsResult(femaleGradesList, score);
     }
 
     @Override
     public int getMalesSitUpAbsResult(int score) {
-        return getAbsResult(malesGradeArrayList, score);
+        return getAbsResult(malesGradeList, score);
     }
-
-    private int getAbsResult(List<SportCategoryNode> arrayList, int score) {
-        SportCategoryNode node;
-        for (int i = 0; i < arrayList.size(); i++) {
-            node = arrayList.get(i);
-            if (score >= node.getAbsScore()) {
-                return node.getResult();
-            }
-        }
-        return WORST_RESULT;
-    }
-
+    
     @Override
     public int getFemalesStaticHandsResult(double score) {
-        return getHandsResult(femaleGradesArrayList, score);
+        return getHandsResult(femaleGradesList, score);
     }
 
     @Override
     public int getMalesHandsResult(double score) {
-        return getHandsResult(malesGradeArrayList, score);
+        return getHandsResult(malesGradeList, score);
+    }
+    
+    @Override
+    public int getFemalesJumpResult(int score) {
+        return getJumpResult(femaleGradesList, score);
     }
 
-    private int getHandsResult(List<SportCategoryNode> ArrayList, double score) {
-        SportCategoryNode node;
-        for (int i = 0; i < ArrayList.size(); i++) {
-            node = ArrayList.get(i);
-            if (score >= node.getHandsScore()) {
-                return node.getResult();
+    @Override
+    public int getMalesJumpResult(int score) {
+        return getJumpResult(malesGradeList, score);
+    }
+
+    private int getAerobicResult(List<SportCategoriesEntry> list, double score) {
+        SportCategoriesEntry entry;
+        boolean emptyField = score == 0;
+        for (int i = 0; i < list.size(); i++) {
+            entry = list.get(i);
+            if (entry.getAerobicScore() >= score) {
+                return emptyField ? WORST_RESULT : entry.getResult();
             }
         }
         return WORST_RESULT;
     }
 
-    @Override
-    public int getFemalesJumpResult(int score) {
-        return getJumpResult(femaleGradesArrayList, score);
+    private int getAbsResult(List<SportCategoriesEntry> list, int score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < list.size(); i++) {
+            entry = list.get(i);
+            if (score >= entry.getAbsScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
     }
 
-    @Override
-    public int getMalesJumpResult(int score) {
-        return getJumpResult(malesGradeArrayList, score);
+    private int getHandsResult(List<SportCategoriesEntry> list, double score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < list.size(); i++) {
+            entry = list.get(i);
+            if (score >= entry.getHandsScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
     }
 
-    public int getJumpResult(List<SportCategoryNode> arrayList, int score) {
+    private int getCubesResult(List<SportCategoriesEntry> list, double score) {
+        SportCategoriesEntry entry;
+        boolean emptyField = score == 0;
+        for (int i = 0; i < list.size(); i++) {
+            entry = list.get(i);
+            if (entry.getCubesScore() >= score) {
+                return emptyField ? WORST_RESULT : entry.getResult();
+            }
+        }
+        return WORST_RESULT;
+    }
 
-        SportCategoryNode node;
-        for (int i = 0; i < arrayList.size(); i++) {
-            node = arrayList.get(i);
-            if (score >= node.getJumpScore()) {
-                return node.getResult();
+    public int getJumpResult(List<SportCategoriesEntry> list, int score) {
+
+        SportCategoriesEntry entry;
+        for (int i = 0; i < list.size(); i++) {
+            entry = list.get(i);
+            if (score >= entry.getJumpScore()) {
+                return entry.getResult();
             }
         }
         return WORST_RESULT;

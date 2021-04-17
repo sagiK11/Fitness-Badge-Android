@@ -1,7 +1,7 @@
 package com.sagikor.android.fitracker.utils.datastructure;
 
 
-public class SportCategoryNode {
+public class SportCategoriesEntry {
     private double cubesScore;
     private double aerobicScore;
     private double handsScore;
@@ -47,19 +47,19 @@ public class SportCategoryNode {
             return this;
         }
 
-        SportCategoryNode build() {
-            SportCategoryNode sportCategoryNode = new SportCategoryNode();
-            sportCategoryNode.setResult(this.result);
-            sportCategoryNode.setAerobicScore(this.aerobicScore);
-            sportCategoryNode.setAbsScore(this.absScore);
-            sportCategoryNode.setJumpScore(this.jumpScore);
-            sportCategoryNode.setCubesScore(this.cubesScore);
-            sportCategoryNode.setHandsScore(this.handsScore);
-            return sportCategoryNode;
+        SportCategoriesEntry build() {
+            SportCategoriesEntry sportCategoriesEntry = new SportCategoriesEntry();
+            sportCategoriesEntry.setResult(this.result);
+            sportCategoriesEntry.setAerobicScore(this.aerobicScore);
+            sportCategoriesEntry.setAbsScore(this.absScore);
+            sportCategoriesEntry.setJumpScore(this.jumpScore);
+            sportCategoriesEntry.setCubesScore(this.cubesScore);
+            sportCategoriesEntry.setHandsScore(this.handsScore);
+            return sportCategoriesEntry;
         }
     }
 
-    public SportCategoryNode() {
+    public SportCategoriesEntry() {
     }
 
     public double getCubesScore() {
