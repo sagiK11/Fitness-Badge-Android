@@ -121,8 +121,10 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
 
     private void checkInput() throws AppExceptions.Input {
-        if (!isValidName(view.getStudentName())) {
+        if(!isNonEmptyInput(view.getStudentName())){
             throw new AppExceptions.Input(AppExceptions.SELECT_NAME);
+        } else if (!isValidName(view.getStudentName())) {
+            throw new AppExceptions.Input(AppExceptions.INVALID_NAME);
         } else if (!super.isValidPhoneNo(view.getStudentPhoneNo())) {
             throw new AppExceptions.Input(AppExceptions.INVALID_PHONE);
         } else if (!isValidClass(view.getStudentClass())) {
@@ -146,7 +148,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     private boolean isAlphabetic(String nameInput) {
         for (Character ch : nameInput.toCharArray()) {
-            if (!Character.isAlphabetic(ch) && ch != ' ' && ch != '\'') {
+            if (!Character.isAlphabetic(ch) && ch != ' ' && ch != '.' && ch != '\'') {
                 return false;
             }
         }

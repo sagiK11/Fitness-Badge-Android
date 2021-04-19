@@ -9,6 +9,7 @@ public class AppExceptions {
     public static final String SELECT_GENDER = "please select gender";
     public static final String INVALID_PHONE = "invalid phone number";
     public static final String MISSING_CLASSES = "add classes in settings";
+    public static final String INVALID_NAME = "invalid name";
 
     public static class Input extends Exception {
 
