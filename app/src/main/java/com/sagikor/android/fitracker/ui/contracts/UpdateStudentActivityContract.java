@@ -36,5 +36,19 @@ public interface UpdateStudentActivityContract extends StudentActivityContract {
         void setHandsScore(String score);
 
         void setJumpScore(String score);
+
+        void setAerobicGrade(String grade);
+
+        void setCubesGrade(String grade);
+
+        void setAbsGrade(String grade);
+
+        void setHandsGrade(String grade);
+
+        void setJumpGrade(String grade);
+
+        void setAerobicWalkingSwitch(boolean isWalking);
+
+        void setPushUpHalfSwitch(boolean isPushUpHalf);
     }
 }

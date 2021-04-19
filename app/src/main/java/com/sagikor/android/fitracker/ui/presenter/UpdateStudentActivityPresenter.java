@@ -43,22 +43,36 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
         view.setStudentName(currentStudent.getName());
         view.setStudentClass(currentStudent.getStudentClass());
         view.setStudentGender(currentStudent.getGender());
-        if (currentStudent.getAerobicScore() != MISSING_INPUT)
+        view.setAerobicWalkingSwitch(currentStudent.isAerobicWalking());
+        view.setPushUpHalfSwitch(currentStudent.isPushUpHalf());
+        if (currentStudent.getAerobicScore() != MISSING_INPUT) {
             view.setAerobicScore(String.valueOf(currentStudent.getAerobicScore()));
-        if (currentStudent.getCubesScore() != MISSING_INPUT)
+            view.setAerobicGrade(String.valueOf(currentStudent.getAerobicResult()));
+        }
+        if (currentStudent.getCubesScore() != MISSING_INPUT) {
             view.setCubesScore(String.valueOf(currentStudent.getCubesScore()));
-        if (currentStudent.getHandsScore() != MISSING_INPUT)
+            view.setCubesGrade(String.valueOf(currentStudent.getCubesResult()));
+        }
+        if (currentStudent.getHandsScore() != MISSING_INPUT) {
             view.setHandsScore(String.valueOf(currentStudent.getHandsScore()));
-        if (currentStudent.getAbsScore() != MISSING_INPUT)
+            view.setHandsGrade(String.valueOf(currentStudent.getHandsResult()));
+        }
+        if (currentStudent.getAbsScore() != MISSING_INPUT) {
             view.setAbsScore(String.valueOf(currentStudent.getAbsScore()));
-        if (currentStudent.getJumpScore() != MISSING_INPUT)
+            view.setAbsGrade(String.valueOf(currentStudent.getAbsResult()));
+        }
+        if (currentStudent.getJumpScore() != MISSING_INPUT) {
             view.setJumpScore(String.valueOf(currentStudent.getJumpScore()));
+            view.setJumpGrade(String.valueOf(currentStudent.getJumpResult()));
+        }
         if (currentStudent.getPhoneNumber() != null)
             view.setStudentPhoneNo(currentStudent.getPhoneNumber());
+
         view.updateTotalScore(currentStudent.getTotalScore());
     }
 
     private void updateStudent() {
+
         Student updatedStudent = new Student.Builder(view.getStudentName())
                 .studentClass(view.getStudentClass())
                 .phoneNumber(view.getStudentPhoneNo())
@@ -77,6 +91,8 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
                 .cubesResult(parse(view.getCubesGrade()))
                 .totalScore(super.getAverage())
                 .updatedDate(Utility.getTodayDate())
+                .isAerobicWalking(view.isAerobicWalkingChecked())
+                .isPushUpHalf(view.isPushUpHalfChecked())
                 .build();
 
         databaseHandler.updateStudent(this, updatedStudent);
@@ -93,4 +109,5 @@ public class UpdateStudentActivityPresenter extends StudentActivityPresenter imp
     public void onUpdateStudentFailed() {
         view.popFailWindow(Utility.GENERIC_ERROR_MESSAGE);
     }
+
 }

@@ -97,7 +97,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     @Override
     public void sendDatabaseToEmail() {
-        showProgressBar();
         Thread sender = new EmailSendThread();
         sender.start();
     }
@@ -210,8 +209,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     private void signOut() {
         Intent intent = new Intent(this, SignInActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
         finish();
     }
@@ -245,7 +244,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
             File file = new File(getFilesDir(), students_grade + ".csv");
             String authority = getApplicationContext().getPackageName() + ".provider";
             Uri path = FileProvider.getUriForFile(getApplicationContext(), authority, file);
-            presenter.onCompleteDataWrite();
             Intent fileIntent = new Intent(Intent.ACTION_SEND);
             fileIntent.setType("text/csv");
             fileIntent.putExtra(Intent.EXTRA_SUBJECT, students_grade);

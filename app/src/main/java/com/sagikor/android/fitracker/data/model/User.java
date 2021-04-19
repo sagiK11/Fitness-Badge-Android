@@ -10,7 +10,7 @@ public class User {
     private String userID;
     private List<String> classes = new ArrayList<>();
 
-    private User(){
+    private User() {
 
     }
 

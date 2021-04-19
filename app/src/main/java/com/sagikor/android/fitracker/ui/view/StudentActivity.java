@@ -6,19 +6,26 @@ import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.Student;
 import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.StudentActivityPresenter;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.StudentTextWatcher;
+import com.sagikor.android.fitracker.utils.Utility;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -34,16 +41,21 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     EditText etHandsScore;
     EditText etAbsScore;
     EditText etJumpScore;
-    TextView tvAerobicScore;
-    TextView tvCubesScore;
-    TextView tvHandsScore;
-    TextView tvAbsScore;
-    TextView tvJumpScore;
-    TextView tvTotalScore;
+    SwitchMaterial swAerobicOption;
+    SwitchMaterial swPushUpOption;
+    TextView tvAerobicGrade;
+    TextView tvCubesGrade;
+    TextView tvHandsGrade;
+    TextView tvAbsGrade;
+    TextView tvJumpGrade;
+    TextView tvFinalGrade;
     TextView tvHandsType;
+    TextView tvAbsType;
     Button btnChooseClass;
     Button btnChooseGender;
     Button btnSaveStudent;
+    TextView tvAbsGuide;
+    TextView tvHandsGuide;
 
 
     @Override
@@ -93,27 +105,27 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public String getAbsGrade() {
-        return cleanText(tvAbsScore);
+        return cleanText(tvAbsGrade);
     }
 
     @Override
     public String getAerobicGrade() {
-        return cleanText(tvAerobicScore);
+        return cleanText(tvAerobicGrade);
     }
 
     @Override
     public String getJumpGrade() {
-        return cleanText(tvJumpScore);
+        return cleanText(tvJumpGrade);
     }
 
     @Override
     public String getHandsGrade() {
-        return cleanText(tvHandsScore);
+        return cleanText(tvHandsGrade);
     }
 
     @Override
     public String getCubesGrade() {
-        return cleanText(tvCubesScore);
+        return cleanText(tvCubesGrade);
     }
 
     @Override
@@ -132,6 +144,16 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     @Override
+    public boolean isAerobicWalkingChecked() {
+        return swAerobicOption.isChecked();
+    }
+
+    @Override
+    public boolean isPushUpHalfChecked() {
+        return swPushUpOption.isChecked();
+    }
+
+    @Override
     public InputStream getFemaleGradesFile() {
         return getResources().openRawResource(R.raw.female_grades);
     }
@@ -147,17 +169,42 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public void popSuccessWindow() {
-        final String STUDENT_SAVED = getResources().getString(R.string.student_saved);
-        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText(STUDENT_SAVED)
+        View contextView = findViewById(R.id.add_student_root);
+        Snackbar.make(contextView, R.string.student_saved, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(getColor(R.color.colorPrimary))
                 .show();
+//
     }
 
     @Override
     public void popFailWindow(String error) {
-        new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText(error)
+        View contextView = findViewById(R.id.add_student_root);
+        error = getErrorInUserLanguage(error);
+        Snackbar.make(contextView, error, Snackbar.LENGTH_LONG)
+                .setBackgroundTint(getColor(R.color.black))
+                .setAction(getString(R.string.try_again), v -> {
+                    //dismissing
+                })
                 .show();
+    }
+
+    private String getErrorInUserLanguage(String error) {
+        switch (error) {
+            case AppExceptions.STUDENT_EXISTS:
+                return getString(R.string.student_exists);
+            case AppExceptions.SELECT_NAME:
+                return getString(R.string.please_enter_student_name);
+            case AppExceptions.INVALID_PHONE:
+                return getString(R.string.invalid_phone_number);
+            case AppExceptions.SELECT_CLASS:
+                return getString(R.string.please_enter_student_class);
+            case AppExceptions.SELECT_GENDER:
+                return getString(R.string.gender_error);
+            case AppExceptions.MISSING_CLASSES:
+                return getString(R.string.add_classes_in_settings);
+            default:
+                return error;
+        }
     }
 
     @Override
@@ -307,15 +354,15 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public void updateTotalScore(double avg) {
-        tvTotalScore.setText(String.valueOf(avg));
+        tvFinalGrade.setText(String.valueOf(avg));
     }
 
     protected void addScoresTextChangedListeners() {
-        addScoreListener(etAerobicScore, tvAerobicScore, SportResults.AEROBIC);
-        addScoreListener(etCubesScore, tvCubesScore, SportResults.CUBES);
-        addScoreListener(etHandsScore, tvHandsScore, SportResults.HANDS);
-        addScoreListener(etJumpScore, tvJumpScore, SportResults.JUMP);
-        addScoreListener(etAbsScore, tvAbsScore, SportResults.ABS);
+        addScoreListener(etAerobicScore, tvAerobicGrade, SportResults.AEROBIC);
+        addScoreListener(etCubesScore, tvCubesGrade, SportResults.CUBES);
+        addScoreListener(etHandsScore, tvHandsGrade, SportResults.HANDS);
+        addScoreListener(etJumpScore, tvJumpGrade, SportResults.JUMP);
+        addScoreListener(etAbsScore, tvAbsGrade, SportResults.ABS);
     }
 
     private void addScoreListener(EditText editText, TextView tvGrade, String type) {
@@ -325,7 +372,14 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                         String input = charSequence.toString().trim();
                         if (presenter.isValidScore(input)) {
                             boolean isFemale = btnChooseGender.getText().toString().equals(getResources().getString(R.string.girl));
-                            String grade = presenter.calculateGrade(input, type, isFemale);
+                            boolean isWalking = swAerobicOption.isChecked();
+                            boolean isPushUpHalf = swPushUpOption.isChecked();
+                            Map<String, Boolean> map = new HashMap<>();
+                            map.put(SportResults.IS_FEMALE, isFemale);
+                            map.put(SportResults.IS_WALKING, isWalking);
+                            map.put(SportResults.IS_PUSH_UP_HALF, isPushUpHalf);
+                            String grade = presenter.calculateGrade(input, type, map);
+
                             tvGrade.setText(grade);
                         } else {
                             tvGrade.setText(getResources().getString(R.string.grade));
@@ -354,6 +408,7 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     protected void bindViews() {
         bindUserInputViews();
         bindTextToDisplayViews();
+        bindGuidingTextViews();
         addScoresTextChangedListeners();
     }
 
@@ -369,15 +424,56 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
         etJumpScore = findViewById(R.id.update_student_jump_id);
         etAbsScore = findViewById(R.id.update_student_abs_id);
         tvHandsType = findViewById(R.id.hands_minutes_text_view);
+        tvAbsType = findViewById(R.id.abs_type_text_view);
+        swAerobicOption = findViewById(R.id.switch_aerobic_walking);
+        swAerobicOption.setOnClickListener(e -> resetAerobicInput());
+        swPushUpOption = findViewById(R.id.switch_push_up);
+        swPushUpOption.setOnClickListener(e -> resetPushUpInput());
+    }
+
+    private void resetPushUpInput() {
+        etHandsScore.setText("");
+        tvHandsGrade.setText(getString(R.string.grade));
+    }
+
+    private void resetAerobicInput() {
+        etAerobicScore.setText("");
+        tvAerobicGrade.setText(getResources().getString(R.string.grade));
     }
 
     protected void bindTextToDisplayViews() {
-        tvAerobicScore = findViewById(R.id.update_student_aerobic_text);
-        tvCubesScore = findViewById(R.id.student_cubes_text);
-        tvHandsScore = findViewById(R.id.student_hands_text);
-        tvJumpScore = findViewById(R.id.student_jump_text);
-        tvAbsScore = findViewById(R.id.student_abs_text);
-        tvTotalScore = findViewById(R.id.student_total_score);
+        tvAerobicGrade = findViewById(R.id.update_student_aerobic_text);
+        tvCubesGrade = findViewById(R.id.student_cubes_text);
+        tvHandsGrade = findViewById(R.id.student_hands_text);
+        tvJumpGrade = findViewById(R.id.student_jump_text);
+        tvAbsGrade = findViewById(R.id.student_abs_text);
+        tvFinalGrade = findViewById(R.id.student_total_score);
+    }
+
+    protected void bindGuidingTextViews() {
+        tvAbsGuide = findViewById(R.id.absTextView);
+        tvHandsGuide = findViewById(R.id.handsTextView);
+    }
+
+    protected void changeLayoutToFemale() {
+        tvHandsType.setText(getResources().getString(R.string.amount));
+        tvAbsType.setText(getString(R.string.minutes));
+        swAerobicOption.setVisibility(View.VISIBLE);
+        swPushUpOption.setVisibility(View.VISIBLE);
+        tvAbsGuide.setText(getString(R.string.plank));
+        tvHandsGuide.setText(getString(R.string.push_up));
+        btnChooseGender.setText(getString(R.string.girl));
+    }
+
+    protected void changeLayoutToMale() {
+        tvHandsType.setText(getResources().getString(R.string.amount));
+        tvAbsType.setText(getString(R.string.amount));
+        swAerobicOption.setVisibility(View.GONE);
+        swPushUpOption.setVisibility(View.GONE);
+        tvAbsGuide.setText(getString(R.string.abs));
+        tvHandsGuide.setText(getString(R.string.hands));
+        btnChooseGender.setText(getString(R.string.boy));
+
     }
 
 }

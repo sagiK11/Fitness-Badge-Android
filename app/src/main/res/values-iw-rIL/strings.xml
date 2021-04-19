@@ -170,4 +170,12 @@
     <string name="students_grades">ציוני התלמידים</string>
     <string name="search_hint">חפש תלמיד..</string>
     <string name="background_image">תמונת רקע</string>
+    <string name="aerobic_settings">הגדרת פעילות אירובית</string>
+    <string name="aerobic_walking_switch">הגדר פעילות אירובית כהליכה עבור תלמיד זה</string>
+    <string name="push_up_switch">הגדר פוש אפ חלקי עבור תלמיד זה</string>
+    <string name="try_again">אני אנסה שוב</string>
+    <string name="invalid_phone_number">טלפון לא תקין</string>
+    <string name="add_classes_in_settings">הוסף כיתות בהגדרות</string>
+    <string name="plank">פלאנק</string>
+    <string name="push_up">פוש אפ</string>
 </resources>

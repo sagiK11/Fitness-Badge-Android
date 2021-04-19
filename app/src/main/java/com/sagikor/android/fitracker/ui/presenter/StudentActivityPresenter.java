@@ -4,6 +4,7 @@ package com.sagikor.android.fitracker.ui.presenter;
 import com.sagikor.android.fitracker.data.db.AppDatabaseHandler;
 import com.sagikor.android.fitracker.data.db.DatabaseHandler;
 import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
+import com.sagikor.android.fitracker.utils.Utility;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 import com.sagikor.android.fitracker.utils.datastructure.SportResultsHandler;
 
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.sagikor.android.fitracker.utils.Utility.MISSING_INPUT;
 
@@ -51,22 +53,25 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
     }
 
     @Override
-    public String calculateGrade(String score, String sportType, boolean isFemale) {
+    public String calculateGrade(String score, String sportType, Map<String, Boolean> map) {
         //this method is called only after we made user input testing and it passed.
         final double tempScore = Double.parseDouble(score);
+        final boolean isFemale = map.get(SportResults.IS_FEMALE);
+        final boolean isWalking = map.get(SportResults.IS_WALKING);
+        final boolean isPushUpHalf = map.get(SportResults.IS_PUSH_UP_HALF);
 
         if (isFemale) {
             switch (sportType) {
                 case SportResults.AEROBIC:
-                    return String.valueOf(sportResults.getFemalesAerobicResult(tempScore));
+                    return String.valueOf(sportResults.getFemalesAerobicResult(tempScore, isWalking));
                 case SportResults.ABS:
-                    return String.valueOf(sportResults.getFemalesSitUpAbsResult((int) tempScore));
+                    return String.valueOf(sportResults.getFemalesAbsResult(tempScore));
                 case SportResults.JUMP:
                     return String.valueOf(sportResults.getFemalesJumpResult((int) tempScore));
                 case SportResults.CUBES:
                     return String.valueOf(sportResults.getFemalesCubesResult(tempScore));
                 default:
-                    return String.valueOf(sportResults.getFemalesStaticHandsResult(tempScore));
+                    return String.valueOf(sportResults.getFemalesHandsResult(tempScore, isPushUpHalf));
             }
         } else {
             switch (sportType) {
@@ -91,7 +96,7 @@ public class StudentActivityPresenter implements StudentActivityContract.Present
         this.view = view;
         final InputStream femaleGrades = view.getFemaleGradesFile();
         final InputStream maleGrades = view.getMaleGradesFile();
-        sportResults = new SportResults(femaleGrades,maleGrades);
+        sportResults = new SportResults(femaleGrades, maleGrades);
     }
 
     @Override

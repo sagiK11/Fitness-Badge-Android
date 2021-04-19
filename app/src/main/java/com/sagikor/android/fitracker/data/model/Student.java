@@ -20,8 +20,8 @@ public class Student {
     private double absScore;
     private double absResult;
     private double totalScore;
-    private double totalScoreWithoutAerobic;
-
+    private boolean isAerobicWalking;
+    private boolean isPushUpHalf;
 
     public static class Builder {
         private String name;
@@ -42,8 +42,8 @@ public class Student {
         private double absScore;
         private double absResult;
         private double totalScore;
-        private double totalScoreWithoutAerobic;
-
+        private boolean isAerobicWalking;
+        private boolean isPushUpHalf;
 
         public Builder(String name) {
             this.name = name;
@@ -134,8 +134,13 @@ public class Student {
             return this;
         }
 
-        public Builder totalScoreWithoutAerobic(double totalScoreWithoutAerobic) {
-            this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
+        public Builder isAerobicWalking(boolean isWalking) {
+            this.isAerobicWalking = isWalking;
+            return this;
+        }
+
+        public Builder isPushUpHalf(boolean isPushUpHalf) {
+            this.isPushUpHalf = isPushUpHalf;
             return this;
         }
 
@@ -158,8 +163,9 @@ public class Student {
             student.setHandsResult(this.handsResult);
             student.setCubesResult(this.cubesResult);
             student.setTotalScore(this.totalScore);
-            student.setTotScoreWithoutAerobic(this.totalScoreWithoutAerobic);
             student.setUpdateDate(this.updatedDate);
+            student.setAerobicWalking(this.isAerobicWalking);
+            student.setPushUpHalf(this.isPushUpHalf);
             return student;
         }
 
@@ -305,16 +311,28 @@ public class Student {
         this.totalScore = totalScore;
     }
 
-    public double getTotScoreWithoutAerobic() {
-        return totalScoreWithoutAerobic;
+    public boolean isAerobicWalking() {
+        return isAerobicWalking;
     }
 
-    public void setTotScoreWithoutAerobic(double totalScoreWithoutAerobic) {
-        this.totalScoreWithoutAerobic = totalScoreWithoutAerobic;
+    public void setAerobicWalking(boolean isAerobicWalking) {
+        this.isAerobicWalking = isAerobicWalking;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public boolean isPushUpHalf() {
+        return isPushUpHalf;
+    }
+
+    public void setPushUpHalf(boolean pushUpHalf) {
+        this.isPushUpHalf = pushUpHalf;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -327,15 +345,6 @@ public class Student {
                 && handsScore != MISSING && cubesScore != MISSING;
     }
 
-    public String toString() {
-        return "\nStudent name: " + name + "\nClass: " + studentClass + "\nPhone: " + "'" + phoneNumber + "'"
-                + " \nGender: " + gender
-                + "\nAerobic Score: " + aerobicScore
-                + "\ncubesScore: " + cubesScore + "\nabsScore: " + absScore + "\njumpScore: " + jumpScore
-                + "\nHandsScore: " + handsScore + "\nTotalScore: " + totalScore
-                + "\nKey: " + key;
-    }
-
     public String asCSV() {
         StringBuilder sb = new StringBuilder();
         return sb.append(name).append(",").append(studentClass).append(",").append(aerobicScore)
@@ -346,23 +355,4 @@ public class Student {
                 .append(jumpResult).append(",").append(totalScore).toString();
     }
 
-    public String[] toArray() {
-        String aerobicScoreString = String.valueOf(aerobicScore);
-        String aerobicResultString = String.valueOf(aerobicResult);
-        String absScoreString = String.valueOf(absScore);
-        String absResultString = String.valueOf(absResult);
-        String handsScoreString = String.valueOf(handsScore);
-        String handsResultString = String.valueOf(handsResult);
-        String jumpScoreString = String.valueOf(jumpScore);
-        String jumpResultString = String.valueOf(jumpResult);
-        String cubesScoreString = String.valueOf(cubesScore);
-        String cubesResultString = String.valueOf(cubesResult);
-        String totalScoreString = String.valueOf(totalScore);
-        return new String[]{
-                name, studentClass, aerobicScoreString, aerobicResultString,
-                absScoreString, absResultString, handsScoreString, handsResultString,
-                cubesScoreString, cubesResultString, jumpScoreString, jumpResultString,
-                totalScoreString
-        };
-    }
 }

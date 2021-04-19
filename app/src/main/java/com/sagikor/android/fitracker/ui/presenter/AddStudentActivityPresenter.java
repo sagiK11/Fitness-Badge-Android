@@ -39,7 +39,7 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
         try {
             checkInput();
         } catch (AppExceptions.Input e) {
-            view.popMessage(e.getMessage());
+            view.popFailWindow(e.getMessage());
             return;
         }
 
@@ -87,6 +87,8 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
                 .cubesResult(parse(view.getCubesGrade()))
                 .totalScore(super.getAverage())
                 .updatedDate(Utility.getTodayDate())
+                .isAerobicWalking(view.isAerobicWalkingChecked())
+                .isPushUpHalf(view.isPushUpHalfChecked())
                 .build();
     }
 
@@ -120,13 +122,13 @@ public class AddStudentActivityPresenter extends StudentActivityPresenter implem
 
     private void checkInput() throws AppExceptions.Input {
         if (!isValidName(view.getStudentName())) {
-            throw new AppExceptions.Input("please select name");
+            throw new AppExceptions.Input(AppExceptions.SELECT_NAME);
         } else if (!super.isValidPhoneNo(view.getStudentPhoneNo())) {
-            throw new AppExceptions.Input("invalid phone number");
+            throw new AppExceptions.Input(AppExceptions.INVALID_PHONE);
         } else if (!isValidClass(view.getStudentClass())) {
-            throw new AppExceptions.Input("please select class");
+            throw new AppExceptions.Input(AppExceptions.SELECT_CLASS);
         } else if (!isValidGender(view.getStudentGender())) {
-            throw new AppExceptions.Input("please select gender");
+            throw new AppExceptions.Input(AppExceptions.SELECT_GENDER);
         }
     }
 

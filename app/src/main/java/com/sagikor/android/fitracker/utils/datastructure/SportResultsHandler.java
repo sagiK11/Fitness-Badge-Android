@@ -6,15 +6,15 @@ public interface SportResultsHandler {
 
     int getMalesCubesResult(double score);
 
-    int getFemalesAerobicResult(double score);
+    int getFemalesAerobicResult(double score, boolean isWalking);
 
     int getMalesAerobicResult(double score);
 
-    int getFemalesSitUpAbsResult(int score);
+    int getFemalesAbsResult(double score);
 
     int getMalesSitUpAbsResult(int score);
 
-    int getFemalesStaticHandsResult(double score);
+    int getFemalesHandsResult(double score, boolean isPushUpHalf);
 
     int getMalesHandsResult(double score);
 

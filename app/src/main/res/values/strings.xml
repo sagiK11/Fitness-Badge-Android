@@ -185,6 +185,14 @@
     <string name="adding_classes">Adding Classes</string>
     <string name="students_grades">Students Grades</string>
     <string name="background_image">background image</string>
+    <string name="aerobic_settings">Aerobic settings</string>
+    <string name="aerobic_walking_switch">Set aerobic activity to walking for this student</string>
+    <string name="push_up_switch">Set push up to half for this student</string>
+    <string name="try_again">try again</string>
+    <string name="invalid_phone_number">invalid phone number</string>
+    <string name="add_classes_in_settings">add classes in settings</string>
+    <string name="plank">plank</string>
+    <string name="push_up">push ups</string>
 
 
 

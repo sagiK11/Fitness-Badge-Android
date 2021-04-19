@@ -4,6 +4,7 @@ package com.sagikor.android.fitracker.ui.contracts;
 import com.sagikor.android.fitracker.data.model.Student;
 
 import java.io.InputStream;
+import java.util.Map;
 
 public interface StudentActivityContract {
     interface Presenter extends BaseContract.BasePresenter {
@@ -14,11 +15,12 @@ public interface StudentActivityContract {
 
         boolean isGenderSelected();
 
-        String calculateGrade(String score, String sportType, boolean isFemale);
+        String calculateGrade(String score, String sportType, Map<String, Boolean> map);
 
         void bind(StudentActivityContract.View view);
 
         void unbind();
+
     }
 
     interface View extends BaseContract.BaseView {
@@ -61,6 +63,10 @@ public interface StudentActivityContract {
         String getGradeStringResource();
 
         String getGenderStringResource();
+
+        boolean isAerobicWalkingChecked();
+
+        boolean isPushUpHalfChecked();
 
         InputStream getFemaleGradesFile();
 

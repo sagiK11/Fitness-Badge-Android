@@ -7,7 +7,7 @@ import java.util.Date;
 public class Utility {
     public static final int PASS_LENGTH = 6;
     public static final int MISSING_INPUT = -1;
-    public static final String GENERIC_ERROR_MESSAGE ="Ho no! Something went wrong!";
+    public static final String GENERIC_ERROR_MESSAGE = "Ho no! Something went wrong!";
 
     private Utility() {
         //Not meant to be initiated

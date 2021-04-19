@@ -19,35 +19,68 @@ public class SportResults implements SportResultsHandler {
     public static final String JUMP = "jump";
     public static final String CUBES = "cubes";
     public static final String HANDS = "hands";
+    public static final String IS_FEMALE = "isFemale";
+    public static final String IS_WALKING = "isWalking";
+    public static final String IS_PUSH_UP_HALF = "isPushUpHalf";
 
 
     public SportResults(InputStream femaleGrades, InputStream maleGrades) {
         femaleGradesList = new ArrayList<>();
         malesGradeList = new ArrayList<>();
 
-        populateGradesList(femaleGradesList, new InputStreamReader(femaleGrades));
-        populateGradesList(malesGradeList, new InputStreamReader(maleGrades));
+        populateFemaleGradesList(new InputStreamReader(femaleGrades));
+        populateMaleGradesList(new InputStreamReader(maleGrades));
     }
 
-    private void populateGradesList(List<SportCategoriesEntry> list, InputStreamReader isr) {
+    private void populateMaleGradesList(InputStreamReader isr) {
         String line;
         final int hands = 0;
         final int jump = 1;
         final int aerobic = 2;
         final int cubes = 3;
         final int abs = 4;
-        final int grade = 5;
+        final int grade = 9;
         try (BufferedReader bf = new BufferedReader(isr)) {
             bf.readLine();//skipping the headers
             while ((line = bf.readLine()) != null) {
                 String[] tokens = line.split(",");
-                list.add(new SportCategoriesEntry.Builder()
+                malesGradeList.add(new SportCategoriesEntry.Builder()
                         .result(Integer.parseInt(tokens[grade]))
                         .handsScore(Double.parseDouble(tokens[hands]))
                         .absScore(Integer.parseInt(tokens[abs]))
                         .jumpScore(Integer.parseInt(tokens[jump]))
                         .cubesScore(Double.parseDouble(tokens[cubes]))
                         .aerobicScore(Double.parseDouble(tokens[aerobic]))
+                        .build());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void populateFemaleGradesList(InputStreamReader isr) {
+        String line;
+        final int jump = 1;
+        final int aerobic = 2;
+        final int cubes = 3;
+        final int aerobic_walking = 5;
+        final int plank = 6;
+        final int push_up_full = 7;
+        final int push_up_half = 8;
+        final int grade = 9;
+        try (BufferedReader bf = new BufferedReader(isr)) {
+            bf.readLine();//skipping the headers
+            while ((line = bf.readLine()) != null) {
+                String[] tokens = line.split(",");
+                femaleGradesList.add(new SportCategoriesEntry.Builder()
+                        .result(Integer.parseInt(tokens[grade]))
+                        .fullPushUpScore(Integer.parseInt(tokens[push_up_full]))
+                        .halfPushUpScore(Integer.parseInt(tokens[push_up_half]))
+                        .plankScore(Double.parseDouble(tokens[plank]))
+                        .jumpScore(Integer.parseInt(tokens[jump]))
+                        .cubesScore(Double.parseDouble(tokens[cubes]))
+                        .aerobicScore(Double.parseDouble(tokens[aerobic]))
+                        .walkingAerobicScore(Double.parseDouble(tokens[aerobic_walking]))
                         .build());
             }
         } catch (IOException e) {
@@ -64,9 +97,11 @@ public class SportResults implements SportResultsHandler {
     public int getMalesCubesResult(double score) {
         return getCubesResult(malesGradeList, score);
     }
-    
+
     @Override
-    public int getFemalesAerobicResult(double score) {
+    public int getFemalesAerobicResult(double score, boolean isWalking) {
+        if (isWalking)
+            return getWalkingAerobicResult(score);
         return getAerobicResult(femaleGradesList, score);
     }
 
@@ -76,25 +111,27 @@ public class SportResults implements SportResultsHandler {
     }
 
     @Override
-    public int getFemalesSitUpAbsResult(int score) {
-        return getAbsResult(femaleGradesList, score);
+    public int getFemalesAbsResult(double score) {
+        return getPlankResult(score);
     }
 
     @Override
     public int getMalesSitUpAbsResult(int score) {
         return getAbsResult(malesGradeList, score);
     }
-    
+
     @Override
-    public int getFemalesStaticHandsResult(double score) {
-        return getHandsResult(femaleGradesList, score);
+    public int getFemalesHandsResult(double score, boolean isPushUpHalf) {
+        if (isPushUpHalf)
+            return getPushUpHalfResult(score);
+        return getPushUpFullResult(score);
     }
 
     @Override
     public int getMalesHandsResult(double score) {
         return getHandsResult(malesGradeList, score);
     }
-    
+
     @Override
     public int getFemalesJumpResult(int score) {
         return getJumpResult(femaleGradesList, score);
@@ -108,10 +145,12 @@ public class SportResults implements SportResultsHandler {
     private int getAerobicResult(List<SportCategoriesEntry> list, double score) {
         SportCategoriesEntry entry;
         boolean emptyField = score == 0;
-        for (int i = 0; i < list.size(); i++) {
-            entry = list.get(i);
-            if (entry.getAerobicScore() >= score) {
-                return emptyField ? WORST_RESULT : entry.getResult();
+        if (!emptyField) {
+            for (int i = 0; i < list.size(); i++) {
+                entry = list.get(i);
+                if (entry.getAerobicScore() >= score) {
+                    return entry.getResult();
+                }
             }
         }
         return WORST_RESULT;
@@ -142,10 +181,12 @@ public class SportResults implements SportResultsHandler {
     private int getCubesResult(List<SportCategoriesEntry> list, double score) {
         SportCategoriesEntry entry;
         boolean emptyField = score == 0;
-        for (int i = 0; i < list.size(); i++) {
-            entry = list.get(i);
-            if (entry.getCubesScore() >= score) {
-                return emptyField ? WORST_RESULT : entry.getResult();
+        if (!emptyField) {
+            for (int i = 0; i < list.size(); i++) {
+                entry = list.get(i);
+                if (entry.getCubesScore() >= score) {
+                    return entry.getResult();
+                }
             }
         }
         return WORST_RESULT;
@@ -157,6 +198,50 @@ public class SportResults implements SportResultsHandler {
         for (int i = 0; i < list.size(); i++) {
             entry = list.get(i);
             if (score >= entry.getJumpScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
+    }
+
+    private int getPlankResult(double score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < femaleGradesList.size(); i++) {
+            entry = femaleGradesList.get(i);
+            if (score >= entry.getPlankScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
+    }
+
+    private int getPushUpFullResult(double score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < femaleGradesList.size(); i++) {
+            entry = femaleGradesList.get(i);
+            if (score >= entry.getFullPushUpScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
+    }
+
+    private int getPushUpHalfResult(double score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < femaleGradesList.size(); i++) {
+            entry = femaleGradesList.get(i);
+            if (score >= entry.getHalfPushUpScore()) {
+                return entry.getResult();
+            }
+        }
+        return WORST_RESULT;
+    }
+
+    private int getWalkingAerobicResult(double score) {
+        SportCategoriesEntry entry;
+        for (int i = 0; i < femaleGradesList.size(); i++) {
+            entry = femaleGradesList.get(i);
+            if (entry.getWalkingAerobicScore() >= score) {
                 return entry.getResult();
             }
         }

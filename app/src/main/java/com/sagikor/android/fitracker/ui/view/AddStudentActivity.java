@@ -13,6 +13,7 @@ import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.AddStudentActivityPresenter;
+import com.sagikor.android.fitracker.utils.AppExceptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,14 +56,11 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
                 .setConfirmText(GIRL)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
-                    btnChooseGender.setText(GIRL);
-                    tvHandsType.setText(getResources().getString(R.string.minutes));
-
+                    changeLayoutToFemale();
                 })
                 .setCancelButton(BOY, sDialog -> {
                     sDialog.dismissWithAnimation();
-                    tvHandsType.setText(getResources().getString(R.string.amount));
-                    btnChooseGender.setText(BOY);
+                    changeLayoutToMale();
                 })
                 .show();
     }
@@ -71,14 +69,14 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
     public void setGirlsPreferences() {
         btnChooseGender.setText(getResources().getString(R.string.girl));
         btnChooseGender.setEnabled(false);
-        tvHandsType.setText(getResources().getString(R.string.minutes));
+        changeLayoutToFemale();
     }
 
     @Override
     public void setBoysPreferences() {
         btnChooseGender.setText(getResources().getString(R.string.boy));
         btnChooseGender.setEnabled(false);
-        tvHandsType.setText(getResources().getString(R.string.amount));
+        changeLayoutToMale();
     }
 
     @Override
@@ -94,7 +92,7 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         ListView listView = row.findViewById(R.id.class_list_view);
 
         if (presenter.getTeacherClasses().isEmpty()) {
-            popFailWindow("Please add the classes you teach in the Settings");
+            popFailWindow(AppExceptions.MISSING_CLASSES);
             return;
         }
         List<String> list = new ArrayList<>();

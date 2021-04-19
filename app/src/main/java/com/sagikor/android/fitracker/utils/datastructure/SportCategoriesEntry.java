@@ -8,6 +8,11 @@ public class SportCategoriesEntry {
     private int absScore;
     private int jumpScore;
     private int result;
+    private int fullPushUpScore;
+    private int halfPushUpScore;
+    private double plankScore;
+    private double walkingAerobicScore;
+
 
     public static class Builder {
         private double cubesScore;
@@ -16,6 +21,10 @@ public class SportCategoriesEntry {
         private int absScore;
         private int jumpScore;
         private int result;
+        private int fullPushUpScore;
+        private int halfPushUpScore;
+        private double plankScore;
+        private double walkingAerobicScore;
 
         Builder result(int result) {
             this.result = result;
@@ -47,6 +56,26 @@ public class SportCategoriesEntry {
             return this;
         }
 
+        Builder plankScore(double plankScore) {
+            this.plankScore = plankScore;
+            return this;
+        }
+
+        Builder fullPushUpScore(int fullPushUpScore) {
+            this.fullPushUpScore = fullPushUpScore;
+            return this;
+        }
+
+        Builder halfPushUpScore(int halfPushUpScore) {
+            this.halfPushUpScore = halfPushUpScore;
+            return this;
+        }
+
+        Builder walkingAerobicScore(double walkingAerobicScore) {
+            this.walkingAerobicScore = walkingAerobicScore;
+            return this;
+        }
+
         SportCategoriesEntry build() {
             SportCategoriesEntry sportCategoriesEntry = new SportCategoriesEntry();
             sportCategoriesEntry.setResult(this.result);
@@ -55,6 +84,10 @@ public class SportCategoriesEntry {
             sportCategoriesEntry.setJumpScore(this.jumpScore);
             sportCategoriesEntry.setCubesScore(this.cubesScore);
             sportCategoriesEntry.setHandsScore(this.handsScore);
+            sportCategoriesEntry.setPlankScore(this.plankScore);
+            sportCategoriesEntry.setWalkingAerobicScore(this.walkingAerobicScore);
+            sportCategoriesEntry.setFullPushUpScore(this.fullPushUpScore);
+            sportCategoriesEntry.setHalfPushUpScore(this.halfPushUpScore);
             return sportCategoriesEntry;
         }
     }
@@ -100,6 +133,38 @@ public class SportCategoriesEntry {
 
     void setHandsScore(double score) {
         this.handsScore = score;
+    }
+
+    public int getFullPushUpScore() {
+        return fullPushUpScore;
+    }
+
+    public void setFullPushUpScore(int fullPushUpScore) {
+        this.fullPushUpScore = fullPushUpScore;
+    }
+
+    public int getHalfPushUpScore() {
+        return halfPushUpScore;
+    }
+
+    public void setHalfPushUpScore(int halfPushUpScore) {
+        this.halfPushUpScore = halfPushUpScore;
+    }
+
+    public double getPlankScore() {
+        return plankScore;
+    }
+
+    public void setPlankScore(double plank) {
+        this.plankScore = plank;
+    }
+
+    public double getWalkingAerobicScore() {
+        return walkingAerobicScore;
+    }
+
+    public void setWalkingAerobicScore(double walkingAerobicScore) {
+        this.walkingAerobicScore = walkingAerobicScore;
     }
 
     public int getResult() {

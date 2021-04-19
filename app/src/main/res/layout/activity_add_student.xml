@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
+    android:id="@+id/add_student_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -150,7 +150,7 @@
             android:text="@string/student_scores"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView15"
+            app:layout_constraintBottom_toTopOf="@+id/switch_aerobic_walking"
             app:layout_constraintEnd_toStartOf="@+id/guideline6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/student_class_id" />
@@ -172,19 +172,54 @@
             app:layout_constraintStart_toEndOf="@+id/student_scores"
             app:layout_constraintTop_toTopOf="@+id/student_scores" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_aerobic_walking"
+            style="@style/settings_buttons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/aerobic_walking_switch"
+            android:textColor="#696969"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/switch_push_up"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/student_scores" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/switch_push_up"
+            style="@style/settings_buttons"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/push_up_switch"
+            android:textColor="#696969"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/switch_aerobic_walking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/aerobicTextView"
+            />
+
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/aerobicTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="2dp"
             android:text="@string/aerobic"
-            app:layout_constraintBottom_toTopOf="@+id/textView16"
+            app:layout_constraintBottom_toTopOf="@+id/absTextView"
             app:layout_constraintEnd_toStartOf="@+id/textView"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/student_scores" />
+            app:layout_constraintTop_toBottomOf="@+id/switch_push_up" />
 
         <TextView
             android:id="@+id/textView"
@@ -194,10 +229,10 @@
             android:layout_marginEnd="3dp"
             android:text="@string/minutes"
             android:textAlignment="textStart"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
+            app:layout_constraintBaseline_toBaselineOf="@+id/aerobicTextView"
             app:layout_constraintEnd_toStartOf="@+id/update_student_aerobic_id"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/textView15" />
+            app:layout_constraintStart_toEndOf="@+id/aerobicTextView" />
 
         <TextView
             android:id="@+id/hands_minutes_text_view"
@@ -207,10 +242,10 @@
             android:layout_marginEnd="3dp"
             android:text="@string/minutes"
             android:textAlignment="textStart"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView18"
+            app:layout_constraintBaseline_toBaselineOf="@+id/handsTextView"
             app:layout_constraintEnd_toStartOf="@+id/update_student_hands_id"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/textView18" />
+            app:layout_constraintStart_toEndOf="@+id/handsTextView" />
 
         <EditText
             android:id="@+id/update_student_aerobic_id"
@@ -240,7 +275,7 @@
             app:layout_constraintStart_toEndOf="@+id/update_student_aerobic_id" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/absTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -248,23 +283,23 @@
             android:layout_marginEnd="2dp"
             android:text="@string/abs"
             app:layout_constraintBottom_toTopOf="@+id/textView17"
-            app:layout_constraintEnd_toStartOf="@+id/textView30"
+            app:layout_constraintEnd_toStartOf="@+id/abs_type_text_view"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/aerobicTextView" />
 
         <TextView
-            android:id="@+id/textView30"
+            android:id="@+id/abs_type_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="3dp"
             android:text="@string/amount"
             android:textAlignment="textStart"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
+            app:layout_constraintBaseline_toBaselineOf="@+id/absTextView"
             app:layout_constraintEnd_toStartOf="@+id/update_student_abs_id"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@+id/textView16" />
+            app:layout_constraintStart_toEndOf="@+id/absTextView" />
 
 
         <EditText
@@ -275,10 +310,10 @@
             android:gravity="start"
             android:inputType="numberDecimal"
             android:textAlignment="textStart"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView30"
+            app:layout_constraintBaseline_toBaselineOf="@+id/abs_type_text_view"
             app:layout_constraintEnd_toStartOf="@+id/student_abs_text"
             app:layout_constraintHorizontal_weight="2.5"
-            app:layout_constraintStart_toEndOf="@+id/textView30" />
+            app:layout_constraintStart_toEndOf="@+id/abs_type_text_view" />
 
         <TextView
             android:id="@+id/student_abs_text"
@@ -301,11 +336,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="2dp"
             android:text="@string/cubes"
-            app:layout_constraintBottom_toTopOf="@+id/textView18"
+            app:layout_constraintBottom_toTopOf="@+id/handsTextView"
             app:layout_constraintEnd_toStartOf="@+id/textView31"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toBottomOf="@+id/absTextView" />
 
         <TextView
             android:id="@+id/textView31"
@@ -349,7 +384,7 @@
             app:layout_constraintStart_toEndOf="@+id/update_student_cubes_id" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/handsTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -403,7 +438,7 @@
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            app:layout_constraintTop_toBottomOf="@+id/handsTextView" />
 
         <TextView
             android:id="@+id/textView33"
@@ -494,6 +529,8 @@
             app:rd_maxRippleRadius="match_view"
             app:rd_rippleColor="@color/colorPrimary"
             app:rd_rippleType="touch" />
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

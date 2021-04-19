@@ -56,13 +56,6 @@ public class UpdateStudentActivity extends StudentActivity implements UpdateStud
     }
 
     @Override
-    public void setStudentGender(String gender) {
-        btnChooseGender.setText(gender);
-        if (gender.equals(getResources().getString(R.string.boy)))
-            tvHandsType.setText(getResources().getString(R.string.amount));
-    }
-
-    @Override
     public void setAerobicScore(String score) {
         etAerobicScore.setText(score);
     }
@@ -85,5 +78,50 @@ public class UpdateStudentActivity extends StudentActivity implements UpdateStud
     @Override
     public void setJumpScore(String score) {
         etJumpScore.setText(score);
+    }
+
+    @Override
+    public void setAerobicGrade(String grade) {
+        tvAerobicGrade.setText(grade);
+    }
+
+    @Override
+    public void setCubesGrade(String grade) {
+        tvCubesGrade.setText(grade);
+    }
+
+    @Override
+    public void setAbsGrade(String grade) {
+        tvAerobicGrade.setText(grade);
+    }
+
+    @Override
+    public void setHandsGrade(String grade) {
+        tvHandsGrade.setText(grade);
+    }
+
+    @Override
+    public void setJumpGrade(String grade) {
+        tvJumpGrade.setText(grade);
+    }
+
+    @Override
+    public void setAerobicWalkingSwitch(boolean isWalking) {
+        swAerobicOption.setChecked(isWalking);
+    }
+
+    @Override
+    public void setPushUpHalfSwitch(boolean isPushUpHalf) {
+        swPushUpOption.setChecked(isPushUpHalf);
+    }
+
+    @Override
+    public void setStudentGender(String gender) {
+        btnChooseGender.setText(gender);
+        if (gender.equals(getString(R.string.boy))) {
+            changeLayoutToMale();
+        } else {
+            changeLayoutToFemale();
+        }
     }
 }
