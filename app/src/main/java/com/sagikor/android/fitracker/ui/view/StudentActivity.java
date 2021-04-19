@@ -135,12 +135,12 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public String getGradeStringResource() {
-        return getResources().getString(R.string.grade);
+        return getString(R.string.grade);
     }
 
     @Override
     public String getGenderStringResource() {
-        return getResources().getString(R.string.gender);
+        return getString(R.string.gender);
     }
 
     @Override
@@ -202,6 +202,8 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                 return getString(R.string.gender_error);
             case AppExceptions.MISSING_CLASSES:
                 return getString(R.string.add_classes_in_settings);
+            case AppExceptions.INVALID_NAME:
+                return getString(R.string.invalid_name);
             default:
                 return error;
         }
@@ -209,9 +211,9 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public void askForSendingSMS(Student student) {
-        final String SEND_QUESTION = getResources().getString(R.string.send_to_student_question);
-        final String YES = getResources().getString(R.string.yes);
-        final String NO = getResources().getString(R.string.no);
+        final String SEND_QUESTION = getString(R.string.send_to_student_question);
+        final String YES = getString(R.string.yes);
+        final String NO = getString(R.string.no);
 
         if (isStudentHasStudentPhoneNo()) {
             new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
@@ -267,22 +269,22 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     private void appendGreetings(StringBuilder res) {
-        final String HELLO = getResources().getString(R.string.hello);
-        final String CURRENT_GRADES = getResources().getString(R.string.current_grades);
+        final String HELLO = getString(R.string.hello);
+        final String CURRENT_GRADES = getString(R.string.current_grades);
         res.append(HELLO).append(" ").append(etStudentName.getText()).
                 append(" ").append(CURRENT_GRADES).append("\n");
     }
 
     private String appendTotalScore(StringBuilder res, Student student) {
-        final String TOTAL_SCORE = getResources().getString(R.string.total_grade_c);
+        final String TOTAL_SCORE = getString(R.string.total_grade_c);
         return res.append("\n").append(TOTAL_SCORE).append(" ")
                 .append(student.getTotalScore()).append(".").toString();
     }
 
     private int appendAerobicText(StringBuilder res, Student student) {
-        final String AEROBIC = getResources().getString(R.string.aero_c);
-        final String GRADE = getResources().getString(R.string.grade_c);
-        final String MINUTES = getResources().getString(R.string.minutes);
+        final String AEROBIC = getString(R.string.aero_c);
+        final String GRADE = getString(R.string.grade_c);
+        final String MINUTES = getString(R.string.minutes);
 
         if (student.getAerobicScore() != MISSING_INPUT) {
             res.append(AEROBIC).append(" ").append(student.getAerobicScore())
@@ -294,9 +296,9 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     private int appendJumpText(StringBuilder res, Student student) {
-        final String JUMP = getResources().getString(R.string.jump_c);
-        final String CM = getResources().getString(R.string.cm);
-        final String GRADE = getResources().getString(R.string.grade_c);
+        final String JUMP = getString(R.string.jump_c);
+        final String CM = getString(R.string.cm);
+        final String GRADE = getString(R.string.grade_c);
 
         if (student.getJumpScore() != MISSING_INPUT) {
             res.append(JUMP).append(" ").append(student.getJumpScore()).append(" ")
@@ -308,9 +310,9 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     private int appendAbsText(StringBuilder res, Student student) {
-        final String ABS = getResources().getString(R.string.abs_c);
-        final String AMOUNT = getResources().getString(R.string.amount);
-        final String GRADE = getResources().getString(R.string.grade_c);
+        final String ABS = getString(R.string.abs_c);
+        final String AMOUNT = getString(R.string.amount);
+        final String GRADE = getString(R.string.grade_c);
 
         if (student.getAbsScore() != MISSING_INPUT) {
             res.append(ABS).append(" ").append(student.getAbsScore()).append(" ")
@@ -322,9 +324,9 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     private int appendCubesText(StringBuilder res, Student student) {
-        final String SECONDS = getResources().getString(R.string.seconds);
-        final String GRADE = getResources().getString(R.string.grade_c);
-        final String CUBES = getResources().getString(R.string.cubes_c);
+        final String SECONDS = getString(R.string.seconds);
+        final String GRADE = getString(R.string.grade_c);
+        final String CUBES = getString(R.string.cubes_c);
 
         if (student.getCubesScore() != MISSING_INPUT) {
             res.append(CUBES).append(" ").append(student.getCubesScore()).append(" ")
@@ -336,15 +338,15 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     private int appendHandsText(StringBuilder res, Student student) {
-        final String HANDS = getResources().getString(R.string.hands_c);
-        final String MINUTES = getResources().getString(R.string.minutes);
-        final String AMOUNT = getResources().getString(R.string.amount);
-        final String GRADE = getResources().getString(R.string.grade_c);
-        final String BOY = getResources().getString(R.string.boy);
+        final String HANDS = getString(R.string.hands_c);
+        final String MINUTES = getString(R.string.minutes);
+        final String AMOUNT = getString(R.string.amount);
+        final String GRADE = getString(R.string.grade_c);
+        final String MALE = getString(R.string.male);
 
         if (student.getHandsScore() != MISSING_INPUT) {
             res.append(HANDS).append(" ").append(student.getHandsScore()).append(" ")
-                    .append(student.getGender().equals(BOY) ? AMOUNT : MINUTES)
+                    .append(student.getGender().equals(MALE) ? AMOUNT : MINUTES)
                     .append(" ").append(GRADE).append(" ")
                     .append(student.getHandsResult()).append(".");
             return 1;
@@ -371,7 +373,7 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                     if (presenter.isGenderSelected()) {
                         String input = charSequence.toString().trim();
                         if (presenter.isValidScore(input)) {
-                            boolean isFemale = btnChooseGender.getText().toString().equals(getResources().getString(R.string.girl));
+                            boolean isFemale = btnChooseGender.getText().toString().equals(getString(R.string.female));
                             boolean isWalking = swAerobicOption.isChecked();
                             boolean isPushUpHalf = swPushUpOption.isChecked();
                             Map<String, Boolean> map = new HashMap<>();
@@ -382,10 +384,10 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
                             tvGrade.setText(grade);
                         } else {
-                            tvGrade.setText(getResources().getString(R.string.grade));
+                            tvGrade.setText(getString(R.string.grade));
                         }
                     } else {
-                        popMessage(getResources().getString(R.string.gender_error));
+                        popFailWindow(getString(R.string.gender_error));
                     }
                 }
         );
@@ -438,7 +440,7 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     private void resetAerobicInput() {
         etAerobicScore.setText("");
-        tvAerobicGrade.setText(getResources().getString(R.string.grade));
+        tvAerobicGrade.setText(getString(R.string.grade));
     }
 
     protected void bindTextToDisplayViews() {
@@ -456,23 +458,23 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     protected void changeLayoutToFemale() {
-        tvHandsType.setText(getResources().getString(R.string.amount));
+        tvHandsType.setText(getString(R.string.amount));
         tvAbsType.setText(getString(R.string.minutes));
         swAerobicOption.setVisibility(View.VISIBLE);
         swPushUpOption.setVisibility(View.VISIBLE);
         tvAbsGuide.setText(getString(R.string.plank));
         tvHandsGuide.setText(getString(R.string.push_up));
-        btnChooseGender.setText(getString(R.string.girl));
+        btnChooseGender.setText(getString(R.string.female));
     }
 
     protected void changeLayoutToMale() {
-        tvHandsType.setText(getResources().getString(R.string.amount));
+        tvHandsType.setText(getString(R.string.amount));
         tvAbsType.setText(getString(R.string.amount));
         swAerobicOption.setVisibility(View.GONE);
         swPushUpOption.setVisibility(View.GONE);
         tvAbsGuide.setText(getString(R.string.abs));
         tvHandsGuide.setText(getString(R.string.hands));
-        btnChooseGender.setText(getString(R.string.boy));
+        btnChooseGender.setText(getString(R.string.male));
 
     }
 

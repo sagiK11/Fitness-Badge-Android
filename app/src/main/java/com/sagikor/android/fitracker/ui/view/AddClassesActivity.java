@@ -113,8 +113,8 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
             UserClass classToTeach = list.get(position);
             Context context = holder.tvClassToTeach.getContext();
             final String YES = context.getString(R.string.yes);
-            final String NO = context.getResources().getString(R.string.no);
-            final String DELETE_STUDENT_QUESTION = context.getResources().getString(R.string.delete_class_question);
+            final String NO = context.getString(R.string.no);
+            final String DELETE_STUDENT_QUESTION = context.getString(R.string.delete_class_question);
 
             //long click
             holder.itemView.setOnLongClickListener(e -> {

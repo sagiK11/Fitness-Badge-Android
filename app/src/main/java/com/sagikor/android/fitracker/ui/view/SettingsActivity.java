@@ -109,10 +109,10 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
 
     private void deleteAllStudentsPopWarning() {
         final int NO = 0;
-        final String DELETE_STUDENTS_QUESTION = getResources().getString(R.string.delete_all_students_question);
-        final String NO_STUDENTS_DELETED = getResources().getString(R.string.no_students_were_deleted);
-        final String[] answers = {getResources().getString(R.string.no),
-                getResources().getString(R.string.yes)};
+        final String DELETE_STUDENTS_QUESTION = getString(R.string.delete_all_students_question);
+        final String NO_STUDENTS_DELETED = getString(R.string.no_students_were_deleted);
+        final String[] answers = {getString(R.string.no),
+                getString(R.string.yes)};
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(DELETE_STUDENTS_QUESTION);
@@ -132,7 +132,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
     }
 
     private void goodByeMessage() {
-        final String SAD_TO_SEE_YOU_LEAVE = getResources().getString(R.string.farewell_user);
+        final String SAD_TO_SEE_YOU_LEAVE = getString(R.string.farewell_user);
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
                 .setTitleText(SAD_TO_SEE_YOU_LEAVE)
                 .setConfirmClickListener(sDialog -> {
@@ -143,9 +143,9 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
     }
 
     private void deleteAccountPopWarning() {
-        final String YES = getResources().getString(R.string.yes);
-        final String NO = getResources().getString(R.string.no);
-        final String DELETE_QUESTION = getResources().getString(R.string.delete_account_question);
+        final String YES = getString(R.string.yes);
+        final String NO = getString(R.string.no);
+        final String DELETE_QUESTION = getString(R.string.delete_account_question);
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(DELETE_QUESTION)
                 .setConfirmText(YES)

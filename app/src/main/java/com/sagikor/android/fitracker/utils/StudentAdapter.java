@@ -42,7 +42,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CustomVi
         Student student = list.get(position);
         holder.tvName.setText(student.getName());
         holder.tvClass.setText(student.getStudentClass());
-        String female = holder.ivAvatar.getContext().getResources().getString(R.string.girl);
+        String female = holder.ivAvatar.getContext().getString(R.string.female);
         boolean isFemale = student.getGender().equals(female);
         holder.ivAvatar.setImageResource(isFemale ? R.mipmap.female_athlete_avatar : R.mipmap.male_avatar);
         holder.ivBadge.setVisibility(student.isFinished() ? View.VISIBLE : View.INVISIBLE);
@@ -55,8 +55,8 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.CustomVi
         Student student = list.get(position);
         Context context = holder.ivAvatar.getContext();
         final String YES = context.getString(R.string.yes);
-        final String NO = context.getResources().getString(R.string.no);
-        final String DELETE_STUDENT_QUESTION = context.getResources().getString(R.string.delete_student_question);
+        final String NO = context.getString(R.string.no);
+        final String DELETE_STUDENT_QUESTION = context.getString(R.string.delete_student_question);
         //short click
         holder.itemView.setOnClickListener(e ->
                 presenter.onStudentClick(student.getKey())

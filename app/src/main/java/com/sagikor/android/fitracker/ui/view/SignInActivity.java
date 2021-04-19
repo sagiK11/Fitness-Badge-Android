@@ -98,19 +98,19 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
     }
 
     public void popSignInFailureMessage() {
-        final String error = getResources().getString(R.string.authentication_error);
+        final String error = getString(R.string.authentication_error);
         popError(error);
     }
 
     @Override
     public void notifyUserToCheckMail() {
-        String checkEMail = getResources().getString(R.string.check_your_email);
+        String checkEMail = getString(R.string.check_your_email);
         popError(checkEMail);
     }
 
     @Override
     public void notifyUserToFillEmail() {
-        String fillEmailField = getResources().getString(R.string.fill_email_field);
+        String fillEmailField = getString(R.string.fill_email_field);
         popError(fillEmailField);
     }
 

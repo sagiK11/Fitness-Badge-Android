@@ -192,9 +192,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     private void signOutQuestionPop() {
-        final String SURE_QUESTION = getResources().getString(R.string.exit_question);
-        final String YES = getResources().getString(R.string.yes);
-        final String NO = getResources().getString(R.string.no);
+        final String SURE_QUESTION = getString(R.string.exit_question);
+        final String YES = getString(R.string.yes);
+        final String NO = getString(R.string.no);
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(SURE_QUESTION)
                 .setConfirmText(YES)
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
         @Override
         public void run() {
-            final String students_grade = getResources().getString(R.string.students_grades);
+            final String students_grade = getString(R.string.students_grades);
             //get students data
             StringBuilder sb = new StringBuilder();
             sb.append(getExcelHeaders());
@@ -253,19 +253,19 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         }
 
         private String getExcelHeaders() {
-            final String name = getResources().getString(R.string.name);
-            final String studentClass = getResources().getString(R.string.student_class);
-            final String aerobicResult = getResources().getString(R.string.aerobic_result);
-            final String aerobicScore = getResources().getString(R.string.aerobic_score);
-            final String absResult = getResources().getString(R.string.abs_result);
-            final String absScore = getResources().getString(R.string.abs_score);
-            final String jumpResult = getResources().getString(R.string.jump_result);
-            final String jumpScore = getResources().getString(R.string.jump_score);
-            final String handsResult = getResources().getString(R.string.hands_result);
-            final String handsScore = getResources().getString(R.string.hands_score);
-            final String cubesResult = getResources().getString(R.string.cubes_result);
-            final String cubesScore = getResources().getString(R.string.cubes_score);
-            final String finalScore = getResources().getString(R.string.final_score);
+            final String name = getString(R.string.name);
+            final String studentClass = getString(R.string.student_class);
+            final String aerobicResult = getString(R.string.aerobic_result);
+            final String aerobicScore = getString(R.string.aerobic_score);
+            final String absResult = getString(R.string.abs_result);
+            final String absScore = getString(R.string.abs_score);
+            final String jumpResult = getString(R.string.jump_result);
+            final String jumpScore = getString(R.string.jump_score);
+            final String handsResult = getString(R.string.hands_result);
+            final String handsScore = getString(R.string.hands_score);
+            final String cubesResult = getString(R.string.cubes_result);
+            final String cubesScore = getString(R.string.cubes_score);
+            final String finalScore = getString(R.string.final_score);
             StringBuilder sb = new StringBuilder();
             return sb.append(name).append(",").append(studentClass).append(",").append(aerobicScore)
                     .append(",").append(aerobicResult).append(",").append(absScore)

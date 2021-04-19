@@ -47,9 +47,9 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
 
     @Override
     public void selectStudentGender() {
-        final String CHOOSE_GENDER = getResources().getString(R.string.choose_gender);
-        final String BOY = getResources().getString(R.string.boy);
-        final String GIRL = getResources().getString(R.string.girl);
+        final String CHOOSE_GENDER = getString(R.string.choose_gender);
+        final String BOY = getString(R.string.male);
+        final String GIRL = getString(R.string.female);
 
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText(CHOOSE_GENDER)
@@ -67,21 +67,21 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
 
     @Override
     public void setGirlsPreferences() {
-        btnChooseGender.setText(getResources().getString(R.string.girl));
+        btnChooseGender.setText(getString(R.string.female));
         btnChooseGender.setEnabled(false);
         changeLayoutToFemale();
     }
 
     @Override
     public void setBoysPreferences() {
-        btnChooseGender.setText(getResources().getString(R.string.boy));
+        btnChooseGender.setText(getString(R.string.male));
         btnChooseGender.setEnabled(false);
         changeLayoutToMale();
     }
 
     @Override
     public void setDefaultPreferences() {
-        btnChooseGender.setText(getResources().getString(R.string.choose_gender));
+        btnChooseGender.setText(getString(R.string.choose_gender));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         alertDialog.setView(row);
 
         AlertDialog dialog = alertDialog.create();
-        final String CHOOSE_CLASS = getResources().getString(R.string.choose_class);
+        final String CHOOSE_CLASS = getString(R.string.choose_class);
         dialog.setTitle(CHOOSE_CLASS);
         listView.setOnItemClickListener((parent, view, position, id) -> {
             setClass((String) parent.getItemAtPosition(position));
@@ -123,17 +123,17 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
 
     @Override
     public String getClassStringResource() {
-        return getResources().getString(R.string.Class);
+        return getString(R.string.Class);
     }
 
     @Override
     public String getGenderStringResource() {
-        return getResources().getString(R.string.choose_gender);
+        return getString(R.string.choose_gender);
     }
 
     @Override
     public String getGradeStringResource() {
-        return getResources().getString(R.string.grade);
+        return getString(R.string.grade);
     }
 
     @Override

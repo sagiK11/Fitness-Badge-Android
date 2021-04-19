@@ -79,9 +79,9 @@ public class StatisticsActivity extends AppCompatActivity implements
 
     private void setPieEntriesSetting() {
         List<PieEntry> categories = new ArrayList<>();
-        final String DONE = getResources().getString(R.string.done);
-        final String UNDONE = getResources().getString(R.string.undone);
-        final String SCHOOL_NAME = getResources().getString(R.string.school_name);
+        final String DONE = getString(R.string.done);
+        final String UNDONE = getString(R.string.undone);
+        final String SCHOOL_NAME = getString(R.string.school_name);
         presenter.calculateFinishedNoOfStudents();
         categories.add(new PieEntry(presenter.getFinishedNo(), DONE));
         categories.add(new PieEntry(presenter.getUnFinishedNo(), UNDONE));
@@ -107,7 +107,7 @@ public class StatisticsActivity extends AppCompatActivity implements
     }
 
     private void createBarDataSet() {
-        final String SCHOOL_NAME = getResources().getString(R.string.school_name);
+        final String SCHOOL_NAME = getString(R.string.school_name);
         BarDataSet barDataSet = new BarDataSet(barEntryList, SCHOOL_NAME);
         barDataSet.setColors(ColorTemplate.LIBERTY_COLORS);
         BarData data = new BarData(barDataSet);
@@ -143,11 +143,11 @@ public class StatisticsActivity extends AppCompatActivity implements
     }
 
     private void createLabelsName() {
-        final String AEROBIC = getResources().getString(R.string.aerobic);
-        final String ABS = getResources().getString(R.string.abs);
-        final String CUBES = getResources().getString(R.string.cubes);
-        final String HANDS = getResources().getString(R.string.hands);
-        final String JUMP = getResources().getString(R.string.jump);
+        final String AEROBIC = getString(R.string.aerobic);
+        final String ABS = getString(R.string.abs);
+        final String CUBES = getString(R.string.cubes);
+        final String HANDS = getString(R.string.hands);
+        final String JUMP = getString(R.string.jump);
 
         labelsName = new ArrayList<>();
         labelsName.add(AEROBIC);
