@@ -118,7 +118,7 @@ public class UpdateStudentActivity extends StudentActivity implements UpdateStud
     @Override
     public void setStudentGender(String gender) {
         btnChooseGender.setText(gender);
-        if (gender.equals(getString(R.string.boy))) {
+        if (gender.equals(getString(R.string.male))) {
             changeLayoutToMale();
         } else {
             changeLayoutToFemale();

@@ -125,8 +125,8 @@
     <string name="twelfth7">12th - 7</string>
     <string name="twelfth8">12th - 8</string>
     <string name="twelfth9">12th - 9</string>
-    <string name="boy">Boy</string>
-    <string name="girl">Girl</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
     <string name="choose_class">Choose Class</string>
     <string name="hello">Hello</string>
     <string name="current_grades">These are your current grades</string>
@@ -190,6 +190,7 @@
     <string name="push_up_switch">Set push up to half for this student</string>
     <string name="try_again">try again</string>
     <string name="invalid_phone_number">invalid phone number</string>
+    <string name="invalid_name">invalid name</string>
     <string name="add_classes_in_settings">add classes in settings</string>
     <string name="plank">plank</string>
     <string name="push_up">push ups</string>

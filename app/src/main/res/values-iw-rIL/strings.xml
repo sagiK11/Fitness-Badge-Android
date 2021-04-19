@@ -108,8 +108,8 @@
     <string name="twelfth7">י\"ב 7</string>
     <string name="twelfth8">י\"ב 8</string>
     <string name="twelfth9">י\"ב 9</string>
-    <string name="boy">בן</string>
-    <string name="girl">בת</string>
+    <string name="male">בן</string>
+    <string name="female">בת</string>
     <string name="choose_gender">בחר מגדר</string>
     <string name="choose_class">בחר כיתה</string>
     <string name="hello">שלום</string>
@@ -175,6 +175,7 @@
     <string name="push_up_switch">הגדר פוש אפ חלקי עבור תלמיד זה</string>
     <string name="try_again">אני אנסה שוב</string>
     <string name="invalid_phone_number">טלפון לא תקין</string>
+    <string name="invalid_name">שם לא תקין</string>
     <string name="add_classes_in_settings">הוסף כיתות בהגדרות</string>
     <string name="plank">פלאנק</string>
     <string name="push_up">פוש אפ</string>
