@@ -4,12 +4,11 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#5B377A</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/blurredish_red</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="actionBarSize">60dp</item>
         <item name="android:layoutDirection">locale</item>
         <item name="android:titleTextStyle">@color/actionBarTextColor</item>
         <item name="android:actionOverflowButtonStyle">@style/MyActionButtonOverflow</item>
-
     </style>
 
     <style name="MyActionButtonOverflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
@@ -21,21 +20,19 @@
     <style name="AppSecondaryTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#5B377A</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/blurredish_red</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="actionBarSize">60dp</item>
         <item name="android:layoutDirection">locale</item>
         <item name="android:titleTextStyle">@color/actionBarTextColor</item>
-
     </style>
 
     <style name="AppThirdTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">#5B377A</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/blurredish_red</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="actionBarSize">60dp</item>
         <item name="android:layoutDirection">locale</item>
         <item name="android:titleTextStyle">@color/actionBarTextColor</item>
-
     </style>
 
 
@@ -48,7 +45,6 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
-
     </style>
 
     <style name="settings_buttons">
@@ -56,9 +52,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">#FFFFFF</item>
         <item name="android:textSize">17sp</item>
-
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
-
     </style>
 
 </resources>
