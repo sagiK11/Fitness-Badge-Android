@@ -7,6 +7,7 @@
     android:background="@color/white"
     android:layoutDirection="ltr"
     android:orientation="vertical"
+    android:id="@+id/view_students_root"
     android:padding="12dp">
 
 

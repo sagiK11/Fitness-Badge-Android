@@ -7,7 +7,11 @@ public interface BaseContract {
     }
 
     interface BaseView {
-        void popMessage(String message);
+        enum msgType {
+            alert, success, fail, dangerous
+        }
+
+        void popMessage(String message, msgType type);
     }
 
 }

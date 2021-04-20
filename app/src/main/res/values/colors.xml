@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#5B377A</color>
-    <color name="colorPrimaryDark">#26C6DA</color>
-    <color name="colorAccent">#4144f0</color>
-    <color name="fixedProgressBar">#a00538</color>
+    <color name="colorPrimaryDark">#3d2551</color>
+    <color name="colorAccent">#75479d</color>
     <color name="actionBarTextColor">#000000</color>
     <color name="transparent">#08000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    <color name="blurredish_red">#f90445</color>
     <color name="table">#393838</color>
-    <color name="button_nav_bar">#000000</color>
     <color name="textInputBackground">#F1EEF2</color>
+    <color name="red">#e1341e</color>
+    <color name="alert">#64769b</color>
 </resources>

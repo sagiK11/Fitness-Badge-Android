@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -20,7 +19,6 @@ import com.sagikor.android.fitracker.ui.contracts.StudentActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.StudentActivityPresenter;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 import com.sagikor.android.fitracker.utils.StudentTextWatcher;
-import com.sagikor.android.fitracker.utils.Utility;
 import com.sagikor.android.fitracker.utils.datastructure.SportResults;
 
 import java.io.InputStream;
@@ -129,11 +127,6 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public String getGradeStringResource() {
         return getString(R.string.grade);
     }
@@ -169,11 +162,7 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
 
     @Override
     public void popSuccessWindow() {
-        View contextView = findViewById(R.id.add_student_root);
-        Snackbar.make(contextView, R.string.student_saved, Snackbar.LENGTH_SHORT)
-                .setBackgroundTint(getColor(R.color.colorPrimary))
-                .show();
-//
+        popMessage(getString(R.string.student_saved), msgType.success);
     }
 
     @Override
@@ -186,6 +175,29 @@ public class StudentActivity extends AppCompatActivity implements StudentActivit
                     //dismissing
                 })
                 .show();
+    }
+
+    @Override
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.add_student_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
+
     }
 
     private String getErrorInUserLanguage(String error) {

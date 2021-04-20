@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.ViewStudentsActivityPresenter;
@@ -73,6 +74,16 @@ public class ViewStudentsActivity extends AppCompatActivity implements
         startActivity(new Intent(this, UpdateStudentActivity.class));
     }
 
+    @Override
+    public void popDeleteStudentSuccess() {
+        popMessage(getString(R.string.student_delete_success), msgType.success);
+    }
+
+    @Override
+    public void popDeleteStudentFail() {
+        popMessage(getString(R.string.student_delete_fail), msgType.fail);
+    }
+
     private void addInputSearch() {
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -93,7 +104,24 @@ public class ViewStudentsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.view_students_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
     }
 }

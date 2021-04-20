@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/statistics_activity_root"
     tools:context=".ui.view.StatisticsActivity">
 
     <LinearLayout

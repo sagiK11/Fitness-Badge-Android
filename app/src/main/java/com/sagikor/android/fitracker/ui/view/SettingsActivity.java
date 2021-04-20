@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
+import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.SettingsActivityContract;
@@ -118,7 +119,7 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
         builder.setTitle(DELETE_STUDENTS_QUESTION);
         builder.setItems(answers, (dialog, choice) -> {
             if (choice == NO) {
-                popMessage(NO_STUDENTS_DELETED);
+                popMessage(NO_STUDENTS_DELETED, msgType.alert);
             } else {
                 presenter.onClearDatabaseClick();
             }
@@ -127,8 +128,25 @@ public class SettingsActivity extends AppCompatActivity implements SettingsActiv
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.settings_activity_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
     }
 
     private void goodByeMessage() {

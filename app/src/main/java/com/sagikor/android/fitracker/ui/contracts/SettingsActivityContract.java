@@ -41,6 +41,5 @@ public interface SettingsActivityContract {
 
         void navToSignInScreen();
 
-        void popMessage(String message);
     }
 }

@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.UserClass;
@@ -114,11 +113,6 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
             dialog.dismiss();
         });
         dialog.show();
-    }
-
-    @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

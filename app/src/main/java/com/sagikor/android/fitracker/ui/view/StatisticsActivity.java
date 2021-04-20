@@ -3,7 +3,7 @@ package com.sagikor.android.fitracker.ui.view;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.snackbar.Snackbar;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.StatisticsActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.StatisticsActivityPresenter;
@@ -163,7 +164,24 @@ public class StatisticsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.statistics_activity_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
     }
 }

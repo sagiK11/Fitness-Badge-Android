@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.SignInActivityContract;
 import com.sagikor.android.fitracker.ui.presenter.SignInActivityPresenter;
@@ -153,7 +154,24 @@ public class SignInActivity extends AppCompatActivity implements SignInActivityC
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.signin_activity_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
     }
 }

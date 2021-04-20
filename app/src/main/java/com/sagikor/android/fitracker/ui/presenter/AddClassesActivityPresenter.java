@@ -14,6 +14,9 @@ import java.util.List;
 public class AddClassesActivityPresenter implements AddClassesActivityContract.Presenter {
     private DatabaseHandler databaseHandler;
     private AddClassesActivityContract.View view;
+    private static final String INSERT_CLASS = "please insert class to teach";
+    private static final String NAME_TOO_LONG = "class name too long";
+    private static final String INVALID_CLASS = "please insert valid class name";
 
     @Override
     public void onAddClassClick() {
@@ -21,8 +24,18 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
         try {
             checkValidInput(classToTeach);
         } catch (AppExceptions.Input e) {
-            view.popMessage(e.getMessage());
-            return;
+            switch (e.getMessage()) {
+                case INSERT_CLASS:
+                    view.popEmptyClassFieldAlert();
+                    return;
+                case NAME_TOO_LONG:
+                    view.popLongClassNameAlert();
+                    return;
+                case INVALID_CLASS:
+                    view.popInvalidClassAlert();
+                default:
+                    return;
+            }
         }
 
         databaseHandler.addClassUserTeaches(this, new UserClass(classToTeach));
@@ -43,11 +56,11 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     public void checkValidInput(String classToTeach) throws AppExceptions.Input {
         final int max_class_name = 10;
         if (classToTeach == null || classToTeach.length() == 0)
-            throw new AppExceptions.Input("please insert class to teach");
+            throw new AppExceptions.Input(INSERT_CLASS);
         else if (classToTeach.length() > max_class_name)
-            throw new AppExceptions.Input("class name too long");
+            throw new AppExceptions.Input(NAME_TOO_LONG);
         else if (!Utility.isValidClassName(classToTeach))
-            throw new AppExceptions.Input("please insert valid class name");
+            throw new AppExceptions.Input(INVALID_CLASS);
     }
 
     @Override
@@ -65,20 +78,22 @@ public class AddClassesActivityPresenter implements AddClassesActivityContract.P
     @Override
     public void onAddClassSuccess(UserClass userClass) {
         view.updateList();
+        view.popAddClassSuccess();
     }
 
     @Override
     public void onAddSClassFailed() {
-        view.popMessage(Utility.GENERIC_ERROR_MESSAGE);
+        view.popAddClassFail();
     }
 
     @Override
     public void onDeleteClassSuccess(UserClass userClass) {
         view.updateList();
+        view.popDeleteClassSuccess();
     }
 
     @Override
     public void onDeleteClassFailed() {
-        view.popMessage(Utility.GENERIC_ERROR_MESSAGE);
+        view.popDeleteClassFail();
     }
 }

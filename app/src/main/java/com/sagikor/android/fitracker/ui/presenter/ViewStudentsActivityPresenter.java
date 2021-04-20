@@ -54,11 +54,11 @@ public class ViewStudentsActivityPresenter implements ViewStudentsActivityContra
 
     @Override
     public void onDeleteStudentSuccess(Student student) {
-        //TODO this can be left empty for the moment
+        view.popDeleteStudentSuccess();
     }
 
     @Override
     public void onDeleteStudentFailed() {
-        //TODO this can be left empty for the moment
+        view.popDeleteStudentFail();
     }
 }

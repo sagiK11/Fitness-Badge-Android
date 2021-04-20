@@ -36,9 +36,21 @@ public interface AddClassesActivityContract {
 
         String getClassToTeach();
 
-        void popMessage(String message);
-
         void updateList();
+
+        void popAddClassSuccess();
+
+        void popAddClassFail();
+
+        void popDeleteClassSuccess();
+
+        void popDeleteClassFail();
+
+        void popEmptyClassFieldAlert();
+
+        void popLongClassNameAlert();
+
+        void popInvalidClassAlert();
 
     }
 }

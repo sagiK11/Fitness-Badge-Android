@@ -5,14 +5,12 @@ import android.net.Uri;
 import android.os.Bundle;
 
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,10 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
@@ -216,8 +214,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        View contextView = findViewById(R.id.main_activity_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(getColor(R.color.colorPrimary))
+                .show();
     }
 
     private class EmailSendThread extends Thread {

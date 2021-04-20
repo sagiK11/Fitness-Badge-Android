@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.sagikor.android.fitracker.R;
 import com.sagikor.android.fitracker.data.model.UserClass;
 import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
@@ -71,13 +71,65 @@ public class AddClassesActivity extends AppCompatActivity implements AddClassesA
     }
 
     @Override
-    public void popMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void popMessage(String message, msgType type) {
+        int backgroundColor;
+        switch (type) {
+            case success:
+                backgroundColor = getColor(R.color.colorPrimary);
+                break;
+            case alert:
+                backgroundColor = getColor(R.color.alert);
+                break;
+            case dangerous:
+                backgroundColor = getColor(R.color.red);
+                break;
+            default:
+                backgroundColor = getColor(R.color.black);
+        }
+        View contextView = findViewById(R.id.add_classes_root);
+        Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
+                .setBackgroundTint(backgroundColor)
+                .show();
     }
 
     @Override
     public void updateList() {
         classAdapter.updateList(presenter.getClassesUserTeaches());
+    }
+
+    @Override
+    public void popAddClassFail() {
+        popMessage(getString(R.string.class_not_saved), msgType.fail);
+    }
+
+    @Override
+    public void popAddClassSuccess() {
+        popMessage(getString(R.string.class_saved), msgType.success);
+    }
+
+    @Override
+    public void popDeleteClassSuccess() {
+        popMessage(getString(R.string.class_deleted), msgType.success);
+    }
+
+    @Override
+    public void popDeleteClassFail() {
+        popMessage(getString(R.string.class_not_deleted), msgType.fail);
+    }
+
+    @Override
+    public void popEmptyClassFieldAlert() {
+        popMessage(getString(R.string.insert_class), msgType.fail);
+    }
+
+    @Override
+    public void popLongClassNameAlert() {
+        popMessage(getString(R.string.class_name_too_long), msgType.fail);
+    }
+
+    @Override
+    public void popInvalidClassAlert() {
+        popMessage(getString(R.string.invalid_class), msgType.fail);
     }
 
     private void generateDataList() {
