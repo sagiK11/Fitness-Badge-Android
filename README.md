@@ -22,13 +22,13 @@ This app empowers the user to:
 
 #### Screenshots
 ###### app home screen
-<img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/HomeScreen.jpeg" width="300" heigh="450">
+<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/HomeScreen.jpg" width="300" heigh="450">
 
 ###### app add student screen
-<img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/AddStudentScreen.jpeg" width="300" heigh="450">
+<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/AddStudentScreen.jpg" width="300" heigh="450">
 
 ###### app students results screen
-<img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/ResultsScreen.jpg" width="300" heigh="450">
+<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/ViewStudentsScreen.jpg" width="300" heigh="450">
 
 ###### app statistics screen
 <img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/StatisticsScreen.jpeg" width="300" heigh="450">
