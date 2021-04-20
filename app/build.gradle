@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.sagikor.android.fitracker"
         minSdkVersion 24
-        targetSdkVersion 28
-        versionCode 4
+        targetSdkVersion 29
+        versionCode 7
         versionName '4.1'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
