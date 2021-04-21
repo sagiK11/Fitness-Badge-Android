@@ -50,7 +50,7 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
         final String BOY = getString(R.string.male);
         final String GIRL = getString(R.string.female);
 
-        new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
+        new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
                 .setTitleText(CHOOSE_GENDER)
                 .setConfirmText(GIRL)
                 .setConfirmClickListener(sDialog -> {
@@ -80,7 +80,7 @@ public class AddStudentActivity extends StudentActivity implements AddStudentAct
 
     @Override
     public void setDefaultPreferences() {
-        btnChooseGender.setText(getString(R.string.choose_gender));
+        btnChooseGender.setText(getString(R.string.gender));
     }
 
     @Override
