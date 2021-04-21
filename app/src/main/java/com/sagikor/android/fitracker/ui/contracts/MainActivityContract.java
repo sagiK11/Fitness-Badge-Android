@@ -8,7 +8,7 @@ public interface MainActivityContract {
 
         void onNavToAddStudentClick();
 
-        void onNavToUpdateStudentClick();
+        void onNavToAddClassesClick();
 
         void onNavToStatisticsClick();
 
@@ -33,7 +33,7 @@ public interface MainActivityContract {
     interface View extends BaseContract.BaseView {
         void navToAddStudentScreen();
 
-        void navToUpdateStudentScreen();
+        void navToAddClassesScreen();
 
         void navToViewStudentsScreen();
 

@@ -4,12 +4,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
     android:layoutDirection="ltr"
-    android:orientation="vertical"
-    android:id="@+id/main_activity_root"
     tools:context=".ui.view.MainActivity"
     tools:layout_editor_absoluteY="65dp">
 
@@ -17,6 +16,7 @@
         android:id="@+id/background_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:contentDescription="@string/background_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,100 +35,173 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.rey.material.widget.Button
-        android:id="@+id/button_add_student"
-        style="@style/buttons_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="3dp"
-        android:background="@drawable/buttons"
-        android:drawableTop="@drawable/ic_person_add_purple_45dp"
-        android:paddingStart="5dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="20dp"
-        android:text="@string/enter_update_data"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/button_update_student"
-        app:layout_constraintEnd_toStartOf="@id/button_search"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintVertical_bias="0.68"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <com.rey.material.widget.Button
-        android:id="@+id/button_search"
-        style="@style/buttons_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/buttons"
-        android:drawableTop="@drawable/ic_search_purple_45dp"
-        android:paddingStart="5dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="20dp"
-        android:text="@string/search"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/button_add_student"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_add_student" />
-
-    <com.rey.material.widget.Button
-        android:id="@+id/button_update_student"
-        style="@style/buttons_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="2dp"
-        android:background="@drawable/buttons"
-        android:drawableTop="@drawable/ic_edit_purple_45dp"
-        android:paddingStart="5dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="20dp"
-        android:text="@string/Update_student"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/button_mail_results"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_add_student" />
-
-    <com.rey.material.widget.Button
-        android:id="@+id/button_mail_results"
-        style="@style/buttons_style"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/buttons"
-        android:drawableTop="@drawable/ic_email_purple_45dp"
-        android:paddingStart="5dp"
-        android:paddingTop="20dp"
-        android:paddingEnd="5dp"
-        android:paddingBottom="20dp"
-        android:text="@string/export_to_excel"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@id/button_update_student"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button_update_student" />
-
     <ProgressBar
         android:id="@+id/main_activity_progress_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:indeterminateTint="@color/colorPrimary"
         android:minWidth="70dp"
         android:minHeight="70dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/button_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button_add_student"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_classes"
+        app:layout_constraintEnd_toStartOf="@+id/button_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.69"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/search"
+                android:paddingTop="16dp"
+                android:src="@drawable/ic_person_add_purple_45dp" />
+
+            <TextView
+                android:id="@+id/enter_update_data_text_view"
+                style="@style/buttons_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/enter_update_data" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button_add_classes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_mail_results"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_add_student">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/home_add_classes"
+                android:paddingTop="16dp"
+                android:src="@mipmap/ic_add_classes" />
+
+            <TextView
+                android:id="@+id/add_classes_text_view"
+                style="@style/buttons_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/home_add_classes" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button_mail_results"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_add_classes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_add_classes"
+        app:layout_constraintTop_toTopOf="@+id/button_add_classes">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/export_to_excel"
+                android:paddingTop="16dp"
+                android:src="@drawable/ic_email_purple_45dp" />
+
+            <TextView
+                android:id="@+id/export_to_excel_text_view"
+                style="@style/buttons_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/export_to_excel" />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/button_search"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="@+id/button_add_student"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_add_student"
+        app:layout_constraintTop_toTopOf="@+id/button_add_student"
+        app:layout_constraintVertical_bias="0.64"
+        app:layout_constraintVertical_chainStyle="packed">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:contentDescription="@string/search"
+                android:paddingTop="16dp"
+                android:src="@drawable/ic_search_purple_45dp" />
+
+            <TextView
+                android:id="@+id/search_text_view"
+                style="@style/buttons_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/search" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

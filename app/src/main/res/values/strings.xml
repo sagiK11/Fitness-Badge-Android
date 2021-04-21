@@ -167,6 +167,7 @@
     <string name="invalid_class">invalid class name</string>
     <string name="student_delete_success">student deleted!</string>
     <string name="student_delete_fail">student was not deleted :(</string>
+    <string name="home_add_classes">Add classes</string>
 
 
 

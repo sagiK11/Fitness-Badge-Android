@@ -28,8 +28,8 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     @Override
-    public void onNavToUpdateStudentClick() {
-        view.navToUpdateStudentScreen();
+    public void onNavToAddClassesClick() {
+        view.navToAddClassesScreen();
     }
 
     @Override

@@ -15,12 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
 import com.sagikor.android.fitracker.R;
@@ -34,10 +34,10 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity implements MainActivityContract.View {
 
     private static final String TAG = "MainActivity";
-    Button btnAddStudent;
-    Button btnSearchStudent;
-    Button btnMailResults;
-    Button btnUpdateStudent;
+    MaterialCardView btnAddStudent;
+    MaterialCardView btnSearchStudent;
+    MaterialCardView btnMailResults;
+    MaterialCardView btnAddClasses;
     ProgressBar progressBar;
     ImageView ivBackgroundImage;
     MaterialToolbar toolbar;
@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public void navToUpdateStudentScreen() {
-        navToViewStudentsScreen();
+    public void navToAddClassesScreen() {
+        startActivity(new Intent(this, AddClassesActivity.class));
     }
 
     @Override
@@ -154,12 +154,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         btnAddStudent.setClickable(isEnable);
         btnSearchStudent.setClickable(isEnable);
         btnMailResults.setClickable(isEnable);
-        btnUpdateStudent.setClickable(isEnable);
+        btnAddClasses.setClickable(isEnable);
         ivBackgroundImage.setAlpha(isEnable ? 1f : 0.1f);
         btnAddStudent.setAlpha(isEnable ? 1f : 0.1f);
         btnSearchStudent.setAlpha(isEnable ? 1f : 0.1f);
         btnMailResults.setAlpha(isEnable ? 1f : 0.1f);
-        btnUpdateStudent.setAlpha(isEnable ? 1f : 0.1f);
+        btnAddClasses.setAlpha(isEnable ? 1f : 0.1f);
         toolbar.setAlpha(isEnable ? 1f : 0f);
     }
 
@@ -169,24 +169,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         btnAddStudent = findViewById(R.id.button_add_student);
         btnSearchStudent = findViewById(R.id.button_search);
         btnMailResults = findViewById(R.id.button_mail_results);
-        btnUpdateStudent = findViewById(R.id.button_update_student);
+        btnAddClasses = findViewById(R.id.button_add_classes);
         progressBar = findViewById(R.id.main_activity_progress_bar);
         ivBackgroundImage = findViewById(R.id.background_image);
-        setButtonsBackgroundAlpha();
     }
 
-    private void setButtonsBackgroundAlpha() {
-        btnAddStudent.getBackground().setAlpha(50);
-        btnSearchStudent.getBackground().setAlpha(50);
-        btnMailResults.getBackground().setAlpha(50);
-        btnUpdateStudent.getBackground().setAlpha(50);
-    }
 
     private void addButtonsOnClickListeners() {
         btnAddStudent.setOnClickListener(e -> presenter.onNavToAddStudentClick());
         btnSearchStudent.setOnClickListener(e -> presenter.onNavToViewStudentsClick());
         btnMailResults.setOnClickListener(e -> presenter.onSendToEmailClick());
-        btnUpdateStudent.setOnClickListener(e -> presenter.onNavToUpdateStudentClick());
+        btnAddClasses.setOnClickListener(e -> presenter.onNavToAddClassesClick());
     }
 
     private void signOutQuestionPop() {
