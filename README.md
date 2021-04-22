@@ -20,21 +20,8 @@ This app empowers the user to:
 ![Farmers Market Finder Demo](http://g.recordit.co/s8f3aLCS5x.gif)
 
 
-#### Screenshots
-###### app home screen
-<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/HomeScreen.jpg" width="300" heigh="450">
+## Architecture Blueprint
+<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/misc/Fitness%20Badge%20architecture-1.jpg">
 
-###### app add student screen
-<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/AddStudentScreen.jpg" width="300" heigh="450">
 
-###### app students results screen
-<img src="https://github.com/sagiK11/Fitness-Badge-Android/blob/master/screenshots/ViewStudentsScreen.jpg" width="300" heigh="450">
-
-###### app statistics screen
-<img src="https://github.com/sagiK11/Fitracker/blob/master/screenshots/StatisticsScreen.jpeg" width="300" heigh="450">
-
-#### Credits
-- PhilJay/MPAndroidChart
-- rey5137/material
-- F0RIS/sweet-alert-dialog
 
