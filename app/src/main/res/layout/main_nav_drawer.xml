@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/app_name"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:src="@mipmap/ic_launcher_2_round"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06999999"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <View
+        android:id="@+id/guideline1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:layout_marginVertical="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.5"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/nav_settings_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_user_title" />
+
+
+    <ImageView
+        android:id="@+id/nav_settings_icon"
+        style="@style/drawer_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/setting"
+        android:src="@drawable/baseline_tune_black_24"
+        app:layout_constraintBottom_toTopOf="@+id/nav_statistics_icon"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nav_drawer_settings"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline1"
+
+        />
+
+    <TextView
+        android:id="@+id/btn_nav_drawer_settings"
+        style="@style/drawer_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/setting"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_settings_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/nav_settings_icon"
+        app:layout_constraintTop_toTopOf="@+id/nav_settings_icon" />
+
+
+    <ImageView
+        android:id="@+id/nav_statistics_icon"
+        style="@style/drawer_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/statistics"
+        android:src="@drawable/baseline_bar_chart_black_24"
+        app:layout_constraintBottom_toTopOf="@+id/nav_about_icon"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nav_drawer_statistics"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_settings_icon" />
+
+
+    <TextView
+        android:id="@+id/btn_nav_drawer_statistics"
+        style="@style/drawer_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/statistics"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_statistics_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/nav_statistics_icon"
+        app:layout_constraintTop_toTopOf="@+id/nav_statistics_icon" />
+
+    <ImageView
+        android:id="@+id/nav_about_icon"
+        style="@style/drawer_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/terms_of_use"
+        android:src="@drawable/baseline_badge_black_24"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nav_drawer_about"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_statistics_icon" />
+
+
+    <TextView
+        android:id="@+id/btn_nav_drawer_about"
+        style="@style/drawer_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/terms_of_use"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_about_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/nav_about_icon"
+        app:layout_constraintTop_toTopOf="@+id/nav_about_icon" />
+
+    <View
+        android:id="@+id/guideline2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_centerVertical="true"
+        android:layout_marginVertical="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp"
+        android:alpha="0.5"
+        android:background="@color/black"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/nav_rate_us_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_about_icon" />
+
+    <ImageView
+        android:id="@+id/nav_rate_us_icon"
+        style="@style/drawer_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/rate_us"
+        android:src="@drawable/baseline_star_rate_black_24"
+        app:layout_constraintBottom_toTopOf="@+id/nav_log_out_icon"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nav_drawer_rate_us"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
+
+    <TextView
+        android:id="@+id/btn_nav_drawer_rate_us"
+        style="@style/drawer_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rate_us"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_rate_us_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/nav_rate_us_icon"
+        app:layout_constraintTop_toTopOf="@+id/nav_rate_us_icon" />
+
+    <ImageView
+        android:id="@+id/nav_log_out_icon"
+        style="@style/drawer_icons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/sign_out"
+        android:src="@drawable/baseline_logout_black_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_nav_drawer_log_out"
+        app:layout_constraintHorizontal_weight="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nav_rate_us_icon" />
+
+
+    <TextView
+        android:id="@+id/btn_nav_drawer_log_out"
+        style="@style/drawer_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_out"
+        app:layout_constraintBottom_toBottomOf="@+id/nav_log_out_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/nav_log_out_icon"
+        app:layout_constraintTop_toTopOf="@+id/nav_log_out_icon" />
+
+    <TextView
+        android:id="@+id/drawer_user_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/drawer_user_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        tools:layout_editor_absoluteX="43dp"
+        tools:text="user name" />
+
+    <TextView
+        android:id="@+id/drawer_user_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="6dp"
+        android:text="@string/PE_teacher"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toTopOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drawer_user_name" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

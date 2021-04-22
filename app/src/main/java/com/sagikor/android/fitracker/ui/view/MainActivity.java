@@ -7,19 +7,17 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
-
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseApp;
@@ -40,8 +38,15 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     MaterialCardView btnAddClasses;
     ProgressBar progressBar;
     ImageView ivBackgroundImage;
-    MaterialToolbar toolbar;
+    DrawerLayout drawerLayout;
     MainActivityPresenter presenter;
+    TextView btnDrawerNavToSettings;
+    TextView btnDrawerNavToStatistics;
+    TextView btnDrawerNavToAbout;
+    TextView btnDrawerNavToRate;
+    TextView btnDrawerLogout;
+    TextView tvUserName;
+    ImageView btnDrawerMenu;
 
 
     @Override
@@ -94,6 +99,24 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
+    public void navToTermsOfUseUsUrl() {
+        final String url = "https://sites.google.com/view/fitrackerprivacy/home";
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+    @Override
+    public void navToRateUs() {
+        final String url = "https://play.google.com/store/apps/details?id=com.sagikor.android.fitracker&hl=en_US";
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+    }
+
+
+    @Override
+    public void openNavDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    @Override
     public void sendDatabaseToEmail() {
         Thread sender = new EmailSendThread();
         sender.start();
@@ -112,26 +135,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.activity_main_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_statistics) {
-            presenter.onNavToStatisticsClick();
-        } else if (id == R.id.nav_settings) {
-            presenter.onNavToSettingsClick();
-        } else if (id == R.id.nav_sign_out) {
-            presenter.onDisconnectClick();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void disconnectUser() {
         signOutQuestionPop();
     }
@@ -144,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void setUserName(String name) {
+        tvUserName.setText(name);
     }
 
     private void initFirebase() {
@@ -160,18 +168,23 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         btnSearchStudent.setAlpha(isEnable ? 1f : 0.1f);
         btnMailResults.setAlpha(isEnable ? 1f : 0.1f);
         btnAddClasses.setAlpha(isEnable ? 1f : 0.1f);
-        toolbar.setAlpha(isEnable ? 1f : 0f);
     }
 
     private void bindViews() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         btnAddStudent = findViewById(R.id.button_add_student);
         btnSearchStudent = findViewById(R.id.button_search);
         btnMailResults = findViewById(R.id.button_mail_results);
         btnAddClasses = findViewById(R.id.button_add_classes);
         progressBar = findViewById(R.id.main_activity_progress_bar);
         ivBackgroundImage = findViewById(R.id.background_image);
+        drawerLayout = findViewById(R.id.main_activity_root);
+        btnDrawerMenu = findViewById(R.id.toolbar_menu);
+        btnDrawerNavToSettings = findViewById(R.id.btn_nav_drawer_settings);
+        btnDrawerNavToAbout = findViewById(R.id.btn_nav_drawer_about);
+        btnDrawerNavToRate = findViewById(R.id.btn_nav_drawer_rate_us);
+        btnDrawerNavToStatistics = findViewById(R.id.btn_nav_drawer_statistics);
+        btnDrawerLogout = findViewById(R.id.btn_nav_drawer_log_out);
+        tvUserName = findViewById(R.id.drawer_user_name);
     }
 
 
@@ -180,6 +193,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         btnSearchStudent.setOnClickListener(e -> presenter.onNavToViewStudentsClick());
         btnMailResults.setOnClickListener(e -> presenter.onSendToEmailClick());
         btnAddClasses.setOnClickListener(e -> presenter.onNavToAddClassesClick());
+        btnDrawerMenu.setOnClickListener(e -> presenter.onOpenDrawer());
+        btnDrawerNavToSettings.setOnClickListener(e -> presenter.onNavToSettingsClick());
+        btnDrawerNavToAbout.setOnClickListener(e -> presenter.onNavToTermsOfUseClick());
+        btnDrawerNavToRate.setOnClickListener(e -> presenter.onNavToRateUsClick());
+        btnDrawerNavToStatistics.setOnClickListener(e -> presenter.onNavToStatisticsClick());
+        btnDrawerLogout.setOnClickListener(e -> disconnectUser());
     }
 
     private void signOutQuestionPop() {
@@ -191,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
                 .setConfirmText(YES)
                 .setConfirmClickListener(sDialog -> {
                     sDialog.dismissWithAnimation();
+                    presenter.onDisconnectClick();
                     signOut();
                 })
                 .setCancelButton(NO, SweetAlertDialog::dismissWithAnimation)
@@ -200,8 +220,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
 
     private void signOut() {
         Intent intent = new Intent(this, SignInActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
         startActivity(intent);
         finish();
     }
@@ -212,6 +231,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityContr
         Snackbar.make(contextView, message, Snackbar.LENGTH_SHORT)
                 .setBackgroundTint(getColor(R.color.colorPrimary))
                 .show();
+    }
+
+    public boolean isDrawerOpen() {
+        return drawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (isDrawerOpen()) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+
     }
 
     private class EmailSendThread extends Thread {

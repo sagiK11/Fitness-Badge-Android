@@ -118,7 +118,7 @@
     <string name="at_least_seven_chars">At Least 6 Chars</string>
     <string name="password_guide">password must contain at least 7 characters.</string>
     <string name="full_name">Full Name</string>
-    <string name="sign_out">Sign Out</string>
+    <string name="sign_out">Logout</string>
     <string name="gender_to_always_girls">Set gender to female</string>
     <string name="gender_to_always_boys">Set gender to male</string>
     <string name="add_student_setting">Add Student Settings</string>
@@ -168,6 +168,11 @@
     <string name="student_delete_success">student deleted!</string>
     <string name="student_delete_fail">student was not deleted :(</string>
     <string name="home_add_classes">Add classes</string>
+    <string name="about_us">About us</string>
+    <string name="terms_of_use">Terms of use</string>
+    <string name="rate_us">Rate us</string>
+    <string name="PE_teacher">physical education teacher</string>
+    <string name="menu">menu</string>
 
 
 

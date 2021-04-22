@@ -38,6 +38,22 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     }
 
     @Override
+    public void onOpenDrawer() {
+        view.openNavDrawer();
+        view.setUserName(databaseHandler.getUserName());
+    }
+
+    @Override
+    public void onNavToTermsOfUseClick() {
+        view.navToTermsOfUseUsUrl();
+    }
+
+    @Override
+    public void onNavToRateUsClick() {
+        view.navToRateUs();
+    }
+
+    @Override
     public void onNavToViewStudentsClick() {
         view.navToViewStudentsScreen();
     }
@@ -50,7 +66,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void onDisconnectClick() {
         databaseHandler.signOut();
-        view.disconnectUser();
     }
 
 

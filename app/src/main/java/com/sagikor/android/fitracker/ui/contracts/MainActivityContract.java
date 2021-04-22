@@ -8,11 +8,17 @@ public interface MainActivityContract {
 
         void onNavToAddStudentClick();
 
+        void onNavToViewStudentsClick();
+
         void onNavToAddClassesClick();
 
         void onNavToStatisticsClick();
 
-        void onNavToViewStudentsClick();
+        void onOpenDrawer();
+
+        void onNavToTermsOfUseClick();
+
+        void onNavToRateUsClick();
 
         void onCompleteDataWrite();
 
@@ -41,6 +47,12 @@ public interface MainActivityContract {
 
         void navToStatisticsScreen();
 
+        void navToTermsOfUseUsUrl();
+
+        void navToRateUs();
+
+        void openNavDrawer();
+
         void disconnectUser();
 
         void sendDatabaseToEmail();
@@ -52,6 +64,8 @@ public interface MainActivityContract {
         void showProgressBar();
 
         void hideProgressBar();
+
+        void setUserName(String name);
 
     }
 }
