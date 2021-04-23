@@ -40,7 +40,6 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void onOpenDrawer() {
         view.openNavDrawer();
-        view.setUserName(databaseHandler.getUserName());
     }
 
     @Override
@@ -81,12 +80,12 @@ public class MainActivityPresenter implements MainActivityContract.Presenter {
     @Override
     public void unbind() {
         this.view = null;
-
     }
 
     @Override
     public void onFinishedLoadingData() {
         view.setActiveMode();
+        view.setUserName(databaseHandler.getUserName());
     }
 
     @Override
