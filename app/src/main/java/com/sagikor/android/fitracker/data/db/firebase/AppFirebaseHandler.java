@@ -55,6 +55,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public List<Student> getStudents() {
+        studentList.sort((student1, student2) -> student1.getName().compareTo(student2.getName()));
         return studentList;
     }
 
@@ -172,6 +173,7 @@ public class AppFirebaseHandler implements FirebaseHandler {
 
     @Override
     public List<UserClass> getClassesUserTeaches() {
+        classesList.sort((class1, class2) -> class1.getClassName().compareTo(class2.getClassName()));
         return classesList;
     }
 
