@@ -9,14 +9,14 @@ import com.sagikor.android.fitracker.data.db.firebase.FirebaseHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.AppSharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.db.sharedprefrences.SharedPreferencesHandler;
 import com.sagikor.android.fitracker.data.model.UserClass;
-import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.MainActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.RegisterActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.SettingsActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.SignInActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.UpdateStudentActivityContract;
-import com.sagikor.android.fitracker.ui.contracts.ViewStudentsActivityContract;
+import com.sagikor.android.fitracker.ui.addclass.AddClassesActivityContract;
+import com.sagikor.android.fitracker.ui.addupdatestudent.AddStudentActivityContract;
+import com.sagikor.android.fitracker.ui.home.MainActivityContract;
+import com.sagikor.android.fitracker.ui.register.RegisterActivityContract;
+import com.sagikor.android.fitracker.ui.settings.SettingsActivityContract;
+import com.sagikor.android.fitracker.ui.signin.SignInActivityContract;
+import com.sagikor.android.fitracker.ui.addupdatestudent.UpdateStudentActivityContract;
+import com.sagikor.android.fitracker.ui.studentslist.ViewStudentsActivityContract;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 

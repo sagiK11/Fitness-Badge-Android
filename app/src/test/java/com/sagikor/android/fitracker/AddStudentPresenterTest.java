@@ -1,6 +1,6 @@
 package com.sagikor.android.fitracker;
-import com.sagikor.android.fitracker.ui.contracts.AddStudentActivityContract;
-import com.sagikor.android.fitracker.ui.presenter.AddStudentActivityPresenter;
+import com.sagikor.android.fitracker.ui.addupdatestudent.AddStudentActivityContract;
+import com.sagikor.android.fitracker.ui.addupdatestudent.AddStudentActivityPresenter;
 
 import org.junit.Assert;
 import org.junit.Test;

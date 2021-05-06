@@ -1,8 +1,8 @@
 package com.sagikor.android.fitracker;
 
 
-import com.sagikor.android.fitracker.ui.contracts.AddClassesActivityContract;
-import com.sagikor.android.fitracker.ui.presenter.AddClassesActivityPresenter;
+import com.sagikor.android.fitracker.ui.addclass.AddClassesActivityContract;
+import com.sagikor.android.fitracker.ui.addclass.AddClassesActivityPresenter;
 import com.sagikor.android.fitracker.utils.AppExceptions;
 
 
